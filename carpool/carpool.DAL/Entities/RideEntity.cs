@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics.Contracts;
-
-namespace carpool.DAL.Entities;
+﻿namespace carpool.DAL.Entities;
 //Start(místo, poloha)
 //Cíl(místo, poloha)
 //Čas začátku
@@ -18,7 +15,7 @@ public record RideEntity(
     Guid UserId,
     Guid CarId) : IEntity
 {
-    public UserEntity? User { get; set; }
-    public ICollection<UserRideEntity> PassengerRides { get; set; }// = new List<UserRideEntity>();
+    public UserEntity? User { get; init; }
+    public ICollection<UserRideEntity> PassengerRides { get; init; } = new List<UserRideEntity>();
     public CarEntity? Car { get; init; }
 }

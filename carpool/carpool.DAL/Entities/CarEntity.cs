@@ -1,5 +1,4 @@
-﻿using carpool.common;
-using carpool.common.Enums;
+﻿using carpool.common.Enums;
 
 namespace carpool.DAL.Entities;
 
@@ -18,9 +17,6 @@ namespace carpool.DAL.Entities;
             int SeatCapacity,
             Guid OwnerId ) : IEntity
     {
-    //#nullable disable
-    //    public CarEntity() : this(default, default, default, default, default, default, default) { }
-    //#nullable enable
-        public UserEntity? Owner { get; init; } //idk
+        public UserEntity? Owner { get; init; }
     }
 

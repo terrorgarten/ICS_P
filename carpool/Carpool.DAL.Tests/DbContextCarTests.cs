@@ -48,7 +48,7 @@ namespace Carpool.DAL.Tests
                     .Rides
                     .FirstOrDefaultAsync(i => i.Id == RideSeeds.Ride1.Id);
             Assert.NotNull(rides);
-            Assert.Equal(RideSeeds.Ride1 with { User = null, Car = null }, rides);
+            Assert.Equal(RideSeeds.Ride1.Id, rides.Id);
         }
 
         public async Task InitializeAsync()
