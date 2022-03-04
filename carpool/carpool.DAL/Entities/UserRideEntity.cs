@@ -1,10 +1,10 @@
 ﻿namespace carpool.DAL.Entities;
 
-public record UserRideEntity
+public record UserRideEntity (
+    Guid Id,
+    Guid PassangerId,
+    Guid RideId) : IEntity
 {
-    public Guid Id { get; set; }
-    public Guid PassangerId { get; set; }
-    public UserEntity Passenger { get; set; }
-    public Guid RideId { get; set; }
-    public RideEntity Ride { get; set; }
+    public UserEntity? Passenger { get; init; }
+    public RideEntity? Ride { get; init; }
 }
