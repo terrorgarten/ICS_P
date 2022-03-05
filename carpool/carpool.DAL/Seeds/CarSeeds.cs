@@ -19,8 +19,7 @@ public static class CarSeeds
         Owner = UserSeeds.FirstUser
     };
 
-
-public static void Seed(this ModelBuilder modelBuilder)
+    public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<CarEntity>().HasData(
             BigCar with { Owner = null });
