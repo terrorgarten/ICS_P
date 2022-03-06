@@ -7,6 +7,7 @@ using carpool.DAL.Entities;
 using carpool.DAL.Seeds;
 using Microsoft.EntityFrameworkCore;
 
+//Seeds, tests and this file are in progress according to Demo 2
 namespace carpool.DAL
 {
     public class CarpoolDbContext : DbContext
