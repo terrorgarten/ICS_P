@@ -2,12 +2,6 @@
 
 namespace carpool.DAL.Entities;
 
-    //Výrobce
-    //Typ
-    //Datum první registrace
-    //Fotografie
-    //Počet míst k sezení
-    //(Majitel, tj.uživatel)
     public record CarEntity(
             Guid Id,
             Manufacturer Manufacturer,

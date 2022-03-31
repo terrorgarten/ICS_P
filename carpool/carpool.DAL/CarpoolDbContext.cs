@@ -12,10 +12,12 @@ namespace carpool.DAL
 {
     public class CarpoolDbContext : DbContext
     {
-        public CarpoolDbContext(DbContextOptions contextOptions)
+        private readonly bool _seedDemoData;
+
+        public CarpoolDbContext(DbContextOptions contextOptions, bool seedDemoData = false)
             : base(contextOptions)
         {
-            
+            _seedDemoData = seedDemoData;
         }
         public DbSet<UserEntity> Users => Set<UserEntity>();
         public DbSet<CarEntity> Cars => Set<CarEntity>();
@@ -25,8 +27,30 @@ namespace carpool.DAL
         {
             base.OnModelCreating(modelBuilder);
 
-            CarSeeds.Seed(modelBuilder);
+            modelBuilder.Entity<UserEntity>()
+                .HasMany(i => i.OwnedCars)
+                .WithOne(i => i.Owner)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<UserEntity>()
+                .HasMany(i => i.DriverRides)
+                .WithOne(i => i.User)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<UserEntity>()
+                .HasMany(i => i.PassengerRides)
+                .WithOne(i => i.Passenger)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<RideEntity>()
+                .HasMany(i => i.PassengerRides)
+                .WithOne(i => i.Ride)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
+            if (!_seedDemoData) return;
             UserSeeds.Seed(modelBuilder);
+            CarSeeds.Seed(modelBuilder);
             RideSeeds.Seed(modelBuilder);
         }
     }

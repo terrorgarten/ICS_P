@@ -1,11 +1,5 @@
-﻿
-namespace carpool.DAL.Entities;
-    //Jméno
-    //Příjmení 
-    //Fotografie
-    //(Vlastněná auta)
-    //(Spolujízdy z pohledu řidiče)
-    //(Spolujízdy z pohledu spolujezdce)
+﻿namespace carpool.DAL.Entities;
+
     public record UserEntity(
         Guid Id,
         string Name,
