@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
 using AutoMapper.EquivalencyExpression;
-using carpool.BL.Facades;
-using carpool.DAL;
-using carpool.DAL.UnitOfWork;
+using Carpool.BL.Facades;
+using Carpool.DAL;
+using Carpool.DAL.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace carpool.BL;
+namespace Carpool.BL;
 
 public static class ServiceCollectionExtension
 {

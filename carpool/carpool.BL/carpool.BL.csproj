@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\carpool.DAL\carpool.DAL.csproj" />
+    <ProjectReference Include="..\carpool.DAL\Carpool.DAL.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,9 +1,9 @@
 ﻿using System;
 using AutoMapper;
-using carpool.common.Enums;
-using carpool.DAL.Entities;
+using Carpool.Common.Enums;
+using Carpool.DAL.Entities;
 
-namespace carpool.BL.Models
+namespace Carpool.BL.Models
 {
     public record CarListModel(
         CarType CarType,

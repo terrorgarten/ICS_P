@@ -1,10 +1,10 @@
 ﻿using System;
 using AutoMapper;
-using carpool.BL.Models;
-using carpool.common.Enums;
-using carpool.DAL.Entities;
+using Carpool.BL.Models;
+using Carpool.Common.Enums;
+using Carpool.DAL.Entities;
 
-namespace carpool.BL.Models
+namespace Carpool.BL.Models
 {
     public record RideListModel(
         string Start,

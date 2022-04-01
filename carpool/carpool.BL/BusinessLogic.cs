@@ -5,9 +5,9 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-[assembly:InternalsVisibleTo("carpool.BL.Tests")]
+[assembly:InternalsVisibleTo("Carpool.BL.Tests")]
 
-namespace carpool.BL
+namespace Carpool.BL
 {
     internal class BusinessLogic
     {

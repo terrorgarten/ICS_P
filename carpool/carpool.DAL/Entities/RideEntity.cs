@@ -1,4 +1,4 @@
-﻿namespace carpool.DAL.Entities;
+﻿namespace Carpool.DAL.Entities;
 //Start(místo, poloha)
 //Cíl(místo, poloha)
 //Čas začátku

@@ -1,7 +1,7 @@
-﻿using carpool.DAL.Entities;
+﻿using Carpool.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace carpool.DAL.Seeds;
+namespace Carpool.DAL.Seeds;
 
 public static class RideSeeds
 {

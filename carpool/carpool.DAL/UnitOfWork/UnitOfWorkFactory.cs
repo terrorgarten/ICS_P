@@ -1,7 +1,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 
-namespace carpool.DAL.UnitOfWork;
+namespace Carpool.DAL.UnitOfWork;
 
 public class UnitOfWorkFactory : IUnitOfWorkFactory
 {

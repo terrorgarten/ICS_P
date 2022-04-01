@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using AutoMapper.EquivalencyExpression;
-using carpool.DAL.Entities;
+using Carpool.DAL.Entities;
 
-namespace carpool.BL.Models
+namespace Carpool.BL.Models
 {
     public record UserDetailModel(
         string Name,

@@ -1,9 +1,9 @@
-﻿using carpool.common.Enums;
-using carpool.DAL.Entities;
+﻿using Carpool.Common.Enums;
+using Carpool.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace carpool.DAL.Seeds;
+namespace Carpool.DAL.Seeds;
 
 public static class CarSeeds
 {

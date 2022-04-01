@@ -1,4 +1,4 @@
-namespace carpool.DAL.UnitOfWork;
+namespace Carpool.DAL.UnitOfWork;
 
 public interface IUnitOfWorkFactory
 {

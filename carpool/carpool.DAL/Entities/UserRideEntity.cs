@@ -1,4 +1,4 @@
-﻿namespace carpool.DAL.Entities;
+﻿namespace Carpool.DAL.Entities;
 
 public record UserRideEntity (
     Guid Id,

@@ -3,10 +3,10 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using carpool.DAL.Entities;
+using Carpool.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace carpool.DAL.UnitOfWork;
+namespace Carpool.DAL.UnitOfWork;
 
 public interface IRepository<TEntity> where TEntity : class, IEntity
 {

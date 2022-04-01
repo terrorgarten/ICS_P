@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using carpool.DAL.Entities;
-using carpool.DAL.Seeds;
+using Carpool.DAL.Entities;
+using Carpool.DAL.Seeds;
 using Microsoft.EntityFrameworkCore;
 
 //Seeds, tests and this file are in progress according to Demo 2
-namespace carpool.DAL
+namespace Carpool.DAL
 {
     public class CarpoolDbContext : DbContext
     {

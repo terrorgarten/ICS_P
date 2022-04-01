@@ -1,11 +1,11 @@
 using System;
 using System.Threading.Tasks;
-using carpool.DAL.Entities;
+using Carpool.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace carpool.DAL.UnitOfWork;
+namespace Carpool.DAL.UnitOfWork;
 
 public interface IUnitOfWork : IAsyncDisposable
 {

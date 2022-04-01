@@ -4,13 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.EntityFrameworkCore;
-using carpool.BL.Models;
-using carpool.DAL;
-using carpool.DAL.Entities;
-using carpool.DAL.UnitOfWork;
+using Carpool.BL.Models;
+using Carpool.DAL;
+using Carpool.DAL.Entities;
+using Carpool.DAL.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 
-namespace carpool.BL.Facades;
+namespace Carpool.BL.Facades;
 
 public class CRUDFacade<TEntity, TListModel, TDetailModel>
         where TEntity : class, IEntity

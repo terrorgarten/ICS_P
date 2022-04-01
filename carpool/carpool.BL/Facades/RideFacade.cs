@@ -1,10 +1,10 @@
 using AutoMapper;
-using carpool.BL.Facades;
-using carpool.BL.Models;
-using carpool.DAL.Entities;
-using carpool.DAL.UnitOfWork;
+using Carpool.BL.Facades;
+using Carpool.BL.Models;
+using Carpool.DAL.Entities;
+using Carpool.DAL.UnitOfWork;
 
-namespace carpool.BL.Facades;
+namespace Carpool.BL.Facades;
 
 public class RideFacade : CRUDFacade<RideEntity, RideListModel, RideDetailModel>
 {

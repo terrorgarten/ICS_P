@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace carpool.DAL.Factories
+namespace Carpool.DAL.Factories
 {
     /// <summary>
     /// EF Core CLI migration generation uses this DbContext to create model and migration
@@ -13,7 +13,7 @@ namespace carpool.DAL.Factories
             DbContextOptionsBuilder<CarpoolDbContext> builder = new();
             builder.UseSqlServer(
                 @"Data Source=(LocalDB)\MSSQLLocalDB;
-                Initial Catalog = CookBook;
+                Initial Catalog = Carpool;
                 MultipleActiveResultSets = True;
                 Integrated Security = True; ");
 

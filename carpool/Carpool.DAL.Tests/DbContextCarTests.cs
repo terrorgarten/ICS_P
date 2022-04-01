@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
-using carpool.DAL;
-using carpool.DAL.Seeds;
+using Carpool.DAL;
+using Carpool.DAL.Seeds;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 

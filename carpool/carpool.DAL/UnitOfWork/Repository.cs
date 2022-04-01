@@ -5,11 +5,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.EntityFrameworkCore;
-using carpool.DAL.Entities;
+using Carpool.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace carpool.DAL.UnitOfWork;
+namespace Carpool.DAL.UnitOfWork;
 
 public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity
 {

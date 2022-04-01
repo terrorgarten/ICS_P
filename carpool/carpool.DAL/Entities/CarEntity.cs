@@ -1,6 +1,6 @@
-﻿using carpool.common.Enums;
+﻿using Carpool.Common.Enums;
 
-namespace carpool.DAL.Entities;
+namespace Carpool.DAL.Entities;
 
     public record CarEntity(
             Guid Id,

@@ -1,4 +1,4 @@
-﻿namespace carpool.common.Enums;
+﻿namespace Carpool.Common.Enums;
 
 public enum Manufacturer
 {

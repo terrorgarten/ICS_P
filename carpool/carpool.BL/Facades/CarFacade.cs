@@ -1,9 +1,9 @@
 using AutoMapper;
-using carpool.BL.Models;
-using carpool.DAL.Entities;
-using carpool.DAL.UnitOfWork;
+using Carpool.BL.Models;
+using Carpool.DAL.Entities;
+using Carpool.DAL.UnitOfWork;
 
-namespace carpool.BL.Facades;
+namespace Carpool.BL.Facades;
 
 public class CarFacade : CRUDFacade<CarEntity, CarListModel, CarDetailModel>
 {

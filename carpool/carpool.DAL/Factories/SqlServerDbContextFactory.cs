@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace carpool.DAL.Factories
+namespace Carpool.DAL.Factories
 {
     public class SqlServerDbContextFactory : IDbContextFactory<CarpoolDbContext>
     {
