@@ -7,7 +7,7 @@ namespace Carpool.DAL.Entities;
             Guid Id,
             Manufacturer Manufacturer,
             CarType CarType,
-            [DataType(DataType.Date)]
+            //[DataType(DataType.Date)]
             DateTime RegistrationDate,
             string? PhotoUrl,
             int SeatCapacity,

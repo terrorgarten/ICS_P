@@ -11,7 +11,7 @@ public static class CarSeeds
         Id: Guid.Parse(input: "0d4fa150-ad80-4d46-a511-4c666166ec5e"),
         Manufacturer: Manufacturer.BMW,
         CarType: CarType.Cabriolet,
-        RegistrationDate: DateTime.Parse("5/1/2015"),
+        RegistrationDate: new DateTime(2015, 10, 1),
         PhotoUrl: @"https://png.pngitem.com/pimgs/s/9-99883_beige-bmw-sedan-5-2013-car-png-clipart.png",
         SeatCapacity: 4,
         OwnerId: UserSeeds.FirstUser.Id)
@@ -23,7 +23,7 @@ public static class CarSeeds
         Id: Guid.Parse(input: "3D08D1F3-7499-4899-B828-BCBA6C08A5C6"),
         Manufacturer: Manufacturer.Fiat,
         CarType: CarType.Universal,
-        RegistrationDate: DateTime.Parse("5/6/2015"),
+        RegistrationDate: new DateTime(2016, 5, 28),
         PhotoUrl: @"https://png.pngitem.com/pimgs/s/79-793999_land-vehicle-city-car-red-fiat-500-rim.png",
         SeatCapacity: 4,
         OwnerId: UserSeeds.SecondUser.Id)
