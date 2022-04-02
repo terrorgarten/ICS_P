@@ -11,16 +11,25 @@ public static class UserSeeds
         Surname: "Mrkvička",
         PhotoUrl: @"https://png.pngitem.com/pimgs/s/200-2004145_selfie-png-transparent-png.png");
 
+    public static readonly UserEntity SecondUser = new(
+        Id: Guid.Parse(input: "050FBEEB-7DC6-494B-A5AD-485B129CC4E6"),
+        Name: "Franta",
+        Surname: "Bobek",
+        PhotoUrl: @"https://png.pngitem.com/pimgs/s/346-3468375_spiderman-mcu-ps4-selfie-hd-png-download.png");
+
     static UserSeeds()
     {
-        FirstUser.OwnedCars.Add(CarSeeds.BigCar);
-        //FirstUser.DriverRides.Add(RideSeeds.Ride1);
-        //FirstUser.PassangerRides.Add(RideSeeds.Ride2);
+        FirstUser.OwnedCars.Add(CarSeeds.SportCar);
+        SecondUser.OwnedCars.Add(CarSeeds.PersonalCar);
+        FirstUser.DriverRides.Add(RideSeeds.Ride1);
+        FirstUser.PassengerRides.Add(UserRideSeeds.UserRide1);
     }
 
     public static void Seed(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<UserEntity>().HasData(
-            FirstUser with{ OwnedCars = Array.Empty<CarEntity>() });
+            FirstUser with{ OwnedCars = Array.Empty<CarEntity>(), DriverRides = Array.Empty<RideEntity>(), PassengerRides = Array.Empty<UserRideEntity>() },
+            SecondUser with { OwnedCars = Array.Empty<CarEntity>(), DriverRides = Array.Empty<RideEntity>(), PassengerRides = Array.Empty<UserRideEntity>() }
+        );
     }
 }

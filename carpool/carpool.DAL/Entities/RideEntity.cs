@@ -1,11 +1,5 @@
 ﻿namespace Carpool.DAL.Entities;
-//Start(místo, poloha)
-//Cíl(místo, poloha)
-//Čas začátku
-//Předpokládaný čas konce, nebo předpokládaná doba cesty
-//(Řidič)
-//(Spolujezdci)
-//(Automobil)
+
 public record RideEntity(
     Guid Id,
     string Start,

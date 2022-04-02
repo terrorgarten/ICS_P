@@ -2,7 +2,7 @@
 
 public record UserRideEntity (
     Guid Id,
-    Guid PassangerId,
+    Guid PassengerId,
     Guid RideId) : IEntity
 {
     public UserEntity? Passenger { get; init; }
