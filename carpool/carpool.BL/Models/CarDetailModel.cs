@@ -10,13 +10,13 @@ namespace Carpool.BL.Models
     public record CarDetailModel(
         Manufacturer Manufacturer,
         CarType CarType,
-        DateOnly RegistrationDate,
+        //DateOnly RegistrationDate,
         string? PhotoUrl,
         int SeatCapacity ) : ModelBase
     {
         public Manufacturer Manufacturer { get; set; } = Manufacturer;
         public CarType CarType { get; set; } = CarType;
-        public DateOnly RegistrationDate { get; set; } = RegistrationDate;
+        //public DateOnly RegistrationDate { get; set; } = RegistrationDate;
         public string? PhotoUrl { get; set; }
         public UserEntity Owner { get; init; }
         

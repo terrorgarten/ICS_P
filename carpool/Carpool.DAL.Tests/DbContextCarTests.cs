@@ -35,9 +35,9 @@ namespace Carpool.DAL.Tests
             var cars
                 = await _carpoolDbContextSut
                     .Cars
-                    .FirstOrDefaultAsync(i => i.Id == CarSeeds.BigCar.Id);
+                    .FirstOrDefaultAsync(i => i.Id == CarSeeds.SportCar.Id);
             Assert.NotNull(cars);
-            Assert.Equal(CarSeeds.BigCar with{ Owner = null }, cars);
+            Assert.Equal(CarSeeds.SportCar with { Owner = null }, cars);
         }
 
         [Fact]

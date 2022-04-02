@@ -1,4 +1,5 @@
-﻿using Carpool.Common.Enums;
+﻿using System.ComponentModel.DataAnnotations;
+using Carpool.Common.Enums;
 
 namespace Carpool.DAL.Entities;
 
@@ -6,7 +7,8 @@ namespace Carpool.DAL.Entities;
             Guid Id,
             Manufacturer Manufacturer,
             CarType CarType,
-            DateOnly RegistrationDate,
+            [DataType(DataType.Date)]
+            DateTime RegistrationDate,
             string? PhotoUrl,
             int SeatCapacity,
             Guid OwnerId ) : IEntity
