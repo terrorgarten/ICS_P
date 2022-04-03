@@ -23,7 +23,12 @@ public static class RideSeeds
         ApproxRideTime: default,
         UserId: default,
         CarId: default
-    );
+    )
+    {
+        User = default,
+        PassengerRides = default,
+        Car = default
+    };
 
     public static readonly RideEntity RideEntity = new(
         Id: Guid.Parse(input: "7953ACF7-1CBD-410A-835F-BA332A591164"),
@@ -32,8 +37,11 @@ public static class RideSeeds
         BeginTime: new DateTime(2020, 1, 1, 19, 30, 0),
         ApproxRideTime: TimeSpan.FromHours(value: 2),
         UserId: UserSeeds.UserEntity.Id, //Franta
-        CarId: CarSeeds.SportCar.Id //nemá tady být nějaký autogen?
-    );
+        CarId: CarSeeds.SportCar.Id 
+    )
+    {
+        //?? nesedí mi tu ještě jedna entitka z userrides
+    };
 
     public static readonly RideEntity RideEntity1 = new(
         Id: Guid.Parse(input: "2D87B86E-AD98-4435-A9D2-EAEF5B9BA0BB"),
@@ -41,9 +49,14 @@ public static class RideSeeds
         End: "Ostrava",
         BeginTime: new DateTime(2019, 6, 4, 9, 0, 0),
         ApproxRideTime: TimeSpan.FromHours(value: 1),
-        UserId: UserSeeds.UserEntity1.Id, //Franta
+        UserId: UserSeeds.UserEntity1.Id,
         CarId: CarSeeds.CarEntity1.Id
-    );
+    )
+    {
+        User = UserSeeds.UserEntity1.Id,
+        PassengerRides = UserRideSeeds.UserRideEntity1 //?? celá entita nebo jen nějaký atribut
+        Car = CarSeeds.CarEntity1
+    };
 
     public static readonly RideEntity RideEntity2 = new(
         Id: Guid.Parse(input: "16E2290B-E1E0-4ADD-9BFD-6B3026AB2F3F"),
@@ -51,9 +64,14 @@ public static class RideSeeds
         End: "Brno",
         BeginTime: new DateTime(2019, 6, 15, 10, 50, 0),
         ApproxRideTime: TimeSpan.FromHours(value: 2.0),
-        UserId: UserSeeds.UserEntity1.Id, //Franta
-        CarId: CarSeeds.CarEntity1.Id
-    );
+        UserId: UserSeeds.UserEntity2.Id,
+        CarId: CarSeeds.CarEntity2.Id
+    )
+    {
+        User = UserSeeds.UserEntity2.Id,
+        PassengerRides = UserRideSeeds.UserRideEntity2 //?? viz výš
+        Car = CarSeeds.CarEntity2
+    };
 
 
     //To ensure that no tests reuse these clones for non-idempotent operations:
