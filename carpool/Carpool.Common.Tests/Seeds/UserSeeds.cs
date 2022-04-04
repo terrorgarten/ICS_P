@@ -1,5 +1,4 @@
-﻿using Carpool.Common.Enums;
-using Carpool.DAL.Entities;
+﻿using Carpool.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Carpool.Common.Tests.Seeds;
@@ -31,7 +30,7 @@ public static class UserSeeds
         Surname: "Hlavacova",
         PhotoUrl: @"https://png.pngitem.com/pimgs/s/200-2003995_transparent-pregnant-woman-png-png-download.png");
 
-    ////To ensure that no tests reuse these clones for non-idempotent operations
+    //To ensure that no tests reuse these clones for non-idempotent operations
     public static readonly UserEntity UserEntityWithNoPassengerRides = UserEntity with
     {
         Id = Guid.Parse("98B7F7B6-0F51-43B3-B8C0-B5FCFFF6DC2E"),
@@ -65,17 +64,31 @@ public static class UserSeeds
         DriverRides = Array.Empty<RideEntity>()
     };
 
-
     static UserSeeds()
     {
-        UserEntity.PassengerRides.Add(UserRideSeeds.UserRideEntity1);
-        UserEntity.PassengerRides.Add(UserRideSeeds.UserRideEntity2);
+        //UserEntity.PassengerRides.Add(UserRideSeeds.UserRideEntity1);
+        //UserEntity.PassengerRides.Add(UserRideSeeds.UserRideEntity2);
+        //UserEntity1.OwnedCars.Add(CarSeeds.CarEntity1);
+        //UserEntity2.OwnedCars.Add(CarSeeds.CarEntity2);
+
     }
 
     public static void Seed(this ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<CarEntity>().HasData(
+        modelBuilder.Entity<UserEntity>().HasData(
             UserEntity with {
+                OwnedCars = Array.Empty<CarEntity>(),
+                PassengerRides = Array.Empty<UserRideEntity>(),
+                DriverRides = Array.Empty<RideEntity>()
+            },
+            UserEntity1 with
+            {
+                OwnedCars = Array.Empty<CarEntity>(),
+                PassengerRides = Array.Empty<UserRideEntity>(),
+                DriverRides = Array.Empty<RideEntity>()
+            },
+            UserEntity2 with
+            {
                 OwnedCars = Array.Empty<CarEntity>(),
                 PassengerRides = Array.Empty<UserRideEntity>(),
                 DriverRides = Array.Empty<RideEntity>()

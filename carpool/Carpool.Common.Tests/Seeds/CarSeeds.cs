@@ -32,14 +32,9 @@ public static class CarSeeds
         Owner = UserSeeds.UserEntity,
     };
 
-    ////To ensure that no tests reuse these clones for non-idempotent operations
-    public static readonly CarEntity SportCarUpdate =
-        SportCar with { Id = Guid.Parse("143332B9-080E-4953-AEA5-BEF64679B052") };
+    
 
-    public static readonly CarEntity SportCarDelete =
-        SportCar with { Id = Guid.Parse("274D0CC9-A948-4818-AADB-A8B4C0506619") };
-
-    public static CarEntity CarEntity1 = new(
+    public static readonly CarEntity CarEntity1 = new(
         Id: Guid.Parse(input: "df935095-8709-4040-a2bb-b6f97cb416dc"),
         Manufacturer: Manufacturer.Kia,
         CarType: CarType.Crossover,
@@ -51,7 +46,7 @@ public static class CarSeeds
         Owner = UserSeeds.UserEntity1,
     };
 
-    public static CarEntity CarEntity2 = new(
+    public static readonly CarEntity CarEntity2 = new(
         Id: Guid.Parse(input: "23b3902d-7d4f-4213-9cf0-112348f56238"),
         Manufacturer: Manufacturer.Skoda,
         CarType: CarType.Sedan,
@@ -63,13 +58,20 @@ public static class CarSeeds
         Owner = UserSeeds.UserEntity2,
     };
 
+    //To ensure that no tests reuse these clones for non-idempotent operations
+    public static readonly CarEntity CarEntityUpdate =
+        CarEntity1 with { Id = Guid.Parse("143332B9-080E-4953-AEA5-BEF64679B052"), Owner = null, OwnerId = UserSeeds.UserEntityUpdate.Id};
+
+    public static readonly CarEntity CarEntityDelete =
+        CarEntity2 with { Id = Guid.Parse("274D0CC9-A948-4818-AADB-A8B4C0506619"), Owner = null };
+
     public static void Seed(this ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<UserEntity>().HasData(
-            CarEntity1,
-            CarEntity2,
-            SportCar,
-            SportCarUpdate,
-            SportCarDelete);
+        modelBuilder.Entity<CarEntity>().HasData(
+            CarEntity1 with { Owner = null },
+            CarEntity2 with { Owner = null },
+            SportCar with { Owner = null },
+            CarEntityUpdate,
+            CarEntityDelete);
     }
 }

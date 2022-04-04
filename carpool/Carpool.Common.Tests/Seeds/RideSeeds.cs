@@ -26,7 +26,6 @@ public static class RideSeeds
     )
     {
         User = default,
-        PassengerRides = default,
         Car = default
     };
 
@@ -53,8 +52,7 @@ public static class RideSeeds
         CarId: CarSeeds.CarEntity1.Id
     )
     {
-        User = UserSeeds.UserEntity1.Id,
-        PassengerRides = UserRideSeeds.UserRideEntity1 //?? celá entita nebo jen nějaký atribut
+        User = UserSeeds.UserEntity1,
         Car = CarSeeds.CarEntity1
     };
 
@@ -68,8 +66,7 @@ public static class RideSeeds
         CarId: CarSeeds.CarEntity2.Id
     )
     {
-        User = UserSeeds.UserEntity2.Id,
-        PassengerRides = UserRideSeeds.UserRideEntity2 //?? viz výš
+        User = UserSeeds.UserEntity2,
         Car = CarSeeds.CarEntity2
     };
 

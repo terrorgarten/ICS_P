@@ -1,5 +1,5 @@
 ﻿using Carpool.DAL;
-using Carpool.DAL.Seeds;
+using Carpool.Common.Tests.Seeds;
 using Microsoft.EntityFrameworkCore;
 
 namespace Carpool.Common.Tests
@@ -21,7 +21,8 @@ namespace Carpool.Common.Tests
             if (!_seedTestingData) return;
             UserSeeds.Seed(modelBuilder);
             CarSeeds.Seed(modelBuilder);
-            RideSeeds.Seed(modelBuilder);
+            //RideSeeds.Seed(modelBuilder);
+            //UserRideSeeds.Seed(modelBuilder);
         }
     }
 }

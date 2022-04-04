@@ -19,15 +19,20 @@ namespace Carpool.DAL
         {
             _seedDemoData = seedDemoData;
         }
-
-        public DbSet<UserRideEntity> UsersRideEntity => Set<UserRideEntity>();
-        public DbSet<UserEntity> Users => Set<UserEntity>();
         public DbSet<CarEntity> Cars => Set<CarEntity>();
+        public DbSet<UserEntity> Users => Set<UserEntity>();
         public DbSet<RideEntity> Rides => Set<RideEntity>();
+        public DbSet<UserRideEntity> UsersRideEntity => Set<UserRideEntity>();
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            //modelBuilder.Entity<CarEntity>()
+            //    .HasOne(i => i.Owner)
+            //    .WithMany(i => i.OwnedCars)
+            //    .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<UserEntity>()
                 .HasMany(i => i.OwnedCars)
@@ -48,12 +53,12 @@ namespace Carpool.DAL
                 .HasMany(i => i.PassengerRides)
                 .WithOne(i => i.Ride)
                 .OnDelete(DeleteBehavior.Cascade);
-
+            
             if (!_seedDemoData) return;
-            UserRideSeeds.Seed(modelBuilder);
             UserSeeds.Seed(modelBuilder);
             CarSeeds.Seed(modelBuilder);
             RideSeeds.Seed(modelBuilder);
+            UserRideSeeds.Seed(modelBuilder);
         }
     }
 }
