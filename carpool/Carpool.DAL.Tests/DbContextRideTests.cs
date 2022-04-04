@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 //using CookBook.Common.Tests.Seeds;
 //using CookBook.DAL.Entities;
 using Carpool.Common.Enums;
-using Carpool.DAL.Entities
-
+using Carpool.Common.Tests;
+using Carpool.Common.Tests.Seeds;
+using Carpool.DAL.Entities;
+using Carpool.DAL.Tests;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 using Xunit.Abstractions;
@@ -18,7 +20,7 @@ namespace Carpool.DAL.Test
 {
     public class DbContextRideTests : DbContextTestsBase
     {
-        public DbContextCarTests(ITestOutputHelper output) : base(output)
+        public DbContextRideTests(ITestOutputHelper output) : base(output)
         {
         }
 
@@ -30,17 +32,22 @@ namespace Carpool.DAL.Test
             {
                 Start = "Brno",
                 End = "Praha"
-            }
+            };
 
             //Act
             CarpoolDbContextSUT.Rides.Add(entity);
             await CarpoolDbContextSUT.SaveChangesAsync();
 
-            //Assert
+
+                //Assert
             await using var dbx = await DbContextFactory.CreateDbContextAsync();
             var actualEntity = await dbx.Rides
+                /*.Include(y => y.PassengerRides)
+                .Include(y => y.User)
+                .Include(y => y.Car)
+                */
                 .SingleAsync(i => i.Id == entity.Id);
-            Assert.Equal(entity, actualEntity);
+            DeepAssert.Equal(entity, actualEntity);
         }
 
         [Fact]
@@ -53,9 +60,9 @@ namespace Carpool.DAL.Test
                 {
                     Start = baseEntity.Start + "Updated",
                     End = baseEntity.End + "Updated",
-                    DateTime = default,
+                    BeginTime = default,
                     //TODO: add others
-                }
+                };
 
             //Act
             CarpoolDbContextSUT.Rides.Update(entity);
@@ -64,7 +71,7 @@ namespace Carpool.DAL.Test
             //Assert
             await using var dbx = await DbContextFactory.CreateDbContextAsync();
             var actualEntity = await dbx.Rides.SingleAsync(i => i.Id == entity.Id);
-            Assert.Equal(entity, actualEntity);
+            DeepAssert.Equal(entity, actualEntity);
         }
     }
 }
