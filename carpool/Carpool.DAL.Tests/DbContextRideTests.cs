@@ -1,14 +1,76 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 //using CookBook.Common.Enums;
 //using CookBook.Common.Tests;
 //using CookBook.Common.Tests.Seeds;
 //using CookBook.DAL.Entities;
-//using Microsoft.EntityFrameworkCore;
-//using Xunit;
-//using Xunit.Abstractions;
+using Carpool.Common.Enums;
+using Carpool.DAL.Entities
+
+using Microsoft.EntityFrameworkCore;
+using Xunit;
+using Xunit.Abstractions;
+
+
+namespace Carpool.DAL.Test
+{
+    public class DbContextRideTests : DbContextTestsBase
+    {
+        public DbContextCarTests(ITestOutputHelper output) : base(output)
+        {
+        }
+
+        [Fact]
+        public async Task AddNew_RideWithJustStartEnd_Persisted()
+        {
+            //Arange
+            var entity = RideSeeds.EmptyRideEntity with
+            {
+                Start = "Brno",
+                End = "Praha"
+            }
+
+            //Act
+            CarpoolDbContextSUT.Rides.Add(entity);
+            await CarpoolDbContextSUT.SaveChangesAsync();
+
+            //Assert
+            await using var dbx = await DbContextFactory.CreateDbContextAsync();
+            var actualEntity = await dbx.Rides
+                .SingleAsync(i => i.Id == entity.Id);
+            Assert.Equal(entity, actualEntity);
+        }
+
+        [Fact]
+        public async Task Update_Recipe_Persisted()
+        {
+            //Arrange
+            var baseEntity = RideSeeds.RideEntityUpdate;
+            var entity =
+                baseEntity with
+                {
+                    Start = baseEntity.Start + "Updated",
+                    End = baseEntity.End + "Updated",
+                    DateTime = default,
+                    //TODO: add others
+                }
+
+            //Act
+            CarpoolDbContextSUT.Rides.Update(entity);
+            await CarpoolDbContextSUT.SaveChangesAsync();
+
+            //Assert
+            await using var dbx = await DbContextFactory.CreateDbContextAsync();
+            var actualEntity = await dbx.Rides.SingleAsync(i => i.Id == entity.Id);
+            Assert.Equal(entity, actualEntity);
+        }
+    }
+}
+
+
+
 
 //namespace CookBook.DAL.Tests
 //{
