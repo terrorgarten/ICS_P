@@ -2,11 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-//using CookBook.Common.Enums;
-//using CookBook.Common.Tests;
-//using CookBook.Common.Tests.Seeds;
-//using CookBook.DAL.Entities;
-using Carpool.Common.Enums;
 using Carpool.Common.Tests;
 using Carpool.Common.Tests.Seeds;
 using Carpool.DAL.Entities;
@@ -16,7 +11,7 @@ using Xunit;
 using Xunit.Abstractions;
 
 
-namespace Carpool.DAL.Test
+namespace Carpool.DAL.Tests
 {
     public class DbContextRideTests : DbContextTestsBase
     {
@@ -31,7 +26,9 @@ namespace Carpool.DAL.Test
             var entity = RideSeeds.EmptyRideEntity with
             {
                 Start = "Brno",
-                End = "Praha"
+                End = "Praha",
+                UserId = UserSeeds.UserEntity.Id,
+                CarId = CarSeeds.CarEntity1.Id
             };
 
             //Act
@@ -39,13 +36,9 @@ namespace Carpool.DAL.Test
             await CarpoolDbContextSUT.SaveChangesAsync();
 
 
-                //Assert
+            //Assert
             await using var dbx = await DbContextFactory.CreateDbContextAsync();
             var actualEntity = await dbx.Rides
-                /*.Include(y => y.PassengerRides)
-                .Include(y => y.User)
-                .Include(y => y.Car)
-                */
                 .SingleAsync(i => i.Id == entity.Id);
             DeepAssert.Equal(entity, actualEntity);
         }

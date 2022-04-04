@@ -70,7 +70,7 @@ public static class UserSeeds
         //UserEntity.PassengerRides.Add(UserRideSeeds.UserRideEntity2);
         //UserEntity1.OwnedCars.Add(CarSeeds.CarEntity1);
         //UserEntity2.OwnedCars.Add(CarSeeds.CarEntity2);
-
+        UserEntity.OwnedCars.Add(CarSeeds.SportCar);
     }
 
     public static void Seed(this ModelBuilder modelBuilder)

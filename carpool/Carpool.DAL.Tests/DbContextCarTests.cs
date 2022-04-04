@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Carpool.Common.Enums;
+using Carpool.Common.Tests;
 using Carpool.Common.Tests.Seeds;
 using Carpool.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -41,75 +42,56 @@ namespace Carpool.DAL.Tests
             Assert.Equal(entity, actualEntity);
         }
 
-//        [Fact]
-//        public async Task GetAll_Ingredients_ContainsSeededWater()
-//        {
-//            //Act
-//            var entities = await CookBookDbContextSUT.Ingredients.ToArrayAsync();
+        [Fact]
+        public async Task GetAll_Car_ContainsSeededWater()
+        {
+            //Act
+            var entities = await CarpoolDbContextSUT.Cars.ToArrayAsync();
 
-//            //Assert
-//            Assert.Contains(IngredientSeeds.Water, entities);
-//        }
+            //Assert
+            Assert.Contains(CarSeeds.CarEntityUpdate, entities);
+        }
 
-//        [Fact]
-//        public async Task GetById_Ingredient_WaterRetrieved()
-//        {
-//            //Act
-//            var entity = await CookBookDbContextSUT.Ingredients.SingleAsync(i=>i.Id == IngredientSeeds.Water.Id);
+        [Fact]
+        public async Task GetById_IncludingIngredients_Recipe()
+        {
+            //Act
+            var entity = await CarpoolDbContextSUT.Cars
+                .Include(i => i.Owner)
+                .ThenInclude(i => i.OwnedCars)
+                .SingleAsync(i => i.Id == CarSeeds.SportCar.Id);
 
-//            //Assert
-//            Assert.Equal(IngredientSeeds.Water, entity);
-//        }
+            //Assert
+            DeepAssert.Equal(CarSeeds.SportCar, entity);
+        }
 
-//        [Fact]
-//        public async Task Update_Ingredient_Persisted()
-//        {
-//            //Arrange
-//            var baseEntity = IngredientSeeds.WaterUpdate;
-//            var entity =
-//                baseEntity with
-//                {
-//                    Name = baseEntity + "Updated",
-//                    Description = baseEntity + "Updated",
-//                };
+        [Fact]
+        public async Task Delete_Ingredient_WaterDeleted()
+        {
+            //Arrange
+            var entityBase = CarSeeds.CarEntityDelete;
 
-//            //Act
-//            CookBookDbContextSUT.Ingredients.Update(entity);
-//            await CookBookDbContextSUT.SaveChangesAsync();
+            //Act
+            CarpoolDbContextSUT.Cars.Remove(entityBase);
+            await CarpoolDbContextSUT.SaveChangesAsync();
 
-//            //Assert
-//            await using var dbx = await DbContextFactory.CreateDbContextAsync();
-//            var actualEntity = await dbx.Ingredients.SingleAsync(i => i.Id == entity.Id);
-//            Assert.Equal(entity, actualEntity);
-//        }
+            //Assert
+            Assert.False(await CarpoolDbContextSUT.Cars.AnyAsync(i => i.Id == entityBase.Id));
+        }
 
-//        [Fact]
-//        public async Task Delete_Ingredient_WaterDeleted()
-//        {
-//            //Arrange
-//            var entityBase = IngredientSeeds.WaterDelete;
+        [Fact]
+        public async Task DeleteById_Ingredient_WaterDeleted()
+        {
+            //Arrange
+            var entityBase = CarSeeds.CarEntityDelete;
 
-//            //Act
-//            CookBookDbContextSUT.Ingredients.Remove(entityBase);
-//            await CookBookDbContextSUT.SaveChangesAsync();
+            //Act
+            CarpoolDbContextSUT.Remove(
+                CarpoolDbContextSUT.Cars.Single(i => i.Id == entityBase.Id));
+            await CarpoolDbContextSUT.SaveChangesAsync();
 
-//            //Assert
-//            Assert.False(await CookBookDbContextSUT.Ingredients.AnyAsync(i => i.Id == entityBase.Id));
-//        }
-
-//        [Fact]
-//        public async Task DeleteById_Ingredient_WaterDeleted()
-//        {
-//            //Arrange
-//            var entityBase = IngredientSeeds.WaterDelete;
-
-//            //Act
-//            CookBookDbContextSUT.Remove(
-//                CookBookDbContextSUT.Ingredients.Single(i => i.Id == entityBase.Id));
-//            await CookBookDbContextSUT.SaveChangesAsync();
-
-//            //Assert
-//            Assert.False(await CookBookDbContextSUT.Ingredients.AnyAsync(i => i.Id == entityBase.Id));
-//        }
+            //Assert
+            Assert.False(await CarpoolDbContextSUT.Cars.AnyAsync(i => i.Id == entityBase.Id));
+        }
     }
 }

@@ -116,8 +116,8 @@ public static class RideSeeds
 
     static RideSeeds()
     {
-        RideEntity.PassengerRides.Add(UserRideSeeds.UserRideEntity1);
-        RideEntity.PassengerRides.Add(UserRideSeeds.UserRideEntity2);
+        //RideEntity.PassengerRides.Add(UserRideSeeds.UserRideEntity1);
+        //RideEntity.PassengerRides.Add(UserRideSeeds.UserRideEntity2);
     }
 
     public static void Seed(ModelBuilder modelBuilder)
