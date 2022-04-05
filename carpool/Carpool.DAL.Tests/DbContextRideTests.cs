@@ -7,6 +7,7 @@ using Carpool.Common.Tests.Seeds;
 using Carpool.DAL.Entities;
 using Carpool.DAL.Tests;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -20,7 +21,7 @@ namespace Carpool.DAL.Tests
         }
 
         [Fact]
-        public async Task AddNew_RideWithJustStartEnd_Persisted()
+        public async Task AddNew_RideWithNoPassengers_Persisted()
         {
             //Arange
             var entity = RideSeeds.EmptyRideEntity with
@@ -44,7 +45,96 @@ namespace Carpool.DAL.Tests
         }
 
         [Fact]
-        public async Task Update_Recipe_Persisted()
+        public async Task AddNew_RideWithPassengers_Persisted()
+        {
+            //Arrange
+            var entity = RideSeeds.EmptyRideEntity with
+            {
+                Start = "Olomouc",
+                End = "Hustopeče",
+                BeginTime = new DateTime(2020, 10, 20, 10, 20, 0),
+                ApproxRideTime = TimeSpan.FromHours(3),
+                UserId = UserSeeds.UserEntity.Id,
+                CarId = CarSeeds.CarEntity1.Id,
+                
+                PassengerRides = new List<UserRideEntity>
+                {
+                    UserRideSeeds.EmptyUserRideEntity with
+                    {
+                        Passenger = UserSeeds.EmptyUserEntity with
+                        {
+                            Name = "Franta",
+                            Surname = "Blazen"
+                        }
+                    },
+
+                    UserRideSeeds.EmptyUserRideEntity with
+                    {
+                        Passenger = UserSeeds.EmptyUserEntity with
+                        {
+                            Name = "Jan",
+                            Surname = "Kral"
+                        }
+                    }
+                }
+            };
+
+            //Act
+            CarpoolDbContextSUT.Rides.Add(entity);
+            await CarpoolDbContextSUT.SaveChangesAsync();
+
+            //Assert
+            await using var dbx = await DbContextFactory.CreateDbContextAsync();
+            var actualEntity = await dbx.Rides
+                .Include(i => i.PassengerRides)
+                .ThenInclude(i => i.Passenger)
+                .SingleAsync(i => i.Id == entity.Id);
+            DeepAssert.Equal(entity, actualEntity);
+        }
+
+
+
+        [Fact]
+        public async Task AddNew_RideWithPassengerRides_Persisted()
+        {
+            var entity = RideSeeds.EmptyRideEntity with
+            {
+                Start = "Olomouc",
+                End = "Hustopeče",
+                BeginTime = new DateTime(2020, 10, 20, 10, 20, 0),
+                ApproxRideTime = TimeSpan.FromHours(3),
+                UserId = UserSeeds.UserEntity.Id,
+                CarId = CarSeeds.CarEntity1.Id,
+                PassengerRides = new List<UserRideEntity>
+                {
+                    UserRideSeeds.EmptyUserRideEntity with
+                    {
+                        PassengerId = UserSeeds.UserEntity1.Id
+                    },
+
+                    UserRideSeeds.EmptyUserRideEntity with
+                    {
+                        PassengerId = UserSeeds.UserEntity2.Id
+                    }
+                }
+            };
+
+            //Act
+            CarpoolDbContextSUT.Rides.Add(entity);
+            await CarpoolDbContextSUT.SaveChangesAsync();
+
+            //Assert
+            await using var dbx = await DbContextFactory.CreateDbContextAsync();
+            var actualEntity = await dbx.Rides
+                .Include(i => i.PassengerRides)
+                .SingleAsync(i => i.Id == entity.Id);
+            DeepAssert.Equal(entity, actualEntity);
+        }
+
+
+
+        [Fact]
+        public async Task Update_Ride_Persisted()
         {
             //Arrange
             var baseEntity = RideSeeds.RideEntityUpdate;
@@ -66,201 +156,60 @@ namespace Carpool.DAL.Tests
             var actualEntity = await dbx.Rides.SingleAsync(i => i.Id == entity.Id);
             DeepAssert.Equal(entity, actualEntity);
         }
+
+        
+
+        [Fact]
+        public async Task GetById_Ride()
+        {
+            var entity = await CarpoolDbContextSUT.Rides
+                .SingleAsync(i => i.Id == RideSeeds.RideEntity.Id);
+
+            DeepAssert.Equal(RideSeeds.RideEntity with { PassengerRides = Array.Empty<UserRideEntity>() }, entity);
+        }
+
+        [Fact]
+        public async Task GetById_IncludingPassengers_Recipe()
+        {
+            //Act
+            var entity = await CarpoolDbContextSUT.Rides
+                .Include(i => i.PassengerRides)
+                .ThenInclude(i => i.Passenger)
+                .SingleAsync(i => i.Id == RideSeeds.RideEntity.Id);
+
+            //Assert
+            DeepAssert.Equal(RideSeeds.RideEntity, entity);
+        }
+
+        [Fact]
+        public async Task Delete_PassengerRide_Deleted()
+        {
+            //Arrange
+            var baseEntity = RideSeeds.RideEntityDelete;
+
+            //Act
+            CarpoolDbContextSUT.Rides.Remove(baseEntity);
+            await CarpoolDbContextSUT.SaveChangesAsync();
+
+            //Assert
+            Assert.False(await CarpoolDbContextSUT.Rides.AnyAsync(i => i.Id == baseEntity.Id));
+        }
+
+        [Fact]
+        public async Task DeleteById_PassengerRide_Deleted()
+        {
+            //Arrange
+            var baseEntity = RideSeeds.RideEntityDelete;
+
+            //Act
+            CarpoolDbContextSUT.Remove(
+                CarpoolDbContextSUT.Rides.Single(i => i.Id == baseEntity.Id));
+            await CarpoolDbContextSUT.SaveChangesAsync();
+
+            //Assert
+            Assert.False(await CarpoolDbContextSUT.Rides.AnyAsync(i => i.Id == baseEntity.Id));
+        }
+
     }
 }
 
-
-
-
-//namespace CookBook.DAL.Tests
-//{
-//    public class DbContextRecipeTests : DbContextTestsBase
-//    {
-//        public DbContextRecipeTests(ITestOutputHelper output) : base(output)
-//        {
-//        }
-        
-//        [Fact]
-//        public async Task AddNew_RecipeWithoutIngredients_Persisted()
-//        {
-//            //Arrange
-//            var entity = RecipeSeeds.EmptyRecipeEntity with {
-//                Name = "Chicken soup",
-//                Description = "Grandma's delicious chicken soup."
-//            };
-
-//            //Act
-//            CookBookDbContextSUT.Recipes.Add(entity);
-//            await CookBookDbContextSUT.SaveChangesAsync();
-
-//            //Assert
-//            await using var dbx = await DbContextFactory.CreateDbContextAsync();
-//            var actualEntity = await dbx.Recipes
-//                .SingleAsync(i => i.Id == entity.Id);
-//            DeepAssert.Equal(entity, actualEntity);
-//        }
-
-//        // Adding ingredients alongside with recipe could be considered a bad design because ingredients are strong entities
-//        [Fact]
-//        public async Task AddNew_RecipeWithIngredients_Persisted()
-//        {
-//            //Arrange
-//            var entity = RecipeSeeds.EmptyRecipeEntity with
-//            {
-//                Name = "Lemonade",
-//                Description = "Simple lemon lemonade",
-//                Ingredients = new List<IngredientAmountEntity> {
-//                IngredientAmountSeeds.EmptyIngredientAmountEntity with
-//                {
-//                    Amount = 1,
-//                    Unit = Unit.L,
-//                    Ingredient = IngredientSeeds.EmptyIngredient with
-//                    {
-//                        Name = "Water",
-//                        Description = "Filtered Water",
-//                        ImageUrl = "https://www.pngitem.com/pimgs/m/40-406527_cartoon-glass-of-water-png-glass-of-water.png"
-//                    }
-//                },
-//                IngredientAmountSeeds.EmptyIngredientAmountEntity with
-//                {
-//                    Amount = 50,
-//                    Unit = Unit.Ml,
-//                    Ingredient = IngredientSeeds.EmptyIngredient with
-//                    {
-//                        Name = "Lime-juice",
-//                        Description = "Fresh lime-juice",
-//                        ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Lime-Whole-Split.jpg/640px-Lime-Whole-Split.jpg"
-//                    }
-//                }
-//            }
-//            };
-
-//            //Act
-//            CookBookDbContextSUT.Recipes.Add(entity);
-//            await CookBookDbContextSUT.SaveChangesAsync();
-
-//            //Assert
-//            await using var dbx = await DbContextFactory.CreateDbContextAsync();
-//            var actualEntity = await dbx.Recipes
-//                .Include(i => i.Ingredients)
-//                .ThenInclude(i => i.Ingredient)
-//                .SingleAsync(i => i.Id == entity.Id);
-//            DeepAssert.Equal(entity, actualEntity);
-//        }
-
-//        // Adding ingredientAmounts alongside with recipe is OK because ingredientAmounts are not strong entities
-//        [Fact]
-//        public async Task AddNew_RecipeWithJustIngredientAmounts_Persisted()
-//        {
-//            //Arrange
-//            var entity = RecipeSeeds.EmptyRecipeEntity with
-//            {
-//                Name = "Lemonade",
-//                Description = "Simple lemon lemonade",
-//                Ingredients = new List<IngredientAmountEntity> {
-//                    IngredientAmountSeeds.EmptyIngredientAmountEntity with
-//                    {
-//                        Amount = 1,
-//                        Unit = Unit.L,
-//                        IngredientId = IngredientSeeds.IngredientEntity1.Id
-//                    },
-//                    IngredientAmountSeeds.EmptyIngredientAmountEntity with
-//                    {
-//                        Amount = 50,
-//                        Unit = Unit.Ml,
-//                        IngredientId = IngredientSeeds.IngredientEntity2.Id
-//                    }
-//                }
-//            };
-
-//            //Act
-//            CookBookDbContextSUT.Recipes.Add(entity);
-//            await CookBookDbContextSUT.SaveChangesAsync();
-
-//            //Assert
-//            await using var dbx = await DbContextFactory.CreateDbContextAsync();
-//            var actualEntity = await dbx.Recipes
-//                .Include(i => i.Ingredients)
-//                .SingleAsync(i => i.Id == entity.Id);
-//            DeepAssert.Equal(entity, actualEntity);
-//        }
-
-//        [Fact]
-//        public async Task GetById_Recipe()
-//        {
-//            //Act
-//            var entity = await CookBookDbContextSUT.Recipes
-//                .SingleAsync(i => i.Id == RecipeSeeds.RecipeEntity.Id);
-
-//            //Assert
-//            DeepAssert.Equal(RecipeSeeds.RecipeEntity with {Ingredients = Array.Empty<IngredientAmountEntity>() }, entity);
-//        }
-
-//        [Fact]
-//        public async Task GetById_IncludingIngredients_Recipe()
-//        {
-//            //Act
-//            var entity = await CookBookDbContextSUT.Recipes
-//                .Include(i=>i.Ingredients)
-//                .ThenInclude(i=>i.Ingredient)
-//                .SingleAsync(i => i.Id == RecipeSeeds.RecipeEntity.Id);
-
-//            //Assert
-//            DeepAssert.Equal(RecipeSeeds.RecipeEntity, entity);
-//        }
-
-//        [Fact]
-//        public async Task Update_Recipe_Persisted()
-//        {
-//            //Arrange
-//            var baseEntity = RecipeSeeds.RecipeEntityUpdate;
-//            var entity =
-//                baseEntity with
-//                {
-//                    Name = baseEntity.Name + "Updated",
-//                    Description = baseEntity.Description + "Updated",
-//                    Duration = default,
-//                    FoodType = FoodType.None,
-//                    ImageUrl = baseEntity.ImageUrl +"Updated",
-//                };
-
-//            //Act
-//            CookBookDbContextSUT.Recipes.Update(entity);
-//            await CookBookDbContextSUT.SaveChangesAsync();
-
-//            //Assert
-//            await using var dbx = await DbContextFactory.CreateDbContextAsync();
-//            var actualEntity = await dbx.Recipes.SingleAsync(i => i.Id == entity.Id);
-//            DeepAssert.Equal(entity, actualEntity);
-//        }
-
-//        [Fact]
-//        public async Task Delete_IngredientAmount_Deleted()
-//        {
-//            //Arrange
-//            var baseEntity = RecipeSeeds.RecipeEntityDelete;
-
-//            //Act
-//            CookBookDbContextSUT.Recipes.Remove(baseEntity);
-//            await CookBookDbContextSUT.SaveChangesAsync();
-
-//            //Assert
-//            Assert.False(await CookBookDbContextSUT.Recipes.AnyAsync(i => i.Id == baseEntity.Id));
-//        }
-
-//        [Fact]
-//        public async Task DeleteById_IngredientAmount_Deleted()
-//        {
-//            //Arrange
-//            var baseEntity = RecipeSeeds.RecipeEntityDelete;
-
-//            //Act
-//            CookBookDbContextSUT.Remove(
-//                CookBookDbContextSUT.Recipes.Single(i => i.Id == baseEntity.Id));
-//            await CookBookDbContextSUT.SaveChangesAsync();
-
-//            //Assert
-//            Assert.False(await CookBookDbContextSUT.Recipes.AnyAsync(i => i.Id == baseEntity.Id));
-//        }
-//    }
-//}
