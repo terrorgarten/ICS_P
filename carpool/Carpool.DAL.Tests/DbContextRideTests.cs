@@ -162,23 +162,23 @@ namespace Carpool.DAL.Tests
         [Fact]
         public async Task GetById_Ride()
         {
-            var entity = await CarpoolDbContextSUT.Rides
+            var entity = await CarpoolDbContextSUT.Rides.Include(i => i.User).ThenInclude(i => i.OwnedCars)
                 .SingleAsync(i => i.Id == RideSeeds.RideEntity.Id);
 
             DeepAssert.Equal(RideSeeds.RideEntity with { PassengerRides = Array.Empty<UserRideEntity>() }, entity);
         }
 
         [Fact]
-        public async Task GetById_IncludingPassengers_Recipe()
+        public async Task GetById_IncludingPassengers_Ride()
         {
             //Act
             var entity = await CarpoolDbContextSUT.Rides
                 .Include(i => i.PassengerRides)
                 .ThenInclude(i => i.Passenger)
-                .SingleAsync(i => i.Id == RideSeeds.RideEntity.Id);
+                .SingleAsync(i => i.Id == RideSeeds.RideEntityForRideTestsGet.Id);
 
             //Assert
-            DeepAssert.Equal(RideSeeds.RideEntity, entity);
+            DeepAssert.Equal(RideSeeds.RideEntityForRideTestsGet, entity);
         }
 
         [Fact]

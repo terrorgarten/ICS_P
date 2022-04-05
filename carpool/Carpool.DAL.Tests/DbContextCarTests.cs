@@ -23,7 +23,55 @@ namespace Carpool.DAL.Tests
         }
 
         [Fact]
-        public async Task Update_Car_Persisted()
+        public async Task AddNew_Car_Persisted()
+        {
+            //Arrange
+            var entity = CarSeeds.EmptyCarEntity with
+            {
+                Manufacturer = Manufacturer.Dacia,
+                CarType = CarType.Universal,
+                OwnerId = UserSeeds.UserEntity.Id
+            };
+
+            //Act
+            CarpoolDbContextSUT.Cars.Add(entity);
+            await CarpoolDbContextSUT.SaveChangesAsync();
+
+            //Assert
+            await using var dbx = await DbContextFactory.CreateDbContextAsync();
+            var actualEntities = await dbx.Cars.SingleAsync(i => i.Id == entity.Id);
+            Assert.Equal(entity, actualEntities);
+        }
+
+        [Fact]
+        public async Task AddNew_CarWithOwner_Persisted()
+        {
+            //Arrange
+            var entity = CarSeeds.EmptyCarEntity with
+            {
+                Manufacturer = Manufacturer.Lamborghini,
+                CarType = CarType.Cabriolet,
+                OwnerId = Guid.Parse("39059CAC-0E34-4B2E-BC3C-4044CC4897F2"),
+                Owner = UserSeeds.EmptyUserEntity with
+                {
+                    Id = Guid.Parse("39059CAC-0E34-4B2E-BC3C-4044CC4897F2"),
+                    Name = "Stanko",
+                    Surname = "Lobotka"
+                }
+            };
+
+            //Act
+            CarpoolDbContextSUT.Cars.Add(entity);
+            await CarpoolDbContextSUT.SaveChangesAsync();
+
+            //Assert
+            await using var dbx = await DbContextFactory.CreateDbContextAsync();
+            var actualEntities = await dbx.Cars.Include(i => i.Owner).SingleAsync(i => i.Id == entity.Id);
+            DeepAssert.Equal(entity, actualEntities);
+        }
+
+        [Fact]
+        public async Task Update_SportCar_Persisted()
         {
             //Arrange
             var baseEntity = CarSeeds.CarEntityUpdate;
@@ -43,7 +91,7 @@ namespace Carpool.DAL.Tests
         }
 
         [Fact]
-        public async Task GetAll_Car_ContainsSeededWater()
+        public async Task GetAll_Car_ContainsSeededSportCarUpdate()
         {
             //Act
             var entities = await CarpoolDbContextSUT.Cars.ToArrayAsync();
@@ -53,20 +101,20 @@ namespace Carpool.DAL.Tests
         }
 
         [Fact]
-        public async Task GetById_IncludingIngredients_Recipe()
+        public async Task GetById_IncludingOwner_Car()
         {
             //Act
             var entity = await CarpoolDbContextSUT.Cars
                 .Include(i => i.Owner)
                 .ThenInclude(i => i.OwnedCars)
-                .SingleAsync(i => i.Id == CarSeeds.SportCar.Id);
+                .SingleAsync(i => i.Id == CarSeeds.CarEntity1.Id);
 
             //Assert
-            DeepAssert.Equal(CarSeeds.SportCar, entity);
+            DeepAssert.Equal(CarSeeds.CarEntity1, entity);
         }
 
         [Fact]
-        public async Task Delete_Ingredient_WaterDeleted()
+        public async Task Delete_SportCar_Deleted()
         {
             //Arrange
             var entityBase = CarSeeds.CarEntityDelete;
@@ -80,7 +128,7 @@ namespace Carpool.DAL.Tests
         }
 
         [Fact]
-        public async Task DeleteById_Ingredient_WaterDeleted()
+        public async Task DeleteById_Car_SportCarDeleted()
         {
             //Arrange
             var entityBase = CarSeeds.CarEntityDelete;
@@ -92,6 +140,26 @@ namespace Carpool.DAL.Tests
 
             //Assert
             Assert.False(await CarpoolDbContextSUT.Cars.AnyAsync(i => i.Id == entityBase.Id));
+        }
+
+        [Fact]
+        public async Task GetAll_UserRide_ForRide()
+        {
+            //Act
+            var userRides = await CarpoolDbContextSUT.UsersRideEntity
+                .Where(i => i.RideId == RideSeeds.RideEntity.Id)
+                .ToArrayAsync();
+
+            Assert.Contains(UserRideSeeds.UserRideEntity1 with
+            {
+                Ride = null,
+                Passenger = null
+            }, userRides);
+            Assert.Contains(UserRideSeeds.UserRideEntity2 with
+            {
+                Ride = null,
+                Passenger = null
+            }, userRides);
         }
     }
 }

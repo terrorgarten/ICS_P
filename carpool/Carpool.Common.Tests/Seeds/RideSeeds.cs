@@ -39,16 +39,17 @@ public static class RideSeeds
         CarId: CarSeeds.SportCar.Id 
     )
     {
-        //?? nesedí mi tu ještě jedna entitka z userrides
+       User = UserSeeds.UserEntity,
+       Car = null
     };
 
-    public static readonly RideEntity RideEntity1 = new(
+    public static readonly RideEntity RideEntityForUserRideEntity = new(
         Id: Guid.Parse(input: "2D87B86E-AD98-4435-A9D2-EAEF5B9BA0BB"),
         Start: "Olomouc",
         End: "Ostrava",
         BeginTime: new DateTime(2019, 6, 4, 9, 0, 0),
         ApproxRideTime: TimeSpan.FromHours(value: 1),
-        UserId: UserSeeds.UserEntity1.Id,
+        UserId: UserSeeds.UserEntity.Id,
         CarId: CarSeeds.CarEntity1.Id
     )
     {
@@ -56,7 +57,7 @@ public static class RideSeeds
         Car = CarSeeds.CarEntity1
     };
 
-    public static readonly RideEntity RideEntity2 = new(
+    public static readonly RideEntity RideEntityForRideTestsGet = new(
         Id: Guid.Parse(input: "16E2290B-E1E0-4ADD-9BFD-6B3026AB2F3F"),
         Start: "Hradec Králové",
         End: "Brno",
@@ -96,13 +97,13 @@ public static class RideSeeds
         Car = null
     };
 
-    public static readonly RideEntity RideEntityForRideUserUpdate = RideEntity with
-    {
-        Id = Guid.Parse(input: "85EFC35D-5F7C-490F-80C9-5789D5AB076E"),
-        User = null,
-        PassengerRides = Array.Empty<UserRideEntity>(),
-        Car = null
-    };
+    //public static readonly RideEntity RideEntityForRideUserUpdate = RideEntity with
+    //{
+    //    Id = Guid.Parse(input: "85EFC35D-5F7C-490F-80C9-5789D5AB076E"),
+    //    User = null,
+    //    PassengerRides = Array.Empty<UserRideEntity>(),
+    //    Car = null
+    //};
 
     public static readonly RideEntity RideEntityForRideUserDelete = RideEntity with
     {
@@ -116,8 +117,8 @@ public static class RideSeeds
 
     static RideSeeds()
     {
-        //RideEntity.PassengerRides.Add(UserRideSeeds.UserRideEntity1);
-        //RideEntity.PassengerRides.Add(UserRideSeeds.UserRideEntity2);
+        RideEntityForUserRideEntity.PassengerRides.Add(UserRideSeeds.UserRideEntity1);
+        RideEntityForRideTestsGet.PassengerRides.Add(UserRideSeeds.UserRideEntity2);
     }
 
     public static void Seed(ModelBuilder modelBuilder)
@@ -129,10 +130,21 @@ public static class RideSeeds
                 PassengerRides = Array.Empty<UserRideEntity>(),
                 Car = null
             },
+            RideEntityForRideTestsGet with
+            {
+                User = null,
+                PassengerRides = Array.Empty<UserRideEntity>(),
+                Car = null
+            },
             RideEntityWithNoPassengers,
             RideEntityUpdate,
             RideEntityDelete,
-            RideEntityForRideUserUpdate,
+            RideEntityForUserRideEntity with
+            {
+                User = null,
+                PassengerRides = Array.Empty<UserRideEntity>(),
+                Car = null
+            },
             RideEntityForRideUserDelete
         );
     }

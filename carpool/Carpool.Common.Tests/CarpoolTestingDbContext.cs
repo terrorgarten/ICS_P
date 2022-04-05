@@ -22,7 +22,7 @@ namespace Carpool.Common.Tests
             UserSeeds.Seed(modelBuilder);
             CarSeeds.Seed(modelBuilder);
             RideSeeds.Seed(modelBuilder);
-            //UserRideSeeds.Seed(modelBuilder);
+            UserRideSeeds.Seed(modelBuilder);
         }
     }
 }

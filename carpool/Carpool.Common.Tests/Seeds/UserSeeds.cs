@@ -18,6 +18,12 @@ public static class UserSeeds
         Surname: "Mrkvička",
         PhotoUrl: null);
 
+    public static readonly UserEntity UserForUserRideEntity = new(
+        Id: Guid.Parse(input: "3D8369CC-263E-42D3-AF62-010BAEEF7D3C"),
+        Name: "Bob",
+        Surname: "Bobek",
+        PhotoUrl: null);
+    
     public static readonly UserEntity UserEntity1 = new(
         Id: Guid.Parse(input: "2FFB085E-6E24-4D42-BBE9-8F7EB2581B49"),
         Name: "Franta",
@@ -66,17 +72,24 @@ public static class UserSeeds
 
     static UserSeeds()
     {
-        //UserEntity.PassengerRides.Add(UserRideSeeds.UserRideEntity1);
-        //UserEntity.PassengerRides.Add(UserRideSeeds.UserRideEntity2);
+        UserForUserRideEntity.PassengerRides.Add(UserRideSeeds.UserRideEntity1);
+        //UserEntity2.PassengerRides.Add(UserRideSeeds.UserRideEntity2);
         //UserEntity1.OwnedCars.Add(CarSeeds.CarEntity1);
-        //UserEntity2.OwnedCars.Add(CarSeeds.CarEntity2);
+        UserEntity2.OwnedCars.Add(CarSeeds.CarEntity2);
         UserEntity.OwnedCars.Add(CarSeeds.SportCar);
+        UserEntity1.OwnedCars.Add(CarSeeds.CarEntity1);
     }
 
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<UserEntity>().HasData(
             UserEntity with {
+                OwnedCars = Array.Empty<CarEntity>(),
+                PassengerRides = Array.Empty<UserRideEntity>(),
+                DriverRides = Array.Empty<RideEntity>()
+            },
+            UserForUserRideEntity with
+            {
                 OwnedCars = Array.Empty<CarEntity>(),
                 PassengerRides = Array.Empty<UserRideEntity>(),
                 DriverRides = Array.Empty<RideEntity>()
