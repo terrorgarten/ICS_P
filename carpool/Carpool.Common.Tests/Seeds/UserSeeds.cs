@@ -11,6 +11,12 @@ public static class UserSeeds
         Surname: default!,
         PhotoUrl: default);
 
+    public static readonly UserEntity EmptyUserEntityWithourCars = new(
+        Id: default,
+        Name: default!,//stringy musia mat !
+        Surname: default!,
+        PhotoUrl: default);
+
 
     public static readonly UserEntity UserEntity = new(
         Id: Guid.Parse(input: "fabde0cd-eefe-443f-baf6-3d96cc2cbf2e"),
@@ -50,7 +56,7 @@ public static class UserSeeds
         PassengerRides = Array.Empty<UserRideEntity>(),
         DriverRides = Array.Empty<RideEntity>()
     };
-    public static readonly UserEntity UserEntityDelete = UserEntity with { 
+    public static readonly UserEntity UserEntityDelete = UserEntity2 with { 
         Id = Guid.Parse("5DCA4CEA-B8A8-4C86-A0B3-FFB78FBA1A09"),
         OwnedCars = Array.Empty<CarEntity>(),
         PassengerRides = Array.Empty<UserRideEntity>(),
