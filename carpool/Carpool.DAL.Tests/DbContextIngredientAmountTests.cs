@@ -1,95 +1,118 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Carpool.Common.Enums;
+using Carpool.Common.Tests;
 using Carpool.Common.Tests.Seeds;
+using Carpool.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace Carpool.DAL.Tests
+
 {
-    public class DbContextIngredientAmountTests : DbContextTestsBase
+    public class DbContextUserRideTests : DbContextTestsBase
     {
-        public DbContextIngredientAmountTests(ITestOutputHelper output) : base(output)
+        public DbContextUserRideTests(ITestOutputHelper output) : base(output)
         {
+
         }
-        
-    //    [Fact]
-    //    public async Task GetAll_IngredientAmounts_ForRecipe()
-    //    {
-    //        //Act
-    //        var ingredientAmounts = await CarpoolDbContextSUT.IngredientAmountEntities
-    //            .Where(i => i.RecipeId == RecipeSeeds.RecipeEntity.Id)
-    //            .ToArrayAsync();
 
-    //        //Assert
-    //        Assert.Contains(IngredientAmountSeeds.IngredientAmountEntity1 with { Recipe = null, Ingredient = null}, ingredientAmounts);
-    //        Assert.Contains(IngredientAmountSeeds.IngredientAmountEntity2 with { Recipe = null, Ingredient = null}, ingredientAmounts);
-    //    }
+        [Fact]
+        public async Task Get_UserRide_ForRide1()
+        {
+            //Act
+            var userRides = await CarpoolDbContextSUT.UsersRideEntity
+                .Where(i => i.RideId == RideSeeds.RideEntityForUserRideEntity.Id)/*.Where( i => i.RideId == RideSeeds.RideEntityForRideTestsGet.Id)*/
+                .ToArrayAsync();
 
-    //    [Fact]
-    //    public async Task GetAll_IngredientAmounts_IncludingIngredients_ForRecipe()
-    //    {
-    //        //Act
-    //        var ingredientAmounts = await CookBookDbContextSUT.IngredientAmountEntities
-    //            .Where(i => i.RecipeId == IngredientAmountSeeds.IngredientAmountEntity1.RecipeId)
-    //            .Include(i => i.Ingredient)
-    //            .ToArrayAsync();
-
-    //        //Assert
-    //        Assert.Contains(IngredientAmountSeeds.IngredientAmountEntity1 with {Recipe = null}, ingredientAmounts);
-    //        Assert.Contains(IngredientAmountSeeds.IngredientAmountEntity2 with {Recipe = null}, ingredientAmounts);
-    //    }
-
-    //    [Fact]
-    //    public async Task Update_IngredientAmount_Persisted()
-    //    {
-    //        //Arrange
-    //        var baseEntity = IngredientAmountSeeds.IngredientAmountEntityUpdate;
-    //        var entity =
-    //            baseEntity with
-    //            {
-    //                Amount = baseEntity.Amount + 1,
-    //                Unit = Unit.None
-    //            };
-
-    //        //Act
-    //        CookBookDbContextSUT.IngredientAmountEntities.Update(entity);
-    //        await CookBookDbContextSUT.SaveChangesAsync();
-
-    //        //Assert
-    //        await using var dbx = await DbContextFactory.CreateDbContextAsync();
-    //        var actualEntity = await dbx.IngredientAmountEntities.SingleAsync(i => i.Id == entity.Id);
-    //        Assert.Equal(entity, actualEntity);
-    //    }
-
-    //    [Fact]
-    //    public async Task Delete_IngredientAmount_Deleted()
-    //    {
-    //        //Arrange
-    //        var baseEntity = IngredientAmountSeeds.IngredientAmountEntityDelete;
-
-    //        //Act
-    //        CookBookDbContextSUT.IngredientAmountEntities.Remove(baseEntity);
-    //        await CookBookDbContextSUT.SaveChangesAsync();
-
-    //        //Assert
-    //        Assert.False(await CookBookDbContextSUT.IngredientAmountEntities.AnyAsync(i => i.Id == baseEntity.Id));
-    //    }
-
-    //    [Fact]
-    //    public async Task DeleteById_IngredientAmount_Deleted()
-    //    {
-    //        //Arrange
-    //        var baseEntity = IngredientAmountSeeds.IngredientAmountEntityDelete;
+            Assert.Contains(UserRideSeeds.UserRideEntity1 with
+            {
+                Ride = null,
+                Passenger = null
+            }, userRides);
             
-    //        //Act
-    //        CookBookDbContextSUT.Remove(
-    //            CookBookDbContextSUT.IngredientAmountEntities.Single(i => i.Id == baseEntity.Id));
-    //        await CookBookDbContextSUT.SaveChangesAsync();
+        }
 
-    //        //Assert
-    //        Assert.False(await CookBookDbContextSUT.Ingredients.AnyAsync(i => i.Id == baseEntity.Id));
-    //    }
+        [Fact]
+        public async Task Get_UserRide_ForRide2()
+        {
+            //Act
+            var userRides = await CarpoolDbContextSUT.UsersRideEntity
+                .Where(i => i.RideId == RideSeeds.RideEntityForRideTestsGet.Id)
+                .ToArrayAsync();
+
+            Assert.Contains(UserRideSeeds.UserRideEntity2 with
+            {
+                Ride = null,
+                Passenger = null
+            }, userRides);
+        }
+
+        [Fact]
+        public async Task GetAll_UserRides_IncludingUsers_ForRide()
+        {
+            //Act
+            var userRides = await CarpoolDbContextSUT.UsersRideEntity
+                .Where(i => i.RideId == UserRideSeeds.UserRideEntityUpdate.RideId)
+                .Include(i => i.Ride)
+                .ToArrayAsync();
+
+            //Assert
+            Assert.Contains(UserRideSeeds.UserRideEntity1 with { Ride = null }, userRides);
+            Assert.Contains(UserRideSeeds.UserRideEntity2 with { Ride = null }, userRides);
+        }
+
+        [Fact]
+        public async Task Update_PassengerId_Persisted()
+        {
+            //Arrange
+            var baseEntity = UserRideSeeds.UserRideEntityUpdate;
+            var entity =
+                baseEntity with
+                {
+                    PassengerId = UserSeeds.UserEntity.Id //?
+                };
+
+            //Act
+            CarpoolDbContextSUT.UsersRideEntity.Update(entity);
+            await CarpoolDbContextSUT.SaveChangesAsync();
+
+            //Assert
+            await using var dbx = await DbContextFactory.CreateDbContextAsync();
+            var actualEntity = await dbx.UsersRideEntity.SingleAsync(i => i.Id == entity.Id);
+            Assert.Equal(entity, actualEntity);
+        }
+
+        [Fact]
+        public async Task Delete_Ride_UREDelete()
+        {
+            //Arrange
+            var entityBase = RideSeeds.RideEntityForRideUserDelete;
+
+            //Act
+            CarpoolDbContextSUT.Rides.Remove(entityBase);
+            await CarpoolDbContextSUT.SaveChangesAsync();
+
+            //Assert
+            Assert.False(await CarpoolDbContextSUT.Rides.AnyAsync(i => i.Id == entityBase.Id));
+        }
+
+        [Fact]
+        public async Task Delete_UserRide_Deleted()
+        {
+            //Arrange
+            var baseEntity = UserRideSeeds.UserRideEntityDelete;
+
+            //Act
+            CarpoolDbContextSUT.UsersRideEntity.Remove(baseEntity);
+            await CarpoolDbContextSUT.SaveChangesAsync();
+
+            //Assert
+            Assert.False(await CarpoolDbContextSUT.UsersRideEntity.AnyAsync(i => i.Id == baseEntity.Id));
+        }
+
     }
 }

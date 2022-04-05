@@ -141,25 +141,5 @@ namespace Carpool.DAL.Tests
             //Assert
             Assert.False(await CarpoolDbContextSUT.Cars.AnyAsync(i => i.Id == entityBase.Id));
         }
-
-        [Fact]
-        public async Task GetAll_UserRide_ForRide()
-        {
-            //Act
-            var userRides = await CarpoolDbContextSUT.UsersRideEntity
-                .Where(i => i.RideId == RideSeeds.RideEntityForUserRideEntity.Id)/*.Where( i => i.RideId == RideSeeds.RideEntityForRideTestsGet.Id)*/
-                .ToArrayAsync();
-
-            Assert.Contains(UserRideSeeds.UserRideEntity1 with
-            {
-                Ride = null,
-                Passenger = null
-            }, userRides);
-            //Assert.Contains(UserRideSeeds.UserRideEntity2 with
-            //{
-            //    Ride = null,
-            //    Passenger = null
-            //}, userRides);
-        }
     }
 }
