@@ -40,7 +40,7 @@ public static class RideSeeds
     )
     {
        User = UserSeeds.UserEntity,
-       Car = null
+       Car = CarSeeds.SportCar
     };
 
     public static readonly RideEntity RideEntityForUserRideEntity = new(
@@ -57,19 +57,19 @@ public static class RideSeeds
         Car = CarSeeds.CarEntity1
     };
 
-    public static readonly RideEntity RideEntityForRideTestsGet = new(
-        Id: Guid.Parse(input: "16E2290B-E1E0-4ADD-9BFD-6B3026AB2F3F"),
-        Start: "Hradec Králové",
-        End: "Brno",
-        BeginTime: new DateTime(2019, 6, 15, 10, 50, 0),
-        ApproxRideTime: TimeSpan.FromHours(value: 2.0),
-        UserId: UserSeeds.UserEntity2.Id,
-        CarId: CarSeeds.CarEntity2.Id
-    )
-    {
-        User = UserSeeds.UserEntity2,
-        Car = CarSeeds.CarEntity2
-    };
+    //public static readonly RideEntity RideEntityForRideTestsGet = new(
+    //    Id: Guid.Parse(input: "16E2290B-E1E0-4ADD-9BFD-6B3026AB2F3F"),
+    //    Start: "Hradec Králové",
+    //    End: "Brno",
+    //    BeginTime: new DateTime(2019, 6, 15, 10, 50, 0),
+    //    ApproxRideTime: TimeSpan.FromHours(value: 2.0),
+    //    UserId: UserSeeds.UserEntity2.Id,
+    //    CarId: CarSeeds.CarEntity2.Id
+    //)
+    //{
+    //    User = UserSeeds.UserEntity2,
+    //    Car = CarSeeds.CarEntity2
+    //};
 
 
     //To ensure that no tests reuse these clones for non-idempotent operations:
@@ -78,6 +78,14 @@ public static class RideSeeds
         Id = Guid.Parse(input: "659E3788-5F96-4287-AB86-395C8A5AE9BC"),
         User = null,
         PassengerRides = Array.Empty<UserRideEntity>(),
+        Car = null
+    };
+
+    public static readonly RideEntity RideEntityForRideTestsGet = RideEntity with
+    {
+        Id = Guid.Parse(input: "16E2290B-E1E0-4ADD-9BFD-6B3026AB2F3F"),
+        User = null,
+        //PassengerRides = Array.Empty<UserRideEntity>(),
         Car = null
     };
 

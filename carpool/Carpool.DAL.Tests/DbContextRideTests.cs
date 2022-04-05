@@ -56,7 +56,7 @@ namespace Carpool.DAL.Tests
                 ApproxRideTime = TimeSpan.FromHours(3),
                 UserId = UserSeeds.UserEntity.Id,
                 CarId = CarSeeds.CarEntity1.Id,
-                
+
                 PassengerRides = new List<UserRideEntity>
                 {
                     UserRideSeeds.EmptyUserRideEntity with
@@ -87,7 +87,7 @@ namespace Carpool.DAL.Tests
             await using var dbx = await DbContextFactory.CreateDbContextAsync();
             var actualEntity = await dbx.Rides
                 .Include(i => i.PassengerRides)
-                .ThenInclude(i => i.Passenger)
+                .ThenInclude(i => i.Passenger).ThenInclude(i => i.OwnedCars)
                 .SingleAsync(i => i.Id == entity.Id);
             DeepAssert.Equal(entity, actualEntity);
         }
@@ -157,15 +157,15 @@ namespace Carpool.DAL.Tests
             DeepAssert.Equal(entity, actualEntity);
         }
 
-        
+
 
         [Fact]
         public async Task GetById_Ride()
         {
-            var entity = await CarpoolDbContextSUT.Rides.Include(i => i.User).ThenInclude(i => i.OwnedCars)
-                .SingleAsync(i => i.Id == RideSeeds.RideEntity.Id);
+            var entity = await CarpoolDbContextSUT.Rides
+                .SingleAsync(i => i.Id == RideSeeds.RideEntityWithNoPassengers.Id);
 
-            DeepAssert.Equal(RideSeeds.RideEntity with { PassengerRides = Array.Empty<UserRideEntity>() }, entity);
+            DeepAssert.Equal(RideSeeds.RideEntityWithNoPassengers, entity);
         }
 
         [Fact]
@@ -176,9 +176,9 @@ namespace Carpool.DAL.Tests
                 .Include(i => i.PassengerRides)
                 .ThenInclude(i => i.Passenger)
                 .SingleAsync(i => i.Id == RideSeeds.RideEntityForRideTestsGet.Id);
-
+            var passengerides = entity.PassengerRides;
             //Assert
-            DeepAssert.Equal(RideSeeds.RideEntityForRideTestsGet, entity);
+            DeepAssert.Equal(RideSeeds.RideEntityForRideTestsGet with {PassengerRides = passengerides}, entity);
         }
 
         [Fact]
