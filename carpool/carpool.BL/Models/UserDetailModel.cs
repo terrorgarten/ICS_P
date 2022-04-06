@@ -11,10 +11,10 @@ namespace Carpool.BL.Models
     {
         public string Name { get; set; } = Name;
         public string Surname { get; set; } = Surname;
-        public string? PhotoUrl { get; set; }
+        public string? PhotoUrl { get; set; } = PhotoUrl;
 
-        public List<CarEntity> OwnedCar { get; init; } = new();
-        public List<RideEntity> DriverRides { get; init; } = new();
+        public List<CarListModel> OwnedCars { get; init; } = new();
+        //public List<RideListModel> DriverRides { get; init; } = new();
         //public List<UserRideEntity> PassengerRides { get; init; } = new();
 
 

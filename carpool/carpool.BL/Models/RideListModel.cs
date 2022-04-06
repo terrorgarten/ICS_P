@@ -9,12 +9,15 @@ namespace Carpool.BL.Models
     public record RideListModel(
         string Start,
         string End,
-        DateTime BeginTime ) : ModelBase
+        DateTime BeginTime,
+        int SeatCapacity) : ModelBase
     {
         public string Start { get; set; } = Start;
         public string End { get; set; } = End;
         public DateTime BeginTime { get; set; } = BeginTime;
+        public int SeatCapacity { get; set; } = SeatCapacity;
 
+        // aktuální pasažéři
 
         public class MapperProfile : Profile
         {
