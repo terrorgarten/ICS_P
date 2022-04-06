@@ -51,7 +51,7 @@ namespace Carpool.DAL.Tests
             }, userRides);
         }
 
-        [Fact]
+        /*[Fact]
         public async Task GetAll_UserRides_IncludingUsers_ForRide()
         {
             //Act
@@ -63,7 +63,7 @@ namespace Carpool.DAL.Tests
             //Assert
             Assert.Contains(UserRideSeeds.UserRideEntity1 with { Ride = null }, userRides);
             Assert.Contains(UserRideSeeds.UserRideEntity2 with { Ride = null }, userRides);
-        }
+        }*/
 
         [Fact]
         public async Task Update_PassengerId_Persisted()
