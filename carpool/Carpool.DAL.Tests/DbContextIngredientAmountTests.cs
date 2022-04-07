@@ -51,20 +51,7 @@ namespace Carpool.DAL.Tests
             }, userRides);
         }
 
-        /*[Fact]
-        public async Task GetAll_UserRides_IncludingUsers_ForRide()
-        {
-            //Act
-            var userRides = await CarpoolDbContextSUT.UsersRideEntity
-                .Where(i => i.RideId == UserRideSeeds.UserRideEntityUpdate.RideId)
-                .Include(i => i.Ride)
-                .ToArrayAsync();
-
-            //Assert
-            Assert.Contains(UserRideSeeds.UserRideEntity1 with { Ride = null }, userRides);
-            Assert.Contains(UserRideSeeds.UserRideEntity2 with { Ride = null }, userRides);
-        }*/
-
+       
         [Fact]
         public async Task Update_PassengerId_Persisted()
         {
