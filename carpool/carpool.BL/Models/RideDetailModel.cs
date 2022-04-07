@@ -36,6 +36,8 @@ namespace Carpool.BL.Models
         public string PhotoUrl { get; set; }
         public DateTime RegistrationDate { get; set; }
 
+        public List<PassengerListModel> Passengers { get; init; } = new();
+
 
         public class MapperProfile : Profile
         {
@@ -49,7 +51,6 @@ namespace Carpool.BL.Models
             }
         }
 
-        //TODO public static RideDetailModel Empty => new(default, default, 4, default);
-        //public static CarDetailModel Empty => new(string.Empty, string.Empty, default, default);
+        public static RideDetailModel Empty => new("Unknown", "Unknown", default, default, default, default, default, default);
     }
 }
