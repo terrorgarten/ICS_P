@@ -8,7 +8,7 @@ namespace Carpool.BL.Models
     public record CarListModel(
         Manufacturer Manufacturer,
         CarType CarType//, OWNER??
-        )
+        ) : ModelBase
     {
         public Manufacturer Manufacturer { get; set; } = Manufacturer;
         public CarType CarType { get; set; } = CarType;

@@ -15,7 +15,7 @@ namespace Carpool.BL.Models
 
         public List<CarListModel> OwnedCars { get; init; } = new();
         //public List<RideListModel> DriverRides { get; init; } = new();
-        //public List<UserRideEntity> PassengerRides { get; init; } = new();
+        //public List<RideListModel> PassengerRides { get; init; } = new();
 
 
         public class MapperProfile : Profile
@@ -24,9 +24,10 @@ namespace Carpool.BL.Models
             {
                 CreateMap<UserEntity, UserDetailModel>()
                     .ReverseMap();
+                //Possible ingore (: 
             }
         }
 
-        //public static UserDetailModel Empty => new(string.Empty, string.Empty);
+        public static UserDetailModel Empty => new("Unknown", "Unknown", "");
     }
 }
