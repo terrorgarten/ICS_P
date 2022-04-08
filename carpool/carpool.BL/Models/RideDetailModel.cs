@@ -30,15 +30,19 @@ namespace Carpool.BL.Models
         // Odkaz na spolucestující
 
         public Guid UserId { get; set; } = UserId;
-        public string Name { get; set; }
-        public string Surname { get; set; }
+        public string Name { get; set; } = "Unknown";
+        public string Surname { get; set; } = "Unknown";
         public Guid CarId { get; set; } = CarId;
         public int SeatCapacity { get; set; } = SeatCapacity;
         public string PhotoUrl { get; set; }
         public DateTime RegistrationDate { get; set; }
 
         //public List<PassengerListModel> Passengers { get; init; } = new();
-
+        //public string Name = "Unknown";
+        //public string Surname = "Unknown";
+#nullable disable
+        public RideDetailModel() : this(default, default, default, default, default, default, default, default, default) { }
+#nullable enable
 
         public class MapperProfile : Profile
         {
@@ -47,6 +51,9 @@ namespace Carpool.BL.Models
                 CreateMap<RideEntity, RideDetailModel>()
                     .ForMember(dst => dst.SeatCapacity, opt => opt.MapFrom(src => src.Car.SeatCapacity))
                     .ForMember(dst => dst.PhotoUrl, opt => opt.MapFrom(src => src.Car.PhotoUrl))
+                    .ForMember(dst => dst.RegistrationDate, opt => opt.MapFrom(src => src.Car.RegistrationDate))
+                    .ForMember(dst => dst.Manufacturer, opt => opt.MapFrom(src => src.Car.Manufacturer))
+                    .ForMember(dst => dst.CarType, opt => opt.MapFrom(src => src.Car.CarType))
                     .ForMember(dst => dst.Name, opt => opt.MapFrom(src => src.User.Name))
                     .ForMember(dst => dst.Surname, opt => opt.MapFrom(src => src.User.Surname));
             }

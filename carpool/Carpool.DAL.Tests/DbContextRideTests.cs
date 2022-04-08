@@ -1,73 +1,73 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Carpool.Common.Tests;
-using Carpool.Common.Tests.Seeds;
-using Carpool.DAL.Entities;
-using Carpool.DAL.Tests;
-using Microsoft.EntityFrameworkCore;
-using Xunit;
-using Xunit.Abstractions;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Threading.Tasks;
+//using Carpool.Common.Tests;
+//using Carpool.Common.Tests.Seeds;
+//using Carpool.DAL.Entities;
+//using Carpool.DAL.Tests;
+//using Microsoft.EntityFrameworkCore;
+//using Xunit;
+//using Xunit.Abstractions;
 
 
-namespace Carpool.DAL.Tests
-{
-    public class DbContextRideTests : DbContextTestsBase
-    {
-        public DbContextRideTests(ITestOutputHelper output) : base(output)
-        {
-        }
+//namespace Carpool.DAL.Tests
+//{
+//    public class DbContextRideTests : DbContextTestsBase
+//    {
+//        public DbContextRideTests(ITestOutputHelper output) : base(output)
+//        {
+//        }
 
-        [Fact]
-        public async Task AddNew_RideWithJustStartEnd_Persisted()
-        {
-            //Arange
-            var entity = RideSeeds.EmptyRideEntity with
-            {
-                Start = "Brno",
-                End = "Praha",
-                UserId = UserSeeds.UserEntity.Id,
-                CarId = CarSeeds.CarEntity1.Id
-            };
+//        [Fact]
+//        public async Task AddNew_RideWithJustStartEnd_Persisted()
+//        {
+//            //Arange
+//            var entity = RideSeeds.EmptyRideEntity with
+//            {
+//                Start = "Brno",
+//                End = "Praha",
+//                UserId = UserSeeds.UserEntity.Id,
+//                CarId = CarSeeds.CarEntity1.Id
+//            };
 
-            //Act
-            CarpoolDbContextSUT.Rides.Add(entity);
-            await CarpoolDbContextSUT.SaveChangesAsync();
+//            //Act
+//            CarpoolDbContextSUT.Rides.Add(entity);
+//            await CarpoolDbContextSUT.SaveChangesAsync();
 
 
-            //Assert
-            await using var dbx = await DbContextFactory.CreateDbContextAsync();
-            var actualEntity = await dbx.Rides
-                .SingleAsync(i => i.Id == entity.Id);
-            DeepAssert.Equal(entity, actualEntity);
-        }
+//            //Assert
+//            await using var dbx = await DbContextFactory.CreateDbContextAsync();
+//            var actualEntity = await dbx.Rides
+//                .SingleAsync(i => i.Id == entity.Id);
+//            DeepAssert.Equal(entity, actualEntity);
+//        }
 
-        [Fact]
-        public async Task Update_Recipe_Persisted()
-        {
-            //Arrange
-            var baseEntity = RideSeeds.RideEntityUpdate;
-            var entity =
-                baseEntity with
-                {
-                    Start = baseEntity.Start + "Updated",
-                    End = baseEntity.End + "Updated",
-                    BeginTime = default,
-                    //TODO: add others
-                };
+//        [Fact]
+//        public async Task Update_Recipe_Persisted()
+//        {
+//            //Arrange
+//            var baseEntity = RideSeeds.RideEntityUpdate;
+//            var entity =
+//                baseEntity with
+//                {
+//                    Start = baseEntity.Start + "Updated",
+//                    End = baseEntity.End + "Updated",
+//                    BeginTime = default,
+//                    //TODO: add others
+//                };
 
-            //Act
-            CarpoolDbContextSUT.Rides.Update(entity);
-            await CarpoolDbContextSUT.SaveChangesAsync();
+//            //Act
+//            CarpoolDbContextSUT.Rides.Update(entity);
+//            await CarpoolDbContextSUT.SaveChangesAsync();
 
-            //Assert
-            await using var dbx = await DbContextFactory.CreateDbContextAsync();
-            var actualEntity = await dbx.Rides.SingleAsync(i => i.Id == entity.Id);
-            DeepAssert.Equal(entity, actualEntity);
-        }
-    }
-}
+//            //Assert
+//            await using var dbx = await DbContextFactory.CreateDbContextAsync();
+//            var actualEntity = await dbx.Rides.SingleAsync(i => i.Id == entity.Id);
+//            DeepAssert.Equal(entity, actualEntity);
+//        }
+//    }
+//}
 
 
 

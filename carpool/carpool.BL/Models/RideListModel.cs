@@ -18,12 +18,16 @@ namespace Carpool.BL.Models
         public int SeatCapacity { get; set; } = SeatCapacity;
 
         // aktuální pasažéři
+#nullable disable
+        public RideListModel() : this(default, default, default, default) { }
+#nullable enable
 
         public class MapperProfile : Profile
         {
             public MapperProfile()
             {
-                CreateMap<RideEntity, RideListModel>();
+                CreateMap<RideEntity, RideListModel>()
+                .ForMember(dst => dst.SeatCapacity, opt => opt.MapFrom(src => src.Car.SeatCapacity));
             }
         }
     }

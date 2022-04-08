@@ -19,11 +19,17 @@ namespace Carpool.BL.Models
         public DateTime RegistrationDate { get; set; } = RegistrationDate;
         public string? PhotoUrl { get; set; }
 
+        //TODO: vymysliet Ignore
+        //public string Name = "Unknown";
+        //public  string Surname = "Unknown";
+
         public class CarMapperProfile : Profile
         {
             public CarMapperProfile()
             {
                 CreateMap<CarEntity, CarDetailModel>()
+                    //.ForMember(dst => dst.Name, opt => opt.MapFrom(src => src.Owner.Name))
+                    //.ForMember(dst => dst.Surname, opt => opt.MapFrom(src => src.Owner.Surname))
                     .ReverseMap();
             }
 

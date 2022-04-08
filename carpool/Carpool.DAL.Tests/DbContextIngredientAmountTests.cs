@@ -1,18 +1,18 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Carpool.Common.Enums;
-using Carpool.Common.Tests.Seeds;
-using Microsoft.EntityFrameworkCore;
-using Xunit;
-using Xunit.Abstractions;
+﻿//using System.Linq;
+//using System.Threading.Tasks;
+//using Carpool.Common.Enums;
+//using Carpool.Common.Tests.Seeds;
+//using Microsoft.EntityFrameworkCore;
+//using Xunit;
+//using Xunit.Abstractions;
 
-namespace Carpool.DAL.Tests
-{
-    public class DbContextIngredientAmountTests : DbContextTestsBase
-    {
-        public DbContextIngredientAmountTests(ITestOutputHelper output) : base(output)
-        {
-        }
+//namespace Carpool.DAL.Tests
+//{
+//    public class DbContextIngredientAmountTests : DbContextTestsBase
+//    {
+//        public DbContextIngredientAmountTests(ITestOutputHelper output) : base(output)
+//        {
+//        }
         
     //    [Fact]
     //    public async Task GetAll_IngredientAmounts_ForRecipe()
@@ -91,5 +91,5 @@ namespace Carpool.DAL.Tests
     //        //Assert
     //        Assert.False(await CookBookDbContextSUT.Ingredients.AnyAsync(i => i.Id == baseEntity.Id));
     //    }
-    }
-}
+//    }
+//}

@@ -6,7 +6,10 @@
         string Surname,
         string? PhotoUrl) : IEntity
     {
-        public ICollection<CarEntity> OwnedCars { get; init; } = new List<CarEntity>();
+#nullable disable
+        public UserEntity() : this(default, default, default, default) { }
+#nullable enable
+    public ICollection<CarEntity> OwnedCars { get; init; } = new List<CarEntity>();
         public ICollection<UserRideEntity> PassengerRides { get; init; } = new List<UserRideEntity>();
         public ICollection<RideEntity> DriverRides { get; init; } = new List<RideEntity>();   
     }
