@@ -1,41 +1,41 @@
-﻿//using System;
-//using System.Threading.Tasks;
-//using Carpool.Common.Tests;
-//using Carpool.Common.Tests.Factories;
-//using Carpool.DAL.Factories;
-//using Microsoft.EntityFrameworkCore;
-//using Xunit;
-//using Xunit.Abstractions;
+﻿using System;
+using System.Threading.Tasks;
+using Carpool.Common.Tests;
+using Carpool.Common.Tests.Factories;
+using Carpool.DAL.Factories;
+using Microsoft.EntityFrameworkCore;
+using Xunit;
+using Xunit.Abstractions;
 
-//namespace Carpool.DAL.Tests;
+namespace Carpool.DAL.Tests;
 
-//public class  DbContextTestsBase : IAsyncLifetime
-//{
-//    protected DbContextTestsBase(ITestOutputHelper output)
-//    {
-//        XUnitTestOutputConverter converter = new(output);
-//        Console.SetOut(converter);
-        
-//        // DbContextFactory = new DbContextTestingInMemoryFactory(GetType().Name, seedTestingData: true);
-//        // DbContextFactory = new DbContextLocalDBTestingFactory(GetType().FullName!, seedTestingData: true);
-//        DbContextFactory = new DbContextSQLiteTestingFactory(GetType().FullName!, seedTestingData: true);
+public class DbContextTestsBase : IAsyncLifetime
+{
+    protected DbContextTestsBase(ITestOutputHelper output)
+    {
+        XUnitTestOutputConverter converter = new(output);
+        Console.SetOut(converter);
 
-//        CarpoolDbContextSUT = DbContextFactory.CreateDbContext();
-//    }
+        // DbContextFactory = new DbContextTestingInMemoryFactory(GetType().Name, seedTestingData: true);
+        // DbContextFactory = new DbContextLocalDBTestingFactory(GetType().FullName!, seedTestingData: true);
+        DbContextFactory = new DbContextSQLiteTestingFactory(GetType().FullName!, seedTestingData: true);
 
-//    protected IDbContextFactory<CarpoolDbContext> DbContextFactory { get; }
-//    protected CarpoolDbContext CarpoolDbContextSUT { get; }
+        CarpoolDbContextSUT = DbContextFactory.CreateDbContext();
+    }
+
+    protected IDbContextFactory<CarpoolDbContext> DbContextFactory { get; }
+    protected CarpoolDbContext CarpoolDbContextSUT { get; }
 
 
-//    public async Task InitializeAsync()
-//    {
-//        await CarpoolDbContextSUT.Database.EnsureDeletedAsync();
-//        await CarpoolDbContextSUT.Database.EnsureCreatedAsync();
-//    }
+    public async Task InitializeAsync()
+    {
+        await CarpoolDbContextSUT.Database.EnsureDeletedAsync();
+        await CarpoolDbContextSUT.Database.EnsureCreatedAsync();
+    }
 
-//    public async Task DisposeAsync()
-//    {
-//        await CarpoolDbContextSUT.Database.EnsureDeletedAsync();
-//        await CarpoolDbContextSUT.DisposeAsync();
-//    }
-//}
+    public async Task DisposeAsync()
+    {
+        await CarpoolDbContextSUT.Database.EnsureDeletedAsync();
+        await CarpoolDbContextSUT.DisposeAsync();
+    }
+}
