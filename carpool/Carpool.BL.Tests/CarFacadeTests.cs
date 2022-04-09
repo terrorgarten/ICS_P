@@ -61,7 +61,7 @@ namespace Carpool.BL.Tests
         }
 
         [Fact]
-        public async Task SeededWater_DeleteById_Deleted()
+        public async Task SeededSportCar_DeleteById_Deleted()
         {
             await _carFacadeSUT.DeleteAsync(CarSeeds.SportCar.Id);
 
@@ -70,7 +70,7 @@ namespace Carpool.BL.Tests
         }
 
         [Fact]
-        public async Task NewIngredient_InsertOrUpdate_IngredientAdded()
+        public async Task NewCar_InsertOrUpdate_CarAdded()
         {
             //Arrange
             var car = new CarDetailModel(
@@ -90,7 +90,7 @@ namespace Carpool.BL.Tests
         }
 
         [Fact]
-        public async Task SeededWater_InsertOrUpdate_IngredientUpdated()
+        public async Task SeededSportCar_InsertOrUpdate_CarUpdated()
         {
             //Arrange
             var car = new CarDetailModel

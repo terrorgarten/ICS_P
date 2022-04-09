@@ -12,11 +12,11 @@ using Xunit.Abstractions;
 
 namespace Carpool.BL.Tests
 {
-    public sealed class IngredientFacadeTests : CRUDFacadeTestsBase
+    public sealed class RideFacadeTests : CRUDFacadeTestsBase
     {
         private readonly RideFacade _rideFacadeSUT;
 
-        public IngredientFacadeTests(ITestOutputHelper output) : base(output)
+        public RideFacadeTests(ITestOutputHelper output) : base(output)
         {
             _rideFacadeSUT = new RideFacade(UnitOfWorkFactory, Mapper);
         }
@@ -51,33 +51,33 @@ namespace Carpool.BL.Tests
             DeepAssert.Equal(Mapper.Map<RideListModel>(RideSeeds.RideEntity), ride);
         }
 
-        /*
+        
         [Fact]
-        public async Task GetById_SeededWater()
+        public async Task GetById_SeededRideEntity()
         {
-            var ingredient = await _ingredientFacadeSUT.GetAsync(IngredientSeeds.Water.Id);
+            var ride = await _rideFacadeSUT.GetAsync(RideSeeds.RideEntity.Id);
 
-            DeepAssert.Equal(Mapper.Map<IngredientDetailModel>(IngredientSeeds.Water), ingredient);
+            DeepAssert.Equal(Mapper.Map<RideDetailModel>(RideSeeds.RideEntity), ride);
         }
-
+        
         [Fact]
         public async Task GetById_NonExistent()
         {
-            var ingredient = await _ingredientFacadeSUT.GetAsync(IngredientSeeds.EmptyIngredient.Id);
+            var ride = await _rideFacadeSUT.GetAsync(RideSeeds.EmptyRideEntity.Id);
 
-            Assert.Null(ingredient);
+            Assert.Null(ride);
         }
-
+        
         [Fact]
-        public async Task SeededWater_DeleteById_Deleted()
+        public async Task SeededRideEntity_DeleteById_Deleted()
         {
-            await _ingredientFacadeSUT.DeleteAsync(IngredientSeeds.Water.Id);
+            await _rideFacadeSUT.DeleteAsync(RideSeeds.RideEntity.Id);
 
             await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            Assert.False(await dbxAssert.Ingredients.AnyAsync(i => i.Id == IngredientSeeds.Water.Id));
+            Assert.False(await dbxAssert.Rides.AnyAsync(i => i.Id == RideSeeds.RideEntity.Id));
         }
 
-
+        /*
         [Fact]
         public async Task NewIngredient_InsertOrUpdate_IngredientAdded()
         {
