@@ -21,7 +21,7 @@ namespace Carpool.Common.Tests
             if (!_seedTestingData) return;
             UserSeeds.Seed(modelBuilder);
             CarSeeds.Seed(modelBuilder);
-            //RideSeeds.Seed(modelBuilder);
+            RideSeeds.Seed(modelBuilder);
             //UserRideSeeds.Seed(modelBuilder);
         }
     }
