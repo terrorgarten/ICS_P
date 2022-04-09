@@ -1,9 +1,9 @@
-﻿//using Carpool.BL.Models;
-//using System.Linq;
-//using System.Threading.Tasks;
-//using Carpool.BL.Facades;
-//using Carpool.Common.Tests;
-//using Carpool.Common.Tests.Seeds;
+﻿using Carpool.BL.Models;
+using System.Linq;
+using System.Threading.Tasks;
+using Carpool.BL.Facades;
+using Carpool.Common.Tests;
+using Carpool.Common.Tests.Seeds;
 
 using System;
 using System.Threading.Tasks;
@@ -35,7 +35,7 @@ namespace Carpool.BL.Tests
                 SeatCapacity: 4,
                 RegistrationDate: DateTime.MaxValue
             );
-
+            model.Id = Guid.Parse("33D3F8D8-4E50-43FE-A8BF-C3234A549976");
             var _ = await _carFacadeSUT.SaveAsync(model);
         }
     }

@@ -35,6 +35,6 @@ namespace Carpool.BL.Models
 
         }
 
-        public static CarDetailModel Empty => new(default, default, 4, default);
+        public static CarDetailModel Empty => new(default, default, default, default);
     }
 }
