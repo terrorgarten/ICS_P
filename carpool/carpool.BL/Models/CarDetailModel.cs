@@ -11,7 +11,8 @@ namespace Carpool.BL.Models
         Manufacturer Manufacturer,
         CarType CarType,
         int SeatCapacity,
-        DateTime RegistrationDate) : ModelBase
+        DateTime RegistrationDate
+        ) : ModelBase
     {
         public Manufacturer Manufacturer { get; set; } = Manufacturer;
         public CarType CarType { get; set; } = CarType;
@@ -28,9 +29,8 @@ namespace Carpool.BL.Models
             public CarMapperProfile()
             {
                 CreateMap<CarEntity, CarDetailModel>()
-                    //.ForMember(dst => dst.Name, opt => opt.MapFrom(src => src.Owner.Name))
-                    //.ForMember(dst => dst.Surname, opt => opt.MapFrom(src => src.Owner.Surname))
                     .ReverseMap();
+                   // .ForMember(dst => dst.OwnerId, opt => opt.Ignore());
             }
 
         }

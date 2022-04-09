@@ -41,22 +41,32 @@ namespace Carpool.BL.Tests
         public async Task GetAll_Single_SeededUser()
         {
             var users = await _userFacadeSUT.GetAsync();
-            foreach (var item in users)
-            {
-                Console.WriteLine($"{item}");
-            }
             var user = users.Single(i => i.Id == UserSeeds.UserEntity.Id);
 
             DeepAssert.Equal(Mapper.Map<UserListModel>(UserSeeds.UserEntity), user);
         }
 
+        [Fact]
+        public async Task Insert_SeededUser()
+        {
+            var seeded_user = new UserDetailModel(
+                    Name: UserSeeds.UserEntity1.Name,
+                    Surname: UserSeeds.UserEntity1.Surname,
+                    PhotoUrl: null
+                );
+            var _ = await _userFacadeSUT.SaveAsync(seeded_user);
+
+            var user = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity1.Id);
+            Console.WriteLine($"{user.OwnedCars.Count}");
+
+        }
 
         [Fact]
         public async Task GetById_SeededUser()
         {
-            var user = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity.Id);
+            var user = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity1.Id);
 
-            DeepAssert.Equal(Mapper.Map<UserDetailModel>(UserSeeds.UserEntity), user);
+            DeepAssert.Equal(Mapper.Map<UserDetailModel>(UserSeeds.UserEntity1), user);
         }
 
         [Fact]
@@ -70,10 +80,10 @@ namespace Carpool.BL.Tests
         [Fact]
         public async Task SeededUser_DeleteById_Deleted()
         {
-            await _userFacadeSUT.DeleteAsync(UserSeeds.UserEntity.Id);
+            await _userFacadeSUT.DeleteAsync(UserSeeds.UserEntity1.Id);
 
             await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            Assert.False(await dbxAssert.Users.AnyAsync(i => i.Id == UserSeeds.UserEntity.Id));
+            Assert.False(await dbxAssert.Users.AnyAsync(i => i.Id == UserSeeds.UserEntity1.Id));
         }
 
 

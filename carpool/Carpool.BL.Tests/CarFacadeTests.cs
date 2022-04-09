@@ -26,12 +26,16 @@ namespace Carpool.BL.Tests
         {
             var model = new CarDetailModel
             (
-                CarType: CarType.Micro,
-                Manufacturer: Manufacturer.Dacia,
+                CarType: CarType.Coupe,
+                Manufacturer: Manufacturer.Subaru,
                 SeatCapacity: 4,
                 RegistrationDate: DateTime.MaxValue
-            );
+            )
+            {
+                Id = CarSeeds.SportCar.Id
+            };
             var _ = await _carFacadeSUT.SaveAsync(model);
+            
         }
 
         [Fact]
@@ -78,7 +82,10 @@ namespace Carpool.BL.Tests
                 Manufacturer: Manufacturer.Chevrolet,
                 SeatCapacity: 4,
                 RegistrationDate: DateTime.MaxValue
-            );
+            )
+            {
+                Id = CarSeeds.SportCar.Id
+            };
 
             //Act
             car = await _carFacadeSUT.SaveAsync(car);
@@ -103,6 +110,8 @@ namespace Carpool.BL.Tests
             {
                 Id = CarSeeds.SportCar.Id
             };
+
+            // Update CarType and Manufacturer
             car.CarType = CarType.Minivan;
             car.Manufacturer = Manufacturer.Bugatti;
 
