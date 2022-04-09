@@ -41,18 +41,22 @@ namespace Carpool.BL.Tests
         public async Task GetAll_Single_SeededUser()
         {
             var users = await _userFacadeSUT.GetAsync();
-            var user = users.Single(i => i.Id == UserSeeds.FirstUser.Id);
+            foreach (var item in users)
+            {
+                Console.WriteLine($"{item}");
+            }
+            var user = users.Single(i => i.Id == UserSeeds.UserEntity.Id);
 
-            DeepAssert.Equal(Mapper.Map<UserListModel>(UserSeeds.FirstUser), user);
+            DeepAssert.Equal(Mapper.Map<UserListModel>(UserSeeds.UserEntity), user);
         }
 
 
         [Fact]
         public async Task GetById_SeededUser()
         {
-            var user= await _userFacadeSUT.GetAsync(UserSeeds.FirstUser.Id);
+            var user = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity.Id);
 
-            DeepAssert.Equal(Mapper.Map<UserDetailModel>(UserSeeds.FirstUser), user);
+            DeepAssert.Equal(Mapper.Map<UserDetailModel>(UserSeeds.UserEntity), user);
         }
 
         [Fact]
@@ -66,10 +70,10 @@ namespace Carpool.BL.Tests
         [Fact]
         public async Task SeededUser_DeleteById_Deleted()
         {
-            await _userFacadeSUT.DeleteAsync(UserSeeds.FirstUser.Id);
+            await _userFacadeSUT.DeleteAsync(UserSeeds.UserEntity.Id);
 
             await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            Assert.False(await dbxAssert.Users.AnyAsync(i => i.Id == UserSeeds.FirstUser.Id));
+            Assert.False(await dbxAssert.Users.AnyAsync(i => i.Id == UserSeeds.UserEntity.Id));
         }
 
 
@@ -93,17 +97,17 @@ namespace Carpool.BL.Tests
         }
 
         [Fact]
-        public async Task SeededFirstUser_InsertOrUpdate_UserUpdated()
+        public async Task SeededUserEntity_InsertOrUpdate_UserUpdated()
         {
             //Arrange
             var user = new UserDetailModel
             (
-                Name: UserSeeds.FirstUser.Name,
-                Surname: UserSeeds.FirstUser.Surname,
-                PhotoUrl: UserSeeds.FirstUser.PhotoUrl
+                Name: UserSeeds.UserEntity.Name,
+                Surname: UserSeeds.UserEntity.Surname,
+                PhotoUrl: UserSeeds.UserEntity.PhotoUrl
             )
             {
-                Id = UserSeeds.FirstUser.Id
+                Id = UserSeeds.UserEntity.Id
             };
             user.Name += "updated";
             user.Surname += "updated";
@@ -111,7 +115,7 @@ namespace Carpool.BL.Tests
             //Act
             await _userFacadeSUT.SaveAsync(user);
 
-            var updated_user = await _userFacadeSUT.GetAsync(UserSeeds.FirstUser.Id);
+            var updated_user = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity.Id);
             //Assert
             await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
             var userFromDb = await dbxAssert.Users.SingleAsync(i => i.Id == user.Id);
