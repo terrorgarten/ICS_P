@@ -50,6 +50,7 @@ namespace Carpool.BL.Tests
 
             DeepAssert.Equal(Mapper.Map<RideListModel>(RideSeeds.RideEntity), ride);
         }
+
         /*
         [Fact]
         public async Task GetById_SeededWater()
