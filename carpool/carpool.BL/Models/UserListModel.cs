@@ -9,7 +9,7 @@ namespace Carpool.BL.Models
     {
         public string Name { get; set; } = Name;
         public string Surname { get; set; } = Surname;
-        public string? ImageUrl { get; set; } 
+        //public string? ImageUrl { get; set; } 
         
         public class MapperProfile : Profile
         {

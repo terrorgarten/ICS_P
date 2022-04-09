@@ -14,10 +14,10 @@ public static class ServiceCollectionExtension
     public static IServiceCollection AddBLServices(this IServiceCollection services)
     {
         services.AddSingleton<IUnitOfWorkFactory, UnitOfWorkFactory>();
-        services.AddSingleton<CarFacade>();
         services.AddSingleton<UserFacade>();
+        services.AddSingleton<CarFacade>();
         services.AddSingleton<RideFacade>();
-        
+
         services.AddAutoMapper((serviceProvider, cfg) =>
         {
             cfg.AddCollectionMappers();

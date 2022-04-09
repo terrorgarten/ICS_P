@@ -53,7 +53,12 @@ namespace Carpool.DAL
                 .HasMany(i => i.PassengerRides)
                 .WithOne(i => i.Ride)
                 .OnDelete(DeleteBehavior.Cascade);
-            
+
+            modelBuilder.Entity<RideEntity>()
+                .HasOne(i => i.User)
+                .WithMany(i => i.DriverRides)
+                .OnDelete(DeleteBehavior.NoAction);
+
             if (!_seedDemoData) return;
             UserSeeds.Seed(modelBuilder);
             CarSeeds.Seed(modelBuilder);

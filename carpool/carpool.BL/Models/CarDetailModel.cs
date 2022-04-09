@@ -7,28 +7,34 @@ using Carpool.DAL.Entities;
 
 namespace Carpool.BL.Models
 {
-    public record CarDetailModel(
+    public record CarDetailModel (
         Manufacturer Manufacturer,
         CarType CarType,
-        //DateOnly RegistrationDate,
-        string? PhotoUrl,
-        int SeatCapacity ) : ModelBase
+        int SeatCapacity,
+        DateTime RegistrationDate) : ModelBase
     {
         public Manufacturer Manufacturer { get; set; } = Manufacturer;
         public CarType CarType { get; set; } = CarType;
-        //public DateOnly RegistrationDate { get; set; } = RegistrationDate;
+        public int SeatCapacity { get; set; } = SeatCapacity;
+        public DateTime RegistrationDate { get; set; } = RegistrationDate;
         public string? PhotoUrl { get; set; }
-        public UserEntity Owner { get; init; }
-        
-        public class MapperProfile : Profile
+
+        //TODO: vymysliet Ignore
+        //public string Name = "Unknown";
+        //public  string Surname = "Unknown";
+
+        public class CarMapperProfile : Profile
         {
-            public MapperProfile()
+            public CarMapperProfile()
             {
                 CreateMap<CarEntity, CarDetailModel>()
+                    //.ForMember(dst => dst.Name, opt => opt.MapFrom(src => src.Owner.Name))
+                    //.ForMember(dst => dst.Surname, opt => opt.MapFrom(src => src.Owner.Surname))
                     .ReverseMap();
             }
+
         }
 
-        //public static CarDetailModel Empty => new(string.Empty, string.Empty, default, default);
+        public static CarDetailModel Empty => new(default, default, default, default);
     }
 }

@@ -6,19 +6,20 @@ using Carpool.DAL.Entities;
 namespace Carpool.BL.Models
 {
     public record CarListModel(
-        CarType CarType,
-        string? PhotoUrl ) : ModelBase
+        Manufacturer Manufacturer,
+        CarType CarType//, OWNER??
+        ) : ModelBase
     {
+        public Manufacturer Manufacturer { get; set; } = Manufacturer;
         public CarType CarType { get; set; } = CarType;
-        public string? PhotoUrl { get; set; }
+        public string PhotoUrl { get; set; }
 
-        public UserEntity Owner { get; init; }
-
-        public class MapperProfile : Profile
+        public class CarListMapperProfile : Profile
         {
-            public MapperProfile()
+            public CarListMapperProfile()
             {
                 CreateMap<CarEntity, CarListModel>();
+                     //V listě nemá být reverseMap
             }
         }
     }

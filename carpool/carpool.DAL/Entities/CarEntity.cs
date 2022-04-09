@@ -13,6 +13,9 @@ namespace Carpool.DAL.Entities;
             int SeatCapacity,
             Guid OwnerId ) : IEntity
     {
-        public UserEntity? Owner { get; init; }
+#nullable disable
+        public CarEntity() : this(default, default, default, default, default, default, default) { }
+#nullable enable
+    public UserEntity? Owner { get; init; }
     }
 
