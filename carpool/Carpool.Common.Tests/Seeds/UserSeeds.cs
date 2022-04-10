@@ -50,12 +50,14 @@ public static class UserSeeds
         PassengerRides = Array.Empty<UserRideEntity>(),
         DriverRides = Array.Empty<RideEntity>()
     };
+
     public static readonly UserEntity UserEntityUpdate = UserEntity with { 
         Id = Guid.Parse("0953F3CE-7B1A-48C1-9796-D2BAC7F67868"),
         OwnedCars = Array.Empty<CarEntity>(),
         PassengerRides = Array.Empty<UserRideEntity>(),
         DriverRides = Array.Empty<RideEntity>()
     };
+
     public static readonly UserEntity UserEntityDelete = UserEntity2 with { 
         Id = Guid.Parse("5DCA4CEA-B8A8-4C86-A0B3-FFB78FBA1A09"),
         OwnedCars = Array.Empty<CarEntity>(),

@@ -4,12 +4,6 @@ using System.Threading.Tasks;
 using Carpool.BL.Facades;
 using Carpool.Common.Tests;
 using Carpool.Common.Tests.Seeds;
-
-using System;
-using System.Threading.Tasks;
-using Carpool.BL.Facades;
-using Carpool.BL.Models;
-using Carpool.Common.Enums;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 using Xunit.Abstractions;

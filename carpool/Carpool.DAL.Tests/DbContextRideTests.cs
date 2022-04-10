@@ -87,7 +87,7 @@ namespace Carpool.DAL.Tests
             await using var dbx = await DbContextFactory.CreateDbContextAsync();
             var actualEntity = await dbx.Rides
                 .Include(i => i.PassengerRides)
-                .ThenInclude(i => i.Passenger).ThenInclude(i => i.OwnedCars)
+                .ThenInclude(i => i.Passenger).ThenInclude(i => i!.OwnedCars)
                 .SingleAsync(i => i.Id == entity.Id);
             DeepAssert.Equal(entity, actualEntity);
         }

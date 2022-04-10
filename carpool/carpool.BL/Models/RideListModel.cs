@@ -26,7 +26,7 @@ namespace Carpool.BL.Models
             public MapperProfile()
             {
                 CreateMap<RideEntity, RideListModel>()
-                .ForMember(dst => dst.SeatCapacity, opt => opt.MapFrom(src => src.Car.SeatCapacity));
+                .ForMember(dst => dst.SeatCapacity, opt => opt.MapFrom(src => src.Car!.SeatCapacity));
             }
         }
     }

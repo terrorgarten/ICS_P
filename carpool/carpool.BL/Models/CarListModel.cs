@@ -12,7 +12,7 @@ namespace Carpool.BL.Models
     {
         public Manufacturer Manufacturer { get; set; } = Manufacturer;
         public CarType CarType { get; set; } = CarType;
-        public string PhotoUrl { get; set; }
+        public string? PhotoUrl { get; set; }
 
         public class CarListMapperProfile : Profile
         {

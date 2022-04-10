@@ -16,7 +16,7 @@ public static class CarSeeds
         SeatCapacity: default,
         OwnerId: default)
     {
-        Owner = default,
+        Owner = default!,
     };
 
 
