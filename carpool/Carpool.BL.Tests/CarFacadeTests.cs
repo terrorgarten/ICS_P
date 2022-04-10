@@ -26,8 +26,8 @@ namespace Carpool.BL.Tests
         {
             var model = new CarDetailModel
             (
-                CarType: CarType.Micro,
-                Manufacturer: Manufacturer.Dacia,
+                CarType: CarType.Coupe,
+                Manufacturer: Manufacturer.Subaru,
                 SeatCapacity: 4,
                 RegistrationDate: DateTime.MaxValue,
                 OwnerId: UserSeeds.UserEntity1.Id
@@ -37,6 +37,7 @@ namespace Carpool.BL.Tests
             };
             
             var _ = await _carFacadeSUT.SaveAsync(model);
+            
         }
 
         [Fact]
@@ -66,7 +67,7 @@ namespace Carpool.BL.Tests
         }
 
         [Fact]
-        public async Task SeededWater_DeleteById_Deleted()
+        public async Task SeededSportCar_DeleteById_Deleted()
         {
             await _carFacadeSUT.DeleteAsync(CarSeeds.SportCar.Id);
 
@@ -75,7 +76,7 @@ namespace Carpool.BL.Tests
         }
 
         [Fact]
-        public async Task NewIngredient_InsertOrUpdate_IngredientAdded()
+        public async Task NewCar_InsertOrUpdate_CarAdded()
         {
             //Arrange
             var car = new CarDetailModel(
@@ -96,7 +97,7 @@ namespace Carpool.BL.Tests
         }
 
         [Fact]
-        public async Task SeededWater_InsertOrUpdate_IngredientUpdated()
+        public async Task SeededSportCar_InsertOrUpdate_CarUpdated()
         {
             //Arrange
             var car = new CarDetailModel
@@ -110,6 +111,8 @@ namespace Carpool.BL.Tests
             {
                 Id = CarSeeds.SportCar.Id
             };
+
+            // Update CarType and Manufacturer
             car.CarType = CarType.Minivan;
             car.Manufacturer = Manufacturer.Bugatti;
 

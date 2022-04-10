@@ -41,15 +41,25 @@ namespace Carpool.BL.Tests
         public async Task GetAll_Single_SeededUser()
         {
             var users = await _userFacadeSUT.GetAsync();
-            foreach (var item in users)
-            {
-                Console.WriteLine($"{item}");
-            }
             var user = users.Single(i => i.Id == UserSeeds.UserEntity.Id);
 
             DeepAssert.Equal(Mapper.Map<UserListModel>(UserSeeds.UserEntity), user);
         }
 
+        [Fact]
+        public async Task Insert_SeededUser()
+        {
+            var seeded_user = new UserDetailModel(
+                    Name: UserSeeds.UserEntity1.Name,
+                    Surname: UserSeeds.UserEntity1.Surname,
+                    PhotoUrl: null
+                );
+            var _ = await _userFacadeSUT.SaveAsync(seeded_user);
+
+            var user = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity1.Id);
+            Console.WriteLine($"{user.OwnedCars.Count}");
+
+        }
 
         [Fact]
         public async Task GetById_SeededUser()
