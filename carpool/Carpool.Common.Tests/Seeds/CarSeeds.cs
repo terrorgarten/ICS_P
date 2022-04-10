@@ -29,7 +29,7 @@ public static class CarSeeds
         SeatCapacity: 2,
         OwnerId: UserSeeds.UserEntity.Id)
     {
-        Owner = null,
+        Owner = UserSeeds.UserEntity,
     };
 
     

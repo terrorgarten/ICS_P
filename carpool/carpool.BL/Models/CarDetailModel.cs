@@ -11,7 +11,8 @@ namespace Carpool.BL.Models
         Manufacturer Manufacturer,
         CarType CarType,
         int SeatCapacity,
-        DateTime RegistrationDate) : ModelBase
+        DateTime RegistrationDate,
+        Guid OwnerId) : ModelBase
     {
         public Manufacturer Manufacturer { get; set; } = Manufacturer;
         public CarType CarType { get; set; } = CarType;
@@ -19,6 +20,7 @@ namespace Carpool.BL.Models
         public DateTime RegistrationDate { get; set; } = RegistrationDate;
         public string? PhotoUrl { get; set; }
 
+        public Guid OwnerId { get; set; } = OwnerId;
         //TODO: vymysliet Ignore
         //public string Name = "Unknown";
         //public  string Surname = "Unknown";
@@ -35,6 +37,6 @@ namespace Carpool.BL.Models
 
         }
 
-        public static CarDetailModel Empty => new(default, default, default, default);
+        public static CarDetailModel Empty => new(default, default, default, default, default);
     }
 }

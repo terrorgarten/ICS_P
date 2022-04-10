@@ -29,8 +29,13 @@ namespace Carpool.BL.Tests
                 CarType: CarType.Micro,
                 Manufacturer: Manufacturer.Dacia,
                 SeatCapacity: 4,
-                RegistrationDate: DateTime.MaxValue
-            );
+                RegistrationDate: DateTime.MaxValue,
+                OwnerId: UserSeeds.UserEntity1.Id
+            )
+            {
+                //Id = Guid.Parse("953C5784-DB27-43D2-A8F3-ED6E6C58CDE4")
+            };
+            
             var _ = await _carFacadeSUT.SaveAsync(model);
         }
 
@@ -77,7 +82,8 @@ namespace Carpool.BL.Tests
                 CarType: CarType.SUV,
                 Manufacturer: Manufacturer.Chevrolet,
                 SeatCapacity: 4,
-                RegistrationDate: DateTime.MaxValue
+                RegistrationDate: DateTime.MaxValue,
+                OwnerId: UserSeeds.UserEntity1.Id
             );
 
             //Act
@@ -98,7 +104,8 @@ namespace Carpool.BL.Tests
                 CarType: CarSeeds.SportCar.CarType,
                 Manufacturer: CarSeeds.SportCar.Manufacturer,
                 SeatCapacity: CarSeeds.SportCar.SeatCapacity,
-                RegistrationDate: CarSeeds.SportCar.RegistrationDate
+                RegistrationDate: CarSeeds.SportCar.RegistrationDate,
+                OwnerId: CarSeeds.SportCar.OwnerId
             )
             {
                 Id = CarSeeds.SportCar.Id
