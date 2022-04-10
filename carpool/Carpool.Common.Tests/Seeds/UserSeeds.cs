@@ -79,8 +79,7 @@ public static class UserSeeds
     static UserSeeds()
     {
         UserForUserRideEntity.PassengerRides.Add(UserRideSeeds.UserRideEntity1);
-        //UserEntity2.PassengerRides.Add(UserRideSeeds.UserRideEntity2);
-        //UserEntity1.OwnedCars.Add(CarSeeds.CarEntity1);
+        UserEntity2.PassengerRides.Add(UserRideSeeds.UserRideEntity2);
         UserEntity2.OwnedCars.Add(CarSeeds.CarEntity2);
         UserEntity.OwnedCars.Add(CarSeeds.SportCar);
         UserEntity1.OwnedCars.Add(CarSeeds.CarEntity1);

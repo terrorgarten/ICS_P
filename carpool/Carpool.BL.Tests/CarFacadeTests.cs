@@ -61,9 +61,9 @@ namespace Carpool.BL.Tests
         [Fact]
         public async Task GetById_NonExistent()
         {
-            var ingredient = await _carFacadeSUT.GetAsync(CarSeeds.EmptyCarEntity.Id);
+            var car = await _carFacadeSUT.GetAsync(CarSeeds.EmptyCarEntity.Id);
 
-            Assert.Null(ingredient);
+            Assert.Null(car);
         }
 
         [Fact]

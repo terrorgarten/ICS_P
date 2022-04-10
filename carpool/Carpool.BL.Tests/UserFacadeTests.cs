@@ -57,8 +57,6 @@ namespace Carpool.BL.Tests
             var _ = await _userFacadeSUT.SaveAsync(seeded_user);
 
             var user = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity1.Id);
-            Console.WriteLine($"{user.OwnedCars.Count}");
-
         }
 
         [Fact]

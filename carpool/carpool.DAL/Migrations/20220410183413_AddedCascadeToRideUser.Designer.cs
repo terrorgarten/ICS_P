@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Carpool.DAL.Migrations
 {
     [DbContext(typeof(CarpoolDbContext))]
-    [Migration("20220409123500_FixingRideUserCascade")]
-    partial class FixingRideUserCascade
+    [Migration("20220410183413_AddedCascadeToRideUser")]
+    partial class AddedCascadeToRideUser
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -40,6 +40,9 @@ namespace Carpool.DAL.Migrations
                     b.Property<string>("PhotoUrl")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("RegistrationDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("SeatCapacity")
                         .HasColumnType("int");
 
@@ -47,7 +50,7 @@ namespace Carpool.DAL.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Cars", (string)null);
+                    b.ToTable("Cars");
                 });
 
             modelBuilder.Entity("Carpool.DAL.Entities.RideEntity", b =>
@@ -82,7 +85,7 @@ namespace Carpool.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Rides", (string)null);
+                    b.ToTable("Rides");
                 });
 
             modelBuilder.Entity("Carpool.DAL.Entities.UserEntity", b =>
@@ -104,7 +107,7 @@ namespace Carpool.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Carpool.DAL.Entities.UserRideEntity", b =>
@@ -125,7 +128,7 @@ namespace Carpool.DAL.Migrations
 
                     b.HasIndex("RideId");
 
-                    b.ToTable("UsersRideEntity", (string)null);
+                    b.ToTable("UsersRideEntity");
                 });
 
             modelBuilder.Entity("Carpool.DAL.Entities.CarEntity", b =>

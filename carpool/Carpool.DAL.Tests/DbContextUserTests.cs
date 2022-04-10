@@ -77,45 +77,9 @@ namespace Carpool.DAL.Tests
             var actualEntity = await dbx.Users
                 .Include(i => i.OwnedCars)
                 .SingleAsync(i => i.Id == entity.Id);
-            DeepAssert.Equal(entity, actualEntity);
+            DeepAssert.Equal(entity, actualEntity, "PassengerRides");
         }
 
-        //// Adding ingredientAmounts alongside with recipe is OK because ingredientAmounts are not strong entities
-        //[Fact]
-        //public async Task AddNew_RecipeWithJustIngredientAmounts_Persisted()
-        //{
-        //    //Arrange
-        //    var entity = RecipeSeeds.EmptyRecipeEntity with
-        //    {
-        //        Name = "Lemonade",
-        //        Description = "Simple lemon lemonade",
-        //        Ingredients = new List<IngredientAmountEntity> {
-        //            IngredientAmountSeeds.EmptyIngredientAmountEntity with
-        //            {
-        //                Amount = 1,
-        //                Unit = Unit.L,
-        //                IngredientId = IngredientSeeds.IngredientEntity1.Id
-        //            },
-        //            IngredientAmountSeeds.EmptyIngredientAmountEntity with
-        //            {
-        //                Amount = 50,
-        //                Unit = Unit.Ml,
-        //                IngredientId = IngredientSeeds.IngredientEntity2.Id
-        //            }
-        //        }
-        //    };
-
-        //    //Act
-        //    CookBookDbContextSUT.Recipes.Add(entity);
-        //    await CookBookDbContextSUT.SaveChangesAsync();
-
-        //    //Assert
-        //    await using var dbx = await DbContextFactory.CreateDbContextAsync();
-        //    var actualEntity = await dbx.Recipes
-        //        .Include(i => i.Ingredients)
-        //        .SingleAsync(i => i.Id == entity.Id);
-        //    DeepAssert.Equal(entity, actualEntity);
-        //}
 
         [Fact]
         public async Task GetById_User()
@@ -141,7 +105,7 @@ namespace Carpool.DAL.Tests
         }
 
         [Fact]
-        public async Task Update_Recipe_Persisted()
+        public async Task Update_User_Persisted()
         {
             //Arrange
             var baseEntity = UserSeeds.UserEntityUpdate;
@@ -164,10 +128,10 @@ namespace Carpool.DAL.Tests
 
 
         [Fact]
-        public async Task Delete_IngredientAmount_Deleted()
+        public async Task Delete_User_Deleted()
         {
             //Arrange
-            var baseEntity = UserSeeds.UserEntity2;
+            var baseEntity = UserSeeds.UserEntityDelete;
 
             //Act
             CarpoolDbContextSUT.Users.Remove(baseEntity);
@@ -178,7 +142,7 @@ namespace Carpool.DAL.Tests
         }
 
         [Fact]
-        public async Task DeleteById_IngredientAmount_Deleted()
+        public async Task DeleteById_User_Deleted()
         {
             //Arrange
             var baseEntity = UserSeeds.UserEntityDelete;

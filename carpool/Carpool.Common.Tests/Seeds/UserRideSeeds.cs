@@ -25,10 +25,10 @@ public static class UserRideSeeds
 
     public static readonly UserRideEntity UserRideEntity2 = new(
         Id: Guid.Parse(input: "87833e66-05ba-4d6b-900b-fe5ace88dbd8"),
-        PassengerId: UserSeeds.UserEntity2.Id,
+        PassengerId: UserSeeds.UserForUserRideEntity.Id,
         RideId: RideSeeds.RideEntityForRideTestsGet.Id)
     {
-        Passenger = UserSeeds.UserEntity2,
+        Passenger = UserSeeds.UserForUserRideEntity,
         Ride = RideSeeds.RideEntityForRideTestsGet
     };
 

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Carpool.DAL.Migrations
 {
-    public partial class FixingRideUserCascade : Migration
+    public partial class AddedCascadeToRideUser : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
