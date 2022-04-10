@@ -20,25 +20,23 @@ namespace Carpool.BL.Tests
         {
             _rideFacadeSUT = new RideFacade(UnitOfWorkFactory, Mapper);
         }
+        [Fact]
+        public async Task Create_WithNonExistingItemDoesNotThrow()
+        {
+            var model = new RideDetailModel
+            (
+                Start: "Praha",
+                End: "Brno",
+                BeginTime: DateTime.MaxValue,
+                ApproxRideTime: TimeSpan.MaxValue,
+                CarId: CarSeeds.CarEntity1.Id,
+                UserId: UserSeeds.UserEntity1.Id
+            )
+            {
+            };
 
-        //[Fact]
-        //public async Task Create_WithNonExistingItem_DoesNotThrow()
-        //{
-        //    var model = new RideDetailModel
-        //    (
-        //        Start: "Praha",
-        //        End: "Brno",
-        //        BeginTime: DateTime.MaxValue,
-        //        ApproxRideTime: TimeSpan.MaxValue,
-        //        Manufacturer: Manufacturer.Bugatti,
-        //        SeatCapacity: 4,
-        //        CarType: CarType.Minivan
-        //    )
-        //    {
-        //        Id = RideSeeds.RideEntityUpdate.Id
-        //    };
-        //    var _ = await _rideFacadeSUT.SaveAsync(model);
-        //}
+            var _ = await _rideFacadeSUT.SaveAsync(model);
+        }
 
         [Fact]
         public async Task GetAll_Single_SeededRideEntity()
@@ -55,7 +53,7 @@ namespace Carpool.BL.Tests
         {
             var ride = await _rideFacadeSUT.GetAsync(RideSeeds.RideEntity.Id);
 
-            DeepAssert.Equal(Mapper.Map<RideDetailModel>(RideSeeds.RideEntity), ride);
+            DeepAssert.Equal(Mapper.Map<RideDetailModel>(RideSeeds.RideEntity), ride, "OwnedCars");
         }
         
         [Fact]
@@ -75,56 +73,54 @@ namespace Carpool.BL.Tests
             Assert.False(await dbxAssert.Rides.AnyAsync(i => i.Id == RideSeeds.RideEntity.Id));
         }
 
-        //[Fact]
-        //public async Task NewRide_InsertOrUpdate_RideAdded()
-        //{
-        //    //Arrange
-        //    var ride = new RideDetailModel(
-        //        Start: "Madrid",
-        //        End: "Berlin",
-        //        BeginTime: DateTime.MaxValue,
-        //        ApproxRideTime: TimeSpan.MaxValue,
-        //        Manufacturer: Manufacturer.Hummer,
-        //        SeatCapacity: 4,
-        //        CarType: CarType.Micro
-        //    );
+        [Fact]
+        public async Task NewRide_InsertOrUpdate_RideAdded()
+        {
+            //Arrange
+            var ride = new RideDetailModel(
+                Start: "Madrid",
+                End: "Berlin",
+                BeginTime: DateTime.MaxValue,
+                ApproxRideTime: TimeSpan.MaxValue,
+                CarId: CarSeeds.CarEntityUpdate.Id,
+                UserId: UserSeeds.UserEntityUpdate.Id
+            );
 
-        //    //Act
-        //    ride = await _rideFacadeSUT.SaveAsync(ride);
+            //Act
+            ride = await _rideFacadeSUT.SaveAsync(ride);
 
-        //    //Assert
-        //    await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-        //    var rideFromDb = await dbxAssert.Rides.SingleAsync(i => i.Id == ride.Id);
-        //    DeepAssert.Equal(ride, Mapper.Map<RideDetailModel>(rideFromDb));
-        //}
+            //Assert
+            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+            var rideFromDb = await dbxAssert.Rides.SingleAsync(i => i.Id == ride.Id);
+            DeepAssert.Equal(ride, Mapper.Map<RideDetailModel>(rideFromDb), "User", "Car");
+        }
 
-        //[Fact]
-        //public async Task SeededRideEntity_InsertOrUpdate_RideUpdated()
-        //{
-        //    //Arrange
-        //    var ride = new RideDetailModel
-        //    (
-        //        Start: RideSeeds.RideEntity.Start,
-        //        End: RideSeeds.RideEntity.End,
-        //        BeginTime: RideSeeds.RideEntity.BeginTime,
-        //        ApproxRideTime: RideSeeds.RideEntity.ApproxRideTime,
-        //        Manufacturer: RideSeeds.RideEntity.Car.Manufacturer,
-        //        SeatCapacity: RideSeeds.RideEntity.Car.SeatCapacity,
-        //        CarType: RideSeeds.RideEntity.Car.CarType
-        //    )
-        //    {
-        //        Id = RideSeeds.RideEntity.Id
-        //    };
-        //    ride.Start = "Liberec";
-        //    ride.End = "Ostrava";
+        [Fact]
+        public async Task SeededRideEntity_InsertOrUpdate_RideUpdated()
+        {
+            //Arrange
+            var ride = new RideDetailModel
+            (
+                Start: RideSeeds.RideEntity.Start,
+                End: RideSeeds.RideEntity.End,
+                BeginTime: RideSeeds.RideEntity.BeginTime,
+                ApproxRideTime: RideSeeds.RideEntity.ApproxRideTime,
+                CarId: CarSeeds.CarEntity1.Id,
+                UserId: UserSeeds.UserEntity1.Id
+            )
+            {
+                Id = RideSeeds.RideEntity.Id
+            };
+            ride.Start = "Liberec";
+            ride.End = "Ostrava";
 
-        //    //Act
-        //    await _rideFacadeSUT.SaveAsync(ride);
+            //Act
+            await _rideFacadeSUT.SaveAsync(ride);
 
-        //    //Assert
-        //    await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-        //    var rideFromDb = await dbxAssert.Rides.SingleAsync(i => i.Id == ride.Id);
-        //    DeepAssert.Equal(ride, Mapper.Map<RideDetailModel>(rideFromDb));
-        //}
+            //Assert
+            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+            var rideFromDb = await dbxAssert.Rides.SingleAsync(i => i.Id == ride.Id);
+            DeepAssert.Equal(ride, Mapper.Map<RideDetailModel>(rideFromDb));
+        }
     }
 }

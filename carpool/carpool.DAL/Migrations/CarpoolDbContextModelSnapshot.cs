@@ -153,7 +153,7 @@ namespace Carpool.DAL.Migrations
                     b.HasOne("Carpool.DAL.Entities.UserEntity", "User")
                         .WithMany("DriverRides")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Car");
@@ -166,7 +166,7 @@ namespace Carpool.DAL.Migrations
                     b.HasOne("Carpool.DAL.Entities.UserEntity", "Passenger")
                         .WithMany("PassengerRides")
                         .HasForeignKey("PassengerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Carpool.DAL.Entities.RideEntity", "Ride")

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Carpool.DAL.Migrations
 {
     [DbContext(typeof(CarpoolDbContext))]
-    [Migration("20220402161805_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20220410203956_AddedCascadeToRideUser2")]
+    partial class AddedCascadeToRideUser2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -41,6 +41,9 @@ namespace Carpool.DAL.Migrations
 
                     b.Property<string>("PhotoUrl")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("RegistrationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("SeatCapacity")
                         .HasColumnType("int");
@@ -152,7 +155,7 @@ namespace Carpool.DAL.Migrations
                     b.HasOne("Carpool.DAL.Entities.UserEntity", "User")
                         .WithMany("DriverRides")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Car");
@@ -165,7 +168,7 @@ namespace Carpool.DAL.Migrations
                     b.HasOne("Carpool.DAL.Entities.UserEntity", "Passenger")
                         .WithMany("PassengerRides")
                         .HasForeignKey("PassengerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Carpool.DAL.Entities.RideEntity", "Ride")

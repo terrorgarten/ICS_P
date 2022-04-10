@@ -106,7 +106,7 @@ namespace Carpool.DAL.Tests
             //Act
             var entity = await CarpoolDbContextSUT.Cars
                 .Include(i => i.Owner)
-                .ThenInclude(i => i.OwnedCars)
+                .ThenInclude(i => i!.OwnedCars)
                 .SingleAsync(i => i.Id == CarSeeds.CarEntity1.Id);
 
             //Assert

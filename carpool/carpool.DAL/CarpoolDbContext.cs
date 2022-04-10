@@ -42,7 +42,7 @@ namespace Carpool.DAL
             modelBuilder.Entity<UserEntity>()
                 .HasMany(i => i.PassengerRides)
                 .WithOne(i => i.Passenger)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);//opraveno na NoAction, kvoli Erroru z migracie a nasledne update-database, logicky sa nam javi Cascade
 
             modelBuilder.Entity<RideEntity>()
                 .HasMany(i => i.PassengerRides)
@@ -52,7 +52,7 @@ namespace Carpool.DAL
             modelBuilder.Entity<RideEntity>()
                 .HasOne(i => i.User)
                 .WithMany(i => i.DriverRides)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);//opraveno na NoAction, kvoli Erroru z migracie a nasledne update-database, logicky sa nam javi Cascade
 
             if (!_seedDemoData) return;
             UserSeeds.Seed(modelBuilder);

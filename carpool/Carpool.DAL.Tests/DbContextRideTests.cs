@@ -20,6 +20,7 @@ namespace Carpool.DAL.Tests
         {
         }
 
+
         [Fact]
         public async Task AddNew_RideWithNoPassengers_Persisted()
         {
