@@ -22,20 +22,12 @@ namespace Carpool.BL.Models
         public DateTime BeginTime { get; set; } = BeginTime;
         public Manufacturer Manufacturer { get; set; } = Manufacturer;
         public CarType CarType { get; set; } = CarType;
-
-        //   public UserEntity User { get; init; }
-        //   public CarEntity Car { get; init; }
-        // Odkaz na spolucestující
-
         public string Name { get; set; }
         public string Surname { get; set; }
         public int SeatCapacity { get; set; } = SeatCapacity;
         public string PhotoUrl { get; set; }
         public DateTime RegistrationDate { get; set; }
 
-        //public List<PassengerListModel> Passengers { get; init; } = new();
-        //public string Name = "Unknown";
-        //public string Surname = "Unknown";
 #nullable disable
         public RideDetailModel() : this(default, default, default, default, default, default, default) { }
 #nullable enable
@@ -51,7 +43,8 @@ namespace Carpool.BL.Models
                     .ForMember(dst => dst.Manufacturer, opt => opt.MapFrom(src => src.Car.Manufacturer))
                     .ForMember(dst => dst.CarType, opt => opt.MapFrom(src => src.Car.CarType))
                     .ForMember(dst => dst.Name, opt => opt.MapFrom(src => src.User.Name))
-                    .ForMember(dst => dst.Surname, opt => opt.MapFrom(src => src.User.Surname));
+                    .ForMember(dst => dst.Surname, opt => opt.MapFrom(src => src.User.Surname))
+                    .ReverseMap();
             }
         }
 

@@ -17,7 +17,6 @@ namespace Carpool.BL.Models
         public DateTime BeginTime { get; set; } = BeginTime;
         public int SeatCapacity { get; set; } = SeatCapacity;
 
-        // aktuální pasažéři
 #nullable disable
         public RideListModel() : this(default, default, default, default) { }
 #nullable enable

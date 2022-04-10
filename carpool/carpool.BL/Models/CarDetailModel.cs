@@ -21,9 +21,6 @@ namespace Carpool.BL.Models
         public string? PhotoUrl { get; set; }
 
         public Guid OwnerId { get; set; } = OwnerId;
-        //TODO: vymysliet Ignore
-        //public string Name = "Unknown";
-        //public  string Surname = "Unknown";
 
         public class CarMapperProfile : Profile
         {

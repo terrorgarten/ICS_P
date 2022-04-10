@@ -29,11 +29,6 @@ namespace Carpool.DAL
         {
             base.OnModelCreating(modelBuilder);
 
-            //modelBuilder.Entity<CarEntity>()
-            //    .HasOne(i => i.Owner)
-            //    .WithMany(i => i.OwnedCars)
-            //    .OnDelete(DeleteBehavior.Cascade);
-
             modelBuilder.Entity<UserEntity>()
                 .HasMany(i => i.OwnedCars)
                 .WithOne(i => i.Owner)
