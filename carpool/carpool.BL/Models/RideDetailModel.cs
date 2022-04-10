@@ -14,9 +14,7 @@ namespace Carpool.BL.Models
         TimeSpan ApproxRideTime,
         Manufacturer Manufacturer,
         int SeatCapacity,
-        CarType CarType,
-        Guid UserId, 
-        Guid CarId) : ModelBase
+        CarType CarType) : ModelBase
     {
         public string Start { get; set; } = Start;
         public string End { get; set; } = End;
@@ -29,10 +27,8 @@ namespace Carpool.BL.Models
         //   public CarEntity Car { get; init; }
         // Odkaz na spolucestující
 
-        public Guid UserId { get; set; } = UserId;
-        public string Name { get; set; } = "Unknown";
-        public string Surname { get; set; } = "Unknown";
-        public Guid CarId { get; set; } = CarId;
+        public string Name { get; set; }
+        public string Surname { get; set; }
         public int SeatCapacity { get; set; } = SeatCapacity;
         public string PhotoUrl { get; set; }
         public DateTime RegistrationDate { get; set; }
@@ -41,7 +37,7 @@ namespace Carpool.BL.Models
         //public string Name = "Unknown";
         //public string Surname = "Unknown";
 #nullable disable
-        public RideDetailModel() : this(default, default, default, default, default, default, default, default, default) { }
+        public RideDetailModel() : this(default, default, default, default, default, default, default) { }
 #nullable enable
 
         public class MapperProfile : Profile
@@ -59,6 +55,6 @@ namespace Carpool.BL.Models
             }
         }
 
-        public static RideDetailModel Empty => new("Unknown", "Unknown", default, default, default, default, default, default, default);
+        public static RideDetailModel Empty => new("Unknown", "Unknown", default, default, default, default, default);
     }
 }

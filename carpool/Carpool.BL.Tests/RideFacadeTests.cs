@@ -21,7 +21,7 @@ namespace Carpool.BL.Tests
             _rideFacadeSUT = new RideFacade(UnitOfWorkFactory, Mapper);
         }
 
-        /*[Fact]
+        [Fact]
         public async Task Create_WithNonExistingItem_DoesNotThrow()
         {
             var model = new RideDetailModel
@@ -29,18 +29,16 @@ namespace Carpool.BL.Tests
                 Start: "Praha",
                 End: "Brno",
                 BeginTime: DateTime.MaxValue,
-                ApproxRideTime: TimeSpan.MaxValue, 
+                ApproxRideTime: TimeSpan.MaxValue,
                 Manufacturer: Manufacturer.Bugatti,
                 SeatCapacity: 4,
-                CarType: CarType.Minivan,
-                UserId: UserSeeds.UserEntity.Id, //Franta
-                CarId: CarSeeds.SportCar.Id
+                CarType: CarType.Minivan
             )
             {
-                
+                //Id = Guid.Parse("7E7D6A18-E9BC-44D8-AC3C-441D4DE5A00C")
             };
             var _ = await _rideFacadeSUT.SaveAsync(model);
-        }*/
+        }
 
         [Fact]
         public async Task GetAll_Single_SeededRideEntity()
@@ -77,47 +75,60 @@ namespace Carpool.BL.Tests
             Assert.False(await dbxAssert.Rides.AnyAsync(i => i.Id == RideSeeds.RideEntity.Id));
         }
 
-        /*
-        [Fact]
-        public async Task NewIngredient_InsertOrUpdate_IngredientAdded()
-        {
-            //Arrange
-            var ingredient = new IngredientDetailModel(
-                Name: "Water",
-                Description: "Mineral water"
-            );
+        //[Fact]
+        //public async Task NewRide_InsertOrUpdate_RideAdded()
+        //{
+        //    //Arrange
+        //    var ride = new RideDetailModel(
+        //        Start: "Madrid",
+        //        End: "Berlin",
+        //        BeginTime: DateTime.MaxValue,
+        //        ApproxRideTime: TimeSpan.MaxValue,
+        //        Manufacturer: Manufacturer.Hummer,
+        //        SeatCapacity: 4,
+        //        CarType: CarType.Micro,
+        //        UserId: UserSeeds.UserEntity.Id,
+        //        CarId: CarSeeds.SportCar.Id
+        //    );
 
-            //Act
-            ingredient = await _ingredientFacadeSUT.SaveAsync(ingredient);
+        //    //Act
+        //    ride = await _rideFacadeSUT.SaveAsync(ride);
 
-            //Assert
-            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            var ingredientFromDb = await dbxAssert.Ingredients.SingleAsync(i => i.Id == ingredient.Id);
-            DeepAssert.Equal(ingredient, Mapper.Map<IngredientDetailModel>(ingredientFromDb));
-        }
+        //    //Assert
+        //    await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+        //    var rideFromDb = await dbxAssert.Rides.SingleAsync(i => i.Id == ride.Id);
+        //    DeepAssert.Equal(ride, Mapper.Map<RideDetailModel>(rideFromDb));
+        //}
 
-        [Fact]
-        public async Task SeededWater_InsertOrUpdate_IngredientUpdated()
-        {
-            //Arrange
-            var ingredient = new IngredientDetailModel
-            (
-                Name: IngredientSeeds.Water.Name,
-                Description: IngredientSeeds.Water.Description
-            )
-            {
-                Id = IngredientSeeds.Water.Id
-            };
-            ingredient.Name += "updated";
-            ingredient.Description += "updated";
+        //[Fact]
+        //public async Task SeededRideEntity_InsertOrUpdate_RideUpdated()
+        //{
+        //    //Arrange
+        //    var ride = new RideDetailModel
+        //    (
+        //        Start: RideSeeds.RideEntity.Start,
+        //        End: RideSeeds.RideEntity.End,
+        //        BeginTime: RideSeeds.RideEntity.BeginTime,
+        //        ApproxRideTime: RideSeeds.RideEntity.ApproxRideTime,
+        //        Manufacturer: RideSeeds.RideEntity.Car.Manufacturer,
+        //        SeatCapacity: RideSeeds.RideEntity.Car.SeatCapacity,
+        //        CarType: RideSeeds.RideEntity.Car.CarType,
+        //        UserId: RideSeeds.RideEntity.UserId,
+        //        CarId: RideSeeds.RideEntity.CarId
+        //    )
+        //    {
+        //        Id = RideSeeds.RideEntity.Id
+        //    };
+        //    ride.Start = "Liberec";
+        //    ride.End = "Ostrava";
 
-            //Act
-            await _ingredientFacadeSUT.SaveAsync(ingredient);
+        //    //Act
+        //    await _rideFacadeSUT.SaveAsync(ride);
 
-            //Assert
-            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            var ingredientFromDb = await dbxAssert.Ingredients.SingleAsync(i => i.Id == ingredient.Id);
-            DeepAssert.Equal(ingredient, Mapper.Map<IngredientDetailModel>(ingredientFromDb));
-        }*/
+        //    //Assert
+        //    await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+        //    var rideFromDb = await dbxAssert.Rides.SingleAsync(i => i.Id == ride.Id);
+        //    DeepAssert.Equal(ride, Mapper.Map<RideDetailModel>(rideFromDb));
+        //}
     }
 }
