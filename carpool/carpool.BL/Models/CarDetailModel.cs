@@ -30,8 +30,8 @@ namespace Carpool.BL.Models
             public CarMapperProfile()
             {
                 CreateMap<CarEntity, CarDetailModel>()
-                    .ReverseMap();
-                   // .ForMember(dst => dst.OwnerId, opt => opt.Ignore());
+                    .ReverseMap()
+                    .ForMember(dst => dst.Owner, opt => opt.Ignore());
             }
 
         }
