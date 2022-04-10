@@ -1,61 +1,145 @@
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using carpool.DAL;
-using carpool.DAL.Seeds;
+using Carpool.Common.Enums;
+using Carpool.Common.Tests;
+using Carpool.Common.Tests.Seeds;
+using Carpool.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Carpool.DAL.Tests
 {
-    public class DbContextCarTests : IAsyncLifetime
+    /// <summary>
+    /// Tests shows an example of DbContext usage when querying strong entity with no navigation properties.
+    /// Entity has no relations, holds no foreign keys.
+    /// </summary>
+    public class DbContextCarTests : DbContextTestsBase
     {
-        private readonly CarpoolDbContext _carpoolDbContextSut;
-
-        public DbContextCarTests()
+        public DbContextCarTests(ITestOutputHelper output) : base(output)
         {
-            var dbContextOptions = new DbContextOptionsBuilder<CarpoolDbContext>();
-            dbContextOptions.UseInMemoryDatabase("Carpool");
-            _carpoolDbContextSut = new CarpoolDbContext(dbContextOptions.Options);
         }
 
         [Fact]
-        public async Task GetAll_Users_SeededFirstUserExists()
+        public async Task AddNew_Car_Persisted()
         {
-            var users
-                = await _carpoolDbContextSut
-                    .Users
-                    .FirstOrDefaultAsync(i => i.Id == UserSeeds.FirstUser.Id);
-            Assert.NotNull(users);
-            Assert.Equal(UserSeeds.FirstUser.Id, users.Id);
+            //Arrange
+            var entity = CarSeeds.EmptyCarEntity with
+            {
+                Manufacturer = Manufacturer.Dacia,
+                CarType = CarType.Universal,
+                OwnerId = UserSeeds.UserEntity.Id
+            };
+
+            //Act
+            CarpoolDbContextSUT.Cars.Add(entity);
+            await CarpoolDbContextSUT.SaveChangesAsync();
+
+            //Assert
+            await using var dbx = await DbContextFactory.CreateDbContextAsync();
+            var actualEntities = await dbx.Cars.SingleAsync(i => i.Id == entity.Id);
+            Assert.Equal(entity, actualEntities);
         }
 
         [Fact]
-        public async Task GetAll_Cars_SeededBigCarExists()
+        public async Task AddNew_CarWithOwner_Persisted()
         {
-            var cars
-                = await _carpoolDbContextSut
-                    .Cars
-                    .FirstOrDefaultAsync(i => i.Id == CarSeeds.BigCar.Id);
-            Assert.NotNull(cars);
-            Assert.Equal(CarSeeds.BigCar with{ Owner = null }, cars);
+            //Arrange
+            var entity = CarSeeds.EmptyCarEntity with
+            {
+                Manufacturer = Manufacturer.Lamborghini,
+                CarType = CarType.Cabriolet,
+                OwnerId = Guid.Parse("39059CAC-0E34-4B2E-BC3C-4044CC4897F2"),
+                Owner = UserSeeds.EmptyUserEntity with
+                {
+                    Id = Guid.Parse("39059CAC-0E34-4B2E-BC3C-4044CC4897F2"),
+                    Name = "Stanko",
+                    Surname = "Lobotka"
+                }
+            };
+
+            //Act
+            CarpoolDbContextSUT.Cars.Add(entity);
+            await CarpoolDbContextSUT.SaveChangesAsync();
+
+            //Assert
+            await using var dbx = await DbContextFactory.CreateDbContextAsync();
+            var actualEntities = await dbx.Cars.Include(i => i.Owner).SingleAsync(i => i.Id == entity.Id);
+            DeepAssert.Equal(entity, actualEntities);
         }
 
         [Fact]
-        public async Task GetAll_Rides_SeededRide1Exists()
+        public async Task Update_SportCar_Persisted()
         {
-            var rides
-                = await _carpoolDbContextSut
-                    .Rides
-                    .FirstOrDefaultAsync(i => i.Id == RideSeeds.Ride1.Id);
-            Assert.NotNull(rides);
-            Assert.Equal(RideSeeds.Ride1.Id, rides.Id);
+            //Arrange
+            var baseEntity = CarSeeds.CarEntityUpdate;
+            var entity = CarSeeds.CarEntityUpdate with
+            {
+                SeatCapacity = baseEntity.SeatCapacity + 1,
+            };
+
+            //Act
+            CarpoolDbContextSUT.Cars.Update(entity);
+            await CarpoolDbContextSUT.SaveChangesAsync();
+
+            //Assert
+            await using var dbx = await DbContextFactory.CreateDbContextAsync();
+            var actualEntity = await dbx.Cars.SingleAsync(i => i.Id == entity.Id);
+            Assert.Equal(entity, actualEntity);
         }
 
-        public async Task InitializeAsync()
-            => await _carpoolDbContextSut.Database.EnsureCreatedAsync();
-       
+        [Fact]
+        public async Task GetAll_Car_ContainsSeededSportCarUpdate()
+        {
+            //Act
+            var entities = await CarpoolDbContextSUT.Cars.ToArrayAsync();
 
-        public async Task DisposeAsync()
-            => await _carpoolDbContextSut.DisposeAsync();
+            //Assert
+            Assert.Contains(CarSeeds.CarEntityUpdate, entities);
+        }
+
+        [Fact]
+        public async Task GetById_IncludingOwner_Car()
+        {
+            //Act
+            var entity = await CarpoolDbContextSUT.Cars
+                .Include(i => i.Owner)
+                .ThenInclude(i => i!.OwnedCars)
+                .SingleAsync(i => i.Id == CarSeeds.CarEntity1.Id);
+
+            //Assert
+            DeepAssert.Equal(CarSeeds.CarEntity1, entity);
+        }
+
+        [Fact]
+        public async Task Delete_SportCar_Deleted()
+        {
+            //Arrange
+            var entityBase = CarSeeds.CarEntityDelete;
+
+            //Act
+            CarpoolDbContextSUT.Cars.Remove(entityBase);
+            await CarpoolDbContextSUT.SaveChangesAsync();
+
+            //Assert
+            Assert.False(await CarpoolDbContextSUT.Cars.AnyAsync(i => i.Id == entityBase.Id));
+        }
+
+        [Fact]
+        public async Task DeleteById_Car_SportCarDeleted()
+        {
+            //Arrange
+            var entityBase = CarSeeds.CarEntityDelete;
+
+            //Act
+            CarpoolDbContextSUT.Remove(
+                CarpoolDbContextSUT.Cars.Single(i => i.Id == entityBase.Id));
+            await CarpoolDbContextSUT.SaveChangesAsync();
+
+            //Assert
+            Assert.False(await CarpoolDbContextSUT.Cars.AnyAsync(i => i.Id == entityBase.Id));
+        }
     }
 }

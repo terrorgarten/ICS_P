@@ -1,22 +1,21 @@
-﻿using carpool.common.Enums;
+﻿using System.ComponentModel.DataAnnotations;
+using Carpool.Common.Enums;
 
-namespace carpool.DAL.Entities;
+namespace Carpool.DAL.Entities;
 
-    //Výrobce
-    //Typ
-    //Datum první registrace
-    //Fotografie
-    //Počet míst k sezení
-    //(Majitel, tj.uživatel)
     public record CarEntity(
             Guid Id,
             Manufacturer Manufacturer,
             CarType CarType,
-            DateOnly RegistrationDate,
+            //[DataType(DataType.Date)]
+            DateTime RegistrationDate,
             string? PhotoUrl,
             int SeatCapacity,
             Guid OwnerId ) : IEntity
     {
-        public UserEntity? Owner { get; init; }
+#nullable disable
+        public CarEntity() : this(default, default, default, default, default, default, default) { }
+#nullable enable
+    public UserEntity? Owner { get; init; }
     }
 
