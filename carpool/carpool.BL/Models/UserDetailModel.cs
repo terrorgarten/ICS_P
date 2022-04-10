@@ -14,9 +14,6 @@ namespace Carpool.BL.Models
         public string? PhotoUrl { get; set; } = PhotoUrl;
 
         public List<CarListModel> OwnedCars { get; init; } = new();
-        //public List<RideListModel> DriverRides { get; init; } = new();
-        //public List<RideListModel> PassengerRides { get; init; } = new();
-
 
         public class MapperProfile : Profile
         {
@@ -24,7 +21,6 @@ namespace Carpool.BL.Models
             {
                 CreateMap<UserEntity, UserDetailModel>()
                     .ReverseMap();
-                //Possible ingore (: 
             }
         }
 

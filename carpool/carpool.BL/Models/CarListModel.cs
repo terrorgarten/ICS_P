@@ -7,7 +7,7 @@ namespace Carpool.BL.Models
 {
     public record CarListModel(
         Manufacturer Manufacturer,
-        CarType CarType//, OWNER??
+        CarType CarType
         ) : ModelBase
     {
         public Manufacturer Manufacturer { get; set; } = Manufacturer;
@@ -19,7 +19,6 @@ namespace Carpool.BL.Models
             public CarListMapperProfile()
             {
                 CreateMap<CarEntity, CarListModel>();
-                     //V listě nemá být reverseMap
             }
         }
     }

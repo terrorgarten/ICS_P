@@ -4,7 +4,7 @@ using Carpool.DAL.Entities;
 namespace Carpool.BL.Models
 {
     public record UserRideDetailModel(
-        string Name, //ID??
+        string Name,
         string Surname) : ModelBase
     {
 
