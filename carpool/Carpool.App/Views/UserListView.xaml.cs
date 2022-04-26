@@ -10,15 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Carpool.App.ViewModels;
 
 namespace Carpool.App.Views
 {
-    public partial class IngredientDetailView
+    /// <summary>
+    /// Interaction logic for UserListView.xaml
+    /// </summary>
+    public partial class UserListView : Window
     {
-        public IngredientDetailView()
+        public UserListView()
         {
             InitializeComponent();
         }
