@@ -15,9 +15,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{035CCD22
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Carpool.BL", "carpool.BL\Carpool.BL.csproj", "{1AC3BA8B-F2C2-4F73-A9B6-42F8CB7F0A5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carpool.Common.Tests", "Carpool.Common.Tests\Carpool.Common.Tests.csproj", "{BED33E03-CF07-4B1E-AE8D-34DC0F97207F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Carpool.Common.Tests", "Carpool.Common.Tests\Carpool.Common.Tests.csproj", "{BED33E03-CF07-4B1E-AE8D-34DC0F97207F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carpool.BL.Tests", "Carpool.BL.Tests\Carpool.BL.Tests.csproj", "{4223EE56-80F4-449F-A88A-15D86C4EF70F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Carpool.BL.Tests", "Carpool.BL.Tests\Carpool.BL.Tests.csproj", "{4223EE56-80F4-449F-A88A-15D86C4EF70F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carpool.App", "Carpool.App\Carpool.App.csproj", "{C75EC2AF-CE26-4601-8EE8-E88D4A69891E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +51,10 @@ Global
 		{4223EE56-80F4-449F-A88A-15D86C4EF70F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4223EE56-80F4-449F-A88A-15D86C4EF70F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4223EE56-80F4-449F-A88A-15D86C4EF70F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C75EC2AF-CE26-4601-8EE8-E88D4A69891E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C75EC2AF-CE26-4601-8EE8-E88D4A69891E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C75EC2AF-CE26-4601-8EE8-E88D4A69891E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C75EC2AF-CE26-4601-8EE8-E88D4A69891E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +66,7 @@ Global
 		{1AC3BA8B-F2C2-4F73-A9B6-42F8CB7F0A5B} = {3B66FF82-FDC8-4AC8-BDB9-441D55BD1F02}
 		{BED33E03-CF07-4B1E-AE8D-34DC0F97207F} = {035CCD22-9E43-4F01-88A6-AC356C9F7E1A}
 		{4223EE56-80F4-449F-A88A-15D86C4EF70F} = {035CCD22-9E43-4F01-88A6-AC356C9F7E1A}
+		{C75EC2AF-CE26-4601-8EE8-E88D4A69891E} = {3B66FF82-FDC8-4AC8-BDB9-441D55BD1F02}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7D4E5139-106D-4387-8CF4-3799279B881F}
