@@ -7,7 +7,6 @@ namespace Carpool.BL.Models
         string Name,
         string Surname) : ModelBase
     {
-
         public Guid PassengerId { get; set; }
         public string Name { get; set; } = Name;
         public string Surname { get; set; } = Surname;

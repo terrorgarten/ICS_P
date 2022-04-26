@@ -52,7 +52,7 @@ namespace Carpool.App
 
             services.Configure<DALSettings>(configuration.GetSection("CookBook:DAL"));
 
-            services.AddSingleton<IDbContextFactory<CookBookDbContext>>(provider =>
+            services.AddSingleton<IDbContextFactory<CarpoolDbContext>>(provider =>
             {
                 var dalSettings = provider.GetRequiredService<IOptions<DALSettings>>().Value;
                 return new SqlServerDbContextFactory(dalSettings.ConnectionString!, dalSettings.SkipMigrationAndSeedDemoData);
@@ -64,18 +64,20 @@ namespace Carpool.App
             services.AddSingleton<IMediator, Mediator>();
 
             services.AddSingleton<MainViewModel>();
-            services.AddSingleton<IIngredientListViewModel, IngredientListViewModel>();
-            services.AddFactory<IIngredientDetailViewModel, IngredientDetailViewModel>();
-            services.AddSingleton<IRecipeListViewModel, UserListViewModel>();
-            services.AddFactory<IRecipeDetailViewModel, RecipeDetailViewModel>();
-            services.AddFactory<IIngredientAmountDetailViewModel, IngredientAmountDetailViewModel>();
+            services.AddSingleton<ICarListViewModel, CarListViewModel>();
+            services.AddFactory<ICarDetailViewModel, CarDetailViewModel>();
+            services.AddSingleton<IUserListViewModel, UserListViewModel>();
+            services.AddFactory<IUserDetailViewModel, UserDetailViewModel>();
+            services.AddSingleton<IRideListViewModel, RideListViewModel>();
+            services.AddFactory<IRideDetailViewModel, RideDetailViewModel>();
+            services.AddFactory<IUserRideDetailViewModel, UserRideDetailViewModel>();
         }
 
         protected override async void OnStartup(StartupEventArgs e)
         {
             await _host.StartAsync();
 
-            var dbContextFactory = _host.Services.GetRequiredService<IDbContextFactory<CookBookDbContext>>();
+            var dbContextFactory = _host.Services.GetRequiredService<IDbContextFactory<CarpoolDbContext>>();
 
             var dalSettings = _host.Services.GetRequiredService<IOptions<DALSettings>>().Value;
             

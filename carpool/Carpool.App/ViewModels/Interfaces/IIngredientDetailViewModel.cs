@@ -2,7 +2,7 @@
 
 namespace Carpool.App.ViewModels
 {
-    public interface IIngredientDetailViewModel : IDetailViewModel<IngredientWrapper>
+    public interface IIngredientDetailViewModel : IDetailViewModel<CarWrapper>
     {
     }
 }

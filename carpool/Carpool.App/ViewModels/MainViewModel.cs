@@ -33,12 +33,12 @@ namespace Carpool.App.ViewModels
             CloseIngredientDetailTabCommand = new RelayCommand<IIngredientDetailViewModel>(OnCloseIngredientDetailTabExecute);
 
             mediator.Register<NewMessage<RecipeWrapper>>(OnRecipeNewMessage);
-            mediator.Register<NewMessage<IngredientWrapper>>(OnIngredientNewMessage);
+            mediator.Register<NewMessage<CarWrapper>>(OnIngredientNewMessage);
 
             mediator.Register<SelectedMessage<RecipeWrapper>>(OnRecipeSelected);
-            mediator.Register<SelectedMessage<IngredientWrapper>>(OnIngredientSelected);
+            mediator.Register<SelectedMessage<CarWrapper>>(OnIngredientSelected);
 
-            mediator.Register<DeleteMessage<IngredientWrapper>>(OnIngredientDeleted);
+            mediator.Register<DeleteMessage<CarWrapper>>(OnIngredientDeleted);
             mediator.Register<DeleteMessage<RecipeWrapper>>(OnRecipeDeleted);
 
         }
@@ -71,7 +71,7 @@ namespace Carpool.App.ViewModels
             SelectRecipe(Guid.Empty);
         }
 
-        private void OnIngredientNewMessage(NewMessage<IngredientWrapper> _)
+        private void OnIngredientNewMessage(NewMessage<CarWrapper> _)
         {
             SelectIngredient(Guid.Empty);
         }
@@ -81,7 +81,7 @@ namespace Carpool.App.ViewModels
             SelectRecipe(message.Id);
         }
 
-        private void OnIngredientSelected(SelectedMessage<IngredientWrapper> message)
+        private void OnIngredientSelected(SelectedMessage<CarWrapper> message)
         {
             SelectIngredient(message.Id);
         }
@@ -95,7 +95,7 @@ namespace Carpool.App.ViewModels
             }
         }
 
-        private void OnIngredientDeleted(DeleteMessage<IngredientWrapper> message)
+        private void OnIngredientDeleted(DeleteMessage<CarWrapper> message)
         {
             var ingredient = IngredientDetailViewModels.SingleOrDefault(i => i.Model?.Id == message.Id);
             if (ingredient != null)
