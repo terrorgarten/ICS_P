@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Carpool.App.Wrappers
 
-namespace Carpool.App.ViewModels.Interfaces
+namespace Carpool.App.ViewModels
 {
-    internal interface IUserDetailViewModel
+    public interface IUserDetailViewModel : IDetailViewModel<UserWrapper>
     {
     }
 }
