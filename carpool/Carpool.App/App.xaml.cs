@@ -43,7 +43,7 @@ namespace Carpool.App
 
         private static void ConfigureAppConfiguration(HostBuilderContext context, IConfigurationBuilder builder)
         {
-            builder.AddJsonFile(@"appsettings.json", false, false);
+            builder.AddJsonFile(@"AppSettings.json", false, false);
         }
 
         private static void ConfigureServices(IConfiguration configuration,
@@ -59,7 +59,7 @@ namespace Carpool.App
                 return new SqlServerDbContextFactory(dalSettings.ConnectionString!, dalSettings.SkipMigrationAndSeedDemoData);
             });
 
-            services.AddSingleton<MainWindow>();
+            services.AddSingleton<UserProfileWindow>();
 
             services.AddSingleton<IMessageDialogService, MessageDialogService>();
             services.AddSingleton<IMediator, Mediator>();
@@ -95,7 +95,7 @@ namespace Carpool.App
                 }
             }
 
-            var mainWindow = _host.Services.GetRequiredService<MainWindow>();
+            var mainWindow = _host.Services.GetRequiredService<UserProfileWindow>();
             mainWindow.Show();
 
             base.OnStartup(e);
