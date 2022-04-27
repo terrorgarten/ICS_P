@@ -17,7 +17,7 @@ namespace Carpool.App.Views
     /// <summary>
     /// Interaction logic for UserProfileWindow.xaml
     /// </summary>
-    public partial class UserProfileWindow : Window
+    public partial class UserProfileWindow
     {
         public UserProfileWindow()
         {

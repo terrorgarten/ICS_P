@@ -1,4 +1,4 @@
-﻿using Carpool.App.Wrappers
+﻿using Carpool.App.Wrappers;
 
 namespace Carpool.App.ViewModels
 {

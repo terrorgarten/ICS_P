@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Carpool.Common.Tests", "Car
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Carpool.BL.Tests", "Carpool.BL.Tests\Carpool.BL.Tests.csproj", "{4223EE56-80F4-449F-A88A-15D86C4EF70F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carpool.App", "Carpool.App\Carpool.App.csproj", "{C75EC2AF-CE26-4601-8EE8-E88D4A69891E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Carpool.App", "Carpool.App\Carpool.App.csproj", "{C75EC2AF-CE26-4601-8EE8-E88D4A69891E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

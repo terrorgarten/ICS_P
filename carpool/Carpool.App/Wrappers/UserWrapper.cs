@@ -15,7 +15,7 @@ namespace Carpool.App.Wrappers
         public UserWrapper(UserDetailModel model)
             : base(model)
         {
-            InitializeCollectionProperties(model);
+            //InitializeCollectionProperties(model);
         }
 
         public string? Name
@@ -35,16 +35,16 @@ namespace Carpool.App.Wrappers
             set => SetValue(value);
         }
 
-        private void InitializeCollectionProperties(UserDetailModel model)
-        {
-            if (model.OwnedCars == null)
-            {
-                throw new ArgumentException("Owned Cars cannot be null");
-            }
-            OwnedCars.AddRange(model.OwnedCars.Select(e => new CarWrapper(e)));
+        //private void InitializeCollectionProperties(UserDetailModel model)
+        //{
+        //    if (model.OwnedCars == null)
+        //    {
+        //        throw new ArgumentException("Owned Cars cannot be null");
+        //    }
+        //    OwnedCars.AddRange(model.OwnedCars.Select(e => new CarWrapper(e)));
 
-            RegisterCollection(OwnedCars, model.OwnedCars);
-        }
+        //    RegisterCollection(OwnedCars, model.OwnedCars);
+        //}
 
         public ObservableCollection<CarWrapper> OwnedCars { get; set; } = new();
 

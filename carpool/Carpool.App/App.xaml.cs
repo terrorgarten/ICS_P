@@ -50,7 +50,7 @@ namespace Carpool.App
         {
             services.AddBLServices();
 
-            services.Configure<DALSettings>(configuration.GetSection("CookBook:DAL"));
+            services.Configure<DALSettings>(configuration.GetSection("Carpool:DAL"));
 
             services.AddSingleton<IDbContextFactory<CarpoolDbContext>>(provider =>
             {
@@ -58,19 +58,19 @@ namespace Carpool.App
                 return new SqlServerDbContextFactory(dalSettings.ConnectionString!, dalSettings.SkipMigrationAndSeedDemoData);
             });
 
-            services.AddSingleton<MainWindow>();
+            services.AddSingleton<UserProfileWindow>();
 
             services.AddSingleton<IMessageDialogService, MessageDialogService>();
             services.AddSingleton<IMediator, Mediator>();
 
-            services.AddSingleton<MainViewModel>();
+            services.AddSingleton<UserProfileWindowViewModel>();
             services.AddSingleton<ICarListViewModel, CarListViewModel>();
-            services.AddFactory<ICarDetailViewModel, CarDetailViewModel>();
-            services.AddSingleton<IUserListViewModel, UserListViewModel>();
-            services.AddFactory<IUserDetailViewModel, UserDetailViewModel>();
-            services.AddSingleton<IRideListViewModel, RideListViewModel>();
-            services.AddFactory<IRideDetailViewModel, RideDetailViewModel>();
-            services.AddFactory<IUserRideDetailViewModel, UserRideDetailViewModel>();
+            //services.AddFactory<ICarDetailViewModel, CarDetailViewModel>();
+            //services.AddSingleton<IUserListViewModel, UserListViewModel>();
+            //services.AddFactory<IUserDetailViewModel, UserDetailViewModel>();
+            //services.AddSingleton<IRideListViewModel, RideListViewModel>();
+            //services.AddFactory<IRideDetailViewModel, RideDetailViewModel>();
+            //services.AddFactory<IUserRideDetailViewModel, UserRideDetailViewModel>();
         }
 
         protected override async void OnStartup(StartupEventArgs e)
@@ -94,7 +94,7 @@ namespace Carpool.App
                 }
             }
 
-            var mainWindow = _host.Services.GetRequiredService<MainWindow>();
+            var mainWindow = _host.Services.GetRequiredService<UserProfileWindow>();
             mainWindow.Show();
 
             base.OnStartup(e);
