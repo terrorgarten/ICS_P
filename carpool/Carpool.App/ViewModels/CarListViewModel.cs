@@ -27,8 +27,8 @@ namespace Carpool.App.ViewModels
         public async Task LoadAsync()
         {
             Cars.Clear();
-            var ingredients = await _carFacade.GetAsync();
-            Cars.AddRange(ingredients);
+            var cars = await _carFacade.GetAsync();
+            Cars.AddRange(cars);
         }
 
         public override void LoadInDesignMode()

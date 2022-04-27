@@ -4,7 +4,7 @@ namespace Carpool.App.Views
     {
         public RecipeDetailView()
         {
-            InitializeComponent();
+           //InitializeComponent();
         }
     }
 }

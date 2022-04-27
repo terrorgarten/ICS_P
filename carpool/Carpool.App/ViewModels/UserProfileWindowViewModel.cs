@@ -31,11 +31,8 @@ namespace Carpool.App.ViewModels
 
         public IUserDetailViewModel UserDetailViewModel { get; }
 
-        public ObservableCollection<ICarListViewModel> RecipeDetailViewModels { get; } =
+        public ObservableCollection<ICarListViewModel> CaListlViewModels { get; } =
             new ObservableCollection<ICarListViewModel>();
-
-        public ObservableCollection<IUserDetailViewModel> IngredientDetailViewModels { get; } =
-            new ObservableCollection<IUserDetailViewModel>();
 
     }
 }

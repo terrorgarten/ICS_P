@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Globalization;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using Carpool.App.Services;
 using Carpool.App.Services.MessageDialog;
@@ -58,7 +59,7 @@ namespace Carpool.App
                 return new SqlServerDbContextFactory(dalSettings.ConnectionString!, dalSettings.SkipMigrationAndSeedDemoData);
             });
 
-            services.AddSingleton<UserProfileWindow>();
+            services.AddSingleton<MainWindow>();
 
             services.AddSingleton<IMessageDialogService, MessageDialogService>();
             services.AddSingleton<IMediator, Mediator>();
@@ -80,7 +81,7 @@ namespace Carpool.App
             var dbContextFactory = _host.Services.GetRequiredService<IDbContextFactory<CarpoolDbContext>>();
 
             var dalSettings = _host.Services.GetRequiredService<IOptions<DALSettings>>().Value;
-            
+
             await using (var dbx = await dbContextFactory.CreateDbContextAsync())
             {
                 if (dalSettings.SkipMigrationAndSeedDemoData)
@@ -94,7 +95,7 @@ namespace Carpool.App
                 }
             }
 
-            var mainWindow = _host.Services.GetRequiredService<UserProfileWindow>();
+            var mainWindow = _host.Services.GetRequiredService<MainWindow>();
             mainWindow.Show();
 
             base.OnStartup(e);

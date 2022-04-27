@@ -1,4 +1,4 @@
-<local:UserControlBase x:Class="Carpool.App.Views.RecipeDetailView"
+<local:UserControlBase x:Class="Carpool.App.Views.CarDetailViewModel"
                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                        xmlns:local="clr-namespace:Carpool.App.Views"
@@ -8,12 +8,12 @@
                        xmlns:texts="clr-namespace:Carpool.App.Resources.Texts"
                        xmlns:extensions="clr-namespace:Carpool.App.Extensions"
                        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-                       xmlns:enums="clr-namespace:Carpool.Common.Enums;assembly=CookBook.Common"
+                       xmlns:enums="clr-namespace:Carpool.Common.Enums;assembly=Carpool.Common"
                        mc:Ignorable="d"
                        Background="{StaticResource DefaultComponentBackgroundBrush}"
-                       d:DataContext="{d:DesignInstance viewModels:RecipeDetailViewModel}"
+                       d:DataContext="{d:DesignInstance viewModels:CarDetailViewModel}"
                        d:DesignHeight="300" d:DesignWidth="400">
-    <Grid Visibility="{Binding Model, Converter={StaticResource NullToVisibilityConverter}}" Width="250">
+    <!--<Grid Visibility="{Binding Model, Converter={StaticResource NullToVisibilityConverter}}" Width="250">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -61,7 +61,7 @@
 
             <Label Grid.Row="4" Grid.Column="0" Content="{x:Static texts:RecipeDetailResources.FoodType_Label_Content}" />
             <ComboBox Grid.Row="4" Grid.Column="1"  MinWidth="150"
-                      ItemsSource="{Binding Source={extensions:EnumBindingSource {x:Type enums:FoodType}}}"
+                      ItemsSource="{Binding Source={extensions:EnumBindingSource {x:Type enums:CarType}}}"
                       SelectedItem="{Binding Model.FoodType, UpdateSourceTrigger=PropertyChanged}"/>
 
             <ListView x:Name="IngredientsListBox" 
@@ -83,10 +83,6 @@
                 </ListView.View>
             </ListView>
 
-            <local:IngredientAmountDetailView Grid.Row="6" Grid.ColumnSpan="2" Grid.Column="0" DataContext="{Binding IngredientAmountDetailViewModel}" />
-            <Image Grid.Row="7"
-                   Grid.Column="1"
-                   Source="{Binding Model.ImageUrl}"/>
         </Grid>
-    </Grid>
+    </Grid>-->
 </local:UserControlBase>
