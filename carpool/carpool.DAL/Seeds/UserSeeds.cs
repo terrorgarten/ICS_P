@@ -22,7 +22,7 @@ public static class UserSeeds
         FirstUser.OwnedCars.Add(CarSeeds.SportCar);
         SecondUser.OwnedCars.Add(CarSeeds.PersonalCar);
         FirstUser.DriverRides.Add(RideSeeds.Ride1);
-        SecondUser.PassengerRides.Add(UserRideSeeds.UserRide1);
+        //SecondUser.PassengerRides.Add(UserRideSeeds.UserRide1);
     }
 
     public static void Seed(ModelBuilder modelBuilder)

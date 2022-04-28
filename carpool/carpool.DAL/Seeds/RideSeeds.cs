@@ -13,14 +13,14 @@ public static class RideSeeds
         ApproxRideTime: TimeSpan.FromHours(2.5),
         CarId: CarSeeds.SportCar.Id,
         UserId: UserSeeds.FirstUser.Id)
-    { 
+    {
         Car = CarSeeds.SportCar,
         User = UserSeeds.FirstUser
     };
 
     static RideSeeds()
     {
-        Ride1.PassengerRides.Add(UserRideSeeds.UserRide1);
+        //Ride1.PassengerRides.Add(UserRideSeeds.UserRide1);
     }
 
     public static void Seed(ModelBuilder modelBuilder)

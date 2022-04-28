@@ -58,7 +58,7 @@ namespace Carpool.DAL
             UserSeeds.Seed(modelBuilder);
             CarSeeds.Seed(modelBuilder);
             RideSeeds.Seed(modelBuilder);
-            UserRideSeeds.Seed(modelBuilder);
+            //UserRideSeeds.Seed(modelBuilder);
         }
     }
 }

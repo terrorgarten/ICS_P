@@ -16,13 +16,38 @@ namespace Carpool.App.ViewModels
     public class CarListViewModel : ViewModelBase, ICarListViewModel
     {
         private readonly CarFacade _carFacade;
+        private readonly IMediator _mediator;
 
-        public CarListViewModel(CarFacade carFacade)
+        public CarListViewModel(CarFacade carFacade, IMediator mediator)
         {
             _carFacade = carFacade;
+            _mediator = mediator;
+
+            CarSelectedCommand = new RelayCommand<CarListModel>(CarSelected);
+            CarNewCommand = new RelayCommand(CarNew);
+
+            mediator.Register<UpdateMessage<CarWrapper>>(CarUpdated);
+            mediator.Register<DeleteMessage<CarWrapper>>(CarDeleted);
         }
 
-        public ObservableCollection<CarListModel> Cars { get; set; } = new();
+        public ObservableCollection<CarListModel> Cars { get; set; } = new()
+        {
+            new CarListModel(Manufacturer.Dacia, CarType.Micro),
+            new CarListModel(Manufacturer.Fiat, CarType.Sedan),
+            new CarListModel(Manufacturer.Volkswagen, CarType.Micro),
+            new CarListModel(Manufacturer.Lamborghini, CarType.Cabriolet)
+        };
+
+    public ICommand CarSelectedCommand { get; }
+        public ICommand CarNewCommand { get; }
+
+        private void CarNew() => _mediator.Send(new NewMessage<CarWrapper>());
+
+        private void CarSelected(CarListModel? car) => _mediator.Send(new SelectedMessage<CarWrapper> { Id = car?.Id });
+
+        private async void CarUpdated(UpdateMessage<CarWrapper> _) => await LoadAsync();
+
+        private async void CarDeleted(DeleteMessage<CarWrapper> _) => await LoadAsync();
 
         public async Task LoadAsync()
         {
