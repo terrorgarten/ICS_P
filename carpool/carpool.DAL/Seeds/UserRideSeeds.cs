@@ -11,7 +11,7 @@ namespace Carpool.DAL.Seeds
             PassengerId: UserSeeds.FirstUser.Id,
             RideId: RideSeeds.Ride1.Id)
         {
-            Passenger = UserSeeds.FirstUser,
+            Passenger = UserSeeds.SecondUser,
             Ride = RideSeeds.Ride1,
         };
 

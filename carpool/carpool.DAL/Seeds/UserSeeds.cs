@@ -6,7 +6,7 @@ namespace Carpool.DAL.Seeds;
 public static class UserSeeds
 {
     public static readonly UserEntity FirstUser = new(
-        Id: Guid.NewGuid(),
+        Id: Guid.Parse(input: "E8C82085-4195-4C1E-BFFB-D6A4069BF997"),
         Name: "Jožko",
         Surname: "Mrkvička",
         PhotoUrl: @"https://png.pngitem.com/pimgs/s/200-2004145_selfie-png-transparent-png.png");
@@ -22,7 +22,7 @@ public static class UserSeeds
         FirstUser.OwnedCars.Add(CarSeeds.SportCar);
         SecondUser.OwnedCars.Add(CarSeeds.PersonalCar);
         FirstUser.DriverRides.Add(RideSeeds.Ride1);
-        FirstUser.PassengerRides.Add(UserRideSeeds.UserRide1);
+        SecondUser.PassengerRides.Add(UserRideSeeds.UserRide1);
     }
 
     public static void Seed(ModelBuilder modelBuilder)

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Carpool.App.ViewModels;
 
 namespace Carpool.App.Views
 {
@@ -19,9 +20,10 @@ namespace Carpool.App.Views
     /// </summary>
     public partial class UserProfileWindow
     {
-        public UserProfileWindow()
+        public UserProfileWindow(UserProfileWindowViewModel mainViewModel)
         {
             InitializeComponent();
+            DataContext = mainViewModel;
         }
     }
 }
