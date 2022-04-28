@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Carpool.App.ViewModels
 {
-    internal class UserDetailViewModel
+    public class UserDetailViewModel
     {
     }
 }

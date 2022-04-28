@@ -15,18 +15,18 @@ namespace Carpool.App.ViewModels
 {
     public class UserProfileWindowViewModel : ViewModelBase
     {
-        private readonly IFactory<IUserDetailViewModel> _userDetailViewModelFactory;
+        //private readonly IFactory<IUserDetailViewModel> _userDetailViewModelFactory;
 
         public UserProfileWindowViewModel(
-            ICarListViewModel carListViewModel,
+            ICarListViewModel carListViewModel
             //IMediator mediator,
             //IFactory<ICarListViewModel> carListViewModelFactory,
-            IFactory<IUserDetailViewModel> userDetailViewModelFactory
+            //IFactory<IUserDetailViewModel> userDetailViewModelFactory
             )
         {
             CarListViewModel = carListViewModel;
-            _userDetailViewModelFactory = userDetailViewModelFactory;
-            UserDetailViewModel = _userDetailViewModelFactory.Create();
+            //_userDetailViewModelFactory = userDetailViewModelFactory;
+            //UserDetailViewModel = _userDetailViewModelFactory.Create();
 
         }
 
@@ -40,7 +40,7 @@ namespace Carpool.App.ViewModels
 
         public ICarListViewModel CarListViewModel { get; }
 
-        public IUserDetailViewModel UserDetailViewModel { get; }
+        //public IUserDetailViewModel UserDetailViewModel { get; }
 
         public ObservableCollection<ICarListViewModel> CaListlViewModels { get; } =
             new ObservableCollection<ICarListViewModel>();
