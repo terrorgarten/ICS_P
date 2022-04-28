@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="clr-namespace:Carpool.App.Views"
     xmlns:viewModels="clr-namespace:Carpool.App.ViewModels"
+
         mc:Ignorable="d"
         Title="UserProfileWindow" Height="450" Width="800"
         d:DataContext="{d:DesignInstance viewModels:UserProfileWindowViewModel}">
@@ -21,15 +22,37 @@
                " FontFamily="Poppins" Height="39"/>
         <Rectangle HorizontalAlignment="Center" Height="120" Margin="0,287,0,0" Stroke="Black" VerticalAlignment="Top" Width="138"/>
 
-        <ListView ItemsSource ="{Binding Cars}" HorizontalAlignment="Center" Width="138" Margin="0,287,0,27">
-            <ListView.ItemTemplate>
+        <views:CarListView x:Name="IngredientList"
+                                  Grid.Row="0" 
+                                  Grid.Column="0"
+                                  DataContext="{Binding CarListViewModel}" />
+        
+        <TabControl x:Name="CarDetail"
+                    ItemsSource="{Binding CarListViewModel}"
+                    SelectedItem="{Binding Select, Mode=TwoWay}" 
+                    Grid.Row="1" 
+                    Grid.Column="2" 
+                    HorizontalAlignment="Right">
+            <TabControl.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="{Binding CarType}"></TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Model.Name}" Margin="5" FontSize="12"/>
+                        <Button Content="X" Command="{Binding RelativeSource=
+                                  {RelativeSource FindAncestor,
+                                  AncestorType={x:Type TabControl}},
+                                  Path=DataContext.CloseIngredientDetailTabCommand}"
+                                CommandParameter="{Binding}" FontWeight="Bold" FontSize="12"
+                                Foreground="White" Padding="0">
+                        </Button>
                     </StackPanel>
                 </DataTemplate>
-            </ListView.ItemTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <views:IngredientDetailView HorizontalAlignment="Left" />
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
                  
-        </ListView>
     </Grid>
 </Window>
