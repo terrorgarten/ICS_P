@@ -30,14 +30,6 @@ namespace Carpool.App.ViewModels
 
         }
 
-        public ICollection<CarListModel> Cars { get; set; } = new List<CarListModel>()
-        {
-            new CarListModel(Manufacturer.Dacia, CarType.Micro),
-            new CarListModel(Manufacturer.Fiat, CarType.Sedan),
-            new CarListModel(Manufacturer.Volkswagen, CarType.Micro),
-            new CarListModel(Manufacturer.Lamborghini, CarType.Cabriolet)
-        };
-
         public ICarListViewModel CarListViewModel { get; }
 
         //public IUserDetailViewModel UserDetailViewModel { get; }

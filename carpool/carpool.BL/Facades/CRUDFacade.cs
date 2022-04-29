@@ -26,16 +26,16 @@ public class CRUDFacade<TEntity, TListModel, TDetailModel>
             _mapper = mapper;
         }
 
-        public async Task DeleteAsync(TDetailModel model) => await this.DeleteAsync(model.Id);
+        public virtual async Task DeleteAsync(TDetailModel model) => await this.DeleteAsync(model.Id);
 
-        public async Task DeleteAsync(Guid id)
+        public virtual async Task DeleteAsync(Guid id)
         {
             await using var uow = _unitOfWorkFactory.Create();
             uow.GetRepository<TEntity>().Delete(id);
             await uow.CommitAsync().ConfigureAwait(false);
         }
 
-        public async Task<TDetailModel?> GetAsync(Guid id)
+        public virtual async Task<TDetailModel?> GetAsync(Guid id)
         {
             await using var uow = _unitOfWorkFactory.Create();
             var query = uow
@@ -45,7 +45,7 @@ public class CRUDFacade<TEntity, TListModel, TDetailModel>
             return await _mapper.ProjectTo<TDetailModel>(query).SingleOrDefaultAsync().ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<TListModel>> GetAsync()
+        public virtual async Task<IEnumerable<TListModel>> GetAsync()
         {
             await using var uow = _unitOfWorkFactory.Create();
             var query = uow
@@ -54,7 +54,7 @@ public class CRUDFacade<TEntity, TListModel, TDetailModel>
             return await _mapper.ProjectTo<TListModel>(query).ToArrayAsync().ConfigureAwait(false);
         }
 
-        public async Task<TDetailModel> SaveAsync(TDetailModel model)
+        public virtual async Task<TDetailModel> SaveAsync(TDetailModel model)
         {
             await using var uow = _unitOfWorkFactory.Create();
 
@@ -66,6 +66,4 @@ public class CRUDFacade<TEntity, TListModel, TDetailModel>
             
             return (await GetAsync(entity.Id).ConfigureAwait(false))!;
         }
-
-        
     }

@@ -1,4 +1,5 @@
-﻿using Carpool.App.Extensions;
+﻿using System;
+using Carpool.App.Extensions;
 using Carpool.App.Messages;
 using Carpool.App.Services;
 using Carpool.App.Wrappers;
@@ -30,19 +31,15 @@ namespace Carpool.App.ViewModels
             mediator.Register<DeleteMessage<CarWrapper>>(CarDeleted);
         }
 
-        public ObservableCollection<CarListModel> Cars { get; set; } = new()
-        {
-            new CarListModel(Manufacturer.Dacia, CarType.Micro),
-            new CarListModel(Manufacturer.Fiat, CarType.Sedan),
-            new CarListModel(Manufacturer.Volkswagen, CarType.Micro),
-            new CarListModel(Manufacturer.Lamborghini, CarType.Cabriolet)
-        };
-
+        public ObservableCollection<CarListModel> Cars { get; set; } = new();
+        
+        
     public ICommand CarSelectedCommand { get; }
         public ICommand CarNewCommand { get; }
 
         private void CarNew() => _mediator.Send(new NewMessage<CarWrapper>());
-
+        
+        //Toto se vola pokud dostanu command
         private void CarSelected(CarListModel? car) => _mediator.Send(new SelectedMessage<CarWrapper> { Id = car?.Id });
 
         private async void CarUpdated(UpdateMessage<CarWrapper> _) => await LoadAsync();

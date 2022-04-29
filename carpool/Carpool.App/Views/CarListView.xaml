@@ -21,7 +21,7 @@
         </Grid.RowDefinitions>
         <controls:ButtonWithIcon Grid.Row="0"
                                  Command="{Binding CarNewCommand}"
-                                 TextContent="{x:Static texts:IngredientListResources.New_Button_Content}"
+                                 TextContent="Cauk"
                                  IconSource="/Resources/Images/Add.png"
                                  HorizontalAlignment="Center"/>
         <ListBox x:Name="CarsListBox" Grid.Row="1" ItemsSource="{Binding Cars}">
