@@ -18,7 +18,7 @@ namespace Carpool.BL.Models
         public int SeatCapacity { get; set; } = SeatCapacity;
 
 #nullable disable
-        public RideListModel() : this(default, default, default, default) { }
+        public RideListModel() : this(default!, default!, default, default) { }
 #nullable enable
 
         public class MapperProfile : Profile

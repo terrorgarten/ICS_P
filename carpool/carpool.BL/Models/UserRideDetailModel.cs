@@ -11,7 +11,7 @@ namespace Carpool.BL.Models
         public string Name { get; set; } = Name;
         public string Surname { get; set; } = Surname;
 #nullable disable
-        public UserRideDetailModel() : this(default, default) { }
+        public UserRideDetailModel() : this(default!, default!) { }
 #nullable enable
 
         public class MapperProfile : Profile
