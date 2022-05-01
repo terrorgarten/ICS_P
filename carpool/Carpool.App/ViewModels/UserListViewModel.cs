@@ -1,69 +1,61 @@
-﻿//using System;
-//using Carpool.App.Extensions;
-//using Carpool.App.Messages;
-//using Carpool.App.Services;
-//using Carpool.App.Wrappers;
-//using Carpool.BL.Models;
-//using System.Collections.ObjectModel;
-//using System.Threading.Tasks;
-//using System.Windows.Input;
-//using Carpool.App.Commands;
-//using Carpool.BL.Facades;
-//using Carpool.Common.Enums;
+﻿using System;
+using Carpool.App.Extensions;
+using Carpool.App.Messages;
+using Carpool.App.Services;
+using Carpool.App.Wrappers;
+using Carpool.BL.Models;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using Carpool.App.Commands;
+using Carpool.BL.Facades;
+using Carpool.Common.Enums;
+using Carpool.DAL.Seeds;
 
-//namespace Carpool.App.ViewModels
-//{
-//     public class UserListViewModel : ViewModelBase, IUserDetailViewModel
-//    {
-//        private readonly RecipeFacade _recipeFacade;
-//        private readonly IMediator _mediator;
+namespace Carpool.App.ViewModels
+{
+    public class UserListViewModel : ViewModelBase, IUserListViewModel
+    {
+        private readonly UserFacade _userFacade;
+        private readonly IMediator _mediator;
 
-//        public UserListViewModel(RecipeFacade recipeFacade, IMediator mediator)
-//        {
-//            _recipeFacade = recipeFacade;
-//            _mediator = mediator;
+        public UserListViewModel(UserFacade userFacade, IMediator mediator)
+        {
+            _userFacade = userFacade;
+            _mediator = mediator;
 
-//            RecipeSelectedCommand = new RelayCommand<RecipeListModel>(RecipeSelected);
-//            RecipeNewCommand = new RelayCommand(RecipeNew);
+            UserSelectedCommand = new RelayCommand<UserListModel>(UserSelected);
+            UserNewCommand = new RelayCommand(UserNew);
 
-//            mediator.Register<UpdateMessage<RecipeWrapper>>(RecipeUpdated);
-//            mediator.Register<DeleteMessage<RecipeWrapper>>(RecipeDeleted);
-//        }
+            mediator.Register<UpdateMessage<UserWrapper>>(UserUpdated);
+            mediator.Register<DeleteMessage<UserWrapper>>(UserDeleted);
+        }
 
-//        public ObservableCollection<RecipeListModel> Recipes { get; } = new();
+        public ObservableCollection<UserListModel> Users { get; set; } = new();
 
-//        public ICommand RecipeNewCommand { get; }
 
-//        public ICommand RecipeSelectedCommand { get; }
+        public ICommand UserSelectedCommand { get; }
+        public ICommand UserNewCommand { get; }
 
-//        private async void RecipeDeleted(DeleteMessage<RecipeWrapper> _) => await LoadAsync();
+        private void UserNew() => _mediator.Send(new NewMessage<UserWrapper>());
 
-//        private async void RecipeUpdated(UpdateMessage<RecipeWrapper> _) => await LoadAsync();
+        //Toto se vola pokud dostanu command
+        private void UserSelected(UserListModel? user) => _mediator.Send(new SelectedMessage<UserWrapper> { Id = user?.Id });
 
-//        private void RecipeNew() => _mediator.Send(new NewMessage<RecipeWrapper>());
+        private async void UserUpdated(UpdateMessage<UserWrapper> _) => await LoadAsync();
 
-//        private void RecipeSelected(RecipeListModel? recipeListModel)
-//        {
-//            if (recipeListModel is not null)
-//            {
-//                _mediator.Send(new SelectedMessage<RecipeWrapper> { Id = recipeListModel.Id });
-//            }
-//        }
+        private async void UserDeleted(DeleteMessage<UserWrapper> _) => await LoadAsync();
 
-//        public async Task LoadAsync()
-//        {
-//            Recipes.Clear();
-//            var recipes = await _recipeFacade.GetAsync();
-//            Recipes.AddRange(recipes);
-//        }
+        public async Task LoadAsync()
+        {
+            Users.Clear();
+            var users = await _userFacade.GetAsync();
+            Users.AddRange(users);
+        }
 
-//        public override void LoadInDesignMode()
-//        {
-//            Recipes.Add(new RecipeListModel(
-//                Name: "Spaghetti",
-//                Duration: TimeSpan.FromMinutes(30),
-//                FoodType.MainDish)
-//                { ImageUrl = "https://cleanfoodcrush.com/wp-content/uploads/2019/01/CleanFoodCrush-Super-Easy-Beef-Stir-Fry-Recipe.jpg" });
-//        }
-//    }
-//}
+        public override void LoadInDesignMode()
+        {
+            Users.Add(new UserListModel(Name: "Arnold", Surname: "Schwarz"));
+        }
+    }
+}

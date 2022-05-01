@@ -18,24 +18,29 @@ namespace Carpool.App.ViewModels
         //private readonly IFactory<IUserDetailViewModel> _userDetailViewModelFactory;
 
         public UserProfileWindowViewModel(
-            ICarListViewModel carListViewModel
+            ICarListViewModel carListViewModel,
+            IUserListViewModel userListViewModel,
+            IRideListViewModel rideListViewModel
             //IMediator mediator,
             //IFactory<ICarListViewModel> carListViewModelFactory,
             //IFactory<IUserDetailViewModel> userDetailViewModelFactory
             )
         {
             CarListViewModel = carListViewModel;
+            UserListViewModel = userListViewModel;
+            RideListViewModel = rideListViewModel;
             //_userDetailViewModelFactory = userDetailViewModelFactory;
             //UserDetailViewModel = _userDetailViewModelFactory.Create();
 
         }
 
         public ICarListViewModel CarListViewModel { get; }
+        public IUserListViewModel UserListViewModel { get; }
+        public IRideListViewModel RideListViewModel { get; }
 
-        //public IUserDetailViewModel UserDetailViewModel { get; }
 
-        public ObservableCollection<ICarListViewModel> CaListlViewModels { get; } =
-            new ObservableCollection<ICarListViewModel>();
+        //public ObservableCollection<ICarListViewModel> CaListlViewModels { get; } =
+        //    new ObservableCollection<ICarListViewModel>();
 
     }
 }
