@@ -24,7 +24,6 @@ namespace Carpool.DAL
         public DbSet<RideEntity> Rides => Set<RideEntity>();
         public DbSet<UserRideEntity> UsersRideEntity => Set<UserRideEntity>();
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -58,7 +57,7 @@ namespace Carpool.DAL
             UserSeeds.Seed(modelBuilder);
             CarSeeds.Seed(modelBuilder);
             RideSeeds.Seed(modelBuilder);
-            //UserRideSeeds.Seed(modelBuilder);
+            UserRideSeeds.Seed(modelBuilder);
         }
     }
 }

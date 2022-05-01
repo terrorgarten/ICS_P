@@ -13,7 +13,7 @@ public static class CarSeeds
         CarType: CarType.Cabriolet,
         RegistrationDate: new DateTime(2015, 10, 1),
         PhotoUrl: @"https://png.pngitem.com/pimgs/s/9-99883_beige-bmw-sedan-5-2013-car-png-clipart.png",
-        SeatCapacity: 4,
+        SeatCapacity: 2,
         OwnerId: UserSeeds.FirstUser.Id)
     {
         Owner = UserSeeds.FirstUser
