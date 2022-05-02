@@ -1,10 +1,10 @@
 namespace Carpool.App.Views
 {
-    public partial class RecipeDetailView
+    public partial class CarDetailView
     {
-        public RecipeDetailView()
+        public CarDetailView()
         {
-           //InitializeComponent();
+           InitializeComponent();
         }
     }
 }

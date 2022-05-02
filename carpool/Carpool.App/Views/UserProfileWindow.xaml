@@ -12,57 +12,62 @@
         d:DataContext="{d:DesignInstance viewModels:UserProfileWindowViewModel}">
     <Grid
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" RenderTransformOrigin="0.47,0.483">
-        <Image HorizontalAlignment="Left" Height="100" Margin="347,63,0,0" VerticalAlignment="Top" Width="100" Source="X:\Školní projekty\ITW\proj_2\mpech.cz\img\dkon.png"/>
-        <Label Content="Můj Profil&#xD;&#xA;" HorizontalAlignment="Center" Margin="0,24,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Poppins" Height="39"/>
-        <TextBox HorizontalAlignment="Center" Margin="0,168,0,0" TextWrapping="Wrap" Text="Uživatel" VerticalAlignment="Top" Width="48"/>
-        <Image HorizontalAlignment="Left" Height="18" Margin="424,168,0,0" VerticalAlignment="Top" Width="18" Source="X:\Školní projekty\ICS\edit.png"/>
-        <Button Content="Přihlášené spolujízdy" HorizontalAlignment="Center" VerticalAlignment="Top" BorderThickness="1,1,1,1" BorderBrush="Black" Background="White" Width="138" Margin="0,201,0,0"/>
-        <Button Content="Vytvořené spolujízdy" HorizontalAlignment="Center" VerticalAlignment="Top" BorderThickness="1,1,1,1" BorderBrush="Black" Background="White" Width="138" Margin="0,232,0,0"/>
-        <Label Content="Moje vozy&#xA;" HorizontalAlignment="Center" Margin="0,257,0,0" VerticalAlignment="Top" FontSize="15
-               " FontFamily="Poppins" Height="39"/>
-        <Rectangle HorizontalAlignment="Center" Height="120" Margin="0,287,0,0" Stroke="Black" VerticalAlignment="Top" Width="138"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="31*"/>
+            <ColumnDefinition Width="129*"/>
+        </Grid.ColumnDefinitions>
+        <Image HorizontalAlignment="Left" Height="100" Margin="192,63,0,0" VerticalAlignment="Top" Width="100" Source="X:\Školní projekty\ITW\proj_2\mpech.cz\img\dkon.png" Grid.Column="1"/>
+        <Label Content="Můj Profil&#xD;&#xA;" HorizontalAlignment="Left" Margin="197,24,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Poppins" Height="39" Grid.Column="1"/>
+        <TextBox HorizontalAlignment="Left" Margin="221,168,0,0" TextWrapping="Wrap" Text="Uživatel" VerticalAlignment="Top" Width="48" Grid.Column="1"/>
+        <Image HorizontalAlignment="Left" Height="18" Margin="269,168,0,0" VerticalAlignment="Top" Width="18" Source="X:\Školní projekty\ICS\edit.png" Grid.Column="1"/>
+        <Button Content="Přihlášené spolujízdy" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1,1,1,1" BorderBrush="Black" Background="White" Width="138" Margin="176,201,0,0" Grid.Column="1"/>
+        <Button Content="Vytvořené spolujízdy" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1,1,1,1" BorderBrush="Black" Background="White" Width="138" Margin="176,232,0,0" Grid.Column="1"/>
+        <Label Content="Moje vozy&#xA;" HorizontalAlignment="Left" Margin="206,257,0,0" VerticalAlignment="Top" FontSize="15
+               " FontFamily="Poppins" Height="39" Grid.Column="1"/>
+        <Rectangle HorizontalAlignment="Left" Height="120" Margin="176,287,0,0" Stroke="Black" VerticalAlignment="Top" Width="138" Grid.Column="1"/>
 
         <views:CarListView x:Name="CarList"
                                   Grid.Row="0" 
-                                  Grid.Column="0"
-                                  DataContext="{Binding CarListViewModel}" Margin="331,287,323,27" RenderTransformOrigin="0.512,0.532" />
+                                  Grid.Column="1"
+                                  DataContext="{Binding CarListViewModel}" Margin="176,287,323,27" RenderTransformOrigin="0.512,0.532" />
 
         <views:RideListView x:Name="RideList"
                            Grid.Row="0"
-                           Grid.Column="0"
-                           DataContext="{Binding RideListViewModel}" Margin="15,149,487,71" />
+                           Grid.Column="1"
+                           DataContext="{Binding RideListViewModel}" Margin="176,68,341,291" />
 
         <views:UserListView x:Name="UserList"
                             Grid.Row="0"
-                            Grid.Column="0"
-                            DataContext="{Binding UserListViewModel}" Margin="535,212,73,87" />
+                            Grid.Column="1"
+                            DataContext="{Binding UserListViewModel}" Margin="0,141,484,158" />
 
-        <!-- <TabControl x:Name="CarDetail" -->
-        <!--             ItemsSource="{Binding CarListViewModel}" -->
-        <!--             SelectedItem="{Binding Select, Mode=TwoWay}"  -->
-        <!--             Grid.Row="1"  -->
-        <!--             Grid.Column="2"  -->
-        <!--             HorizontalAlignment="Right"> -->
-        <!--     <TabControl.ItemTemplate> -->
-        <!--         <DataTemplate> -->
-        <!--             <StackPanel Orientation="Horizontal"> -->
-        <!--                 <TextBlock Text="{Binding Model.Name}" Margin="5" FontSize="12"/> -->
-        <!--                 <Button Content="X" Command="{Binding RelativeSource= -->
-        <!--                           {RelativeSource FindAncestor, -->
-        <!--                           AncestorType={x:Type TabControl}}, -->
-        <!--                           Path=DataContext.CloseIngredientDetailTabCommand}" -->
-        <!--                         CommandParameter="{Binding}" FontWeight="Bold" FontSize="12" -->
-        <!--                         Foreground="White" Padding="0"> -->
-        <!--                 </Button> -->
-        <!--             </StackPanel> -->
-        <!--         </DataTemplate> -->
-        <!--     </TabControl.ItemTemplate> -->
-        <!--     <TabControl.ContentTemplate> -->
-        <!--         <DataTemplate> -->
-        <!--             <views:IngredientDetailView HorizontalAlignment="Left" /> -->
-        <!--         </DataTemplate> -->
-        <!--     </TabControl.ContentTemplate> -->
-        <!-- </TabControl> -->
+        <TabControl x:Name="RecipeDetail"
+                    ItemsSource="{Binding UserDetailViewModel}"
+                    SelectedItem="{Binding SelectedUserDetailViewModel, Mode=TwoWay}"
+                    Grid.Row="0" 
+                    Grid.Column="1" Margin="354,0,0,27" HorizontalAlignment="Left" Width="281" Height="383" VerticalAlignment="Bottom" >
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Model.Name}" Margin="5"/>
+                        <Button Content="X" Command="{Binding RelativeSource=
+                                  {RelativeSource FindAncestor,
+                                  AncestorType={x:Type TabControl}},
+                                  Path=DataContext.CloseUserDetailTabCommand}"
+                                CommandParameter="{Binding}"
+                                Width="20" Height="20" FontWeight="Bold" FontSize="12"
+                                Foreground="White" Padding="0">
+                        </Button>
+                    </StackPanel>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <views:UserDetailView HorizontalAlignment="Left" />
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
+
 
     </Grid>
 </Window>

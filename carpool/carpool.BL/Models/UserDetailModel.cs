@@ -13,7 +13,8 @@ namespace Carpool.BL.Models
         public string Surname { get; set; } = Surname;
         public string? PhotoUrl { get; set; } = PhotoUrl;
 
-        public List<CarListModel> OwnedCars { get; init; } = new();
+        //List??
+        public List<CarDetailModel> OwnedCars { get; init; } = new();
 
         public class MapperProfile : Profile
         {
@@ -24,6 +25,6 @@ namespace Carpool.BL.Models
             }
         }
 
-        public static UserDetailModel Empty => new("Unknown", "Unknown", "");
+        public static UserDetailModel Empty => new("Unknown", "Unknown", string.Empty);
     }
 }

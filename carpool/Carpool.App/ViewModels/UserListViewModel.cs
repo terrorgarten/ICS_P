@@ -40,7 +40,10 @@ namespace Carpool.App.ViewModels
         private void UserNew() => _mediator.Send(new NewMessage<UserWrapper>());
 
         //Toto se vola pokud dostanu command
-        private void UserSelected(UserListModel? user) => _mediator.Send(new SelectedMessage<UserWrapper> { Id = user?.Id });
+        private void UserSelected(UserListModel? user)
+        {
+            _mediator.Send(new SelectedMessage<UserWrapper> { Id = user?.Id });
+        } 
 
         private async void UserUpdated(UpdateMessage<UserWrapper> _) => await LoadAsync();
 

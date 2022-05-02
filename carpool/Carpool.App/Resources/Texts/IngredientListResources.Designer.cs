@@ -41,7 +41,7 @@ namespace Carpool.App.Resources.Texts {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 // if (object.ReferenceEquals(resourceMan, null)) {
-                //     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CookBook.App.Resources.Texts.IngredientListResources", typeof(IngredientListResources).Assembly);
+                //     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Carpool.App.Resources.Texts.IngredientListResources", typeof(IngredientListResources).Assembly);
                 //     resourceMan = temp;
                 // }
                 // return resourceMan;
