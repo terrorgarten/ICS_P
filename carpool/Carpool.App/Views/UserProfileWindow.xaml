@@ -34,30 +34,24 @@
         <views:RideListView x:Name="RideList"
                            Grid.Row="0"
                            Grid.Column="1"
-                           DataContext="{Binding RideListViewModel}" Margin="176,68,341,291" />
+                           DataContext="{Binding RideListViewModel}" Margin="176,68,323,290" />
 
         <views:UserListView x:Name="UserList"
                             Grid.Row="0"
                             Grid.Column="1"
                             DataContext="{Binding UserListViewModel}" Margin="0,141,484,158" />
-
-        <TabControl x:Name="RecipeDetail"
-                    ItemsSource="{Binding UserDetailViewModel}"
-                    SelectedItem="{Binding SelectedUserDetailViewModel, Mode=TwoWay}"
-                    Grid.Row="0" 
-                    Grid.Column="1" Margin="354,0,0,27" HorizontalAlignment="Left" Width="281" Height="383" VerticalAlignment="Bottom" >
+        <TabControl x:Name="UserDetail"
+                    ItemsSource="{Binding UserDetailViewModels}"
+                    SelectedItem="{Binding SelectedUserDetailViewModel, Mode=TwoWay}" 
+                    Grid.Column="1" Margin="340,0,0,0" HorizontalAlignment="Left" Width="281" Height="383" VerticalAlignment="Center" >
             <TabControl.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Model.Name}" Margin="5"/>
-                        <Button Content="X" Command="{Binding RelativeSource=
-                                  {RelativeSource FindAncestor,
-                                  AncestorType={x:Type TabControl}},
-                                  Path=DataContext.CloseUserDetailTabCommand}"
+                        <Button Content="X" Command="{Binding DataContext.CloseUserDetailTabCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}}"
                                 CommandParameter="{Binding}"
                                 Width="20" Height="20" FontWeight="Bold" FontSize="12"
-                                Foreground="White" Padding="0">
-                        </Button>
+                                Foreground="White" Padding="0"/>
                     </StackPanel>
                 </DataTemplate>
             </TabControl.ItemTemplate>
