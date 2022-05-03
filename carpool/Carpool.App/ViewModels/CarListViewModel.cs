@@ -33,7 +33,6 @@ namespace Carpool.App.ViewModels
 
         public ObservableCollection<CarListModel> Cars { get; set; } = new();
         
-        
         public ICommand CarSelectedCommand { get; }
         public ICommand CarNewCommand { get; }
 

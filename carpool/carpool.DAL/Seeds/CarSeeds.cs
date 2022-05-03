@@ -31,10 +31,23 @@ public static class CarSeeds
         Owner = UserSeeds.SecondUser
     };
 
+    public static readonly CarEntity BatMobile = new(
+        Id: Guid.Parse(input: "4BFBD813-0CD6-4D66-8F62-840503E597B4"),
+        Manufacturer: Manufacturer.Audi,
+        CarType: CarType.Convertible,
+        RegistrationDate: new DateTime(2017, 6, 28),
+        PhotoUrl: @"https://png.pngitem.com/pimgs/s/79-793999_land-vehicle-city-car-red-fiat-500-rim.png",
+        SeatCapacity: 4,
+        OwnerId: UserSeeds.SecondUser.Id)
+    {
+        Owner = UserSeeds.SecondUser
+    };
+
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<CarEntity>().HasData(
             SportCar with { Owner = null },
-            PersonalCar with { Owner = null });
+            PersonalCar with { Owner = null },
+            BatMobile with { Owner = null });
     }
 }

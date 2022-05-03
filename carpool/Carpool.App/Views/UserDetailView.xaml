@@ -30,6 +30,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
@@ -47,13 +48,13 @@
             <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Model.PhotoUrl, UpdateSourceTrigger=PropertyChanged}"/>
 
             <ListView x:Name="CarListBox" 
-                      Grid.Row="5" 
+                      Grid.Row="6" 
                       Grid.Column="0" 
                       Grid.ColumnSpan="2" 
                       Focusable="False"
                       SelectionMode="Single"
                       ItemsSource="{Binding Model.OwnedCars}"
-                      SelectedItem="{Binding SelectedCar, Mode=TwoWay}">
+                      SelectedItem="{Binding SelectedCar}">
                 <ListView.View>
                     <GridView>
                         <GridView.Columns>
@@ -64,7 +65,7 @@
                 </ListView.View>
             </ListView>
 
-            <local:CarListView Grid.Row="6" Grid.ColumnSpan="2" Grid.Column="0" DataContext="{Binding CarListViewModel}" />
+            <!--<local:CarListView Grid.Row="6" Grid.ColumnSpan="2" Grid.Column="0" DataContext="{Binding CarListViewModel}" />-->
             <Image Grid.Row="7"
                    Grid.Column="1"
                    Source="{Binding Model.PhotoUrl}"/>

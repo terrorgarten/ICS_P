@@ -31,7 +31,7 @@ namespace Carpool.App.ViewModels
             DeleteCommand = new AsyncRelayCommand(DeleteAsync);
         }
 
-        public CarWrapper? Model { get; private set; }
+        public CarWrapper? Model { get;  set; }
         public ICommand SaveCommand { get; }
         public ICommand DeleteCommand { get; }
 
