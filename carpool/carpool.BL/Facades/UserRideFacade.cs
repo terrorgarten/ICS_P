@@ -12,6 +12,7 @@ public class UserRideFacade : CRUDFacade<UserRideEntity, UserRideDetailModel, Us
     }
     public override Task<UserRideDetailModel> SaveAsync(UserRideDetailModel model)
         {
+
             //TEST
             return base.SaveAsync(model);
         }

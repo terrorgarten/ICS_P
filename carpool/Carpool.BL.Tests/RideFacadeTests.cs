@@ -122,5 +122,23 @@ namespace Carpool.BL.Tests
             var rideFromDb = await dbxAssert.Rides.SingleAsync(i => i.Id == ride.Id);
             DeepAssert.Equal(ride, Mapper.Map<RideDetailModel>(rideFromDb));
         }
+
+        [Fact]
+        public async Task GetFilteredRide()
+        {
+
+            var filtered = _rideFacadeSUT.GetFilteredListAsync
+            (RideSeeds.RideEntity.Id,
+                new DateTime(2019, 6,4, 8, 0, 0),
+                DateTime.Now,
+                "Olomouc",
+                "Ostrava");
+            Console.WriteLine("HELLOS");
+            Console.WriteLine(filtered);
+         
+            
+            
+        }
+
     }
 }

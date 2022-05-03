@@ -6,6 +6,7 @@ using Carpool.BL.Facades;
 using Carpool.Common.Enums;
 using Carpool.Common.Tests;
 using Carpool.Common.Tests.Seeds;
+using Carpool.DAL.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 using Xunit.Abstractions;
@@ -14,6 +15,7 @@ namespace Carpool.BL.Tests
 {
     public sealed class CarFacadeTests : CRUDFacadeTestsBase
     {
+        private readonly IUnitOfWorkFactory _unitOfWorkFactory;
         private readonly CarFacade _carFacadeSUT;
 
         public CarFacadeTests(ITestOutputHelper output) : base(output)
