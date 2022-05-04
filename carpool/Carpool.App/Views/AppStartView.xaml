@@ -36,17 +36,16 @@
             <TabItem x:Name="Dashboard" Header="DASHBOARD">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="55*"/>
-                        <ColumnDefinition Width="404*"/>
+                        <ColumnDefinition Width="445*"/>
+                        <ColumnDefinition Width="472*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="Můj profil" Margin="0,31,608,285" Width="287" FontSize="25" FontFamily="Calibri" Grid.ColumnSpan="2"></Label>
-                    <views:UserDetailView HorizontalAlignment="Left" Width="395" Margin="22,78,0,23"
-                                          DataContext="{Binding UserDetailViewModels}" Grid.ColumnSpan="2"/>
+                    <Label Content="Můj profil" Margin="0,31,134,285" Width="287" FontSize="25" FontFamily="Calibri"/>
+                    <views:UserDetailView Grid.Column="0" HorizontalAlignment="Left" Width="395" Margin="22,78,0,23"
+                                          DataContext="{Binding SelectedUserDetailViewModel}"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="FindRide" Header="HLEDAT JÍZDU">
-                <views:FindRidesharesWindow Margin="0,0,-9,0"></views:FindRidesharesWindow
-                    >
+
             </TabItem>
             <TabItem x:Name="ManageRides" Header="SPRAVOVAT JÍZDU">
 
