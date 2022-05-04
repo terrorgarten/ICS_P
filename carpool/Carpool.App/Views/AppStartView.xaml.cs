@@ -30,5 +30,10 @@ namespace Carpool.App.Views
         {
 
         }
+
+        private void UserDetailView_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -41,12 +41,41 @@
                     </Grid.ColumnDefinitions>
                     <Label Content="Můj profil" Margin="0,31,134,285" Width="287" FontSize="25" FontFamily="Calibri"/>
                     <views:UserDetailView Grid.Column="0" HorizontalAlignment="Left" Width="395" Margin="22,78,0,23"
-                                          DataContext="{Binding SelectedUserDetailViewModel}"/>
+                                          DataContext="{Binding SelectedUserDetailViewModel}" Loaded="UserDetailView_Loaded"/>
+                    <views:RideListView Margin="14,31,10,240" Grid.Column="1"
+                                        DataContext="{Binding RideListViewModel}"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="FindRide" Header="HLEDAT JÍZDU">
 
             </TabItem>
+
+
+            <TabItem x:Name="Car" Header="AUTO">
+                <TabControl x:Name="CarDetail"
+                            ItemsSource="{Binding CarDetailViewModels}"
+                            SelectedItem="{Binding SelectedCarDetailViewModel, Mode=TwoWay}" Margin="10,24,0,0" HorizontalAlignment="Left" Width="281" Height="383" VerticalAlignment="Top" >
+                    <TabControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Model.Manufacturer}" Margin="5"/>
+                                <Button Content="X" Command="{Binding DataContext.CloseCarDetailTabCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}}"
+                                        CommandParameter="{Binding}"
+                                        Width="20" Height="20" FontWeight="Bold" FontSize="12"
+                                        Foreground="White" Padding="0"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </TabControl.ItemTemplate>
+                    <TabControl.ContentTemplate>
+                        <DataTemplate>
+                            <views:CarDetailView HorizontalAlignment="Right" />
+                        </DataTemplate>
+                    </TabControl.ContentTemplate>
+                </TabControl>
+
+            </TabItem>
+
+
             <TabItem x:Name="ManageRides" Header="SPRAVOVAT JÍZDU">
 
             </TabItem>
