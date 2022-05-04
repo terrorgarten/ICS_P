@@ -1,4 +1,7 @@
-﻿namespace Carpool.DAL.Entities;
+﻿using AutoMapper;
+using Carpool.DAL.Entities;
+
+namespace Carpool.DAL.Entities;
 
 public record UserRideEntity (
     Guid Id,
@@ -10,4 +13,5 @@ public record UserRideEntity (
 #nullable enable
     public UserEntity? Passenger { get; init; }
     public RideEntity? Ride { get; init; }
+
 }

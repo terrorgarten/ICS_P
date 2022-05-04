@@ -25,6 +25,8 @@ namespace Carpool.BL.Models
                     .ForMember(entity => entity.Passenger, expression => expression.Ignore())
                     .ForMember(entity => entity.Ride, expression => expression.Ignore())
                     .ForMember(entity => entity.RideId, expression => expression.Ignore());
+
+                
             }
             public static UserRideDetailModel Empty => new("Unknown", "Unknown");
 

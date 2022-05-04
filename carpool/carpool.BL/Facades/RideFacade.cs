@@ -18,14 +18,13 @@ public class RideFacade : CRUDFacade<RideEntity, RideListModel, RideDetailModel>
         _uow = unitOfWorkFactory;
         _mapper = mapper;
     }
-    
+
     public override async Task<RideDetailModel?> GetAsync(Guid id)
     {
         await using var uowCreate = _uow.Create();
-        var db = uowCreate.GetRepository<RideEntity>().Get();
-        var ride = await db.Include(ride => ride.Car).SingleOrDefaultAsync(ride => ride.Id == id);
+        var db = uowCreate.GetRepository<RideEntity>().Get().Where(ride => ride.Id == id);
 
-        return _mapper.Map<RideDetailModel>(ride);
+        return await _mapper.ProjectTo<RideDetailModel>(db).SingleOrDefaultAsync().ConfigureAwait(false);
 
     }
 
@@ -38,20 +37,21 @@ public class RideFacade : CRUDFacade<RideEntity, RideListModel, RideDetailModel>
         }
 
         await using var _uowCreated = _uow.Create();
-        var db = _uowCreated.GetRepository<RideEntity>().Get();
+        var queryRides = _uowCreated.GetRepository<RideEntity>().Get();
         /* foreach (var VARIABLE in db)
          {
              Console.WriteLine(VARIABLE);
          } */
-        var rides = db.Where(x => 
+        var rides = queryRides.Where(x => 
                     x.Start == startCity && x.End == endCity &&
                     x.BeginTime >= timeFrom && x.BeginTime <= timeTo);
 
-        foreach (var VARIABLE in rides)
+       /* foreach (var VARIABLE in rides)
         {
             Console.WriteLine(VARIABLE);
         }
-
+            */
+       
         var rideList = await _mapper.ProjectTo<RideListModel>(rides).ToListAsync().ConfigureAwait(false);
         
         return rideList;
