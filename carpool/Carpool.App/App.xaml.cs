@@ -59,11 +59,12 @@ namespace Carpool.App
                 return new SqlServerDbContextFactory(dalSettings.ConnectionString!, dalSettings.SkipMigrationAndSeedDemoData);
             });
 
-            services.AddSingleton<UserProfileWindow>();
+            services.AddSingleton<AppStartView>();
 
             services.AddSingleton<IMessageDialogService, MessageDialogService>();
             services.AddSingleton<IMediator, Mediator>();
 
+            services.AddSingleton<AppStartViewModel>();
             services.AddSingleton<UserProfileWindowViewModel>();
             services.AddSingleton<ICarListViewModel, CarListViewModel>();
             services.AddFactory<ICarDetailViewModel, CarDetailViewModel>();
@@ -95,7 +96,7 @@ namespace Carpool.App
                 }
             }
 
-            var mainWindow = _host.Services.GetRequiredService<UserProfileWindow>();
+            var mainWindow = _host.Services.GetRequiredService<AppStartView>();
             mainWindow.Show();
 
             base.OnStartup(e);

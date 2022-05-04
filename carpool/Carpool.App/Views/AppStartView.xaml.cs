@@ -11,17 +11,19 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Carpool.App.ViewModels;
 
 namespace Carpool.App.Views
 {
     /// <summary>
-    /// Interaction logic for AppStartView.xaml
+    /// Interaction logic for UserProfileWindow.xaml
     /// </summary>
-    public partial class AppStartView : Window
+    public partial class AppStartView
     {
-        public AppStartView()
+        public AppStartView(AppStartViewModel mainViewModel)
         {
             InitializeComponent();
+            DataContext = mainViewModel;
         }
     }
 }

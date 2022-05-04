@@ -25,7 +25,7 @@ namespace Carpool.App.ViewModels
             IMediator mediator,
             IFactory<ICarDetailViewModel> carDetailViewModelFactory,
             IFactory<IUserDetailViewModel> userDetailViewModelFactory
-            )
+        )
         {
             CarListViewModel = carListViewModel;
             UserListViewModel = userListViewModel;
@@ -47,6 +47,8 @@ namespace Carpool.App.ViewModels
             mediator.Register<DeleteMessage<CarWrapper>>(OnCarDeleted);
 
         }
+
+        public int SelectedIndex { get; set; }  
 
         public ICarListViewModel CarListViewModel { get; }
         public IUserListViewModel UserListViewModel { get; }
@@ -81,6 +83,7 @@ namespace Carpool.App.ViewModels
 
         private void OnUserSelected(SelectedMessage<UserWrapper> message)
         {
+            SelectedIndex = 1;
             SelectUser(message.Id);
         }
 

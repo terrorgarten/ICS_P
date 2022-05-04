@@ -36,10 +36,11 @@
         <views:UserListView x:Name="UserList"
                             Grid.Row="0"
                             DataContext="{Binding UserListViewModel}" Margin="466,305,313,19" />
-
+        
         <TabControl x:Name="UserDetail"
                     ItemsSource="{Binding UserDetailViewModels}"
-                    SelectedItem="{Binding SelectedUserDetailViewModel, Mode=TwoWay}" Margin="649,10,0,0" HorizontalAlignment="Left" Width="281" Height="383" VerticalAlignment="Top" >
+                    SelectedItem="{Binding SelectedUserDetailViewModel, Mode=TwoWay}" Margin="649,10,0,0" HorizontalAlignment="Left" Width="281" Height="383" VerticalAlignment="Top"
+                    SelectedIndex="{Binding SelectedIndex}">
             <TabControl.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
