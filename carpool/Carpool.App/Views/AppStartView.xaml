@@ -27,36 +27,32 @@
         <Rectangle HorizontalAlignment="Left" Height="120" Margin="296,189,0,0" Stroke="Black" VerticalAlignment="Top" Width="138"/>
 
 
-        <TabControl SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}">
-            <TabItem>
+        <TabControl SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}" Margin="0,0,10,0" SelectionChanged="TabControl_SelectionChanged">
+            <TabItem x:Name="Login" Header="LOGIN" Height="21" VerticalAlignment="Bottom">
                 <views:UserListView x:Name="UserList"
                                     Grid.Row="0"
-                                    DataContext="{Binding UserListViewModel}" Margin="396,296,383,28" />
+                                    DataContext="{Binding UserListViewModel}" Margin="68,0,67,0" Height="316" />
             </TabItem>
-            <TabItem>
-                <TabControl x:Name="UserDetail"
-                            ItemsSource="{Binding UserDetailViewModels}"
-                            SelectedItem="{Binding SelectedUserDetailViewModel, Mode=TwoWay}" Margin="20,10,0,0" HorizontalAlignment="Left" Width="483" Height="383" VerticalAlignment="Top">
+            <TabItem x:Name="Dashboard" Header="DASHBOARD">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="55*"/>
+                        <ColumnDefinition Width="404*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Můj profil" Margin="0,31,608,285" Width="287" FontSize="25" FontFamily="Calibri" Grid.ColumnSpan="2"></Label>
+                    <views:UserDetailView HorizontalAlignment="Left" Width="395" Margin="22,78,0,23"
+                                          DataContext="{Binding UserDetailViewModels}" Grid.ColumnSpan="2"/>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="FindRide" Header="HLEDAT JÍZDU">
+                <views:FindRidesharesWindow Margin="0,0,-9,0"></views:FindRidesharesWindow
+                    >
+            </TabItem>
+            <TabItem x:Name="ManageRides" Header="SPRAVOVAT JÍZDU">
 
-                    <TabControl.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Model.Name}" Margin="5"/>
-                                <Button Content="X" Command="{Binding DataContext.CloseUserDetailTabCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}}"
-                                        CommandParameter="{Binding}"
-                                        Width="20" Height="20" FontWeight="Bold" FontSize="12"
-                                        Foreground="White" Padding="0"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </TabControl.ItemTemplate>
-                    <TabControl.ContentTemplate>
-                        <DataTemplate>
-                            <views:UserDetailView HorizontalAlignment="Left" />
-                        </DataTemplate>
-                    </TabControl.ContentTemplate>
-                </TabControl>
             </TabItem>
         </TabControl>
+
 
 
 
