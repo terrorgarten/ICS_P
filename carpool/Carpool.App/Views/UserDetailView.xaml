@@ -12,8 +12,8 @@
                        mc:Ignorable="d"
                        Background="{StaticResource DefaultComponentBackgroundBrush}"
                        d:DataContext="{d:DesignInstance viewModels:UserDetailViewModel}"
-                       d:DesignHeight="300" Width="538">
-    <Grid Visibility="{Binding Model, Converter={StaticResource NullToVisibilityConverter}}" Margin="49,0,28,0">
+                       d:DesignHeight="300" Width="808">
+    <Grid Visibility="{Binding Model, Converter={StaticResource NullToVisibilityConverter}}" Margin="49,0,394,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -22,7 +22,7 @@
             <Button Style="{StaticResource SaveButtonStyle}" Content="{x:Static texts:RecipeDetailResources.Save_Button_Content}" Command="{Binding SaveCommand}" />
             <Button Content="{x:Static texts:RecipeDetailResources.Delete_Button_Content}" Command="{Binding DeleteCommand}" />
         </StackPanel>
-        <Grid Grid.Row="1" Margin="0,10,30,-10">
+        <Grid Grid.Row="1" Margin="0,10,30,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -45,7 +45,7 @@
             <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Model.Surname, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="265" />
 
             <Label Grid.Row="2" Grid.Column="0" Content="PhotoUrl" />
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Model.PhotoUrl, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,10,0"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Model.PhotoUrl, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,13,0" Width="265" Height="18" TextAlignment="Left" HorizontalAlignment="Left"/>
 
             <ListView x:Name="CarListBox" 
                       Grid.Row="6" 
@@ -54,7 +54,7 @@
                       Focusable="False"
                       SelectionMode="Single"
                       ItemsSource="{Binding Model.OwnedCars}"
-                      SelectedItem="{Binding SelectedCar}">
+                      SelectedItem="{Binding SelectedCar}" HorizontalAlignment="Left">
                 <ListView.View>
                     <GridView>
                         <GridView.Columns>
@@ -65,10 +65,36 @@
                 </ListView.View>
             </ListView>
 
+            <DataGrid x:Name="RideList" 
+                      AutoGenerateColumns="False"
+                      ItemsSource="{Binding Model.DriverRides}" Grid.Column="1" Margin="389,6,-321,16" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Stretch" Width="278">
+                <!--SelectedItem="{Binding SelectedCar}" Margin="340,22,-346,26" Grid.RowSpan="3" Grid.Column="1">-->
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Start" Binding="{Binding Start}" />
+                    <DataGridTextColumn Header="End" Binding="{Binding End}" />
+                    <DataGridTextColumn Header="Begin Time" Binding="{Binding BeginTime}" />
+                    <DataGridTextColumn Header="Ride Time" Binding="{Binding ApproxRideTime}" />
+                </DataGrid.Columns>
+
+            </DataGrid>
+
+            <DataGrid x:Name="PassengerList" 
+                      AutoGenerateColumns="False"
+                      ItemsSource="{Binding Model.PassangerRides}" Margin="429,66,-305,64" Grid.Row="7" Grid.Column="1">
+                <!--SelectedItem="{Binding SelectedCar}" Margin="340,22,-346,26" Grid.RowSpan="3" Grid.Column="1">-->
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Id}" />
+                    <DataGridTextColumn Header="Surname" Binding="{Binding Surname}" />
+                </DataGrid.Columns>
+
+            </DataGrid>
+
             <!--<local:CarListView Grid.Row="6" Grid.ColumnSpan="2" Grid.Column="0" DataContext="{Binding CarListViewModel}" />-->
-            <Image Grid.Row="7"
+            <Image Grid.Row="6"
                    Grid.Column="1"
-                   Source="{Binding Model.PhotoUrl}"/>
+                   Source="{Binding Model.PhotoUrl}" Margin="90,2,0,0" Grid.RowSpan="2" Stretch="Uniform" HorizontalAlignment="Stretch"/>
         </Grid>
     </Grid>
 </local:UserControlBase>

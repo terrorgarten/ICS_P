@@ -21,8 +21,34 @@ public static class RideSeeds
     public static readonly RideEntity Ride2 = new(
         Id: Guid.Parse(input: "85481279-3C93-4C97-B15C-40A5BD0EBB21"),
         Start: "Brno",
-        End: "Praha",
+        End: "Olomouc",
+        BeginTime: new DateTime(2022, 09, 28, 10, 30, 0),
+        ApproxRideTime: TimeSpan.FromHours(2.5),
+        CarId: CarSeeds.PersonalCar.Id,
+        UserId: UserSeeds.SecondUser.Id)
+    {
+        Car = CarSeeds.PersonalCar,
+        User = UserSeeds.SecondUser
+    };
+
+    public static readonly RideEntity Ride3 = new(
+        Id: Guid.Parse(input: "06DF6684-2100-4618-A72D-6185C6402249"),
+        Start: "Brno",
+        End: "Bratislava",
         BeginTime: new DateTime(2022, 10, 28, 10, 30, 0),
+        ApproxRideTime: TimeSpan.FromHours(2.5),
+        CarId: CarSeeds.SportCar.Id,
+        UserId: UserSeeds.FirstUser.Id)
+    {
+        Car = CarSeeds.SportCar,
+        User = UserSeeds.FirstUser
+    };
+
+    public static readonly RideEntity Ride4 = new(
+        Id: Guid.Parse(input: "65D5BC26-A782-4664-94CE-BCC348BB20F5"),
+        Start: "Zlín",
+        End: "Olomouc",
+        BeginTime: new DateTime(2022, 09, 28, 10, 30, 0),
         ApproxRideTime: TimeSpan.FromHours(2.5),
         CarId: CarSeeds.PersonalCar.Id,
         UserId: UserSeeds.SecondUser.Id)
@@ -41,6 +67,8 @@ public static class RideSeeds
     {
         modelBuilder.Entity<RideEntity>().HasData(
             Ride1 with { Car = null, User = null, PassengerRides = Array.Empty<UserRideEntity>() },
-            Ride2 with { Car = null, User = null, PassengerRides = Array.Empty<UserRideEntity>() });
+            Ride2 with { Car = null, User = null, PassengerRides = Array.Empty<UserRideEntity>() },
+            Ride3 with { Car = null, User = null, PassengerRides = Array.Empty<UserRideEntity>() },
+            Ride4 with { Car = null, User = null, PassengerRides = Array.Empty<UserRideEntity>() });
     }
 }

@@ -40,10 +40,8 @@
                         <ColumnDefinition Width="472*"/>
                     </Grid.ColumnDefinitions>
                     <Label Content="Můj profil" Margin="0,31,134,285" Width="287" FontSize="25" FontFamily="Calibri"/>
-                    <views:UserDetailView Grid.Column="0" HorizontalAlignment="Left" Width="395" Margin="22,78,0,23"
-                                          DataContext="{Binding SelectedUserDetailViewModel}" Loaded="UserDetailView_Loaded"/>
-                    <views:RideListView Margin="14,31,10,240" Grid.Column="1"
-                                        DataContext="{Binding RideListViewModel}"/>
+                    <views:UserDetailView Grid.Column="0" HorizontalAlignment="Left" Width="873" Margin="24,76,0,25"
+                                          DataContext="{Binding SelectedUserDetailViewModel}" Loaded="UserDetailView_Loaded" Grid.ColumnSpan="2"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="FindRide" Header="HLEDAT JÍZDU">

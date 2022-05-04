@@ -49,8 +49,6 @@ namespace Carpool.App.ViewModels
             SelectedIndex = 0;
         }
 
-        
-
         public ICarListViewModel CarListViewModel { get; }
         public IUserListViewModel UserListViewModel { get; }
         public IRideListViewModel RideListViewModel { get; }

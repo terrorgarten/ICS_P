@@ -23,7 +23,6 @@ namespace Carpool.App.Wrappers
             set => SetValue(value);
         }
         
-        
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (string.IsNullOrWhiteSpace(Name))

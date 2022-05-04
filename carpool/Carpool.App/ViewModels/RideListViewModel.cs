@@ -33,7 +33,6 @@ namespace Carpool.App.ViewModels
 
         public ObservableCollection<RideListModel> Rides { get; set; } = new();
 
-
         public ICommand RideSelectedCommand { get; }
         public ICommand RideNewCommand { get; }
 

@@ -16,6 +16,10 @@ namespace Carpool.BL.Models
         //List??
         public List<CarDetailModel> OwnedCars { get; init; } = new();
 
+        public List<RideDetailModel> DriverRides { get; init; } = new();
+
+        public List<UserRideDetailModel> PassengerRides { get; init; } = new();
+
         public class MapperProfile : Profile
         {
             public MapperProfile()

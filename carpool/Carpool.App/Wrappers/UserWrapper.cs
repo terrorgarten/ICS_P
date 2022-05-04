@@ -44,9 +44,21 @@ namespace Carpool.App.Wrappers
             OwnedCars.AddRange(model.OwnedCars.Select(e => new CarWrapper(e)));
 
             RegisterCollection(OwnedCars, model.OwnedCars);
+
+            DriverRides.AddRange(model.DriverRides.Select(d => new RideWrapper(d)));
+
+            RegisterCollection(DriverRides, model.DriverRides);
+
+            PassangerRides.AddRange(model.PassengerRides.Select(f => new UserRideWrapper(f)));
+
+            RegisterCollection(PassangerRides, model.PassengerRides);
         }
 
         public ObservableCollection<CarWrapper> OwnedCars { get; set; } = new();
+
+        public ObservableCollection<RideWrapper> DriverRides { get; set; } = new();
+
+        public ObservableCollection<UserRideWrapper> PassangerRides { get; set; } = new();
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
