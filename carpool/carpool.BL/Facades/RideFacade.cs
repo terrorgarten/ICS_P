@@ -38,20 +38,20 @@ public class RideFacade : CRUDFacade<RideEntity, RideListModel, RideDetailModel>
 
         await using var _uowCreated = _uow.Create();
         var queryRides = _uowCreated.GetRepository<RideEntity>().Get();
-        /* foreach (var VARIABLE in db)
-         {
-             Console.WriteLine(VARIABLE);
-         } */
+        foreach (var variable in queryRides)
+        {
+            Console.WriteLine(variable);
+        } 
         var rides = queryRides.Where(x => 
                     x.Start == startCity && x.End == endCity &&
                     x.BeginTime >= timeFrom && x.BeginTime <= timeTo);
-
-       /* foreach (var VARIABLE in rides)
+        foreach (var variable in rides)
         {
-            Console.WriteLine(VARIABLE);
+            Console.WriteLine("Vyfiltrovana:  ");
+            Console.WriteLine(variable);
+
         }
-            */
-       
+
         var rideList = await _mapper.ProjectTo<RideListModel>(rides).ToListAsync().ConfigureAwait(false);
         
         return rideList;
