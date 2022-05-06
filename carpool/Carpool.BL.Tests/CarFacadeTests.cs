@@ -126,5 +126,12 @@ namespace Carpool.BL.Tests
             var carFromDb = await dbxAssert.Cars.SingleAsync(i => i.Id == car.Id);
             DeepAssert.Equal(car, Mapper.Map<CarDetailModel>(carFromDb));
         }
+
+        [Fact]
+        public async Task GetCarsOwnedByUser()
+        {
+
+            var filtered = await _carFacadeSUT.GetUserCars(UserSeeds.UserEntity1.Id);
+        }
     }
 }
