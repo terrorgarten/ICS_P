@@ -25,32 +25,39 @@ namespace Carpool.BL.Tests
         {
 
             var filtered = await _userRideFacadeSUT.GetUserRides
-                (RideSeeds.RideEntity.Id);
-
-
+                (UserSeeds.UserForUserRideEntity.Id);
+            
         }
-        /*
+        
         [Fact]
         public async Task Create_WithNonExistingItem_UserRideDetail_DoesNotThrow()
         {
             var user = new UserRideDetailModel
             (
-                Name: "Danoch",
-                Surname: "Udy"
-            );
-            var _ = await _userRideFacadeSUT.SaveAsync(user);
+                Name: UserSeeds.UserEntity1.Name,
+                Surname: UserSeeds.UserEntity1.Surname
+
+            )
+            {
+                RideId = RideSeeds.RideEntity.Id,
+                PassengerId = UserSeeds.UserEntity1.Id
+            };
+            
+
+
+            var _ = await _userRideFacadeSUT.SaveCheckAsync(UserSeeds.UserEntity1.Id, RideSeeds.RideEntity.Id );
         }
 
         
         [Fact]
-        public async Task GetAll_Single_SeededUser()
+        public async Task GetAll_Single_SeededUserRide()
         {
-            var users = await _userFacadeSUT.GetAsync();
-            var user = users.Single(i => i.Id == UserSeeds.UserEntity.Id);
+            var users = await _userRideFacadeSUT.GetAsync();
+            var user = users.Single(i => i.Id == UserRideSeeds.UserRideEntity1.Id);
 
-            DeepAssert.Equal(Mapper.Map<UserListModel>(UserSeeds.UserEntity), user);
+            DeepAssert.Equal(Mapper.Map<UserRideDetailModel>(UserRideSeeds.UserRideEntity1), user);
         }
-        
+        /*
         [Fact]
         public async Task Insert_SeededUser()
         {

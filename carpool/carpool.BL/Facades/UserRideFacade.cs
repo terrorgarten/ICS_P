@@ -42,6 +42,7 @@ public class UserRideFacade : CRUDFacade<UserRideEntity, UserRideDetailModel, Us
         if (ride == null)
         {
             // The ride for some reason does not exist
+            Console.WriteLine("Equal");
             return null;
         }
 
@@ -50,7 +51,7 @@ public class UserRideFacade : CRUDFacade<UserRideEntity, UserRideDetailModel, Us
         {
             if (numPassengers == ride.Car.SeatCapacity)
             {
-
+                Console.WriteLine("Equal");
                 return null;
             }
         }
@@ -60,11 +61,10 @@ public class UserRideFacade : CRUDFacade<UserRideEntity, UserRideDetailModel, Us
         {
             if (userRide.Id == newPassengerId)
             {
-
+                Console.WriteLine("Equal");
                 return null;
             }
         }
-
         // Check if new Passenger is not the driver
         if (ride.UserId == newPassengerId)
         {
@@ -77,35 +77,38 @@ public class UserRideFacade : CRUDFacade<UserRideEntity, UserRideDetailModel, Us
         UserRideDetailModel? model = new UserRideDetailModel(user.Name, user.Surname)
         {
             PassengerId = user.Id,
+            RideId = ride.Id,
             Id = Guid.NewGuid()
         };
 
+        Console.WriteLine("Equal123123");
         return await base.SaveAsync(model);
 
     }
 
-    public async Task<IEnumerable<RideListModel>?> GetUserRides(Guid? id)
+    public async Task<IEnumerable<UserRideDetailModel>?> GetUserRides(Guid? id)
     {
         if (id == null)
         {
-            return new List<RideListModel>();
+            return new List<UserRideDetailModel>();
         }
 
         await using var _uowCreated = _uow.Create();
         var queryUserRides = _uowCreated.GetRepository<UserRideEntity>().Get();
-        //foreach (var variable in queryUserRides)
-        //{
-        //    Console.WriteLine(variable);
-        //} 
-
-        var userRides = queryUserRides.Where(x => x.PassengerId == id);
-        /* foreach (var variable in userRides)
+        foreach (var variable in queryUserRides)
         {
             Console.WriteLine(variable);
         }
-            */
-        var userRideList = await _mapper.ProjectTo<RideListModel>(userRides).ToListAsync().ConfigureAwait(false);
 
+        var userRides = queryUserRides.Where(x => x.PassengerId == id);
+        foreach (var variable in userRides)
+        {
+            Console.WriteLine("Vyfiltrovana:  ");
+            Console.WriteLine(variable);
+        }
+        var userRideList = await _mapper.ProjectTo<UserRideDetailModel>(userRides).ToListAsync().ConfigureAwait(false);
+        
+            
         return userRideList;
     }
 }
