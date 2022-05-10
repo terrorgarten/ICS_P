@@ -83,11 +83,15 @@ namespace Carpool.BL.Tests
         public async Task NewUser_InsertOrUpdate_UserAdded()
         {
             //Arrange
-            var user = new UserDetailModel(
-                Name: "Martin",
-                Surname: "Vano",
-                PhotoUrl: null
-            );
+            var user = new UserDetailModel
+            (
+                Name: UserSeeds.UserEntity1.Name,
+                Surname: UserSeeds.UserEntity1.Surname,
+                PhotoUrl: UserSeeds.UserEntity1.PhotoUrl
+            )
+            {
+                Id = UserSeeds.UserEntity1.Id
+            };
 
             //Act
             user = await _userFacadeSUT.SaveAsync(user);
