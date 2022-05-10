@@ -56,6 +56,9 @@
 
 
             <TabItem x:Name="Car" Header="AUTO">
+                <views:CarListView >
+                    
+                </views:CarListView>
                 <!--<TabControl x:Name="CarDetail"
                             ItemsSource="{Binding CarDetailViewModels}"
                             SelectedItem="{Binding SelectedCarDetailViewModel, Mode=TwoWay}" Margin="10,24,0,0" HorizontalAlignment="Left" Width="281" Height="383" VerticalAlignment="Top" >

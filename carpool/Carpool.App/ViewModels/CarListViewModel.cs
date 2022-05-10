@@ -31,13 +31,17 @@ namespace Carpool.App.ViewModels
             mediator.Register<DeleteMessage<CarWrapper>>(CarDeleted);
             mediator.Register<SelectedMessage<UserWrapper>>(UserSelected);
         }
-
+        private Guid? LoggedInUserId { get; set; }
         private void UserSelected(SelectedMessage<UserWrapper> obj)
         {
             LoggedInUserId = obj.Id;
+            _ = LoadAsync();
         }
 
-        private Guid? LoggedInUserId { get; set; }
+
+        
+
+
 
 
 
