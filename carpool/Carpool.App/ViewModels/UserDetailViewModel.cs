@@ -40,6 +40,7 @@ namespace Carpool.App.ViewModels
             mediator.Register<NewMessage<CarWrapper>>(NewCar);
             mediator.Register<UpdateMessage<CarWrapper>>(UpdateCar);
             mediator.Register<DeleteMessage<CarWrapper>>(DeleteCar);
+           
         }
 
         public ICommand DeleteCommand { get; }
@@ -64,6 +65,7 @@ namespace Carpool.App.ViewModels
         }
 
         //public UserWrapper? Model { get; set; }
+        
 
         public UserWrapper? Model
         {
@@ -99,12 +101,15 @@ namespace Carpool.App.ViewModels
 
         private void UpdateCar(UpdateMessage<CarWrapper> message)
         {
-            if (message.TargetId != Model?.Id)
-            {
-                return;
-            }
+            //if (message.TargetId != Model?.Id)
+            //{
+            //    return;
+            //}
+            //var Id = SelectedCar.OwnerId;
+            //Model?.OwnedCars.Clear();
 
-            SelectedCar = null;
+            //var ownedcars = _userFacade.GetAsync(Model?.OwnedCars);
+            //ownedcars.AddRange(ownedcars);
         }
 
         public async Task DeleteAsync()

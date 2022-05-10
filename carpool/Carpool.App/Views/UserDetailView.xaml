@@ -79,18 +79,6 @@
 
             </DataGrid>
 
-            <DataGrid x:Name="PassengerList" 
-                      AutoGenerateColumns="False"
-                      ItemsSource="{Binding Model.PassangerRides}" Margin="429,66,-305,64" Grid.Row="7" Grid.Column="1">
-                <!--SelectedItem="{Binding SelectedCar}" Margin="340,22,-346,26" Grid.RowSpan="3" Grid.Column="1">-->
-
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Id}" />
-                    <DataGridTextColumn Header="Surname" Binding="{Binding Surname}" />
-                </DataGrid.Columns>
-
-            </DataGrid>
-
             <!--<local:CarListView Grid.Row="6" Grid.ColumnSpan="2" Grid.Column="0" DataContext="{Binding CarListViewModel}" />-->
             <Image Grid.Row="6"
                    Grid.Column="1"

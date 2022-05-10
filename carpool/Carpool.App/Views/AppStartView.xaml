@@ -10,12 +10,14 @@
         mc:Ignorable="d"
         Title="UserProfileWindow" Height="450" Width="933"
         d:DataContext="{d:DesignInstance viewModels:AppStartViewModel}">
-    <Grid
+
+    <Grid 
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" RenderTransformOrigin="0.47,0.483" HorizontalAlignment="Center" Width="933">
-        <Grid.RowDefinitions>
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
+
         <Image HorizontalAlignment="Left" Height="100" Margin="343,52,0,0" VerticalAlignment="Top" Width="100" Source="X:\Školní projekty\ITW\proj_2\mpech.cz\img\dkon.png"/>
         <Label Content="Můj Profil&#xD;&#xA;" HorizontalAlignment="Left" Margin="317,8,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Poppins" Height="39" Width="95"/>
         <TextBox HorizontalAlignment="Left" Margin="315,112,0,0" TextWrapping="Wrap" Text="Uživatel" VerticalAlignment="Top" Width="48" Height="18"/>
@@ -27,7 +29,11 @@
         <Rectangle HorizontalAlignment="Left" Height="120" Margin="296,189,0,0" Stroke="Black" VerticalAlignment="Top" Width="138"/>
 
 
-        <TabControl SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}" Margin="0,0,10,0" SelectionChanged="TabControl_SelectionChanged">
+        <views:CarListView x:Name="CarList"
+                           Grid.Column="1"
+                           DataContext="{Binding CarListViewModel}" Margin="10,16,-19,59" />
+
+        <TabControl Grid.Column="0" SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}" Margin="0,0,10,0" SelectionChanged="TabControl_SelectionChanged">
             <TabItem x:Name="Login" Header="LOGIN" Height="21" VerticalAlignment="Bottom">
                 <views:UserListView x:Name="UserList"
                                     Grid.Row="0"
