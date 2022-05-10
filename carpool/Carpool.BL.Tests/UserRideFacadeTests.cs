@@ -57,32 +57,36 @@ namespace Carpool.BL.Tests
 
             DeepAssert.Equal(Mapper.Map<UserRideDetailModel>(UserRideSeeds.UserRideEntity1), user);
         }
-        /*
         [Fact]
-        public async Task Insert_SeededUser()
+        public async Task Insert_SeededUserRide()
         {
-            var seeded_user = new UserDetailModel(
+            var seeded_user = new UserRideDetailModel
+            (
                     Name: UserSeeds.UserEntity1.Name,
-                    Surname: UserSeeds.UserEntity1.Surname,
-                    PhotoUrl: null
-                );
-            var _ = await _userFacadeSUT.SaveAsync(seeded_user);
+                    Surname: UserSeeds.UserEntity1.Surname
+            )
+            {
+                RideId = RideSeeds.RideEntity.Id,
+                PassengerId = UserSeeds.UserEntity1.Id
+            };
+            var _ = await _userRideFacadeSUT.SaveAsync(seeded_user);
 
-            var user = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity1.Id);
+            var user = await _userRideFacadeSUT.GetAsync(UserRideSeeds.UserRideEntity1.Id);
         }
 
+        
         [Fact]
-        public async Task GetById_SeededUser()
+        public async Task GetById_SeededUserRide()
         {
-            var user = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity1.Id);
+            var user = await _userRideFacadeSUT.GetAsync(UserRideSeeds.UserRideEntity1.Id);
 
-            DeepAssert.Equal(Mapper.Map<UserDetailModel>(UserSeeds.UserEntity1), user);
+            DeepAssert.Equal(Mapper.Map<UserRideDetailModel>(UserRideSeeds.UserRideEntity1), user);
         }
-
+        
         [Fact]
-        public async Task GetById_NonExistentUser()
+        public async Task GetById_NonExistentUserRide()
         {
-            var user = await _userFacadeSUT.GetAsync(UserSeeds.EmptyUserEntity.Id);
+            var user = await _userRideFacadeSUT.GetAsync(UserRideSeeds.EmptyUserRideEntity.Id);
 
             Assert.Null(user);
         }
@@ -90,60 +94,60 @@ namespace Carpool.BL.Tests
         [Fact]
         public async Task SeededUser_DeleteById_Deleted()
         {
-            await _userFacadeSUT.DeleteAsync(UserSeeds.UserEntity1.Id);
+            await _userRideFacadeSUT.DeleteAsync(UserRideSeeds.UserRideEntity1.Id);
 
             await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            Assert.False(await dbxAssert.Users.AnyAsync(i => i.Id == UserSeeds.UserEntity1.Id));
+            Assert.False(await dbxAssert.Users.AnyAsync(i => i.Id == UserRideSeeds.UserRideEntity1.Id));
         }
+        
 
+        //[Fact]
+        //public async Task NewUserRide_Insert_UserRideAdded()
+        //{
+        //    //Arrange
+        //    var user = new UserRideDetailModel
+        //    (
+        //        Name: UserSeeds.UserForUserRideEntity.Name,
+        //        Surname: UserSeeds.UserForUserRideEntity.Surname
+        //    )
+        //    {
+        //        RideId = RideSeeds.RideEntityForUserRideEntity.Id,
+        //        PassengerId = UserSeeds.UserForUserRideEntity.Id
+        //    };
 
-        [Fact]
-        public async Task NewUser_InsertOrUpdate_UserAdded()
-        {
-            //Arrange
-            var user = new UserDetailModel
-            (
-                Name: UserSeeds.UserEntity1.Name,
-                Surname: UserSeeds.UserEntity1.Surname,
-                PhotoUrl: UserSeeds.UserEntity1.PhotoUrl
-            )
-            {
-                Id = UserSeeds.UserEntity1.Id
-            };
+        //    //Act
+        //    user = await _userRideFacadeSUT.SaveAsync(user);
 
-            //Act
-            user = await _userFacadeSUT.SaveAsync(user);
+        //    //Assert
+        //    await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+        //    var userFromDb = await dbxAssert.UsersRideEntity.SingleAsync(i => i.Id == user.Id);
+        //    DeepAssert.Equal(user, Mapper.Map<UserRideDetailModel>(userFromDb));
+        //}
+        
+        //[Fact]
+        //public async Task SeededUserRideEntity_Update_UserRideUpdated()
+        //{
+        //    //Arrange
+        //    var user = new UserRideDetailModel
+        //    (
+        //        Name: UserSeeds.UserForUserRideEntity.Name,
+        //        Surname: UserSeeds.UserForUserRideEntity.Surname
+        //    )
+        //    {
+        //        RideId = RideSeeds.RideEntityForUserRideEntity.Id,
+        //        PassengerId = UserSeeds.UserForUserRideEntity.Id
+        //    };
+        //    user.Name += "updated";
+        //    user.Surname += "updated";
 
-            //Assert
-            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            var userFromDb = await dbxAssert.Users.SingleAsync(i => i.Id == user.Id);
-            DeepAssert.Equal(user, Mapper.Map<UserDetailModel>(userFromDb));
-        }
+        //    //Act
+        //    await _userRideFacadeSUT.SaveAsync(user);
 
-        [Fact]
-        public async Task SeededUserEntity_InsertOrUpdate_UserUpdated()
-        {
-            //Arrange
-            var user = new UserDetailModel
-            (
-                Name: UserSeeds.UserEntity.Name,
-                Surname: UserSeeds.UserEntity.Surname,
-                PhotoUrl: UserSeeds.UserEntity.PhotoUrl
-            )
-            {
-                Id = UserSeeds.UserEntity.Id
-            };
-            user.Name += "updated";
-            user.Surname += "updated";
-
-            //Act
-            await _userFacadeSUT.SaveAsync(user);
-
-            var updated_user = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity.Id);
-            //Assert
-            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            var userFromDb = await dbxAssert.Users.SingleAsync(i => i.Id == user.Id);
-            DeepAssert.Equal(user, Mapper.Map<UserDetailModel>(userFromDb));
-        }*/
+        //    var updated_user = await _userRideFacadeSUT.GetAsync(UserRideSeeds.UserRideEntity1.Id);
+        //    //Assert
+        //    await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+        //    var userFromDb = await dbxAssert.UsersRideEntity.SingleAsync(i => i.Id == user.Id);
+        //    DeepAssert.Equal(user, Mapper.Map<UserRideDetailModel>(userFromDb));
+        //}
     }
 }
