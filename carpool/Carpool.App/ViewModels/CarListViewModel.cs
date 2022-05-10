@@ -14,12 +14,12 @@ using Carpool.DAL.Seeds;
 
 namespace Carpool.App.ViewModels
 {
-    public class CarListViewModel : ViewModelBase, ICarListViewModel
+    public class CarViewModel : ViewModelBase, ICarListViewModel
     {
         private readonly CarFacade _carFacade;
         private readonly IMediator _mediator;
 
-        public CarListViewModel(CarFacade carFacade, IMediator mediator)
+        public CarViewModel(CarFacade carFacade, IMediator mediator)
         {
             _carFacade = carFacade;
             _mediator = mediator;
@@ -29,7 +29,23 @@ namespace Carpool.App.ViewModels
 
             mediator.Register<UpdateMessage<CarWrapper>>(CarUpdated);
             mediator.Register<DeleteMessage<CarWrapper>>(CarDeleted);
+            mediator.Register<SelectedMessage<UserWrapper>>(UserSelected);
         }
+
+        private void UserSelected(SelectedMessage<UserWrapper> obj)
+        {
+            LoggedInUserId = obj.Id;
+        }
+
+        private Guid? LoggedInUserId { get; set; }
+
+
+
+
+
+
+
+
 
         public ObservableCollection<CarListModel> Cars { get; set; } = new();
         
@@ -48,8 +64,8 @@ namespace Carpool.App.ViewModels
         public async Task LoadAsync()
         {
             Cars.Clear();
-            var cars = await _carFacade.GetAsync();
-            Cars.AddRange(cars);
+            var cars = await _carFacade.GetUserCars(LoggedInUserId);
+            Cars.AddRange(cars!);
         }
 
         public override void LoadInDesignMode()

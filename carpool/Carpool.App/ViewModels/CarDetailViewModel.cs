@@ -29,12 +29,19 @@ namespace Carpool.App.ViewModels
 
             SaveCommand = new AsyncRelayCommand(SaveAsync, CanSave);
             DeleteCommand = new AsyncRelayCommand(DeleteAsync);
+            mediator.Register<SelectedMessage<UserWrapper>>(OnUserSelected);
         }
 
+        //remove nullability?
+        private Guid? CurrentUser { get; set; }
         public CarWrapper? Model { get;  set; }
         public ICommand SaveCommand { get; }
         public ICommand DeleteCommand { get; }
 
+        private void OnUserSelected(SelectedMessage<UserWrapper> obj)
+        {
+            CurrentUser = obj.Id;
+        }
 
         public async Task LoadAsync(Guid id)
         {

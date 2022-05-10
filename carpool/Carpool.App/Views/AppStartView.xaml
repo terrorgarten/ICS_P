@@ -40,7 +40,7 @@
                                     DataContext="{Binding UserListViewModel}" Margin="68,0,67,0" Height="316" />
             </TabItem>
             <TabItem x:Name="Dashboard" Header="DASHBOARD">
-                <Grid>
+                <!--<Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="445*"/>
                         <ColumnDefinition Width="472*"/>
@@ -48,7 +48,7 @@
                     <Label Content="Můj profil" Margin="0,31,134,285" Width="287" FontSize="25" FontFamily="Calibri"/>
                     <views:UserDetailView Grid.Column="0" HorizontalAlignment="Left" Width="873" Margin="24,76,0,25"
                                           DataContext="{Binding SelectedUserDetailViewModel}" Loaded="UserDetailView_Loaded" Grid.ColumnSpan="2"/>
-                </Grid>
+                </Grid>-->
             </TabItem>
             <TabItem x:Name="FindRide" Header="HLEDAT JÍZDU">
 
@@ -56,7 +56,7 @@
 
 
             <TabItem x:Name="Car" Header="AUTO">
-                <TabControl x:Name="CarDetail"
+                <!--<TabControl x:Name="CarDetail"
                             ItemsSource="{Binding CarDetailViewModels}"
                             SelectedItem="{Binding SelectedCarDetailViewModel, Mode=TwoWay}" Margin="10,24,0,0" HorizontalAlignment="Left" Width="281" Height="383" VerticalAlignment="Top" >
                     <TabControl.ItemTemplate>
@@ -75,8 +75,7 @@
                             <views:CarDetailView HorizontalAlignment="Right" />
                         </DataTemplate>
                     </TabControl.ContentTemplate>
-                </TabControl>
-
+                </TabControl>-->
             </TabItem>
 
 
