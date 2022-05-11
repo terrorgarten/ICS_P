@@ -56,4 +56,33 @@ public class RideFacade : CRUDFacade<RideEntity, RideListModel, RideDetailModel>
         
         return rideList;
     }
+
+    public async Task<IEnumerable<RideListModel>?> GetUserRides(Guid? id)
+    {
+        if (id == null)
+        {
+            return new List<RideListModel>();
+        }
+
+        await using var _uowCreated = _uow.Create();
+        var queryUserCars = _uowCreated.GetRepository<RideEntity>().Get();
+
+        //foreach (var variable in queryUserCars)
+        //{
+        //    Console.WriteLine(variable);
+        //}
+        //Console.WriteLine("");
+
+        var driverRides = queryUserCars.Where(x => x.UserId == id);
+
+        foreach (var variable in driverRides)
+        {
+            Console.WriteLine("Vyfiltrovana:  ");
+            Console.WriteLine(variable);
+        }
+
+        var driverRideList = await _mapper.ProjectTo<RideListModel>(driverRides).ToListAsync().ConfigureAwait(false);
+
+        return driverRideList;
+    }
 }
