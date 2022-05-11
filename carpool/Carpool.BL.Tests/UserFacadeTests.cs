@@ -108,12 +108,12 @@ namespace Carpool.BL.Tests
             //Arrange
             var user = new UserDetailModel
             (
-                Name: UserSeeds.UserEntity.Name,
-                Surname: UserSeeds.UserEntity.Surname,
-                PhotoUrl: UserSeeds.UserEntity.PhotoUrl
+                Name: UserSeeds.UserEntity1.Name,
+                Surname: UserSeeds.UserEntity1.Surname,
+                PhotoUrl: UserSeeds.UserEntity1.PhotoUrl
             )
             {
-                Id = UserSeeds.UserEntity.Id
+                Id = UserSeeds.UserEntity1.Id
             };
             user.Name += "updated";
             user.Surname += "updated";

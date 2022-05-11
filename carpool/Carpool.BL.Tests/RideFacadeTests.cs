@@ -57,7 +57,7 @@ namespace Carpool.BL.Tests
         {
             var ride = await _rideFacadeSUT.GetAsync(RideSeeds.RideEntity.Id);
 
-            DeepAssert.Equal(Mapper.Map<RideDetailModel>(RideSeeds.RideEntity), ride, "OwnedCars");
+            DeepAssert.Equal(Mapper.Map<RideDetailModel>(RideSeeds.RideEntity), ride, "OwnedCars", "DriverRides");
         }
         
         [Fact]
