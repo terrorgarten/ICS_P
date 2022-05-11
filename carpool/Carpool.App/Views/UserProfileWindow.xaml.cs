@@ -22,8 +22,8 @@ namespace Carpool.App.Views
     {
         public UserProfileWindow(UserProfileWindowViewModel mainViewModel)
         {
-            InitializeComponent();
-            DataContext = mainViewModel;
+            //InitializeComponent();
+            //DataContext = mainViewModel;
         }
     }
 }

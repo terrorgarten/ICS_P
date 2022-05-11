@@ -66,7 +66,6 @@ namespace Carpool.App.ViewModels
 
         //public UserWrapper? Model { get; set; }
         
-
         public UserWrapper? Model
         {
             get => _model;

@@ -42,7 +42,6 @@ namespace Carpool.App.ViewModels
             mediator.Register<NewMessage<UserWrapper>>(OnUserNewMessage);
             mediator.Register<SelectedMessage<UserWrapper>>(OnUserSelected);
             mediator.Register<DeleteMessage<UserWrapper>>(OnUserDeleted);
-            SelectedIndex = 0;
         }
 
         public ICarListViewModel CarListViewModel { get; }
@@ -68,12 +67,8 @@ namespace Carpool.App.ViewModels
 
         private void OnUserNewMessage(NewMessage<UserWrapper> _)
         {
+            SelectedIndex = 1;
             SelectUser(Guid.Empty);
-        }
-
-        private void OnCarNewMessage(NewMessage<CarWrapper> _)
-        {
-            SelectCar(Guid.Empty);
         }
 
         private void OnUserSelected(SelectedMessage<UserWrapper> message)
@@ -82,27 +77,12 @@ namespace Carpool.App.ViewModels
             SelectUser(message.Id);
         }
 
-        private void OnCarSelected(SelectedMessage<CarWrapper> message)
-        {
-            SelectedIndex = 3;
-            SelectCar(message.Id);
-        }
-
         private void OnUserDeleted(DeleteMessage<UserWrapper> message)
         {
             var user = UserDetailViewModels.SingleOrDefault(i => i.Model?.Id == message.Id);
             if (user != null)
             {
                 UserDetailViewModels.Remove(user);
-            }
-        }
-
-        private void OnCarDeleted(DeleteMessage<CarWrapper> message)
-        {
-            var car = CarDetailViewModels.SingleOrDefault(i => i.Model?.Id == message.Id);
-            if (car != null)
-            {
-                CarDetailViewModels.Remove(car);
             }
         }
 

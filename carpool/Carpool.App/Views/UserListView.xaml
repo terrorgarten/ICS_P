@@ -21,7 +21,7 @@
         <controls:ButtonWithIcon Grid.Row="0"
                                  Command="{Binding UserNewCommand}"
                                  TextContent="Users"
-                                 IconSource="/Resources/Images/Add.png"
+                                 IconSource="https://w7.pngwing.com/pngs/535/334/png-transparent-computer-icons-add-button-logo-number-add-button-thumbnail.png"
                                  HorizontalAlignment="Center"/>
         <ListBox x:Name="UsersListBox" Grid.Row="1" ItemsSource="{Binding Users}">
             <i:Interaction.Triggers>
@@ -35,7 +35,7 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding Name}" />
                         <Label Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding Surname}" />

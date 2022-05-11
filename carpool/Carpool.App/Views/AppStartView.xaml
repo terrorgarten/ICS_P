@@ -8,7 +8,7 @@
     xmlns:viewModels="clr-namespace:Carpool.App.ViewModels"
 
         mc:Ignorable="d"
-        Title="UserProfileWindow" Height="450" Width="933"
+        Title="Carpool" Height="450" Width="933"
         d:DataContext="{d:DesignInstance viewModels:AppStartViewModel}">
 
     <Grid 
@@ -18,7 +18,7 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         
-        <TabControl Grid.Column="0" SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}" Margin="0,0,-40,0" SelectionChanged="TabControl_SelectionChanged" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="933">
+        <TabControl Grid.Column="0" SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}" Margin="0,0,-40,0" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="933">
             <TabItem x:Name="Login" Header="LOGIN" Height="21" VerticalAlignment="Bottom">
                 <views:UserListView x:Name="UserList"
                                     Grid.Row="0"
@@ -32,7 +32,7 @@
                     </Grid.ColumnDefinitions>
                     <Label Content="Můj profil" Margin="0,31,134,285" Width="287" FontSize="25" FontFamily="Calibri"/>
                     <views:UserDetailView Grid.Column="0" HorizontalAlignment="Left" Width="873" Margin="24,76,0,25"
-                                          DataContext="{Binding SelectedUserDetailViewModel}" Loaded="UserDetailView_Loaded" Grid.ColumnSpan="2"/>
+                                          DataContext="{Binding SelectedUserDetailViewModel}" Grid.ColumnSpan="2"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="FindRide" Header="HLEDAT JÍZDU">

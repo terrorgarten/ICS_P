@@ -65,7 +65,7 @@ namespace Carpool.App
             services.AddSingleton<IMediator, Mediator>();
 
             services.AddSingleton<AppStartViewModel>();
-            services.AddSingleton<UserProfileWindowViewModel>();
+            //services.AddSingleton<UserProfileWindowViewModel>();
             services.AddSingleton<ICarListViewModel, CarViewModel>();
             services.AddFactory<ICarDetailViewModel, CarDetailViewModel>();
             services.AddSingleton<IUserListViewModel, UserListViewModel>();

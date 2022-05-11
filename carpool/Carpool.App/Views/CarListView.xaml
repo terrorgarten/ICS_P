@@ -20,7 +20,8 @@
         </Grid.RowDefinitions>
         <controls:ButtonWithIcon Grid.Row="0"
                                  Command="{Binding CarNewCommand}"
-                                 IconSource="https://png.pngitem.com/pimgs/s/65-653761_add-button-png-image-free-download-searchpng-png.png" Margin="0,0,0,0"  Width="50"/>
+                                 TextContent="Moje vozy" HorizontalAlignment="Center"
+                                 IconSource="https://w7.pngwing.com/pngs/535/334/png-transparent-computer-icons-add-button-logo-number-add-button-thumbnail.png" Margin="52,0,52,0"/>
         <ListBox x:Name="CarsListBox" Grid.Row="1" ItemsSource="{Binding Cars}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
@@ -44,7 +45,7 @@
 
         <TabControl x:Name="CarDetail"
                     ItemsSource="{Binding CarDetailViewModels}"
-                    SelectedItem="{Binding SelectedCarDetailViewModel, Mode=TwoWay}" Margin="-319,0,0,0" HorizontalAlignment="Left" Width="248" Height="322" VerticalAlignment="Center" Grid.Row="1" >
+                    SelectedItem="{Binding SelectedCarDetailViewModel, Mode=TwoWay}" Margin="-544,0,0,0" HorizontalAlignment="Left" Width="470" Height="357" VerticalAlignment="Top" Grid.Row="1" >
             <TabControl.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

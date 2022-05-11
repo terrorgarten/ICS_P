@@ -53,8 +53,8 @@
                       Grid.ColumnSpan="2" 
                       Focusable="False"
                       SelectionMode="Single"
-                      ItemsSource="{Binding Model.OwnedCars}"
-                      SelectedItem="{Binding SelectedCar}" HorizontalAlignment="Left">
+                      ItemsSource="{Binding Model.OwnedCars}">
+                <!--SelectedItem="{Binding SelectedCar}" HorizontalAlignment="Left">-->
                 <ListView.View>
                     <GridView>
                         <GridView.Columns>
@@ -65,19 +65,22 @@
                 </ListView.View>
             </ListView>
 
-            <DataGrid x:Name="RideList" 
-                      AutoGenerateColumns="False"
+            <ListView Grid.Row="0" x:Name="RideList" 
                       ItemsSource="{Binding Model.DriverRides}" Grid.Column="1" Margin="389,6,-321,16" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Stretch" Width="278">
                 <!--SelectedItem="{Binding SelectedCar}" Margin="340,22,-346,26" Grid.RowSpan="3" Grid.Column="1">-->
 
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Start" Binding="{Binding Start}" />
-                    <DataGridTextColumn Header="End" Binding="{Binding End}" />
-                    <DataGridTextColumn Header="Begin Time" Binding="{Binding BeginTime}" />
-                    <DataGridTextColumn Header="Ride Time" Binding="{Binding ApproxRideTime}" />
-                </DataGrid.Columns>
+                <ListView.View>
+                    <GridView>
+                        <GridView.Columns>
+                            <GridViewColumn Header="Start" DisplayMemberBinding="{Binding Start}" />
+                            <GridViewColumn Header="End" DisplayMemberBinding="{Binding End}" />
+                            <GridViewColumn Header="Begin Time" DisplayMemberBinding="{Binding BeginTime}" />
+                            <GridViewColumn Header="Ride Time" DisplayMemberBinding="{Binding ApproxRideTime}" />
+                        </GridView.Columns>
+                    </GridView>
+                </ListView.View>
 
-            </DataGrid>
+            </ListView>
 
             <!--<local:CarListView Grid.Row="6" Grid.ColumnSpan="2" Grid.Column="0" DataContext="{Binding CarListViewModel}" />-->
             <Image Grid.Row="6"
