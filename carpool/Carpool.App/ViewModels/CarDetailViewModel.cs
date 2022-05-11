@@ -33,14 +33,14 @@ namespace Carpool.App.ViewModels
         }
 
         //remove nullability?
-        private Guid? CurrentUser { get; set; }
+        private static Guid? CurrentUserId { get; set; }
         public CarWrapper? Model { get;  set; }
         public ICommand SaveCommand { get; }
         public ICommand DeleteCommand { get; }
 
         private void OnUserSelected(SelectedMessage<UserWrapper> obj)
         {
-            CurrentUser = obj.Id;
+            CurrentUserId = obj.Id;
         }
 
         public async Task LoadAsync(Guid id)
@@ -54,7 +54,8 @@ namespace Carpool.App.ViewModels
             {
                 throw new InvalidOperationException("Null model cannot be saved");
             }
-
+            
+            Model.OwnerId = CurrentUserId;
             Model = await _carFacade.SaveAsync(Model.Model);
             _mediator.Send(new UpdateMessage<CarWrapper> { Model = Model });
         }

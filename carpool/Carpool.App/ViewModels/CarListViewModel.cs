@@ -45,7 +45,7 @@ namespace Carpool.App.ViewModels
             mediator.Register<SelectedMessage<CarWrapper>>(OnCarSelected);
             mediator.Register<SelectedMessage<UserWrapper>>(UserSelected);
 
-            //mediator.Register<NewMessage<CarWrapper>>(OnCarNewMessage);
+            mediator.Register<NewMessage<CarWrapper>>(OnCarNewMessage);
 
         }
         private Guid? LoggedInUserId { get; set; }

@@ -5,7 +5,7 @@
                        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
                        xmlns:local="clr-namespace:Carpool.App.Views"
                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                       xmlns:texts="clr-namespace:Carpool.App.Resources.Texts"
+                       xmlns:texts="clr-namespace:Carpool.App.Resources"
                        xmlns:controls="clr-namespace:Carpool.App.Controls"
                        xmlns:viewModels="clr-namespace:Carpool.App.ViewModels"
                        d:DesignHeight="450"
@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
         <controls:ButtonWithIcon Grid.Row="0"
                                  Command="{Binding CarNewCommand}"
-                                 IconSource="/Resources/Images/Add.png" Margin="0,-3,0,0" HorizontalAlignment="Center" Width="200"/>
+                                 IconSource="https://png.pngitem.com/pimgs/s/65-653761_add-button-png-image-free-download-searchpng-png.png" Margin="0,0,0,0"  Width="50"/>
         <ListBox x:Name="CarsListBox" Grid.Row="1" ItemsSource="{Binding Cars}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
