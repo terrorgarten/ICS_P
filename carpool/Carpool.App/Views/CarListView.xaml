@@ -13,7 +13,7 @@
                        mc:Ignorable="d"
                        Background="{StaticResource DefaultComponentBackgroundBrush}"
                        d:DataContext="{d:DesignInstance viewModels:CarViewModel}">
-    <Grid x:Name="Root">
+    <Grid x:Name="Root" Margin="596,0,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -43,5 +43,27 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+
+        <TabControl x:Name="CarDetail"
+                    ItemsSource="{Binding CarDetailViewModels}"
+                    SelectedItem="{Binding SelectedCarDetailViewModel, Mode=TwoWay}" Margin="-319,0,0,0" HorizontalAlignment="Left" Width="248" Height="323" VerticalAlignment="Center" Grid.Row="1" >
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Model.Manufacturer}" Margin="5"/>
+                        <Button Content="X" Command="{Binding DataContext.CloseCarDetailTabCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}}"
+                                CommandParameter="{Binding}"
+                                Width="20" Height="20" FontWeight="Bold" FontSize="12"
+                                Foreground="White" Padding="0"/>
+                    </StackPanel>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <local:CarDetailView HorizontalAlignment="Right" />
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
+
     </Grid>
 </local:UserControlBase>

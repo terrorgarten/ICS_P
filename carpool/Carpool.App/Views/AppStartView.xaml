@@ -29,15 +29,11 @@
         <Rectangle HorizontalAlignment="Left" Height="120" Margin="296,189,0,0" Stroke="Black" VerticalAlignment="Top" Width="138"/>
 
 
-        <views:CarListView x:Name="CarList"
-                           Grid.Column="1"
-                           DataContext="{Binding CarListViewModel}" Margin="10,16,-19,59" />
-
-        <TabControl Grid.Column="0" SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}" Margin="0,0,10,0" SelectionChanged="TabControl_SelectionChanged">
+        <TabControl Grid.Column="0" SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}" Margin="0,0,-40,0" SelectionChanged="TabControl_SelectionChanged" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="933">
             <TabItem x:Name="Login" Header="LOGIN" Height="21" VerticalAlignment="Bottom">
                 <views:UserListView x:Name="UserList"
                                     Grid.Row="0"
-                                    DataContext="{Binding UserListViewModel}" Margin="68,0,67,0" Height="316" />
+                                    DataContext="{Binding UserListViewModel}" Margin="46,0,32,0" Height="316" />
             </TabItem>
             <TabItem x:Name="Dashboard" Header="DASHBOARD">
                 <!--<Grid>
@@ -56,9 +52,8 @@
 
 
             <TabItem x:Name="Car" Header="AUTO">
-                <views:CarListView >
-                    
-                </views:CarListView>
+                <views:CarListView 
+                    DataContext="{Binding CarListViewModel}" Height="409" Margin="0,0,11,0"></views:CarListView>
                 <!--<TabControl x:Name="CarDetail"
                             ItemsSource="{Binding CarDetailViewModels}"
                             SelectedItem="{Binding SelectedCarDetailViewModel, Mode=TwoWay}" Margin="10,24,0,0" HorizontalAlignment="Left" Width="281" Height="383" VerticalAlignment="Top" >

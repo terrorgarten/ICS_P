@@ -5,12 +5,15 @@ using Carpool.App.Services;
 using Carpool.App.Wrappers;
 using Carpool.BL.Models;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Carpool.App.Commands;
 using Carpool.BL.Facades;
 using Carpool.Common.Enums;
 using Carpool.DAL.Seeds;
+using Carpool.App.Factories;
+
 
 namespace Carpool.App.ViewModels
 {
@@ -19,17 +22,30 @@ namespace Carpool.App.ViewModels
         private readonly CarFacade _carFacade;
         private readonly IMediator _mediator;
 
-        public CarViewModel(CarFacade carFacade, IMediator mediator)
+        private readonly IFactory<ICarDetailViewModel> _carDetailViewModelFactory;
+
+        public CarViewModel(
+            CarFacade carFacade, IMediator mediator,
+            IFactory<ICarDetailViewModel> carDetailViewModelFactory
+            )
         {
             _carFacade = carFacade;
             _mediator = mediator;
 
+            _carDetailViewModelFactory = carDetailViewModelFactory;
+            CarDetailViewModel = _carDetailViewModelFactory.Create();
+
             CarSelectedCommand = new RelayCommand<CarListModel>(CarSelected);
             CarNewCommand = new RelayCommand(CarNew);
+            CloseCarDetailTabCommand = new RelayCommand<ICarDetailViewModel>(OnCloseCarDetailTabExecute);
 
             mediator.Register<UpdateMessage<CarWrapper>>(CarUpdated);
             mediator.Register<DeleteMessage<CarWrapper>>(CarDeleted);
+            mediator.Register<SelectedMessage<CarWrapper>>(OnCarSelected);
             mediator.Register<SelectedMessage<UserWrapper>>(UserSelected);
+
+            //mediator.Register<NewMessage<CarWrapper>>(OnCarNewMessage);
+
         }
         private Guid? LoggedInUserId { get; set; }
         private void UserSelected(SelectedMessage<UserWrapper> obj)
@@ -38,9 +54,57 @@ namespace Carpool.App.ViewModels
             _ = LoadAsync();
         }
 
+        private void OnCarSelected(SelectedMessage<CarWrapper> message)
+        {
+            SelectCar(message.Id);
+        }
 
-        
 
+
+        //CAR DETAIL WORKAROUND
+        public ICommand CloseCarDetailTabCommand { get; }
+        public ICarDetailViewModel? SelectedCarDetailViewModel { get; set; }
+        public ICarDetailViewModel CarDetailViewModel { get; }
+        public ObservableCollection<ICarDetailViewModel> CarDetailViewModels { get; } =
+            new ObservableCollection<ICarDetailViewModel>();
+
+        private void SelectCar(Guid? id)
+        {
+            if (id is null)
+            {
+                SelectedCarDetailViewModel = null;
+            }
+
+            else
+            {
+                var carDetailViewModel = CarDetailViewModels.SingleOrDefault(vm => vm.Model?.Id == id);
+                if (carDetailViewModel == null)
+                {
+                    carDetailViewModel = _carDetailViewModelFactory.Create();
+                    CarDetailViewModels.Add(carDetailViewModel);
+                    carDetailViewModel.LoadAsync(id.Value);
+                }
+                SelectedCarDetailViewModel = carDetailViewModel;
+            }
+        }
+
+        private void OnCloseCarDetailTabExecute(ICarDetailViewModel? recipeDetailViewModel)
+        {
+            if (recipeDetailViewModel is not null)
+            {
+                // TODO: Check if the Detail has changes and ask user to cancel
+                CarDetailViewModels.Remove(recipeDetailViewModel);
+            }
+        }
+
+        private void OnCarDeleted(DeleteMessage<CarWrapper> message)
+        {
+            var car = CarDetailViewModels.SingleOrDefault(i => i.Model?.Id == message.Id);
+            if (car != null)
+            {
+                CarDetailViewModels.Remove(car);
+            }
+        }
 
 
 
@@ -56,14 +120,20 @@ namespace Carpool.App.ViewModels
         public ICommand CarSelectedCommand { get; }
         public ICommand CarNewCommand { get; }
 
+      
+
         private void CarNew() => _mediator.Send(new NewMessage<CarWrapper>());
         
-        //Toto se vola pokud dostanu command
-        private void CarSelected(CarListModel? car) => _mediator.Send(new SelectedMessage<CarWrapper> { Id = car?.Id });
-
+        //Toto se vola pokud dostanu command z listu -> nechci a predelat
+        private void CarSelected(CarListModel? car)
+        {
+            SelectCar(car?.Id);
+        }
         private async void CarUpdated(UpdateMessage<CarWrapper> _) => await LoadAsync();
 
         private async void CarDeleted(DeleteMessage<CarWrapper> _) => await LoadAsync();
+
+        
 
         public async Task LoadAsync()
         {

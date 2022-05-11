@@ -16,7 +16,7 @@ namespace Carpool.App.ViewModels
     public class AppStartViewModel : ViewModelBase
     {
         private readonly IFactory<IUserDetailViewModel> _userDetailViewModelFactory;
-        private readonly IFactory<ICarDetailViewModel> _carDetailViewModelFactory;
+        private readonly IFactory<ICarDetailViewModel> _carDetailViewModelFactory; //DEL
         public int SelectedIndex { get; set; }
 
         public AppStartViewModel(
