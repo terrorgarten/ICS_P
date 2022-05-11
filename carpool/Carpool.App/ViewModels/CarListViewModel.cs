@@ -45,7 +45,7 @@ namespace Carpool.App.ViewModels
             mediator.Register<SelectedMessage<CarWrapper>>(OnCarSelected);
             mediator.Register<SelectedMessage<UserWrapper>>(UserSelected);
 
-            mediator.Register<NewMessage<CarWrapper>>(OnCarNewMessage);
+            //mediator.Register<NewMessage<CarWrapper>>(OnCarNewMessage);
 
         }
         private Guid? LoggedInUserId { get; set; }
@@ -127,7 +127,7 @@ namespace Carpool.App.ViewModels
 
       
 
-        private void CarNew() => _mediator.Send(new NewMessage<CarWrapper>());
+        private void CarNew() => SelectCar(Guid.Empty);
         
         //Toto se vola pokud dostanu command z listu -> nechci a predelat
         private void CarSelected(CarListModel? car)

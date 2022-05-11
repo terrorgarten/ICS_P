@@ -73,7 +73,7 @@ namespace Carpool.App.ViewModels
 
         private void OnCarNewMessage(NewMessage<CarWrapper> _)
         {
-            SelectUser(Guid.Empty);
+            SelectCar(Guid.Empty);
         }
 
         private void OnUserSelected(SelectedMessage<UserWrapper> message)
