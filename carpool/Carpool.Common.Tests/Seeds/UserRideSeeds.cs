@@ -32,6 +32,15 @@ public static class UserRideSeeds
         Ride = RideSeeds.RideEntityForRideTestsGet
     };
 
+    public static readonly UserRideEntity UserRideEntity3 = new(
+        Id: Guid.Parse(input: "0D6AD977-11EA-424F-982D-45C3F0BC1CC2"),
+        PassengerId: UserSeeds.UserEntity2.Id,
+        RideId: RideSeeds.RideEntityForUserRideEntity.Id)
+    {
+        Passenger = UserSeeds.UserEntity2,
+        Ride = RideSeeds.RideEntityForUserRideEntity
+    };
+
     //To ensure that no tests reuse these clones for non-idempotent operations
     public static readonly UserRideEntity UserRideEntityUpdate = UserRideEntity1 with { Id = Guid.Parse("A2E6849D-A158-4436-980C-7FC26B60C674"), Ride = null, Passenger = null, PassengerId = UserSeeds.UserForUserRideEntityUpdate.Id };
     public static readonly UserRideEntity UserRideEntityDelete = UserRideEntity2 with { Id = Guid.Parse("30872EFF-CED4-4F2B-89DB-0EE83A74D279"), Ride = null, Passenger = null, RideId = RideSeeds.RideEntityForRideUserDelete.Id };
@@ -41,6 +50,7 @@ public static class UserRideSeeds
         modelBuilder.Entity<UserRideEntity>().HasData(
         UserRideEntity1 with { Passenger = null, Ride = null },
         UserRideEntity2 with { Passenger = null, Ride = null },
+        UserRideEntity3 with { Passenger = null, Ride = null },
         UserRideEntityUpdate,
         UserRideEntityDelete
         );

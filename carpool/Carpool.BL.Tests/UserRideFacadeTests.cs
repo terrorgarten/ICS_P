@@ -28,7 +28,16 @@ namespace Carpool.BL.Tests
                 (UserSeeds.UserForUserRideEntity.Id);
             
         }
-        
+
+        [Fact]
+        public async Task GetRidePassengers()
+        {
+
+            var filtered = await _userRideFacadeSUT.GetPassengers
+                (RideSeeds.RideEntityForUserRideEntity.Id);
+
+        }
+
         [Fact]
         public async Task Create_WithNonExistingItem_UserRideDetail_DoesNotThrow()
         {
