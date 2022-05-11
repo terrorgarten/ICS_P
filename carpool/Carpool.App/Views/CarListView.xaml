@@ -15,14 +15,12 @@
                        d:DataContext="{d:DesignInstance viewModels:CarViewModel}">
     <Grid x:Name="Root" Margin="596,0,0,0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" MinHeight="50" />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <controls:ButtonWithIcon Grid.Row="0"
                                  Command="{Binding CarNewCommand}"
-                                 TextContent="Moje vozy"
-                                 IconSource="/Resources/Images/Add.png"
-                                 HorizontalAlignment="Center"/>
+                                 IconSource="/Resources/Images/Add.png" Margin="0,-3,0,0" HorizontalAlignment="Center" Width="200"/>
         <ListBox x:Name="CarsListBox" Grid.Row="1" ItemsSource="{Binding Cars}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
@@ -46,7 +44,7 @@
 
         <TabControl x:Name="CarDetail"
                     ItemsSource="{Binding CarDetailViewModels}"
-                    SelectedItem="{Binding SelectedCarDetailViewModel, Mode=TwoWay}" Margin="-319,0,0,0" HorizontalAlignment="Left" Width="248" Height="323" VerticalAlignment="Center" Grid.Row="1" >
+                    SelectedItem="{Binding SelectedCarDetailViewModel, Mode=TwoWay}" Margin="-319,0,0,0" HorizontalAlignment="Left" Width="248" Height="322" VerticalAlignment="Center" Grid.Row="1" >
             <TabControl.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

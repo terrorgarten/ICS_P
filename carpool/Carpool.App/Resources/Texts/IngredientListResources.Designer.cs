@@ -40,12 +40,12 @@ namespace Carpool.App.Resources.Texts {
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
-                // if (object.ReferenceEquals(resourceMan, null)) {
-                //     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Carpool.App.Resources.Texts.IngredientListResources", typeof(IngredientListResources).Assembly);
-                //     resourceMan = temp;
-                // }
-                // return resourceMan;
-                return null;
+                if (object.ReferenceEquals(resourceMan, null))
+                {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Carpool.App.Resources.Texts.IngredientListResources", typeof(IngredientListResources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
             }
         }
         
@@ -56,8 +56,7 @@ namespace Carpool.App.Resources.Texts {
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         public static global::System.Globalization.CultureInfo Culture {
             get {
-                //return resourceCulture;
-                return CultureInfo.InvariantCulture;
+                return resourceCulture;
             }
             set {
                 resourceCulture = value;
@@ -69,8 +68,7 @@ namespace Carpool.App.Resources.Texts {
         /// </summary>
         public static string New_Button_Content {
             get {
-                //return ResourceManager.GetString("New_Button_Content", resourceCulture);
-                return "";
+                return ResourceManager.GetString("New_Button_Content", resourceCulture);
             }
         }
     }
