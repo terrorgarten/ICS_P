@@ -42,10 +42,6 @@ namespace Carpool.App.ViewModels
             mediator.Register<NewMessage<UserWrapper>>(OnUserNewMessage);
             mediator.Register<SelectedMessage<UserWrapper>>(OnUserSelected);
             mediator.Register<DeleteMessage<UserWrapper>>(OnUserDeleted);
-
-            mediator.Register<NewMessage<CarWrapper>>(OnCarNewMessage);
-            mediator.Register<SelectedMessage<CarWrapper>>(OnCarSelected);
-            mediator.Register<DeleteMessage<CarWrapper>>(OnCarDeleted);
             SelectedIndex = 0;
         }
 

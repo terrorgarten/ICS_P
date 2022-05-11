@@ -26,6 +26,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
+                <RowDefinition />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -46,6 +47,10 @@
 
             <Label Grid.Row="4" Grid.Column="0" Content="Photo" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Image Grid.Row="4" Grid.Column="1" Source="{Binding Model.PhotoUrl}"/>
+
+            <Label Grid.Row="5" Grid.Column="0" Content="PHOTO URL" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Model.PhotoUrl, UpdateSourceTrigger=PropertyChanged}"/>
+
         </Grid>
     </Grid>
 </local:UserControlBase>

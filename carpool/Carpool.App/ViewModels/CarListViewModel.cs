@@ -35,6 +35,7 @@ namespace Carpool.App.ViewModels
             _carDetailViewModelFactory = carDetailViewModelFactory;
             CarDetailViewModel = _carDetailViewModelFactory.Create();
 
+            
             CarSelectedCommand = new RelayCommand<CarListModel>(CarSelected);
             CarNewCommand = new RelayCommand(CarNew);
             CloseCarDetailTabCommand = new RelayCommand<ICarDetailViewModel>(OnCloseCarDetailTabExecute);
@@ -44,7 +45,7 @@ namespace Carpool.App.ViewModels
             mediator.Register<SelectedMessage<CarWrapper>>(OnCarSelected);
             mediator.Register<SelectedMessage<UserWrapper>>(UserSelected);
 
-            //mediator.Register<NewMessage<CarWrapper>>(OnCarNewMessage);
+            mediator.Register<NewMessage<CarWrapper>>(OnCarNewMessage);
 
         }
         private Guid? LoggedInUserId { get; set; }
@@ -59,7 +60,11 @@ namespace Carpool.App.ViewModels
             SelectCar(message.Id);
         }
 
-
+        //NEW CAR
+        private void OnCarNewMessage(NewMessage<CarWrapper> _)
+        {
+            SelectCar(Guid.Empty);
+        }
 
         //CAR DETAIL WORKAROUND
         public ICommand CloseCarDetailTabCommand { get; }

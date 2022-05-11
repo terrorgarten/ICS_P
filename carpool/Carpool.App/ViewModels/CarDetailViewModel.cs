@@ -55,6 +55,7 @@ namespace Carpool.App.ViewModels
                 throw new InvalidOperationException("Null model cannot be saved");
             }
 
+            Model.Id = Guid.NewGuid();
             Model = await _carFacade.SaveAsync(Model.Model);
             _mediator.Send(new UpdateMessage<CarWrapper> { Model = Model });
         }
