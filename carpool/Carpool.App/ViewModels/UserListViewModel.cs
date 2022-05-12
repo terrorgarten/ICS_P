@@ -33,7 +33,6 @@ namespace Carpool.App.ViewModels
 
         public ObservableCollection<UserListModel> Users { get; set; } = new();
 
-
         public ICommand UserSelectedCommand { get; }
         public ICommand UserNewCommand { get; }
 

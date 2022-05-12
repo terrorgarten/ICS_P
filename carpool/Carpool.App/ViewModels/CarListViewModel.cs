@@ -45,7 +45,7 @@ namespace Carpool.App.ViewModels
             mediator.Register<SelectedMessage<CarWrapper>>(OnCarSelected);
             mediator.Register<SelectedMessage<UserWrapper>>(UserSelected);
 
-            mediator.Register<NewMessage<CarWrapper>>(OnCarNewMessage);
+            //mediator.Register<NewMessage<CarWrapper>>(OnCarNewMessage);
 
         }
         private Guid? LoggedInUserId { get; set; }
@@ -60,11 +60,11 @@ namespace Carpool.App.ViewModels
             SelectCar(message.Id);
         }
 
-        //NEW CAR
-        private void OnCarNewMessage(NewMessage<CarWrapper> _)
-        {
-            SelectCar(Guid.Empty);
-        }
+        ////NEW CAR
+        //private void OnCarNewMessage(NewMessage<CarWrapper> _)
+        //{
+        //    SelectCar(Guid.Empty);
+        //}
 
         //CAR DETAIL WORKAROUND
         public ICommand CloseCarDetailTabCommand { get; }
@@ -111,21 +111,10 @@ namespace Carpool.App.ViewModels
             }
         }
 
-
-
-
-
-
-
-
-
-
         public ObservableCollection<CarListModel> Cars { get; set; } = new();
         
         public ICommand CarSelectedCommand { get; }
         public ICommand CarNewCommand { get; }
-
-      
 
         private void CarNew() => SelectCar(Guid.Empty);
         
@@ -138,8 +127,6 @@ namespace Carpool.App.ViewModels
 
         private async void CarDeleted(DeleteMessage<CarWrapper> _) => await LoadAsync();
 
-        
-
         public async Task LoadAsync()
         {
             Cars.Clear();
@@ -149,7 +136,7 @@ namespace Carpool.App.ViewModels
 
         public override void LoadInDesignMode()
         {
-            Cars.Add(new CarListModel(Manufacturer: Manufacturer.Dacia, CarType.Micro) { PhotoUrl = "https://www.pngitem.com/pimgs/m/40-406527_cartoon-glass-of-water-png-glass-of-water.png" });
+            Cars.Add(new CarListModel(Manufacturer.Dacia, CarType.Micro) { PhotoUrl = "https://www.pngitem.com/pimgs/m/40-406527_cartoon-glass-of-water-png-glass-of-water.png" });
         }
     }
 }
