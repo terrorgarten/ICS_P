@@ -25,5 +25,10 @@ namespace Carpool.App.Views
             InitializeComponent();
             DataContext = mainViewModel;
         }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

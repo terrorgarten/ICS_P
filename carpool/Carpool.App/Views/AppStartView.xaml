@@ -6,47 +6,85 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="clr-namespace:Carpool.App.Views"
     xmlns:viewModels="clr-namespace:Carpool.App.ViewModels"
+     
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="15"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     TextElement.FontFamily="Poppins"
+     
 
-        mc:Ignorable="d"
-        Title="Carpool" Height="450" Width="933"
+    mc:Ignorable="d"
+        Title="Carpool" Height="850" Width="933"
         d:DataContext="{d:DesignInstance viewModels:AppStartViewModel}">
 
-    <Grid 
+
+    <Grid Background="#5e98f7"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" RenderTransformOrigin="0.47,0.483" HorizontalAlignment="Center" Width="933">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        
-        <TabControl Grid.Column="0" SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}" Margin="0,0,-40,0" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="933">
-            <TabItem x:Name="Login" Header="LOGIN" Height="21" VerticalAlignment="Bottom">
+
+        <TabControl Foreground="Black" Grid.Column="0" Background="#5e98f7" SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}" Margin="0,0,-40,0" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="933" SelectionChanged="TabControl_SelectionChanged">
+            <!--TabControl Styling-->
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Grid Name="Panel">
+                                    <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="12,2"
+                                        />
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Panel" Property="Background" Value="#5e98f7" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Panel" Property="Background" Value="White" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+
+
+            <TabItem Foreground="Black"  x:Name="Login" Header="LOGIN" Height="21" VerticalAlignment="Bottom">
                 <views:UserListView x:Name="UserList"
                                     Grid.Row="0"
                                     DataContext="{Binding UserListViewModel}" Margin="46,0,32,0" Height="316" />
             </TabItem>
-            <TabItem x:Name="Dashboard" Header="DASHBOARD">
+
+            <TabItem  Foreground="Black" x:Name="Dashboard" Header="DASHBOARD">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="445*"/>
                         <ColumnDefinition Width="472*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="Můj profil" Margin="0,31,134,285" Width="287" FontSize="25" FontFamily="Calibri"/>
-                    <views:UserDetailView Grid.Column="0" HorizontalAlignment="Left" Width="873" Margin="24,76,0,25"
+                    <Label Content="Můj profil" Margin="0,17,411,306" Width="112" FontSize="25" FontFamily="Calibri" Grid.ColumnSpan="2" Foreground="White"/>
+                    <views:UserDetailView Background="#8bb6fc" Grid.Column="0" HorizontalAlignment="Left" Width="873" Margin="24,76,0,25"
                                           DataContext="{Binding SelectedUserDetailViewModel}" Grid.ColumnSpan="2"/>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="FindRide" Header="HLEDAT JÍZDU">
+            <TabItem  Foreground="Black" x:Name="FindRide" Header="HLEDAT JÍZDU">
 
             </TabItem>
 
 
-            <TabItem x:Name="Car" Header="AUTO">
+            <TabItem  Foreground="Black" x:Name="Car" Header="AUTO">
                 <views:CarListView 
                     DataContext="{Binding CarListViewModel}" Height="409" Margin="0,0,11,0"></views:CarListView>
-                </TabItem>
+            </TabItem>
 
 
-            <TabItem x:Name="ManageRides" Header="SPRAVOVAT JÍZDU">
+            <TabItem  Foreground="Black" x:Name="ManageRides" Header="SPRAVOVAT JÍZDU">
 
             </TabItem>
         </TabControl>
@@ -57,4 +95,5 @@
 
 
     </Grid>
+
 </Window>
