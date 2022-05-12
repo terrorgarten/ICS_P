@@ -55,8 +55,8 @@
                         <ColumnDefinition Width="34*"/>
                         <ColumnDefinition Width="275*"/>
                     </Grid.ColumnDefinitions>
-                    <views:RideListView 
-                        DataContext="{Binding RideDetailViewModel}" Height="399" Margin="176,3,1,3" Grid.Column="1"></views:RideListView>
+                    <views:RideDetailView 
+                        DataContext="{Binding RideDetailViewModel}" Height="399" Margin="176,3,1,3" Grid.Column="1"></views:RideDetailView>
                     <views:RideListView 
                         Grid.Column="0"
                         DataContext="{Binding RideListViewModel}" Height="409" Margin="0,0,654,-4" Grid.ColumnSpan="2" Loaded="RideListView_Loaded"></views:RideListView>

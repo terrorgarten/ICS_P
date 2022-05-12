@@ -39,6 +39,8 @@
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding Start}" />
                         <Label Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding End}" />
+                        <Label Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding BeginTime}" />
+
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

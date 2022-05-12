@@ -45,7 +45,10 @@ namespace Carpool.App.Wrappers
             get => GetValue<TimeSpan>();
             set => SetValue(value);
         }
-        public Guid UserId
+        /// <summary>
+        /// TODO - odstranit nullability? pr save async se kontroluje 
+        /// </summary>
+        public Guid? UserId
         {
             get => GetValue<Guid>();
             set => SetValue(value);

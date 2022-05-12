@@ -17,7 +17,7 @@ namespace Carpool.BL.Models
         Guid CarId
     ) : ModelBase
     {
-        public CarDetailModel? Car { get; set; }
+        //public CarDetailModel? Car { get; set; }
         public UserDetailModel? User { get; set; }
         public string Start { get; set; } = Start;
         public string End { get; set; } = End;

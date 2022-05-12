@@ -37,6 +37,7 @@ namespace Carpool.App.ViewModels
             DeleteCommand = new AsyncRelayCommand(DeleteAsync);
 
             mediator.Register<SelectedMessage<UserWrapper>>(OnUserSelected);
+            mediator.Register<SelectedMessage<RideWrapper>>(OnRideSelected);
         }
 
         public RideWrapper? Model { get; set; }
@@ -44,19 +45,19 @@ namespace Carpool.App.ViewModels
         public ICommand SaveCommand { get; }
         public ICommand DeleteCommand { get; }
 
+
+        private void OnRideSelected(SelectedMessage<RideWrapper> message)
+        {
+            if (message.Id != null) _ = LoadAsync(message.Id.Value);
+        }
+
         
 
-
-        private bool CanSave() => Model?.IsValid ?? false;
-
-        private void OnUserSelected(SelectedMessage<UserWrapper> obj)
+        private static void OnUserSelected(SelectedMessage<UserWrapper> obj)
         {
             CurrentUserId = obj.Id;
-        } 
-
-
-
-
+        }
+        
 
         public async Task LoadAsync(Guid id)
         {
@@ -65,12 +66,67 @@ namespace Carpool.App.ViewModels
 
         public Task DeleteAsync()
         {
-            throw new NotImplementedException();
+            //if (Model is null)
+            //{
+            //    throw new InvalidOperationException("Null model cannot be deleted");
+            //}
+
+            //if (Model.Id != Guid.Empty)
+            //{
+            //    var delete = _messageDialogService.Show(
+            //        $"Delete",
+            //        $"Do you want to delete ride to {Model?.End} scheduled for ?.",
+            //        MessageDialogButtonConfiguration.YesNo,
+            //        MessageDialogResult.No);
+
+            //    if (delete == MessageDialogResult.No) return;
+
+            //    try
+            //    {
+            //        await _carFacade.DeleteAsync(Model!.Id);
+            //    }
+            //    catch
+            //    {
+            //        var _ = _messageDialogService.Show(
+            //            $"Deleting of {Model?.Manufacturer} failed!",
+            //            "Deleting failed",
+            //            MessageDialogButtonConfiguration.OK,
+            //            MessageDialogResult.OK);
+            //    }
+
+            //    _mediator.Send(new DeleteMessage<CarWrapper>
+            //    {
+            //        Model = Model
+            //    });
+            //}
+            throw new NotImplementedException("Delete not implemented yet");
         }
 
-        public Task SaveAsync()
+        private bool CanSave() => Model?.IsValid ?? false;
+        //{
+        //    if (Model == null)
+        //    {
+        //        return false;
+        //    }
+        //    //Ride has already lapsed
+        //    return DateTime.Compare(Model.BeginTime, DateTime.Now) >= 0;
+        //}
+
+        //TODO - Kontroly? 
+        public async Task SaveAsync()
         {
-            throw new NotImplementedException();
+            if (Model == null)
+            {
+                throw new InvalidOperationException("Null model cannot be saved");
+            }
+
+            if (CurrentUserId == null)
+            {
+                throw new InvalidOperationException("No user selected");
+            }
+            //Model.UserId = CurrentUserId;
+            Model = await _rideFacade.SaveAsync(Model.Model);
+            _mediator.Send(new UpdateMessage<RideWrapper> { Model = Model });
         }
     }
 }

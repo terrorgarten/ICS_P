@@ -111,6 +111,8 @@ namespace Carpool.App.ViewModels
             }
         }
 
+
+
         private void SelectUser(Guid? id)
         {
             if (id is null)
