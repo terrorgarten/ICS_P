@@ -22,36 +22,55 @@ namespace Carpool.App.ViewModels
         private readonly IMediator _mediator;
         private readonly RideFacade _rideFacade;
         private readonly IMessageDialogService _messageDialogService;
+        private readonly CarFacade _carFacade;
 
         public RideDetailViewModel
             (RideFacade rideFacade,
                 IMessageDialogService messageDialogService,
-                IMediator mediator
+                IMediator mediator,
+                CarFacade carFacade
                 )
         {
             _rideFacade = rideFacade;
             _messageDialogService = messageDialogService;
             _mediator = mediator;
+            _carFacade = carFacade;
 
             SaveCommand = new AsyncRelayCommand(SaveAsync, CanSave);
             DeleteCommand = new AsyncRelayCommand(DeleteAsync);
+            CarSelectedCommand = new RelayCommand<CarListModel>(OnCarSelected);
 
             mediator.Register<SelectedMessage<UserWrapper>>(OnUserSelected);
             mediator.Register<SelectedMessage<RideWrapper>>(OnRideSelected);
+            mediator.Register<NewMessage<RideWrapper>>(OnNewRide);
+        }
+
+        private void OnCarSelected(CarListModel? car)
+        {
+            Model!.CarId = car!.Id;
+            _ = LoadAsync(Model.Id);
+        }
+
+        private void OnNewRide(NewMessage<RideWrapper> obj)
+        {
+            Model = RideDetailModel.Empty;
+            Model.Id = Guid.NewGuid();
+            Model.UserId = CurrentUserId;
         }
 
         public RideWrapper? Model { get; set; }
         private static Guid? CurrentUserId { get; set; }
         public ICommand SaveCommand { get; }
         public ICommand DeleteCommand { get; }
+        public ObservableCollection<CarListModel> UserCars { get; set; } = new();
+
+        public ICommand CarSelectedCommand { get; }
 
 
         private void OnRideSelected(SelectedMessage<RideWrapper> message)
         {
             if (message.Id != null) _ = LoadAsync(message.Id.Value);
         }
-
-        
 
         private static void OnUserSelected(SelectedMessage<UserWrapper> obj)
         {
@@ -62,44 +81,48 @@ namespace Carpool.App.ViewModels
         public async Task LoadAsync(Guid id)
         {
             Model = await _rideFacade.GetAsync(id) ?? RideDetailModel.Empty;
+            UserCars.Clear();
+            var cars = await _carFacade.GetUserCars(CurrentUserId);
+            UserCars.AddRange(cars!);
         }
 
-        public Task DeleteAsync()
+        public async Task DeleteAsync()
         {
-            //if (Model is null)
-            //{
-            //    throw new InvalidOperationException("Null model cannot be deleted");
-            //}
+            if (Model is null)
+            {
+                throw new InvalidOperationException("Null model cannot be deleted");
+            }
 
-            //if (Model.Id != Guid.Empty)
-            //{
-            //    var delete = _messageDialogService.Show(
-            //        $"Delete",
-            //        $"Do you want to delete ride to {Model?.End} scheduled for ?.",
-            //        MessageDialogButtonConfiguration.YesNo,
-            //        MessageDialogResult.No);
+            if (Model.Id != Guid.Empty)
+            {
+                var delete = _messageDialogService.Show(
+                    $"Delete",
+                    $"Do you want to delete ride to {Model?.End} scheduled for ?.",
+                    MessageDialogButtonConfiguration.YesNo,
+                    MessageDialogResult.No);
 
-            //    if (delete == MessageDialogResult.No) return;
+                if (delete == MessageDialogResult.No) return;
 
-            //    try
-            //    {
-            //        await _carFacade.DeleteAsync(Model!.Id);
-            //    }
-            //    catch
-            //    {
-            //        var _ = _messageDialogService.Show(
-            //            $"Deleting of {Model?.Manufacturer} failed!",
-            //            "Deleting failed",
-            //            MessageDialogButtonConfiguration.OK,
-            //            MessageDialogResult.OK);
-            //    }
+                try
+                {
+                    await _rideFacade.DeleteAsync(Model!.Id);
+                }
+                catch
+                {
+                    var _ = _messageDialogService.Show(
+                        $"Deleting of ride failed!",
+                        "Deleting failed",
+                        MessageDialogButtonConfiguration.OK,
+                        MessageDialogResult.OK);
+                }
 
-            //    _mediator.Send(new DeleteMessage<CarWrapper>
-            //    {
-            //        Model = Model
-            //    });
-            //}
-            throw new NotImplementedException("Delete not implemented yet");
+                _mediator.Send(new DeleteMessage<RideWrapper>());
+                //TODO - odebrat z rides vsude -> DELETED MESSAGE 
+            }
+            else
+            {
+                Model = null;
+            }
         }
 
         private bool CanSave() => Model?.IsValid ?? false;
@@ -112,10 +135,12 @@ namespace Carpool.App.ViewModels
         //    return DateTime.Compare(Model.BeginTime, DateTime.Now) >= 0;
         //}
 
+        
+
         //TODO - Kontroly? 
         public async Task SaveAsync()
         {
-            if (Model == null)
+            if (Model is null)
             {
                 throw new InvalidOperationException("Null model cannot be saved");
             }
@@ -124,7 +149,7 @@ namespace Carpool.App.ViewModels
             {
                 throw new InvalidOperationException("No user selected");
             }
-            //Model.UserId = CurrentUserId;
+
             Model = await _rideFacade.SaveAsync(Model.Model);
             _mediator.Send(new UpdateMessage<RideWrapper> { Model = Model });
         }

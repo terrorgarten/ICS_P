@@ -6,6 +6,7 @@
                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                        xmlns:texts="clr-namespace:Carpool.App.Resources.Texts"
                        xmlns:viewModels="clr-namespace:Carpool.App.ViewModels"
+                       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
                        d:DesignHeight="450"
                        d:DesignWidth="800"
                        mc:Ignorable="d"
@@ -43,7 +44,28 @@
             <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Model.ApproxRideTime, UpdateSourceTrigger=PropertyChanged}"/>
 
             <Label Grid.Row="3" Grid.Column="0" Content="Car" HorizontalAlignment="Center" />
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Model.Car.Manufacturer, UpdateSourceTrigger=PropertyChanged}"/>
+            <!--<TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Model.Car.Manufacturer, UpdateSourceTrigger=PropertyChanged}"/>-->
+            <ComboBox x:Name="CarsComboBox" Grid.Row="3" Grid.Column="1" ItemsSource="{Binding UserCars}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding CarSelectedCommand}"
+                                               CommandParameter="{Binding ElementName=CarsComboBox, Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding Manufacturer}"  />
+                        </Grid>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
 
             <!-- pasažéři
             
