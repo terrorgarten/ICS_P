@@ -17,7 +17,7 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        
+
         <TabControl Grid.Column="0" SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}" Margin="0,0,-40,0" SelectionChanged="TabControl_SelectionChanged" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="933">
             <TabItem x:Name="Login" Header="LOGIN" Height="21" VerticalAlignment="Bottom">
                 <views:UserListView x:Name="UserList"
@@ -27,12 +27,15 @@
             <TabItem x:Name="Dashboard" Header="DASHBOARD">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="445*"/>
-                        <ColumnDefinition Width="472*"/>
+                        <ColumnDefinition Width="337*"/>
+                        <ColumnDefinition Width="45*"/>
+                        <ColumnDefinition Width="15*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="477*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="Můj profil" Margin="0,31,134,285" Width="287" FontSize="25" FontFamily="Calibri"/>
+                    <Label Content="Můj profil" Margin="0,31,21,285" Width="287" FontSize="25" FontFamily="Calibri"/>
                     <views:UserDetailView Grid.Column="0" HorizontalAlignment="Left" Width="873" Margin="24,76,0,25"
-                                          DataContext="{Binding SelectedUserDetailViewModel}" Loaded="UserDetailView_Loaded" Grid.ColumnSpan="2"/>
+                                          DataContext="{Binding SelectedUserDetailViewModel}" Loaded="UserDetailView_Loaded" Grid.ColumnSpan="5"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="FindRide" Header="HLEDAT JÍZDU">
@@ -43,11 +46,21 @@
             <TabItem x:Name="Car" Header="AUTO">
                 <views:CarListView 
                     DataContext="{Binding CarListViewModel}" Height="409" Margin="0,0,11,0"></views:CarListView>
-                </TabItem>
+            </TabItem>
 
 
             <TabItem x:Name="ManageRides" Header="SPRAVOVAT JÍZDU">
-
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="34*"/>
+                        <ColumnDefinition Width="275*"/>
+                    </Grid.ColumnDefinitions>
+                    <views:RideListView 
+                        DataContext="{Binding RideDetailViewModel}" Height="399" Margin="176,3,1,3" Grid.Column="1"></views:RideListView>
+                    <views:RideListView 
+                        Grid.Column="0"
+                        DataContext="{Binding RideListViewModel}" Height="409" Margin="0,0,654,-4" Grid.ColumnSpan="2" Loaded="RideListView_Loaded"></views:RideListView>
+                </Grid>
             </TabItem>
         </TabControl>
 

@@ -23,6 +23,8 @@ namespace Carpool.App.ViewModels
             ICarListViewModel carListViewModel,
             IUserListViewModel userListViewModel,
             IRideListViewModel rideListViewModel,
+            IRideDetailViewModel rideDetailViewModel,
+
             IMediator mediator,
             IFactory<ICarDetailViewModel> carDetailViewModelFactory,
             IFactory<IUserDetailViewModel> userDetailViewModelFactory
@@ -31,6 +33,8 @@ namespace Carpool.App.ViewModels
             CarListViewModel = carListViewModel;
             UserListViewModel = userListViewModel;
             RideListViewModel = rideListViewModel;
+            RideDetailViewModel = rideDetailViewModel;
+            
             _userDetailViewModelFactory = userDetailViewModelFactory;
             UserDetailViewModel = _userDetailViewModelFactory.Create();
             _carDetailViewModelFactory = carDetailViewModelFactory;
@@ -45,6 +49,7 @@ namespace Carpool.App.ViewModels
             SelectedIndex = 0;
         }
 
+        public IRideDetailViewModel RideDetailViewModel { get; set; }
         public ICarListViewModel CarListViewModel { get; }
         public IUserListViewModel UserListViewModel { get; }
         public IRideListViewModel RideListViewModel { get; }

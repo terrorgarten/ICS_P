@@ -20,14 +20,14 @@
         </Grid.RowDefinitions>
         <controls:ButtonWithIcon Grid.Row="0"
                                  Command="{Binding RideNewCommand}"
-                                 TextContent="Moje jízdy"
+                                 TextContent="Jízdy, které řídím"
                                  IconSource="/Resources/Images/Add.png"
                                  HorizontalAlignment="Center"/>
-        <ListBox x:Name="RidesListBox" Grid.Row="1" ItemsSource="{Binding Rides}">
+        <ListBox x:Name="CarsListBox" Grid.Row="1" ItemsSource="{Binding DriverRides}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding RideSelectedCommand}"
-                                           CommandParameter="{Binding ElementName=RidesListBox, Path=SelectedItem}" />
+                                           CommandParameter="{Binding ElementName=CarsListBox, Path=SelectedItem}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <ListBox.ItemTemplate>
@@ -36,13 +36,9 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding Start}" />
                         <Label Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding End}" />
-                        <Label Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding BeginTime}" />
-                        <Label Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding SeatCapacity}" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

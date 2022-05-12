@@ -29,10 +29,17 @@ namespace Carpool.App.ViewModels
 
             mediator.Register<UpdateMessage<RideWrapper>>(RideUpdated);
             mediator.Register<DeleteMessage<RideWrapper>>(RideDeleted);
+            mediator.Register<SelectedMessage<UserWrapper>>(OnUserSelected);
         }
 
-        public ObservableCollection<RideListModel> Rides { get; set; } = new();
+        private void OnUserSelected(SelectedMessage<UserWrapper> obj)
+        {
+            LoggedInUser = obj.Id;
+            _ = LoadAsync();
+        }
 
+        public ObservableCollection<RideListModel> DriverRides { get; set; } = new();
+        private static Guid? LoggedInUser { get; set; }
         public ICommand RideSelectedCommand { get; }
         public ICommand RideNewCommand { get; }
 
@@ -47,14 +54,14 @@ namespace Carpool.App.ViewModels
 
         public async Task LoadAsync()
         {
-            Rides.Clear();
-            var rides = await _rideFacade.GetAsync();
-            Rides.AddRange(rides);
+            DriverRides.Clear();
+            var rides = await _rideFacade.GetUserRides(LoggedInUser);
+            DriverRides.AddRange(rides!);
         }
 
         public override void LoadInDesignMode()
         {
-            Rides.Add(new RideListModel(Start: "Praha", End: "Olomouc", DateTime.MaxValue, 4));
+            DriverRides.Add(new RideListModel(Start: "Praha", End: "Olomouc", DateTime.MaxValue, 4));
         }
     }
 }

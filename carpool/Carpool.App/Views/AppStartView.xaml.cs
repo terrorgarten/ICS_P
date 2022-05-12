@@ -35,5 +35,10 @@ namespace Carpool.App.Views
         {
 
         }
+
+        private void RideListView_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
