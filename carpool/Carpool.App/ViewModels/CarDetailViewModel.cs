@@ -57,7 +57,7 @@ namespace Carpool.App.ViewModels
             
             Model.OwnerId = CurrentUserId;
             Model = await _carFacade.SaveAsync(Model.Model);
-            _mediator.Send(new UpdateMessage<CarWrapper> { Model = Model });
+            _mediator.Send(new UpdateMessage<CarWrapper> { Model = Model, TargetId = Model.OwnerId });
         }
 
         private bool CanSave() => Model?.IsValid ?? false;
@@ -94,7 +94,8 @@ namespace Carpool.App.ViewModels
 
                 _mediator.Send(new DeleteMessage<CarWrapper>
                 {
-                    Model = Model
+                    Model = Model,
+                    TargetId = Model.OwnerId
                 });
             }
         }

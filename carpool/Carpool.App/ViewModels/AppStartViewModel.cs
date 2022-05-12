@@ -107,26 +107,26 @@ namespace Carpool.App.ViewModels
             }
         }
 
-        private void SelectCar(Guid? id)
-        {
-            if (id is null)
-            {
-                SelectedCarDetailViewModel = null;
-            }
+        //private void SelectCar(Guid? id)
+        //{
+        //    if (id is null)
+        //    {
+        //        SelectedCarDetailViewModel = null;
+        //    }
 
-            else
-            {
-                var carDetailViewModel = CarDetailViewModels.SingleOrDefault(vm => vm.Model?.Id == id);
-                if (carDetailViewModel == null)
-                {
-                    carDetailViewModel = _carDetailViewModelFactory.Create();
-                    CarDetailViewModels.Add(carDetailViewModel);
-                    carDetailViewModel.LoadAsync(id.Value);
-                }
+        //    else
+        //    {
+        //        var carDetailViewModel = CarDetailViewModels.SingleOrDefault(vm => vm.Model?.Id == id);
+        //        if (carDetailViewModel == null)
+        //        {
+        //            carDetailViewModel = _carDetailViewModelFactory.Create();
+        //            CarDetailViewModels.Add(carDetailViewModel);
+        //            carDetailViewModel.LoadAsync(id.Value);
+        //        }
 
-                SelectedCarDetailViewModel = carDetailViewModel;
-            }
-        }
+        //        SelectedCarDetailViewModel = carDetailViewModel;
+        //    }
+        //}
 
         private void OnCloseUserDetailTabExecute(IUserDetailViewModel? recipeDetailViewModel)
         {

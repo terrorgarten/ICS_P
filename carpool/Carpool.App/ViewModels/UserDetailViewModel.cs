@@ -84,8 +84,7 @@ namespace Carpool.App.ViewModels
                 return;
             }
 
-            Model?.OwnedCars.Remove(message.Model);
-            SelectedCar = null;
+            _ = LoadAsync(Model.Id);
         }
 
         private void NewCar(NewMessage<CarWrapper> message)
@@ -95,20 +94,17 @@ namespace Carpool.App.ViewModels
                 return;
             }
 
-            Model?.OwnedCars.Add(message.Model);
+            _ = LoadAsync(Model.Id);
         }
 
         private void UpdateCar(UpdateMessage<CarWrapper> message)
         {
-            //if (message.TargetId != Model?.Id)
-            //{
-            //    return;
-            //}
-            //var Id = SelectedCar.OwnerId;
-            //Model?.OwnedCars.Clear();
+            if (message.TargetId != Model?.Id)
+            {
+                return;
+            }
 
-            //var ownedcars = _userFacade.GetAsync(Model?.OwnedCars);
-            //ownedcars.AddRange(ownedcars);
+            _ = LoadAsync(Model.Id);
         }
 
         public async Task DeleteAsync()
