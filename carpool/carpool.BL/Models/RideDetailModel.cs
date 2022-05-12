@@ -17,7 +17,7 @@ namespace Carpool.BL.Models
         Guid CarId
     ) : ModelBase
     {
-        //public CarDetailModel? Car { get; set; }
+        public CarDetailModel? Car { get; set; }
         public UserDetailModel? User { get; set; }
         public string Start { get; set; } = Start;
         public string End { get; set; } = End;
@@ -44,6 +44,7 @@ namespace Carpool.BL.Models
             public MapperProfile()
             {
                 CreateMap<RideEntity, RideDetailModel>()
+                    
                     //.ForMember(dst => dst.SeatCapacity, opt => opt.MapFrom(src => src.Car!.SeatCapacity))
                     //.ForMember(dst => dst.PhotoUrl, opt => opt.MapFrom(src => src.Car!.PhotoUrl))
                     //.ForMember(dst => dst.RegistrationDate, opt => opt.MapFrom(src => src.Car!.RegistrationDate))
@@ -51,7 +52,7 @@ namespace Carpool.BL.Models
                     //.ForMember(dst => dst.CarType, opt => opt.MapFrom(src => src.Car!.CarType))
                     //.ForMember(dst => dst.Name, opt => opt.MapFrom(src => src.User!.Name))
                     //.ForMember(dst => dst.Surname, opt => opt.MapFrom(src => src.User!.Surname))
-                    .ReverseMap();
+                    .ReverseMap().ForMember(dst => dst.User, opt => opt.Ignore());
             }
         }
 
