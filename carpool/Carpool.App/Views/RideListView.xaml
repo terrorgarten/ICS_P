@@ -36,10 +36,11 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding Start}" />
-                        <Label Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding End}" />
-                        <Label Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding BeginTime}" />
+                        <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding Start}" ContentStringFormat="Z: {0}"  />
+                        <Label Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{Binding End}" ContentStringFormat="Do: {0}" />
+                        <Label Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" Content="{Binding BeginTime}" />
 
                     </Grid>
                 </DataTemplate>

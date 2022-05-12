@@ -40,7 +40,13 @@ namespace Carpool.App.ViewModels
             mediator.Register<NewMessage<CarWrapper>>(NewCar);
             mediator.Register<UpdateMessage<CarWrapper>>(UpdateCar);
             mediator.Register<DeleteMessage<CarWrapper>>(DeleteCar);
-           
+            mediator.Register<DeleteMessage<RideWrapper>>(OnRideDeleted);
+
+        }
+
+        private void OnRideDeleted(DeleteMessage<RideWrapper> obj)
+        {
+            _ = LoadAsync(Model!.Id);
         }
 
         public ICommand DeleteCommand { get; }

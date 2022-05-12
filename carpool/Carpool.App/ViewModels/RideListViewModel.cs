@@ -43,6 +43,8 @@ namespace Carpool.App.ViewModels
         public ICommand RideSelectedCommand { get; }
         public ICommand RideNewCommand { get; }
 
+        
+
         private void RideNew() => _mediator.Send(new NewMessage<RideWrapper>());
 
         //Toto se vola pokud dostanu command
