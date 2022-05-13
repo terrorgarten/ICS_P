@@ -67,7 +67,7 @@ namespace Carpool.DAL.Tests
             //Assert
             await using var dbx = await DbContextFactory.CreateDbContextAsync();
             var actualEntities = await dbx.Cars.Include(i => i.Owner).SingleAsync(i => i.Id == entity.Id);
-            DeepAssert.Equal(entity, actualEntities, "PassengerRides");
+            DeepAssert.Equal(entity, actualEntities, "PassengerRides", "OwnerId");
         }
 
         [Fact]

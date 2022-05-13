@@ -71,10 +71,10 @@ namespace Carpool.BL.Tests
         [Fact]
         public async Task SeededSportCar_DeleteById_Deleted()
         {
-            await _carFacadeSUT.DeleteAsync(CarSeeds.SportCar.Id);
+            await _carFacadeSUT.DeleteAsync(CarSeeds.CarEntityDelete.Id);
 
             await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            Assert.False(await dbxAssert.Cars.AnyAsync(i => i.Id == CarSeeds.SportCar.Id));
+            Assert.False(await dbxAssert.Cars.AnyAsync(i => i.Id == CarSeeds.CarEntityDelete.Id));
         }
 
         [Fact]
