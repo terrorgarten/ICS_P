@@ -18,7 +18,7 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <TabControl Grid.Column="0" SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}" Margin="0,0,-40,0" SelectionChanged="TabControl_SelectionChanged" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="933">
+        <TabControl Grid.Column="0" SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}" Margin="0,0,-40,0" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="933">
             <TabItem x:Name="Login" Header="LOGIN" Height="21" VerticalAlignment="Bottom">
                 <views:UserListView x:Name="UserList"
                                     Grid.Row="0"
@@ -35,7 +35,7 @@
                     </Grid.ColumnDefinitions>
                     <Label Content="Můj profil" Margin="0,31,21,285" Width="287" FontSize="25" FontFamily="Calibri"/>
                     <views:UserDetailView Grid.Column="0" HorizontalAlignment="Left" Width="873" Margin="24,76,0,25"
-                                          DataContext="{Binding SelectedUserDetailViewModel}" Loaded="UserDetailView_Loaded" Grid.ColumnSpan="5"/>
+                                          DataContext="{Binding SelectedUserDetailViewModel}" Grid.ColumnSpan="5"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="FindRide" Header="HLEDAT JÍZDU">
@@ -59,7 +59,7 @@
                         DataContext="{Binding RideDetailViewModel}" Height="399" Margin="176,3,1,3" Grid.Column="1"></views:RideDetailView>
                     <views:RideListView 
                         Grid.Column="0"
-                        DataContext="{Binding RideListViewModel}" Height="409" Margin="0,0,654,-4" Grid.ColumnSpan="2" Loaded="RideListView_Loaded"></views:RideListView>
+                        DataContext="{Binding RideListViewModel}" Height="409" Margin="0,0,654,-4" Grid.ColumnSpan="2" ></views:RideListView>
                 </Grid>
             </TabItem>
         </TabControl>

@@ -26,8 +26,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -44,8 +43,10 @@
             <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Model.ApproxRideTime, UpdateSourceTrigger=PropertyChanged}"/>
 
             <Label Grid.Row="3" Grid.Column="0" Content="Car" HorizontalAlignment="Center" />
-            <!--<TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Model.Car.Manufacturer, UpdateSourceTrigger=PropertyChanged}"/>-->
-            <ComboBox x:Name="CarsComboBox" Grid.Row="3" Grid.Column="1" ItemsSource="{Binding UserCars}">
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Model.Car.Manufacturer, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <Label Grid.Row="4" Grid.Column="0" Content="Car Selection" HorizontalAlignment="Center" />
+            <ComboBox x:Name="CarsComboBox" Grid.Row="4" Grid.Column="1" ItemsSource="{Binding UserCars}" VerticalAlignment="Bottom">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding CarSelectedCommand}"
@@ -59,7 +60,6 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding Manufacturer}"  />
                         </Grid>

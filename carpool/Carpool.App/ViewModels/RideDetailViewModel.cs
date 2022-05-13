@@ -38,17 +38,24 @@ namespace Carpool.App.ViewModels
 
             SaveCommand = new AsyncRelayCommand(SaveAsync, CanSave);
             DeleteCommand = new AsyncRelayCommand(DeleteAsync);
-            CarSelectedCommand = new RelayCommand<CarListModel>(OnCarSelected);
+            CarSelectedCommand = new RelayCommand<CarDetailModel>(OnCarSelected);
 
             mediator.Register<SelectedMessage<UserWrapper>>(OnUserSelected);
             mediator.Register<SelectedMessage<RideWrapper>>(OnRideSelected);
             mediator.Register<NewMessage<RideWrapper>>(OnNewRide);
         }
 
-        private void OnCarSelected(CarListModel? car)
+        private void OnCarSelected(CarDetailModel? car)
         {
+            if (car is null)
+            {
+                return;
+            }
+
             Model!.CarId = car!.Id;
-            _ = LoadAsync(Model.Id);
+            Model.Car = car;
+            _ = SaveAsync();
+            //_ = LoadAsync(Model.Id);
         }
 
         private void OnNewRide(NewMessage<RideWrapper> obj)
@@ -62,7 +69,7 @@ namespace Carpool.App.ViewModels
         private static Guid? CurrentUserId { get; set; }
         public ICommand SaveCommand { get; }
         public ICommand DeleteCommand { get; }
-        public ObservableCollection<CarListModel> UserCars { get; set; } = new();
+        public ObservableCollection<CarDetailModel> UserCars { get; set; } = new();
 
         public ICommand CarSelectedCommand { get; }
 
@@ -82,7 +89,7 @@ namespace Carpool.App.ViewModels
         {
             Model = await _rideFacade.GetAsync(id) ?? RideDetailModel.Empty;
             UserCars.Clear();
-            var cars = await _carFacade.GetUserCars(CurrentUserId);
+            var cars = await _carFacade.GetUserCarsDetails(CurrentUserId);
             UserCars.AddRange(cars!);
         }
 

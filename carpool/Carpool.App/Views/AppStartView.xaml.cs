@@ -26,19 +26,5 @@ namespace Carpool.App.Views
             DataContext = mainViewModel;
         }
 
-        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void UserDetailView_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void RideListView_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

@@ -7,7 +7,7 @@ public record RideEntity(
     DateTime BeginTime,
     TimeSpan ApproxRideTime,
     Guid UserId,
-    Guid CarId) : IEntity
+    Guid? CarId) : IEntity
 {
 #nullable disable
     public RideEntity() : this(default, default!, default!, default, default, default, default) { }

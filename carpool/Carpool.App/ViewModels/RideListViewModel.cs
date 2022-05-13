@@ -5,6 +5,7 @@ using Carpool.App.Services;
 using Carpool.App.Wrappers;
 using Carpool.BL.Models;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Carpool.App.Commands;
@@ -59,6 +60,7 @@ namespace Carpool.App.ViewModels
             DriverRides.Clear();
             var rides = await _rideFacade.GetUserRides(LoggedInUser);
             DriverRides.AddRange(rides!);
+            DriverRides = new ObservableCollection<RideListModel>(DriverRides.Distinct());
         }
 
         public override void LoadInDesignMode()

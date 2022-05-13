@@ -39,8 +39,37 @@ public class CarFacade : CRUDFacade<CarEntity, CarListModel, CarDetailModel>
             Console.WriteLine(variable);
         }
 
-        var userRideList = await _mapper.ProjectTo<CarListModel>(userCars).ToListAsync().ConfigureAwait(false);
+        var carList = await _mapper.ProjectTo<CarListModel>(userCars).ToListAsync().ConfigureAwait(false);
 
-        return userRideList;
+        return carList;
+    }
+
+    public async Task<IEnumerable<CarDetailModel>?> GetUserCarsDetails(Guid? id)
+    {
+        if (id == null)
+        {
+            return new List<CarDetailModel>();
+        }
+
+        await using var _uowCreated = _uow.Create();
+        var queryUserCars = _uowCreated.GetRepository<CarEntity>().Get();
+
+        //foreach (var variable in queryUserCars)
+        //{
+        //    Console.WriteLine(variable);
+        //}
+        //Console.WriteLine("");
+
+        var userCars = queryUserCars.Where(x => x.OwnerId == id);
+
+        foreach (var variable in userCars)
+        {
+            Console.WriteLine("Vyfiltrovana:  ");
+            Console.WriteLine(variable);
+        }
+
+        var carDetailList = await _mapper.ProjectTo<CarDetailModel>(userCars).ToListAsync().ConfigureAwait(false);
+
+        return carDetailList;
     }
 }
