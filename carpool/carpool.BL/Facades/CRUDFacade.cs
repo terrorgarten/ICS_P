@@ -26,7 +26,8 @@ public class CRUDFacade<TEntity, TListModel, TDetailModel>
             _mapper = mapper;
         }
 
-        public virtual async Task DeleteAsync(TDetailModel model) => await this.DeleteAsync(model.Id);
+        //nepouziva sa
+        //public virtual async Task DeleteAsync(TDetailModel model) => await this.DeleteAsync(model.Id);
 
         public virtual async Task DeleteAsync(Guid id)
         {

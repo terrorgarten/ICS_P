@@ -15,6 +15,20 @@ public class CarFacade : CRUDFacade<CarEntity, CarListModel, CarDetailModel>
         _uow = unitOfWorkFactory;
         _mapper = mapper;
     }
+
+    public override async Task DeleteAsync(Guid id)
+    {
+        await using var uow = _uow.Create();
+        var db = uow.GetRepository<RideEntity>().Get().Where(ride => ride.CarId == id);
+        foreach (var res in db.Select(x => x.Id))
+        {
+            uow.GetRepository<RideEntity>().Delete(res);
+        }
+        await uow.CommitAsync();
+
+        await base.DeleteAsync(id);
+    }
+
     public async Task<IEnumerable<CarListModel>?> GetUserCars(Guid? id)
     {
         if (id == null)

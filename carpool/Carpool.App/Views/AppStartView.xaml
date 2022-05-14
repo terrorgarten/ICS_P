@@ -8,7 +8,7 @@
     xmlns:viewModels="clr-namespace:Carpool.App.ViewModels"
 
         mc:Ignorable="d"
-        Title="UserProfileWindow" Height="450" Width="933"
+        Title="Carpool" Height="450" Width="933"
         d:DataContext="{d:DesignInstance viewModels:AppStartViewModel}">
 
     <Grid 

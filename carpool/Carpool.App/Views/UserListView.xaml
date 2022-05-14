@@ -18,11 +18,10 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <controls:ButtonWithIcon Grid.Row="0"
-                                 Command="{Binding UserNewCommand}"
-                                 TextContent="Users"
-                                 IconSource="/Resources/Images/Add.png"
-                                 HorizontalAlignment="Center"/>
+        <Button Grid.Row="0"
+                Command="{Binding UserNewCommand}"
+                Content="Users"
+                HorizontalAlignment="Center"/>
         <ListBox x:Name="UsersListBox" Grid.Row="1" ItemsSource="{Binding Users}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
@@ -35,7 +34,7 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding Name}" />
                         <Label Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding Surname}" />

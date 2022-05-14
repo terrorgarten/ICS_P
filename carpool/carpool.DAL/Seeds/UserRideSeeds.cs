@@ -7,19 +7,19 @@ namespace Carpool.DAL.Seeds
     {
         public static readonly UserRideEntity UserRide1 = new(
             Id: Guid.Parse(input: "3C5391D1-624E-4CEB-A93C-1A6F4980CEF7"),
-            PassengerId: UserSeeds.FirstUser.Id,
+            PassengerId: UserSeeds.SecondUser.Id,
             RideId: RideSeeds.Ride1.Id)
         {
-            Passenger = UserSeeds.FirstUser,
+            Passenger = UserSeeds.SecondUser,
             Ride = RideSeeds.Ride1
         };
 
         public static readonly UserRideEntity UserRide2 = new(
             Id: Guid.Parse(input: "E29C9F5C-F879-4BD9-9B3D-0AA5327E6730"),
-            PassengerId: UserSeeds.SecondUser.Id,
+            PassengerId: UserSeeds.FirstUser.Id,
             RideId: RideSeeds.Ride2.Id)
         {
-            Passenger = UserSeeds.SecondUser,
+            Passenger = UserSeeds.FirstUser,
             Ride = RideSeeds.Ride2
         };
 

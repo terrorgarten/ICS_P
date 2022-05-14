@@ -31,27 +31,27 @@ namespace Carpool.DAL
             modelBuilder.Entity<UserEntity>()
                 .HasMany(i => i.OwnedCars)
                 .WithOne(i => i.Owner)
+                .OnDelete(DeleteBehavior.ClientCascade);
+
+            modelBuilder.Entity<CarEntity>()
+                .HasMany(i => i.Rides)
+                .WithOne(i => i.Car)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<UserEntity>()
-                .HasMany(i => i.DriverRides)
-                .WithOne(i => i.User)
-                .OnDelete(DeleteBehavior.Cascade);
+            //modelBuilder.Entity<UserEntity>()
+            //    .HasMany(i => i.DriverRides)
+            //    .WithOne(i => i.User)
+            //    .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<UserEntity>()
                 .HasMany(i => i.PassengerRides)
                 .WithOne(i => i.Passenger)
-                .OnDelete(DeleteBehavior.ClientCascade);//opraveno na NoAction, kvoli Erroru z migracie a nasledne update-database, logicky sa nam javi Cascade
+                .OnDelete(DeleteBehavior.Cascade);//opraveno na NoAction, kvoli Erroru z migracie a nasledne update-database, logicky sa nam javi Cascade
 
             modelBuilder.Entity<RideEntity>()
                 .HasMany(i => i.PassengerRides)
                 .WithOne(i => i.Ride)
                 .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<RideEntity>()
-                .HasOne(i => i.User)
-                .WithMany(i => i.DriverRides)
-                .OnDelete(DeleteBehavior.ClientCascade);//opraveno na NoAction, kvoli Erroru z migracie a nasledne update-database, logicky sa nam javi Cascade
 
             if (!_seedDemoData) return;
             UserSeeds.Seed(modelBuilder);

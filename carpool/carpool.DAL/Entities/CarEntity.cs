@@ -15,4 +15,6 @@ public record CarEntity(
     public CarEntity() : this(default, default, default, default, default, default, default) { }
 #nullable enable
     public UserEntity? Owner { get; init; }
+    public ICollection<RideEntity> Rides { get; init; } = new List<RideEntity>();
+
 }

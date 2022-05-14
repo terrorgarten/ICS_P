@@ -34,5 +34,11 @@
 	  <ProjectReference Include="..\Carpool.Common\Carpool.Common.csproj" />
 	  <ProjectReference Include="..\Carpool.DAL\Carpool.DAL.csproj" />
   </ItemGroup>
+	
+	<ItemGroup>
+		<None Update="AppSettings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 
 </Project>

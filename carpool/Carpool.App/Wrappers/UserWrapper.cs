@@ -37,10 +37,10 @@ namespace Carpool.App.Wrappers
 
         private void InitializeCollectionProperties(UserDetailModel model)
         {
-            if (model.OwnedCars == null)
-            {
-                throw new ArgumentException("Owned Cars cannot be null");
-            }
+            //if (model.OwnedCars == null)
+            //{
+            //    throw new ArgumentException("Owned Cars cannot be null");
+            //}
             OwnedCars.AddRange(model.OwnedCars.Select(e => new CarWrapper(e)));
 
             RegisterCollection(OwnedCars, model.OwnedCars);

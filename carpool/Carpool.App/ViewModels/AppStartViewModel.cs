@@ -46,7 +46,6 @@ namespace Carpool.App.ViewModels
             mediator.Register<NewMessage<UserWrapper>>(OnUserNewMessage);
             mediator.Register<SelectedMessage<UserWrapper>>(OnUserSelected);
             mediator.Register<DeleteMessage<UserWrapper>>(OnUserDeleted);
-            SelectedIndex = 0;
         }
 
         public IRideDetailViewModel RideDetailViewModel { get; set; }
@@ -73,24 +72,14 @@ namespace Carpool.App.ViewModels
 
         private void OnUserNewMessage(NewMessage<UserWrapper> _)
         {
+            SelectedIndex = 1;
             SelectUser(Guid.Empty);
-        }
-
-        private void OnCarNewMessage(NewMessage<CarWrapper> _)
-        {
-            SelectCar(Guid.Empty);
         }
 
         private void OnUserSelected(SelectedMessage<UserWrapper> message)
         {
             SelectedIndex = 1;
             SelectUser(message.Id);
-        }
-
-        private void OnCarSelected(SelectedMessage<CarWrapper> message)
-        {
-            SelectedIndex = 3;
-            SelectCar(message.Id);
         }
 
         private void OnUserDeleted(DeleteMessage<UserWrapper> message)
@@ -134,26 +123,26 @@ namespace Carpool.App.ViewModels
             }
         }
 
-        private void SelectCar(Guid? id)
-        {
-            if (id is null)
-            {
-                SelectedCarDetailViewModel = null;
-            }
+        //private void SelectCar(Guid? id)
+        //{
+        //    if (id is null)
+        //    {
+        //        SelectedCarDetailViewModel = null;
+        //    }
 
-            else
-            {
-                var carDetailViewModel = CarDetailViewModels.SingleOrDefault(vm => vm.Model?.Id == id);
-                if (carDetailViewModel == null)
-                {
-                    carDetailViewModel = _carDetailViewModelFactory.Create();
-                    CarDetailViewModels.Add(carDetailViewModel);
-                    carDetailViewModel.LoadAsync(id.Value);
-                }
+        //    else
+        //    {
+        //        var carDetailViewModel = CarDetailViewModels.SingleOrDefault(vm => vm.Model?.Id == id);
+        //        if (carDetailViewModel == null)
+        //        {
+        //            carDetailViewModel = _carDetailViewModelFactory.Create();
+        //            CarDetailViewModels.Add(carDetailViewModel);
+        //            carDetailViewModel.LoadAsync(id.Value);
+        //        }
 
-                SelectedCarDetailViewModel = carDetailViewModel;
-            }
-        }
+        //        SelectedCarDetailViewModel = carDetailViewModel;
+        //    }
+        //}
 
         private void OnCloseUserDetailTabExecute(IUserDetailViewModel? recipeDetailViewModel)
         {

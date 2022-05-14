@@ -7,9 +7,8 @@ public record UserEntity(
     string? PhotoUrl) : IEntity
 {
 #nullable disable
-    public UserEntity() : this(default, default!, default!, default) { }
+    public UserEntity() : this(default, string.Empty, string.Empty, default) { }
 #nullable enable
-    public ICollection<CarEntity> OwnedCars { get; init; } = new List<CarEntity>();
-    public ICollection<UserRideEntity> PassengerRides { get; init; } = new List<UserRideEntity>();
-    public ICollection<RideEntity> DriverRides { get; init; } = new List<RideEntity>();   
+    public ICollection<CarEntity>? OwnedCars { get; init; } = new List<CarEntity>();
+    public ICollection<UserRideEntity>? PassengerRides { get; init; } = new List<UserRideEntity>();
 }

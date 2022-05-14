@@ -19,17 +19,23 @@ namespace Carpool.App.ViewModels
     {
         private readonly IMediator _mediator;
         private readonly UserFacade _userFacade;
+        //private readonly UserRideFacade _userRideFacade;
+        private readonly RideFacade _rideFacade;
         private readonly IMessageDialogService _messageDialogService;
         private UserWrapper? _model = UserDetailModel.Empty;
         private CarWrapper? _selectedCar;
 
         public UserDetailViewModel(
             UserFacade userFacade,
+            //UserRideFacade userRideFacade,
+            RideFacade rideFacade,
             IMessageDialogService messageDialogService,
             IMediator mediator,
             ICarListViewModel carListViewModel)
         {
             _userFacade = userFacade;
+            //_userRideFacade = userRideFacade;
+            _rideFacade = rideFacade;
             _messageDialogService = messageDialogService;
             _mediator = mediator;
             CarListViewModel = carListViewModel;
@@ -55,6 +61,8 @@ namespace Carpool.App.ViewModels
 
         public ICarListViewModel CarListViewModel { get; }
 
+        public ObservableCollection<RideListModel> PassengerRides { get; set; } = new();
+
         public CarWrapper? SelectedCar
         {
             get => _selectedCar;
@@ -72,7 +80,6 @@ namespace Carpool.App.ViewModels
 
         //public UserWrapper? Model { get; set; }
         
-
         public UserWrapper? Model
         {
             get => _model;
@@ -82,7 +89,13 @@ namespace Carpool.App.ViewModels
             }
         }
 
-        public async Task LoadAsync(Guid id) => Model = await _userFacade.GetAsync(id) ?? UserDetailModel.Empty;
+        public async Task LoadAsync(Guid id)
+        {
+            Model = await _userFacade.GetAsync(id) ?? UserDetailModel.Empty;
+            PassengerRides.Clear();
+            var passengerRides = await _rideFacade.GetPassengerRides(Model.Id);
+            PassengerRides.AddRange(passengerRides!);
+        }
 
         private void DeleteCar(DeleteMessage<CarWrapper> message)
         {
@@ -91,8 +104,7 @@ namespace Carpool.App.ViewModels
                 return;
             }
 
-            Model?.OwnedCars.Remove(message.Model);
-            SelectedCar = null;
+            _ = LoadAsync(Model.Id);
         }
 
         private void NewCar(NewMessage<CarWrapper> message)
@@ -102,20 +114,17 @@ namespace Carpool.App.ViewModels
                 return;
             }
 
-            Model?.OwnedCars.Add(message.Model);
+            _ = LoadAsync(Model.Id);
         }
 
         private void UpdateCar(UpdateMessage<CarWrapper> message)
         {
-            //if (message.TargetId != Model?.Id)
-            //{
-            //    return;
-            //}
-            //var Id = SelectedCar.OwnerId;
-            //Model?.OwnedCars.Clear();
+            if (message.TargetId != Model?.Id)
+            {
+                return;
+            }
 
-            //var ownedcars = _userFacade.GetAsync(Model?.OwnedCars);
-            //ownedcars.AddRange(ownedcars);
+            _ = LoadAsync(Model.Id);
         }
 
         public async Task DeleteAsync()

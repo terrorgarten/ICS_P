@@ -57,20 +57,6 @@ public static class RideSeeds
         Car = CarSeeds.CarEntity1
     };
 
-    //public static readonly RideEntity RideEntityForRideTestsGet = new(
-    //    Id: Guid.Parse(input: "16E2290B-E1E0-4ADD-9BFD-6B3026AB2F3F"),
-    //    Start: "Hradec Králové",
-    //    End: "Brno",
-    //    BeginTime: new DateTime(2019, 6, 15, 10, 50, 0),
-    //    ApproxRideTime: TimeSpan.FromHours(value: 2.0),
-    //    UserId: UserSeeds.UserEntity2.Id,
-    //    CarId: CarSeeds.CarEntity2.Id
-    //)
-    //{
-    //    User = UserSeeds.UserEntity2,
-    //    Car = CarSeeds.CarEntity2
-    //};
-
 
     //To ensure that no tests reuse these clones for non-idempotent operations:
     public static readonly RideEntity RideEntityWithNoPassengers = RideEntity with

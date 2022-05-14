@@ -27,14 +27,12 @@ public class UserRideFacade : CRUDFacade<UserRideEntity, UserRideDetailModel, Us
 
     public async Task<UserRideDetailModel?> SaveCheckAsync(Guid newPassengerId, Guid rideId)
     {
-
-
         var uowCreate = _uow.Create();
         var queryRides = uowCreate.GetRepository<RideEntity>().Get();
         var queryUsers = uowCreate.GetRepository<UserEntity>().Get();
 
 
-        var rides = queryRides.Where(x => x.Id == rideId);
+        var rides = queryRides.Include(x => x.Car).Where(x => x.Id == rideId);
         var users = queryUsers.Where(x => x.Id == newPassengerId);
         var ride = rides.FirstOrDefault();
         var user = users.FirstOrDefault();
@@ -66,7 +64,7 @@ public class UserRideFacade : CRUDFacade<UserRideEntity, UserRideDetailModel, Us
             }
         }
         // Check if new Passenger is not the driver
-        if (ride.UserId == newPassengerId)
+        if (ride.Car.OwnerId == newPassengerId)
         {
             Console.WriteLine("Equal");
             return null;

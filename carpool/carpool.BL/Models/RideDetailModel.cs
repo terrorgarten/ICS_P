@@ -37,10 +37,15 @@ namespace Carpool.BL.Models
             public MapperProfile()
             {
                 CreateMap<RideEntity, RideDetailModel>()
+                    //.ForMember(dst => dst.SeatCapacity, opt => opt.MapFrom(src => src.Car!.SeatCapacity))
+                    //.ForMember(dst => dst.PhotoUrl, opt => opt.MapFrom(src => src.Car!.PhotoUrl))
+                    //.ForMember(dst => dst.RegistrationDate, opt => opt.MapFrom(src => src.Car!.RegistrationDate))
+                    //.ForMember(dst => dst.Manufacturer, opt => opt.MapFrom(src => src.Car!.Manufacturer))
+                    //.ForMember(dst => dst.CarType, opt => opt.MapFrom(src => src.Car!.CarType))
+                    //.ForMember(dst => dst.Name, opt => opt.MapFrom(src => src.User!.Name))
+                    //.ForMember(dst => dst.Surname, opt => opt.MapFrom(src => src.User!.Surname))
                     .ReverseMap()
-                    .ForMember(dst => dst.User, opt => opt.Ignore())
                     .ForMember(dst => dst.Car, opt => opt.Ignore());
-
             }
         }
 

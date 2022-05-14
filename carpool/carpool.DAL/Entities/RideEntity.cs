@@ -6,13 +6,11 @@ public record RideEntity(
     string End,
     DateTime BeginTime,
     TimeSpan ApproxRideTime,
-    Guid UserId,
-    Guid? CarId) : IEntity
+    Guid CarId) : IEntity
 {
 #nullable disable
-    public RideEntity() : this(default, default!, default!, default, default, default, default) { }
+    public RideEntity() : this(default, string.Empty, string.Empty, default, default, default) { }
 #nullable enable
-    public UserEntity? User { get; init; }
     public ICollection<UserRideEntity> PassengerRides { get; init; } = new List<UserRideEntity>();
     public CarEntity? Car { get; init; }
 }

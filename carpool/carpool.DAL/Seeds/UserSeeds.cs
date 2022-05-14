@@ -19,19 +19,22 @@ public static class UserSeeds
 
     static UserSeeds()
     {
-        FirstUser.OwnedCars.Add(CarSeeds.SportCar);
-        SecondUser.OwnedCars.Add(CarSeeds.PersonalCar);
-        FirstUser.DriverRides.Add(RideSeeds.Ride1);
-        SecondUser.PassengerRides.Add(UserRideSeeds.UserRide1);
-        SecondUser.DriverRides.Add(RideSeeds.Ride2);
-        FirstUser.PassengerRides.Add(UserRideSeeds.UserRide2);
+        FirstUser.OwnedCars!.Add(CarSeeds.SportCar);
+        //FirstUser.DriverRides!.Add(RideSeeds.Ride1);
+        //FirstUser.DriverRides!.Add(RideSeeds.Ride3);
+        FirstUser.PassengerRides!.Add(UserRideSeeds.UserRide2);
+
+        SecondUser.OwnedCars!.Add(CarSeeds.PersonalCar);
+        //SecondUser.DriverRides!.Add(RideSeeds.Ride2);
+        //SecondUser.DriverRides!.Add(RideSeeds.Ride4);
+        SecondUser.PassengerRides!.Add(UserRideSeeds.UserRide1);
     }
 
     public static void Seed(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<UserEntity>().HasData(
-            FirstUser with{ OwnedCars = Array.Empty<CarEntity>(), DriverRides = Array.Empty<RideEntity>(), PassengerRides = Array.Empty<UserRideEntity>() },
-            SecondUser with { OwnedCars = Array.Empty<CarEntity>(), DriverRides = Array.Empty<RideEntity>(), PassengerRides = Array.Empty<UserRideEntity>() }
+            FirstUser with{ OwnedCars = Array.Empty<CarEntity>(), PassengerRides = Array.Empty<UserRideEntity>() },
+            SecondUser with { OwnedCars = Array.Empty<CarEntity>(), PassengerRides = Array.Empty<UserRideEntity>() }
         );
     }
 }

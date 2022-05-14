@@ -11,11 +11,9 @@ public static class RideSeeds
         End: "Praha",
         BeginTime: new DateTime(2022, 10, 28, 10, 30, 0),
         ApproxRideTime: TimeSpan.FromHours(2.5),
-        CarId: CarSeeds.SportCar.Id,
-        UserId: UserSeeds.FirstUser.Id)
+        CarId: CarSeeds.SportCar.Id)
     {
         Car = CarSeeds.SportCar,
-        User = UserSeeds.FirstUser
     };
 
     public static readonly RideEntity Ride2 = new(
@@ -24,11 +22,9 @@ public static class RideSeeds
         End: "Olomouc",
         BeginTime: new DateTime(2022, 09, 28, 10, 30, 0),
         ApproxRideTime: TimeSpan.FromHours(2.5),
-        CarId: CarSeeds.PersonalCar.Id,
-        UserId: UserSeeds.SecondUser.Id)
+        CarId: CarSeeds.PersonalCar.Id)
     {
         Car = CarSeeds.PersonalCar,
-        User = UserSeeds.SecondUser
     };
 
     public static readonly RideEntity Ride3 = new(
@@ -37,11 +33,9 @@ public static class RideSeeds
         End: "Bratislava",
         BeginTime: new DateTime(2022, 10, 28, 10, 30, 0),
         ApproxRideTime: TimeSpan.FromHours(2.5),
-        CarId: CarSeeds.SportCar.Id,
-        UserId: UserSeeds.FirstUser.Id)
+        CarId: CarSeeds.SportCar.Id)
     {
         Car = CarSeeds.SportCar,
-        User = UserSeeds.FirstUser
     };
 
     public static readonly RideEntity Ride4 = new(
@@ -50,11 +44,9 @@ public static class RideSeeds
         End: "Olomouc",
         BeginTime: new DateTime(2022, 09, 28, 10, 30, 0),
         ApproxRideTime: TimeSpan.FromHours(2.5),
-        CarId: CarSeeds.PersonalCar.Id,
-        UserId: UserSeeds.SecondUser.Id)
+        CarId: CarSeeds.PersonalCar.Id)
     {
         Car = CarSeeds.PersonalCar,
-        User = UserSeeds.SecondUser
     };
 
     static RideSeeds()
@@ -66,9 +58,9 @@ public static class RideSeeds
     public static void Seed(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<RideEntity>().HasData(
-            Ride1 with { Car = null, User = null, PassengerRides = Array.Empty<UserRideEntity>() },
-            Ride2 with { Car = null, User = null, PassengerRides = Array.Empty<UserRideEntity>() },
-            Ride3 with { Car = null, User = null, PassengerRides = Array.Empty<UserRideEntity>() },
-            Ride4 with { Car = null, User = null, PassengerRides = Array.Empty<UserRideEntity>() });
+            Ride1 with { Car = null, PassengerRides = Array.Empty<UserRideEntity>() },
+            Ride2 with { Car = null, PassengerRides = Array.Empty<UserRideEntity>() },
+            Ride3 with { Car = null, PassengerRides = Array.Empty<UserRideEntity>() },
+            Ride4 with { Car = null, PassengerRides = Array.Empty<UserRideEntity>() });
     }
 }
