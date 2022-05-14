@@ -43,4 +43,19 @@ public class CarFacade : CRUDFacade<CarEntity, CarListModel, CarDetailModel>
 
         return carList;
     }
+
+    public async Task<IEnumerable<CarDetailModel>?> GetUserCarsDetails(Guid? id)
+    {
+        if (id == null)
+        {
+            return new List<CarDetailModel>();
+        }
+
+        await using var _uowCreated = _uow.Create();
+        var queryUserCars = _uowCreated.GetRepository<CarEntity>().Get();
+        var userCars = queryUserCars.Where(x => x.OwnerId == id);
+        var carDetail = await _mapper.ProjectTo<CarDetailModel>(userCars).ToListAsync().ConfigureAwait(false);
+
+        return carDetail;
+    }
 }

@@ -100,7 +100,7 @@ namespace Carpool.BL.Tests
 
             //Assert
             await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            var userFromDb = await dbxAssert.Users.SingleAsync(i => i.Id == user.Id);
+            var userFromDb = await dbxAssert.Users.Include(x => x.PassengerRides).SingleAsync(i => i.Id == user.Id);
             DeepAssert.Equal(user, Mapper.Map<UserDetailModel>(userFromDb), "OwnedCars", "DriverRides");
         }
 
@@ -126,7 +126,7 @@ namespace Carpool.BL.Tests
             var updated_user = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity2.Id);
             //Assert
             await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            var userFromDb = await dbxAssert.Users.SingleAsync(i => i.Id == user.Id);
+            var userFromDb = await dbxAssert.Users.Include(x => x.OwnedCars).Include(x => x.PassengerRides).SingleAsync(i => i.Id == user.Id);
             DeepAssert.Equal(updated_user, Mapper.Map<UserDetailModel>(userFromDb));
         }
     }
