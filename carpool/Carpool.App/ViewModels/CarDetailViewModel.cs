@@ -82,6 +82,7 @@ namespace Carpool.App.ViewModels
                 try
                 {
                     await _carFacade.DeleteAsync(Model!.Id);
+                    _mediator.Send(new UpdateMessage<CarWrapper>{});
                 }
                 catch
                 {
