@@ -23,5 +23,10 @@ namespace Carpool.App.Views
         {
             InitializeComponent();
         }
+
+        private void UsersListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

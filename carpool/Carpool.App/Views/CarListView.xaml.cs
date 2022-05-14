@@ -6,5 +6,10 @@ namespace Carpool.App.Views
         {
             InitializeComponent();
         }
+
+        private void CarDetail_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

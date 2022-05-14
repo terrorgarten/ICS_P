@@ -13,16 +13,23 @@
                        mc:Ignorable="d"
                         Background="{StaticResource DefaultComponentBackgroundBrush}"
                        d:DataContext="{d:DesignInstance viewModels:UserListViewModel}">
-    <Grid x:Name="Root">
+    <Grid Background="#8bb6fc"  x:Name="Root">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Button Grid.Row="0"
+      
+        <Button Background="White" BorderBrush="#5e98f7" Foreground="Black"  Grid.Row="0"
                 Command="{Binding UserNewCommand}"
-                Content="Users"
-                HorizontalAlignment="Center"/>
-        <ListBox x:Name="UsersListBox" Grid.Row="1" ItemsSource="{Binding Users}">
+                Content="Vytvořit uživatele"
+                HorizontalAlignment="Left"/>
+        <!--<controls:ButtonWithIcon Grid.Row="0"
+                                 Command="{Binding UserNewCommand}"
+                                 TextContent="New User"
+                                 HorizontalAlignment="Left"
+                                 IconSource="https://w7.pngwing.com/pngs/535/334/png-transparent-computer-icons-add-button-logo-number-add-button-thumbnail.png" Margin="52,0,52,0"/>-->
+                                 
+        <ListBox Background="#8bb6fc"  x:Name="UsersListBox" Grid.Row="1" ItemsSource="{Binding Users}" SelectionChanged="UsersListBox_SelectionChanged">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding UserSelectedCommand}"
@@ -30,17 +37,18 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
+                <DataTemplate >
+                    <Grid Background="White">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding Name}" />
-                        <Label Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding Surname}" />
+                        <Label Foreground="Black" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding Name}" />
+                        <Label Foreground="Black" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{Binding Surname}" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
     </Grid>
+
 </local:UserControlBase>

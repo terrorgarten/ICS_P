@@ -10,7 +10,7 @@
                        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
                        xmlns:enums="clr-namespace:Carpool.Common.Enums;assembly=Carpool.Common"
                        mc:Ignorable="d"
-                       Background="{StaticResource DefaultComponentBackgroundBrush}"
+                       Background="#8bb6fc"
                        d:DataContext="{d:DesignInstance viewModels:UserDetailViewModel}"
                        d:DesignHeight="300" Width="808">
     <Grid Visibility="{Binding Model, Converter={StaticResource NullToVisibilityConverter}}" Margin="49,0,394,0">
@@ -23,10 +23,10 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Button Style="{StaticResource SaveButtonStyle}" Content="{x:Static texts:RecipeDetailResources.Save_Button_Content}" Command="{Binding SaveCommand}" />
-            <Button Content="{x:Static texts:RecipeDetailResources.Delete_Button_Content}" Command="{Binding DeleteCommand}" />
+            <Button Background="White" Foreground="Green" BorderBrush="Green"   Content="{x:Static texts:RecipeDetailResources.Save_Button_Content}" Command="{Binding SaveCommand}" />
+            <Button Background="White" Foreground="Red" BorderBrush="Red"  Content="{x:Static texts:RecipeDetailResources.Delete_Button_Content}" Command="{Binding DeleteCommand}" />
         </StackPanel>
-        <Grid Grid.Column="0" Grid.Row="1" Margin="0,10,30,0">
+        <Grid Grid.Row="1" Margin="0,32,30,4">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -42,14 +42,14 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Content="Name" />
-            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="265" />
+            <Label Foreground="Black"  Grid.Row="0" Grid.Column="0" Content="Name" />
+            <TextBox Background="Transparent" BorderBrush="Black"  Grid.Column="1" Text="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged}" Margin="0,4,13,0" VerticalAlignment="Top" Height="18" />
 
-            <Label Grid.Row="1" Grid.Column="0" Content="Surname" />
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Model.Surname, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="265" />
+            <Label Foreground="Black" Grid.Row="1" Grid.Column="0" Content="Surname" />
+            <TextBox Background="Transparent" BorderBrush="Black" Grid.Row="1" Grid.Column="1" Text="{Binding Model.Surname, UpdateSourceTrigger=PropertyChanged}" Margin="0,4,13,0" VerticalAlignment="Top" />
 
-            <Label Grid.Row="2" Grid.Column="0" Content="PhotoUrl" />
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Model.PhotoUrl, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,13,0" Width="265" Height="18" TextAlignment="Left" HorizontalAlignment="Left"/>
+            <Label Foreground="Black" Grid.Row="2" Grid.Column="0" Content="PhotoUrl" />
+            <TextBox Background="Transparent" BorderBrush="Black" Grid.Row="2" Grid.Column="1" Text="{Binding Model.PhotoUrl, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,13,0" Height="18" TextAlignment="Left"/>
 
             <ListView x:Name="CarListBox" 
                       Grid.Row="6" 
@@ -57,12 +57,12 @@
                       Grid.ColumnSpan="2" 
                       Focusable="False"
                       SelectionMode="Single"
-                      ItemsSource="{Binding Model.OwnedCars}">
+                      ItemsSource="{Binding Model.OwnedCars}" Margin="0,43,0,87" Grid.RowSpan="2">
                 <!--SelectedItem="{Binding SelectedCar}" HorizontalAlignment="Left">-->
                 <ListView.View>
                     <GridView>
                         <GridView.Columns>
-                            <GridViewColumn Header="Manufacturer" DisplayMemberBinding="{Binding Manufacturer}" />
+                            <GridViewColumn Header="Manufacturer" DisplayMemberBinding="{Binding Manufacturer}"   />
                             <GridViewColumn Header="CarType" DisplayMemberBinding="{Binding CarType}" />
                         </GridView.Columns>
                     </GridView>
