@@ -53,7 +53,7 @@ namespace Carpool.App.Wrappers
             get => GetValue<Guid>();
             set => SetValue(value);
         }
-        public Guid CarId
+        public Guid? CarId
         {
             get => GetValue<Guid>();
             set => SetValue(value);

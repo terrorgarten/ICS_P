@@ -58,7 +58,7 @@ namespace Carpool.App.ViewModels
         public async Task LoadAsync()
         {
             DriverRides.Clear();
-            var rides = await _rideFacade.GetUserRides(LoggedInUser);
+            var rides = await _rideFacade.GetDriverRides(LoggedInUser);
             DriverRides.AddRange(rides!);
             DriverRides = new ObservableCollection<RideListModel>(DriverRides.Distinct());
         }
