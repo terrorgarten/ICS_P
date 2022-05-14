@@ -58,7 +58,7 @@
                 <ListView.View>
                     <GridView>
                         <GridView.Columns>
-                            <GridViewColumn Header="Manufacturer" DisplayMemberBinding="{Binding Manufacturer}" />
+                            <GridViewColumn Header="Manufacturer" DisplayMemberBinding="{Binding Manufacturer}"   />
                             <GridViewColumn Header="CarType" DisplayMemberBinding="{Binding CarType}" />
                         </GridView.Columns>
                     </GridView>
@@ -70,7 +70,7 @@
 
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Start" DisplayMemberBinding="{Binding Start}" />
+                        <GridViewColumn Header="Start" DisplayMemberBinding="{Binding Start}"  />
                         <GridViewColumn Header="End" DisplayMemberBinding="{Binding End}" />
                         <GridViewColumn Header="Begin Time" DisplayMemberBinding="{Binding BeginTime}" />
                         <GridViewColumn Header="Ride Time" DisplayMemberBinding="{Binding ApproxRideTime}" />
@@ -79,12 +79,11 @@
 
             </ListView>
             <Label Foreground="Black" Content="My cars" HorizontalAlignment="Left" Margin="85,12,0,0" Grid.Row="7" VerticalAlignment="Top" Grid.Column="1"/>
-            <Image
-                   Grid.Column="1"
-                   Source="{Binding Model.PhotoUrl}" Margin="284,43,-118,4" Stretch="Uniform" Grid.Row="7"/>
 
             <!--<local:CarListView Grid.Row="6" Grid.ColumnSpan="2" Grid.Column="0" DataContext="{Binding CarListViewModel}" />-->
         </Grid>
         <Label Foreground="Black" Content="About me" HorizontalAlignment="Left" Margin="136,5,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Image
+                   Source="{Binding Model.PhotoUrl}" Margin="374,128,-121,32" Stretch="Uniform" Grid.Row="1"/>
     </Grid>
 </local:UserControlBase>

@@ -13,7 +13,7 @@
                        mc:Ignorable="d"
                        Background="{StaticResource DefaultComponentBackgroundBrush}"
                        d:DataContext="{d:DesignInstance viewModels:CarViewModel}">
-    <Grid x:Name="Root" Margin="596,0,0,0">
+    <Grid x:Name="Root" Margin="0,0,500,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" MinHeight="50" />
             <RowDefinition />
@@ -22,7 +22,8 @@
                                  Command="{Binding CarNewCommand}"
                                  TextContent="Moje vozy" HorizontalAlignment="Center"
                                  IconSource="https://w7.pngwing.com/pngs/535/334/png-transparent-computer-icons-add-button-logo-number-add-button-thumbnail.png" Margin="52,0,52,0"/>
-        <ListBox x:Name="CarsListBox" Grid.Row="1" ItemsSource="{Binding Cars}">
+        <ListBox Background="#5e98f7" x:Name="CarsListBox" Grid.Row="1" ItemsSource="{Binding Cars}" Margin="10,0,-10,61">
+            
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding CarSelectedCommand}"
@@ -43,13 +44,13 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <TabControl x:Name="CarDetail"
+        <TabControl x:Name="CarDetail" Background="#5e98f7"
                     ItemsSource="{Binding CarDetailViewModels}"
-                    SelectedItem="{Binding SelectedCarDetailViewModel, Mode=TwoWay}" Margin="-544,0,0,0" HorizontalAlignment="Left" Width="470" Height="357" VerticalAlignment="Top" Grid.Row="1" >
+                    SelectedItem="{Binding SelectedCarDetailViewModel, Mode=TwoWay}" Margin="515,35,-479,0" Height="340" VerticalAlignment="Top" Grid.RowSpan="2" >
             <TabControl.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Model.Manufacturer}" Margin="5"/>
+                        <TextBlock Foreground="Black" Text="{Binding Model.Manufacturer}" Margin="5"/>
                         <Button Content="X" Command="{Binding DataContext.CloseCarDetailTabCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}}"
                                 CommandParameter="{Binding}"
                                 Width="20" Height="20" FontWeight="Bold" FontSize="12"

@@ -79,7 +79,7 @@
 
 
             <TabItem  Foreground="Black" x:Name="Car" Header="AUTO">
-                <views:CarListView 
+                <views:CarListView  Background="#8bb6fc"
                     DataContext="{Binding CarListViewModel}" Height="409" Margin="0,0,11,0"></views:CarListView>
             </TabItem>
 
