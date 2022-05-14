@@ -132,7 +132,7 @@ namespace Carpool.BL.Tests
         {
 
             var filtered = await _rideFacadeSUT.GetFilteredListAsync
-            (RideSeeds.RideEntity.Id,
+            (
                 new DateTime(2019, 6,4, 8, 0, 0),
                 DateTime.Now,
                 "Olomouc",
