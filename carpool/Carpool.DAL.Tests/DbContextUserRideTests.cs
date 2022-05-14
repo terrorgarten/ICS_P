@@ -25,7 +25,7 @@ namespace Carpool.DAL.Tests
         {
             //Act
             var userRides = await CarpoolDbContextSUT.UsersRideEntity
-                .Where(i => i.RideId == RideSeeds.RideEntityForUserRideEntity.Id)/*.Where( i => i.RideId == RideSeeds.RideEntityForRideTestsGet.Id)*/
+                .Where(i => i.RideId == RideSeeds.RideEntityForUserRideEntity.Id)
                 .ToArrayAsync();
 
             Assert.Contains(UserRideSeeds.UserRideEntity1 with

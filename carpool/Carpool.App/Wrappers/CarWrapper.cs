@@ -44,18 +44,6 @@ namespace Carpool.App.Wrappers
             get => GetValue<Guid>();
             set => SetValue(value);
         }
-        //public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        //{
-        //    //if (string.IsNullOrWhiteSpace(Name))
-        //    //{
-        //    //    yield return new ValidationResult($"{nameof(Name)} is required", new[] {nameof(Name)});
-        //    //}
-
-        //    //if (string.IsNullOrWhiteSpace(Description))
-        //    //{
-        //    //    yield return new ValidationResult($"{nameof(Description)} is required", new[] {nameof(Description)});
-        //    //}
-        //}
 
         public static implicit operator CarWrapper(CarDetailModel detailModel)
             => new(detailModel);

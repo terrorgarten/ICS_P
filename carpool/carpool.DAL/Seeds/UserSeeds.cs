@@ -20,13 +20,9 @@ public static class UserSeeds
     static UserSeeds()
     {
         FirstUser.OwnedCars!.Add(CarSeeds.SportCar);
-        //FirstUser.DriverRides!.Add(RideSeeds.Ride1);
-        //FirstUser.DriverRides!.Add(RideSeeds.Ride3);
         FirstUser.PassengerRides!.Add(UserRideSeeds.UserRide2);
 
         SecondUser.OwnedCars!.Add(CarSeeds.PersonalCar);
-        //SecondUser.DriverRides!.Add(RideSeeds.Ride2);
-        //SecondUser.DriverRides!.Add(RideSeeds.Ride4);
         SecondUser.PassengerRides!.Add(UserRideSeeds.UserRide1);
     }
 

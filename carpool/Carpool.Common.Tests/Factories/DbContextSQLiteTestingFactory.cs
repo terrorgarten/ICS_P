@@ -17,10 +17,7 @@ public class DbContextSQLiteTestingFactory : IDbContextFactory<CarpoolDbContext>
     {
         DbContextOptionsBuilder<CarpoolDbContext> builder = new();
         builder.UseSqlite($"Data Source={_databaseName};Cache=Shared");
-
-        // contextOptionsBuilder.LogTo(System.Console.WriteLine); //Enable in case you want to see tests details, enabled may cause some inconsistencies in tests
-        // builder.EnableSensitiveDataLogging();
-
+        
         return new CarpoolTestingDbContext(builder.Options, _seedTestingData);
     }
 }

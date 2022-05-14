@@ -70,7 +70,6 @@
             </ListView>
 
            
-            <!--<local:CarListView Grid.Row="6" Grid.ColumnSpan="2" Grid.Column="0" DataContext="{Binding CarListViewModel}" />-->
             <Image Grid.Row="7"
                    Grid.Column="1"
                    Source="{Binding Model.PhotoUrl}" Margin="90,1,0,0" Stretch="Uniform"/>
@@ -78,7 +77,6 @@
 
         <ListView Grid.Row="1" x:Name="RideList" 
                    ItemsSource="{Binding Model.DriverRides}" Grid.Column="1" Margin="90,10,-330,177">
-            <!--SelectedItem="{Binding SelectedCar}" Margin="340,22,-346,26" Grid.RowSpan="3" Grid.Column="1">-->
 
             <ListView.View>
                 <GridView>

@@ -27,8 +27,6 @@ namespace Carpool.BL.Models
             {
                 CreateMap<RideEntity, RideListModel>()
                     .ForMember(dst => dst.SeatCapacity, opt => opt.MapFrom(src => src.Car!.SeatCapacity));
-                //CreateMap<UserRideEntity, RideListModel>()
-                //    .ReverseMap();
             }
         }
     }

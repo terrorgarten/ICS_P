@@ -87,16 +87,16 @@ namespace Carpool.BL.Tests
                 BeginTime: DateTime.MaxValue,
                 ApproxRideTime: TimeSpan.MaxValue,
                 CarId: CarSeeds.CarEntityUpdate.Id,
-                UserId: UserSeeds.UserEntityUpdate.Id
+                UserId: CarSeeds.CarEntityUpdate.OwnerId
             );
-
+                
             //Act
             ride = await _rideFacadeSUT.SaveAsync(ride);
 
             //Assert
             await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            var rideFromDb = await dbxAssert.Rides.SingleAsync(i => i.Id == ride.Id);
-            DeepAssert.Equal(ride, Mapper.Map<RideDetailModel>(rideFromDb), "User", "Car");
+            var rideFromDb = await dbxAssert.Rides.Include(x => x.Car ).SingleAsync(i => i.Id == ride.Id);
+            DeepAssert.Equal(ride, Mapper.Map<RideDetailModel>(rideFromDb), "User");
         }
 
         [Fact]
@@ -110,7 +110,7 @@ namespace Carpool.BL.Tests
                 BeginTime: RideSeeds.RideEntity.BeginTime,
                 ApproxRideTime: RideSeeds.RideEntity.ApproxRideTime,
                 CarId: CarSeeds.CarEntity1.Id,
-                UserId: UserSeeds.UserEntity1.Id
+                UserId: CarSeeds.CarEntity1.OwnerId
             )
             {
                 Id = RideSeeds.RideEntity.Id
@@ -123,8 +123,8 @@ namespace Carpool.BL.Tests
 
             //Assert
             await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            var rideFromDb = await dbxAssert.Rides.SingleAsync(i => i.Id == ride.Id);
-            DeepAssert.Equal(ride, Mapper.Map<RideDetailModel>(rideFromDb));
+            var rideFromDb = await dbxAssert.Rides.Include(x => x.Car).SingleAsync(i => i.Id == ride.Id);
+            DeepAssert.Equal(ride, Mapper.Map<RideDetailModel>(rideFromDb), "User", "Car");
         }
 
         [Fact]
@@ -157,8 +157,8 @@ namespace Carpool.BL.Tests
 
             //Assert
             await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            var rideFromDb = await dbxAssert.Rides.SingleAsync(i => i.Id == ride.Id);
-            DeepAssert.Equal(ride, Mapper.Map<RideDetailModel>(rideFromDb), "User", "Car");
+            var rideFromDb = await dbxAssert.Rides.Include(x => x.Car).SingleAsync(i => i.Id == ride.Id);
+            DeepAssert.Equal(ride, Mapper.Map<RideDetailModel>(rideFromDb), "User");
 
             await _userRideFacadeSUT.SaveCheckAsync(UserSeeds.UserEntityUpdate.Id, rideFromDb.Id);
            

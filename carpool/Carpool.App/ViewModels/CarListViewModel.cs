@@ -60,12 +60,6 @@ namespace Carpool.App.ViewModels
             SelectCar(message.Id);
         }
 
-        ////NEW CAR
-        //private void OnCarNewMessage(NewMessage<CarWrapper> _)
-        //{
-        //    SelectCar(Guid.Empty);
-        //}
-
         //CAR DETAIL WORKAROUND
         public ICommand CloseCarDetailTabCommand { get; }
         public ICarDetailViewModel? SelectedCarDetailViewModel { get; set; }

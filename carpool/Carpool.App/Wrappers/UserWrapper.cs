@@ -37,10 +37,7 @@ namespace Carpool.App.Wrappers
 
         private void InitializeCollectionProperties(UserDetailModel model)
         {
-            //if (model.OwnedCars == null)
-            //{
-            //    throw new ArgumentException("Owned Cars cannot be null");
-            //}
+            
             OwnedCars.AddRange(model.OwnedCars.Select(e => new CarWrapper(e)));
 
             RegisterCollection(OwnedCars, model.OwnedCars);
@@ -72,14 +69,6 @@ namespace Carpool.App.Wrappers
                 yield return new ValidationResult($"{nameof(Surname)} is required", new[] { nameof(Surname) });
             }
 
-            //if (string.IsNullOrWhiteSpace(Description))
-            //{
-            //    yield return new ValidationResult($"{nameof(Description)} is required", new[] {nameof(Description)});
-            //}
-            //if (Duration == default)
-            //{
-            //    yield return new ValidationResult($"{nameof(Duration)} is required", new[] {nameof(Duration)});
-            //}
         }
 
         public static implicit operator UserWrapper(UserDetailModel detailModel)

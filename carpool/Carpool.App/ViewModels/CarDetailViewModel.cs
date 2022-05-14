@@ -100,19 +100,6 @@ namespace Carpool.App.ViewModels
                 });
             }
         }
-
-        //public override void LoadInDesignMode()
-        //{
-        //    base.LoadInDesignMode();
-        //    Model = new CarWrapper(new CarDetailModel(
-        //        Manufacturer: Manufacturer.Dacia,
-        //        CarType: CarType.Minivan,
-        //        SeatCapacity: 4,
-        //        RegistrationDate: DateTime.MinValue,
-        //        )
-        //    {
-        //        ImageUrl = "https://www.pngitem.com/pimgs/m/40-406527_cartoon-glass-of-water-png-glass-of-water.png"
-        //    });
-        //}
+        
     }
 }

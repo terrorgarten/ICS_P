@@ -6,10 +6,10 @@ namespace Carpool.Common.Tests.Seeds;
 public static class UserSeeds
 {
     public static readonly UserEntity EmptyUserEntity = new(
-        Id: default,
-        Name: default!,//stringy musia mat !
-        Surname: default!,
-        PhotoUrl: default);
+        Id: default, 
+        Name: string.Empty,//stringy musia mat !
+        Surname: string.Empty,
+        PhotoUrl: string.Empty);
 
     public static readonly UserEntity EmptyUserEntityWithourCars = new(
         Id: default,

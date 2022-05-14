@@ -55,13 +55,8 @@ public class RideFacade : CRUDFacade<RideEntity, RideListModel, RideDetailModel>
         var idsToFind = userRides.Select(x => x.RideId).ToList();
         var newRideList = queryRides.Where(x => idsToFind.Any(id => id == x.Id));
 
-        var userRideList = await _mapper.ProjectTo<RideListModel>(newRideList).ToListAsync().ConfigureAwait(false);
-        //foreach (var variable in userRideList)
-        //{
-        //    Console.WriteLine("Vyfiltrovana:  ");
-        //    Console.WriteLine(variable);
-        //}
-        return userRideList;
+        var RideList = await _mapper.ProjectTo<RideListModel>(newRideList).ToListAsync().ConfigureAwait(false);
+        return RideList;
     }
 
     public async Task<IEnumerable<RideListModel>?> GetDriverRides(Guid? id)
@@ -74,23 +69,31 @@ public class RideFacade : CRUDFacade<RideEntity, RideListModel, RideDetailModel>
         await using var _uowCreated = _uow.Create();
         var queryDriverRides = _uowCreated.GetRepository<RideEntity>().Get();
 
-        //foreach (var variable in queryUserCars)
-        //{
-        //    Console.WriteLine(variable);
-        //}
-        //Console.WriteLine("");
-
         var driverRides = queryDriverRides.Include(x => x.Car).Where(x => x.Car!.OwnerId == id);
-
-        foreach (var variable in driverRides)
-        {
-            Console.WriteLine("Vyfiltrovana:  ");
-            Console.WriteLine(variable);
-        }
 
         var driverRideList = await _mapper.ProjectTo<RideListModel>(driverRides).ToListAsync().ConfigureAwait(false);
 
         return driverRideList;
+    }
+
+
+    public async Task<IEnumerable<RideListModel>> GetFilteredListAsync(Guid? id, DateTime? timeFrom, DateTime? timeTo,
+        string? startCity, string? endCity)
+    {
+        if (id == null)
+        {
+            return new List<RideListModel>();
+        }
+
+        await using var _uowCreated = _uow.Create();
+        var queryRides = _uowCreated.GetRepository<RideEntity>().Get();
+        var rides = queryRides.Where(x => 
+                    x.Start == startCity && x.End == endCity &&
+                    x.BeginTime >= timeFrom && x.BeginTime <= timeTo);
+        
+        var rideList = await _mapper.ProjectTo<RideListModel>(rides).ToListAsync().ConfigureAwait(false);
+        
+        return rideList;
     }
 
     public async Task<IEnumerable<UserRideDetailModel>?> GetPassengers(Guid? id)

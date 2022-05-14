@@ -40,7 +40,7 @@ namespace Carpool.DAL.Tests
             //Assert
             await using var dbx = await DbContextFactory.CreateDbContextAsync();
             var actualEntities = await dbx.Cars.SingleAsync(i => i.Id == entity.Id);
-            Assert.Equal(entity, actualEntities);
+            DeepAssert.Equal(entity, actualEntities);
         }
 
         [Fact]
@@ -87,19 +87,10 @@ namespace Carpool.DAL.Tests
             //Assert
             await using var dbx = await DbContextFactory.CreateDbContextAsync();
             var actualEntity = await dbx.Cars.SingleAsync(i => i.Id == entity.Id);
-            Assert.Equal(entity, actualEntity);
+            DeepAssert.Equal(entity, actualEntity);
         }
 
-        [Fact]
-        public async Task GetAll_Car_ContainsSeededSportCarUpdate()
-        {
-            //Act
-            var entities = await CarpoolDbContextSUT.Cars.ToArrayAsync();
-
-            //Assert
-            Assert.Contains(CarSeeds.CarEntityUpdate, entities);
-        }
-
+       
         [Fact]
         public async Task GetById_IncludingOwner_Car()
         {

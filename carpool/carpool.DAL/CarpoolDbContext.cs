@@ -37,12 +37,7 @@ namespace Carpool.DAL
                 .HasMany(i => i.Rides)
                 .WithOne(i => i.Car)
                 .OnDelete(DeleteBehavior.Cascade);
-
-            //modelBuilder.Entity<UserEntity>()
-            //    .HasMany(i => i.DriverRides)
-            //    .WithOne(i => i.User)
-            //    .OnDelete(DeleteBehavior.Cascade);
-
+            
             modelBuilder.Entity<UserEntity>()
                 .HasMany(i => i.PassengerRides)
                 .WithOne(i => i.Passenger)

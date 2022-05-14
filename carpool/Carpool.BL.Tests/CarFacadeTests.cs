@@ -33,10 +33,7 @@ namespace Carpool.BL.Tests
                 SeatCapacity: 4,
                 RegistrationDate: DateTime.MaxValue,
                 OwnerId: UserSeeds.UserEntity1.Id
-            )
-            {
-                //Id = Guid.Parse("953C5784-DB27-43D2-A8F3-ED6E6C58CDE4")
-            };
+            );
             
             var _ = await _carFacadeSUT.SaveAsync(model);
             

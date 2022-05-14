@@ -1,4 +1,5 @@
-﻿using Carpool.BL.Models;
+﻿using System;
+using Carpool.BL.Models;
 using System.Linq;
 using System.Threading.Tasks;
 using Carpool.BL.Facades;
@@ -58,14 +59,15 @@ namespace Carpool.BL.Tests
         {
             var user = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity1.Id);
 
-            DeepAssert.Equal(Mapper.Map<UserDetailModel>(UserSeeds.UserEntity1), user);
+            DeepAssert.Equal(Mapper.Map<UserDetailModel>(UserSeeds.UserEntity1), user, "DriverRides");
         }
 
         [Fact]
         public async Task GetById_NonExistentUser()
         {
+            
             var user = await _userFacadeSUT.GetAsync(UserSeeds.EmptyUserEntity.Id);
-
+            
             Assert.Null(user);
         }
 
@@ -99,7 +101,7 @@ namespace Carpool.BL.Tests
             //Assert
             await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
             var userFromDb = await dbxAssert.Users.SingleAsync(i => i.Id == user.Id);
-            DeepAssert.Equal(user, Mapper.Map<UserDetailModel>(userFromDb));
+            DeepAssert.Equal(user, Mapper.Map<UserDetailModel>(userFromDb), "OwnedCars", "DriverRides");
         }
 
         [Fact]

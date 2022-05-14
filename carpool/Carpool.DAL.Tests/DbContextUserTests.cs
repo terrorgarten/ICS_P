@@ -89,7 +89,7 @@ namespace Carpool.DAL.Tests
                 .SingleAsync(i => i.Id == UserSeeds.UserEntity.Id);
 
             //Assert
-            DeepAssert.Equal(UserSeeds.UserEntity with { OwnedCars = Array.Empty<CarEntity>(), DriverRides = Array.Empty<RideEntity>(), PassengerRides = Array.Empty<UserRideEntity>() }, entity);
+            DeepAssert.Equal(UserSeeds.UserEntity with { OwnedCars = Array.Empty<CarEntity>(), PassengerRides = Array.Empty<UserRideEntity>() }, entity);
         }
 
         [Fact]
@@ -101,7 +101,7 @@ namespace Carpool.DAL.Tests
                 .SingleAsync(i => i.Id == UserSeeds.UserEntity1.Id);
 
             //Assert
-            DeepAssert.Equal(UserSeeds.UserEntity1 with { DriverRides = Array.Empty<RideEntity>(), PassengerRides = Array.Empty<UserRideEntity>() }, entity);
+            DeepAssert.Equal(UserSeeds.UserEntity1 with { PassengerRides = Array.Empty<UserRideEntity>() }, entity);
         }
 
         [Fact]

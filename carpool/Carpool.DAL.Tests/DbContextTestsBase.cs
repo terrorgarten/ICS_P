@@ -15,9 +15,7 @@ public class DbContextTestsBase : IAsyncLifetime
     {
         XUnitTestOutputConverter converter = new(output);
         Console.SetOut(converter);
-
-        // DbContextFactory = new DbContextTestingInMemoryFactory(GetType().Name, seedTestingData: true);
-        // DbContextFactory = new DbContextLocalDBTestingFactory(GetType().FullName!, seedTestingData: true);
+        
         DbContextFactory = new DbContextSQLiteTestingFactory(GetType().FullName!, seedTestingData: true);
 
         CarpoolDbContextSUT = DbContextFactory.CreateDbContext();

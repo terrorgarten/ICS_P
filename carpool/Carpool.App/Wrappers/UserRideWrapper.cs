@@ -36,18 +36,7 @@ namespace Carpool.App.Wrappers
             }
 
             //TODO: tu mozno budu podobne tie validace? :hmmmm:
-            //if (string.IsNullOrWhiteSpace(IngredientDescription))
-            //{
-            //    yield return new ValidationResult($"{nameof(IngredientDescription)} is required", new[] {nameof(IngredientDescription)});
-            //}
-            //if (Amount > 0)
-            //{
-            //    yield return new ValidationResult($"{nameof(Amount)} is required", new[] {nameof(Amount)});
-            //}
-            //if (Unit != Unit.None)
-            //{
-            //    yield return new ValidationResult($"{nameof(Unit)} is required", new[] {nameof(Amount)});
-            //}
+            
         }
 
         public static implicit operator UserRideWrapper(UserRideDetailModel detailModel)

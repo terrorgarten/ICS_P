@@ -18,8 +18,6 @@ public class DbContextLocalDBTestingFactory : IDbContextFactory<CarpoolDbContext
         DbContextOptionsBuilder<CarpoolDbContext> builder = new();
         builder.UseSqlServer($"Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog = {_databaseName};MultipleActiveResultSets = True;Integrated Security = True; ");
         
-        // contextOptionsBuilder.LogTo(System.Console.WriteLine); //Enable in case you want to see tests details, enabled may cause some inconsistencies in tests
-        // builder.EnableSensitiveDataLogging();
         
         return new CarpoolTestingDbContext(builder.Options, _seedTestingData);
     }

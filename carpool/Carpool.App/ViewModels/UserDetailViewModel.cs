@@ -19,7 +19,6 @@ namespace Carpool.App.ViewModels
     {
         private readonly IMediator _mediator;
         private readonly UserFacade _userFacade;
-        //private readonly UserRideFacade _userRideFacade;
         private readonly RideFacade _rideFacade;
         private readonly IMessageDialogService _messageDialogService;
         private UserWrapper? _model = UserDetailModel.Empty;
@@ -27,14 +26,12 @@ namespace Carpool.App.ViewModels
 
         public UserDetailViewModel(
             UserFacade userFacade,
-            //UserRideFacade userRideFacade,
             RideFacade rideFacade,
             IMessageDialogService messageDialogService,
             IMediator mediator,
             ICarListViewModel carListViewModel)
         {
             _userFacade = userFacade;
-            //_userRideFacade = userRideFacade;
             _rideFacade = rideFacade;
             _messageDialogService = messageDialogService;
             _mediator = mediator;
@@ -77,8 +74,7 @@ namespace Carpool.App.ViewModels
                 });
             }
         }
-
-        //public UserWrapper? Model { get; set; }
+        
         
         public UserWrapper? Model
         {
@@ -176,19 +172,6 @@ namespace Carpool.App.ViewModels
             Model = await _userFacade.SaveAsync(Model);
             _mediator.Send(new UpdateMessage<UserWrapper> { Model = Model });
         }
-
-        //public override void LoadInDesignMode()
-        //{
-        //    base.LoadInDesignMode();
-        //    Model = new UserWrapper(new UserDetailModel(
-        //        Name: "Spaghetti",
-        //        Description: "Spaghetti description",
-        //        Duration: new TimeSpan(0, 30, 0),
-        //        FoodType.MainDish
-        //        )
-        //    {
-        //        ImageUrl = "https://cleanfoodcrush.com/wp-content/uploads/2019/01/CleanFoodCrush-Super-Easy-Beef-Stir-Fry-User.jpg"
-        //    });
-        //}
+        
     }
 }

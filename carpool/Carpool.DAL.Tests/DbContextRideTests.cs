@@ -29,7 +29,6 @@ namespace Carpool.DAL.Tests
             {
                 Start = "Brno",
                 End = "Praha",
-                UserId = UserSeeds.UserEntity.Id,
                 CarId = CarSeeds.CarEntity1.Id
             };
 
@@ -55,7 +54,6 @@ namespace Carpool.DAL.Tests
                 End = "Hustopeče",
                 BeginTime = new DateTime(2020, 10, 20, 10, 20, 0),
                 ApproxRideTime = TimeSpan.FromHours(3),
-                UserId = UserSeeds.UserEntity.Id,
                 CarId = CarSeeds.CarEntity1.Id,
 
                 PassengerRides = new List<UserRideEntity>
@@ -104,7 +102,6 @@ namespace Carpool.DAL.Tests
                 End = "Hustopeče",
                 BeginTime = new DateTime(2020, 10, 20, 10, 20, 0),
                 ApproxRideTime = TimeSpan.FromHours(3),
-                UserId = UserSeeds.UserEntity.Id,
                 CarId = CarSeeds.CarEntity1.Id,
                 PassengerRides = new List<UserRideEntity>
                 {
