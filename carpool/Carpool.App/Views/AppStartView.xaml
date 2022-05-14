@@ -23,10 +23,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" RenderTransformOrigin="0.47,0.483" HorizontalAlignment="Center" Width="933">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <TabControl Foreground="Black" Grid.Column="0" Background="#5e98f7" SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}" Margin="0,0,-40,0" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="933" SelectionChanged="TabControl_SelectionChanged">
+        <TabControl Foreground="Black" Grid.Column="0" Background="#5e98f7" SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}" HorizontalAlignment="Left" Width="933" >
             <!--TabControl Styling-->
             <TabControl.Resources>
                 <Style TargetType="TabItem">
@@ -65,15 +64,11 @@
             <TabItem  Foreground="Black" x:Name="Dashboard" Header="DASHBOARD">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="337*"/>
-                        <ColumnDefinition Width="45*"/>
-                        <ColumnDefinition Width="15*"/>
-                        <ColumnDefinition Width="53*"/>
-                        <ColumnDefinition Width="477*"/>
+                        <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="Můj profil" Margin="0,17,411,306" Width="112" FontSize="25" FontFamily="Calibri" Grid.ColumnSpan="2" Foreground="White"/>
+                    <Label Content="Můj profil" Margin="0,17,956,306" Width="112" FontSize="25" FontFamily="Calibri" Foreground="White"/>
                     <views:UserDetailView Background="#8bb6fc" Grid.Column="0" HorizontalAlignment="Left" Width="873" Margin="24,76,0,25"
-                                          DataContext="{Binding SelectedUserDetailViewModel}" Grid.ColumnSpan="2"/>
+                                          DataContext="{Binding SelectedUserDetailViewModel}"/>
                 </Grid>
             </TabItem>
             <TabItem  Foreground="Black" x:Name="FindRide" Header="HLEDAT JÍZDU">
