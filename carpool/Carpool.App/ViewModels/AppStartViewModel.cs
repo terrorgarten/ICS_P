@@ -24,6 +24,7 @@ namespace Carpool.App.ViewModels
             IUserListViewModel userListViewModel,
             IRideListViewModel rideListViewModel,
             IRideDetailViewModel rideDetailViewModel,
+            IRideSearchViewModel rideSearchViewModel,
 
             IMediator mediator,
             IFactory<ICarDetailViewModel> carDetailViewModelFactory,
@@ -34,6 +35,7 @@ namespace Carpool.App.ViewModels
             UserListViewModel = userListViewModel;
             RideListViewModel = rideListViewModel;
             RideDetailViewModel = rideDetailViewModel;
+            RideSearchViewModel = rideSearchViewModel;
             
             _userDetailViewModelFactory = userDetailViewModelFactory;
             UserDetailViewModel = _userDetailViewModelFactory.Create();
@@ -54,6 +56,7 @@ namespace Carpool.App.ViewModels
         public IRideListViewModel RideListViewModel { get; }
         public IUserDetailViewModel UserDetailViewModel { get; }
         public ICarDetailViewModel CarDetailViewModel { get; }
+        public IRideSearchViewModel RideSearchViewModel { get; }
 
         public ICommand CloseUserDetailTabCommand { get; }
 

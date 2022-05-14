@@ -71,10 +71,12 @@
                                           DataContext="{Binding SelectedUserDetailViewModel}"/>
                 </Grid>
             </TabItem>
-            <TabItem  Foreground="Black" x:Name="FindRide" Header="HLEDAT JÍZDU">
+           
 
+            <TabItem x:Name="FindRide" Header="HLEDAT JÍZDU">
+                <views:RideSearchView
+                    DataContext="{Binding RideSearchViewModel}" Margin="7,0,5,0"></views:RideSearchView>
             </TabItem>
-
 
             <TabItem  Foreground="Black" x:Name="Car" Header="AUTO">
                 <views:CarListView  Background="#8bb6fc"

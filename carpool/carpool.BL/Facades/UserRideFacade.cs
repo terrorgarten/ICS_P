@@ -20,8 +20,12 @@ public class UserRideFacade : CRUDFacade<UserRideEntity, UserRideDetailModel, Us
     }
     
 
-    public async Task<UserRideDetailModel?> SaveCheckAsync(Guid newPassengerId, Guid rideId)
+    public async Task<UserRideDetailModel?> SaveCheckAsync(Guid? newPassengerId, Guid? rideId)
     {
+        if (newPassengerId is null || rideId is null)
+        {
+            return null;
+        }
         var uowCreate = _uow.Create();
         var queryRides = uowCreate.GetRepository<RideEntity>().Get();
         var queryUsers = uowCreate.GetRepository<UserEntity>().Get();

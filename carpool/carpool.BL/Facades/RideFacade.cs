@@ -80,15 +80,20 @@ public class RideFacade : CRUDFacade<RideEntity, RideListModel, RideDetailModel>
     public async Task<IEnumerable<RideListModel>> GetFilteredListAsync(DateTime? timeFrom, DateTime? timeTo,
         string? startCity, string? endCity)
     {
-        
+
         await using var _uowCreated = _uow.Create();
         var queryRides = _uowCreated.GetRepository<RideEntity>().Get();
-        var rides = queryRides.Where(x => 
-                    x.Start == startCity && x.End == endCity &&
-                    x.BeginTime >= timeFrom && x.BeginTime <= timeTo);
-        
+
+        var rides = queryRides.Where(x => x.Start == startCity && x.End == endCity);
+        if (timeFrom != null && timeTo != null)
+        {
+            rides = queryRides.Where(x =>
+                x.Start == startCity && x.End == endCity &&
+                x.BeginTime >= timeFrom && x.BeginTime <= timeTo);
+        }
+
         var rideList = await _mapper.ProjectTo<RideListModel>(rides).ToListAsync().ConfigureAwait(false);
-        
+
         return rideList;
     }
 
@@ -118,32 +123,5 @@ public class RideFacade : CRUDFacade<RideEntity, RideListModel, RideDetailModel>
     //    return userRideModel;
     //}
 
-    public async Task<IEnumerable<RideListModel>> GetFilteredListAsync(Guid? id, DateTime? timeFrom, DateTime? timeTo,
-        string? startCity, string? endCity)
-    {
-        if (id == null)
-        {
-            return new List<RideListModel>();
-        }
-
-        await using var _uowCreated = _uow.Create();
-        var queryRides = _uowCreated.GetRepository<RideEntity>().Get();
-        //foreach (var variable in queryRides)
-        //{
-        //    Console.WriteLine(variable);
-        //} 
-        var rides = queryRides.Where(x => 
-                    x.Start == startCity && x.End == endCity &&
-                    x.BeginTime >= timeFrom && x.BeginTime <= timeTo);
-        //foreach (var variable in rides)
-        //{
-        //    Console.WriteLine("Vyfiltrovana:  ");
-        //    Console.WriteLine(variable);
-
-        //}
-
-        var rideList = await _mapper.ProjectTo<RideListModel>(rides).ToListAsync().ConfigureAwait(false);
-        
-        return rideList;
-    }
+  
 }
