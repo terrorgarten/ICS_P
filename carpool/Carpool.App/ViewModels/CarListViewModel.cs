@@ -87,12 +87,12 @@ namespace Carpool.App.ViewModels
             }
         }
 
-        private void OnCloseCarDetailTabExecute(ICarDetailViewModel? recipeDetailViewModel)
+        private void OnCloseCarDetailTabExecute(ICarDetailViewModel? carDetailViewModel)
         {
-            if (recipeDetailViewModel is not null)
+            if (carDetailViewModel is not null)
             {
                 // TODO: Check if the Detail has changes and ask user to cancel
-                CarDetailViewModels.Remove(recipeDetailViewModel);
+                CarDetailViewModels.Remove(carDetailViewModel);
             }
         }
 
@@ -119,7 +119,11 @@ namespace Carpool.App.ViewModels
         }
         private async void CarUpdated(UpdateMessage<CarWrapper> _) => await LoadAsync();
 
-        private async void CarDeleted(DeleteMessage<CarWrapper> _) => await LoadAsync();
+        private async void CarDeleted(DeleteMessage<CarWrapper> deleteMessage)
+        {
+            CarDetailViewModels.Remove(CarDetailViewModels.Single(i => i.Model!.Id == deleteMessage.Id));
+            await LoadAsync();
+        }
 
         public async Task LoadAsync()
         {

@@ -171,6 +171,7 @@ namespace Carpool.App.ViewModels
 
             Model = await _userFacade.SaveAsync(Model);
             _mediator.Send(new UpdateMessage<UserWrapper> { Model = Model });
+            _mediator.Send(new SelectedMessage<UserWrapper> { Id = Model?.Id });
         }
         
     }

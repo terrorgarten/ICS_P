@@ -48,7 +48,7 @@ namespace Carpool.App.ViewModels
             mediator.Register<SelectedMessage<UserWrapper>>(OnUserSelected);
             mediator.Register<SelectedMessage<RideWrapper>>(OnRideSelected);
             mediator.Register<NewMessage<RideWrapper>>(OnNewRide);
-            mediator.Register<UpdateMessage<CarWrapper>>(OnCarUpdated);
+            mediator.Register<UpdateComboboxMessage<CarWrapper>>(OnCarUpdated);
         }
 
         private async Task OnPassengerDelete(UserRideDetailModel? rideDetailModel)
@@ -82,7 +82,7 @@ namespace Carpool.App.ViewModels
             Model.UserId = CurrentUserId;
         }
 
-        private void OnCarUpdated(UpdateMessage<CarWrapper> obj)
+        private void OnCarUpdated(UpdateComboboxMessage<CarWrapper> obj)
         {
             _ = LoadAsync((Guid) CurrentUserId!);
         }
@@ -104,11 +104,17 @@ namespace Carpool.App.ViewModels
             if (message.Id != null) _ = LoadAsync(message.Id.Value);
         }
 
-        private static void OnUserSelected(SelectedMessage<UserWrapper> obj)
+        private void OnUserSelected(SelectedMessage<UserWrapper> obj)
         {
             CurrentUserId = obj.Id;
+            if (CurrentUserId == Guid.Empty)
+            {
+                Model = null;
+            }
+
         }
-        
+
+
 
         public async Task LoadAsync(Guid id)
         {
@@ -186,8 +192,19 @@ namespace Carpool.App.ViewModels
                 throw new InvalidOperationException("No user selected");
             }
 
-            Model = await _rideFacade.SaveAsync(Model.Model);
-            _mediator.Send(new UpdateMessage<RideWrapper> { Model = Model });
+            try
+            {
+                Model = await _rideFacade.SaveAsync(Model.Model);
+                _mediator.Send(new UpdateMessage<RideWrapper> { Model = Model });
+            }
+            catch
+            {
+                var _ = _messageDialogService.Show(
+                    $"Zkontrolujte, zda jsou všechna pole vyplněna",
+                    "Ukládání jízdy selhalo",
+                    MessageDialogButtonConfiguration.OK,
+                    MessageDialogResult.OK);
+            }
         }
     }
 }

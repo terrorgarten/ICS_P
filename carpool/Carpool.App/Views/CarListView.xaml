@@ -5,7 +5,6 @@
                        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
                        xmlns:local="clr-namespace:Carpool.App.Views"
                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                       xmlns:texts="clr-namespace:Carpool.App.Resources"
                        xmlns:controls="clr-namespace:Carpool.App.Controls"
                        xmlns:viewModels="clr-namespace:Carpool.App.ViewModels"
                        d:DesignHeight="450"
@@ -22,8 +21,8 @@
                                  Command="{Binding CarNewCommand}"
                                  TextContent="Moje vozy" HorizontalAlignment="Center"
                                  IconSource="https://w7.pngwing.com/pngs/535/334/png-transparent-computer-icons-add-button-logo-number-add-button-thumbnail.png" Margin="52,0,52,0"/>
-        <ListBox Background="#5e98f7" x:Name="CarsListBox" Grid.Row="1" ItemsSource="{Binding Cars}" Margin="10,0,-10,61">
-            
+        <ListBox Background="#5e98f7" x:Name="CarsListBox" Grid.Row="1" ItemsSource="{Binding Cars}" Margin="10,0,-10,61" d:ItemsSource="{d:SampleData ItemCount=5}">
+
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding CarSelectedCommand}"
@@ -46,7 +45,7 @@
 
         <TabControl x:Name="CarDetail" Background="#5e98f7"
                     ItemsSource="{Binding CarDetailViewModels}"
-                    SelectedItem="{Binding SelectedCarDetailViewModel, Mode=TwoWay}" Margin="515,35,-479,0" Height="340" VerticalAlignment="Top" Grid.RowSpan="2" >
+                    SelectedItem="{Binding SelectedCarDetailViewModel, Mode=TwoWay}" Margin="450,0,-465,0" Height="300" VerticalAlignment="Top" Grid.Row="1" >
             <TabControl.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

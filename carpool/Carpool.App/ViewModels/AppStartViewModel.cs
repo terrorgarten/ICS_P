@@ -18,6 +18,7 @@ namespace Carpool.App.ViewModels
         private readonly IFactory<IUserDetailViewModel> _userDetailViewModelFactory;
         private readonly IFactory<ICarDetailViewModel> _carDetailViewModelFactory; //DEL
         public int SelectedIndex { get; set; }
+        public readonly IMediator _mediator;
 
         public AppStartViewModel(
             ICarListViewModel carListViewModel,
@@ -31,6 +32,7 @@ namespace Carpool.App.ViewModels
             IFactory<IUserDetailViewModel> userDetailViewModelFactory
         )
         {
+            _mediator = mediator;
             CarListViewModel = carListViewModel;
             UserListViewModel = userListViewModel;
             RideListViewModel = rideListViewModel;
@@ -44,13 +46,19 @@ namespace Carpool.App.ViewModels
 
             CloseUserDetailTabCommand = new RelayCommand<IUserDetailViewModel>(OnCloseUserDetailTabExecute);
             CloseCarDetailTabCommand = new RelayCommand<ICarDetailViewModel>(OnCloseCarDetailTabExecute);
+            Logout = new RelayCommand(OnLogout);
 
             mediator.Register<NewMessage<UserWrapper>>(OnUserNewMessage);
             mediator.Register<SelectedMessage<UserWrapper>>(OnUserSelected);
             mediator.Register<DeleteMessage<UserWrapper>>(OnUserDeleted);
         }
 
-        public IRideDetailViewModel RideDetailViewModel { get; set; }
+        private void OnLogout()
+        {
+            _mediator.Send(new SelectedMessage<UserWrapper> { Id = Guid.Empty});
+        }
+
+        public IRideDetailViewModel? RideDetailViewModel { get; set; }
         public ICarListViewModel CarListViewModel { get; }
         public IUserListViewModel UserListViewModel { get; }
         public IRideListViewModel RideListViewModel { get; }
@@ -61,7 +69,7 @@ namespace Carpool.App.ViewModels
         public ICommand CloseUserDetailTabCommand { get; }
 
         public ICommand CloseCarDetailTabCommand { get; }
-
+        public ICommand Logout { get; }
 
         public ObservableCollection<IUserDetailViewModel> UserDetailViewModels { get; } =
             new ObservableCollection<IUserDetailViewModel>();
@@ -73,6 +81,7 @@ namespace Carpool.App.ViewModels
 
         public ICarDetailViewModel? SelectedCarDetailViewModel { get; set; }
 
+
         private void OnUserNewMessage(NewMessage<UserWrapper> _)
         {
             SelectedIndex = 1;
@@ -81,6 +90,12 @@ namespace Carpool.App.ViewModels
 
         private void OnUserSelected(SelectedMessage<UserWrapper> message)
         {
+            if (message.Id == null || message.Id == Guid.Empty)
+            {
+                SelectUser(message.Id);
+                SelectedIndex = 0;
+                return;
+            }
             SelectedIndex = 1;
             SelectUser(message.Id);
         }
@@ -92,6 +107,8 @@ namespace Carpool.App.ViewModels
             {
                 UserDetailViewModels.Remove(user);
             }
+
+            SelectedIndex = 0;
         }
 
         private void OnCarDeleted(DeleteMessage<CarWrapper> message)
