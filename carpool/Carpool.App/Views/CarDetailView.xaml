@@ -4,7 +4,6 @@
                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                        xmlns:local="clr-namespace:Carpool.App.Views"
                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                       xmlns:texts="clr-namespace:Carpool.App.Resources.Texts"
                        xmlns:viewModels="clr-namespace:Carpool.App.ViewModels"
                        d:DesignHeight="450"
                        mc:Ignorable="d"
@@ -16,10 +15,10 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <Button Background="White" Foreground="Green" BorderBrush="Green"
-                    Content="{x:Static texts:IngredientDetailResources.Save_Button_Content}"
+                    Content="Ulozit"
                     Command="{Binding SaveCommand}" />
             <Button Background="White" Foreground="Red" BorderBrush="Red"
-                    Content="{x:Static texts:IngredientDetailResources.Delete_Button_Content}"
+                    Content="Smazat"
                     Command="{Binding DeleteCommand}" />
         </StackPanel>
         <Grid Grid.Row="1">

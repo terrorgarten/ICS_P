@@ -45,5 +45,9 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
+	
+	<ItemGroup>
+	  <Folder Include="Resources\Texts\" />
+	</ItemGroup>
 
 </Project>

@@ -29,7 +29,7 @@ public sealed class UserRideFacadeTests : CRUDFacadeTestsBase
     [Fact]
     public async Task GetRidePassengers()
     {
-        var filtered = await _userRideFacadeSUT.GetPassengers
+        var _ = await _userRideFacadeSUT.GetPassengers
             (RideSeeds.RideEntityForUserRideEntity.Id);
     }
 
@@ -74,7 +74,7 @@ public sealed class UserRideFacadeTests : CRUDFacadeTestsBase
         };
         var _ = await _userRideFacadeSUT.SaveAsync(seeded_user);
 
-        var user = await _userRideFacadeSUT.GetAsync(UserRideSeeds.UserRideEntity1.Id);
+        var __ = await _userRideFacadeSUT.GetAsync(UserRideSeeds.UserRideEntity1.Id);
     }
 
 

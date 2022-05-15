@@ -5,7 +5,6 @@
                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                        xmlns:viewModels="clr-namespace:Carpool.App.ViewModels"
-                       xmlns:texts="clr-namespace:Carpool.App.Resources.Texts"
                        mc:Ignorable="d"
                        Background="#8bb6fc"
                        d:DataContext="{d:DesignInstance viewModels:UserDetailViewModel}"
@@ -22,10 +21,10 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <Button Background="White" Foreground="Green" BorderBrush="Green"
-                    Content="{x:Static texts:RecipeDetailResources.Save_Button_Content}"
+                    Content="Uložit"
                     Command="{Binding SaveCommand}" />
             <Button Background="White" Foreground="Red" BorderBrush="Red"
-                    Content="{x:Static texts:RecipeDetailResources.Delete_Button_Content}"
+                    Content="Smazat"
                     Command="{Binding DeleteCommand}" />
         </StackPanel>
 

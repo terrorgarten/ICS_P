@@ -158,7 +158,9 @@ public sealed class RideFacadeTests : CRUDFacadeTestsBase
         {
             await _userRideFacadeSUT.SaveCheckAsync(UserSeeds.UserEntityUpdate.Id, rideFromDb.Id);
         }
-        catch(Exception e)
-        {}
+        catch
+        {
+            // ignored
+        }
     }
 }
