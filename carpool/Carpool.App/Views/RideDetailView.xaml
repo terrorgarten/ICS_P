@@ -35,23 +35,23 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" Content="Origin" HorizontalAlignment="Center"/>
-            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Model.Start, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Grid.Row="0" Grid.Column="0" Content="Start" HorizontalAlignment="Center"/>
+            <TextBox Foreground="Black" Background="White" Grid.Row="0" Grid.Column="1" Text="{Binding Model.Start, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <Label Grid.Row="1" Grid.Column="0" Content="Destination" HorizontalAlignment="Center"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Model.End, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="Cíl" HorizontalAlignment="Center"/>
+            <TextBox Foreground="Black" Background="White" Grid.Row="1" Grid.Column="1" Text="{Binding Model.End, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <Label Grid.Row="2" Grid.Column="0" Content="Approximate duration" HorizontalAlignment="Center" />
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Model.ApproxRideTime, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="Odhadovaná doba " HorizontalAlignment="Center" />
+            <TextBox Foreground="Black" Background="White" Grid.Row="2" Grid.Column="1" Text="{Binding Model.ApproxRideTime, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <Label Grid.Row="4" Grid.Column="0" Content="Car" HorizontalAlignment="Center" />
-            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Model.Car.Manufacturer, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Grid.Row="4" Grid.Column="0" Content="Vozidlo" HorizontalAlignment="Center" />
+            <TextBox Foreground="Black" Background="White" Grid.Row="4" Grid.Column="1" Text="{Binding Model.Car.Manufacturer, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <Label Grid.Row="3" Grid.Column="0" Content="Date and time" HorizontalAlignment="Center" />
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Model.BeginTime, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Grid.Row="3" Grid.Column="0" Content="Datum a Čas" HorizontalAlignment="Center" />
+            <TextBox Foreground="Black" Background="White" Grid.Row="3" Grid.Column="1" Text="{Binding Model.BeginTime, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <Label Grid.Row="5" Grid.Column="0" Content="Car Selection" HorizontalAlignment="Center" />
-            <ComboBox x:Name="CarsComboBox" Grid.Row="5" ItemsSource="{Binding UserCars, Mode=OneWay}" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="126,2,0,0">
+            <Label Grid.Row="5" Grid.Column="0" Content="Výběr vozidla" HorizontalAlignment="Center" />
+            <ComboBox Background="White" Foreground="Black" x:Name="CarsComboBox" Grid.Row="5" ItemsSource="{Binding UserCars, Mode=OneWay}" VerticalAlignment="Top" Margin="0,2,0,0" Grid.Column="1">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding CarSelectedCommand}"
@@ -75,7 +75,7 @@
             <Label Grid.Row="6" Grid.Column="0" Content="Passengers" HorizontalAlignment="Center" />
 
 
-            <ListBox x:Name="PassengerListBox" Background="Transparent" Grid.Row="6" Grid.Column="1"  ItemsSource="{Binding Passengers}">
+            <ListBox x:Name="PassengerListBox" Background="Transparent" Grid.Row="6" Grid.Column="1"  ItemsSource="{Binding Passengers}" Height="125" VerticalAlignment="Top">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding PassengerDeleteCommand}"

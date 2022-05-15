@@ -104,10 +104,10 @@
                         <ColumnDefinition Width="125*"/>
                     </Grid.ColumnDefinitions>
                     <views:RideDetailView 
-                        DataContext="{Binding RideDetailViewModel}" Height="399" Margin="176,30,1,30" Grid.Column="1" Grid.ColumnSpan="2"></views:RideDetailView>
+                        DataContext="{Binding RideDetailViewModel}" Margin="114,26,63,0" Grid.Column="1" Grid.ColumnSpan="2"/>
                     <views:RideListView 
                         Grid.Column="0"
-                        DataContext="{Binding RideListViewModel}" Height="409" Margin="0,27,529,23" Grid.ColumnSpan="2" ></views:RideListView>
+                        DataContext="{Binding RideListViewModel}" Height="409" Margin="51,25,478,25" Grid.ColumnSpan="2" ></views:RideListView>
                 </Grid>
             </TabItem>
         </TabControl>

@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
         <controls:ButtonWithIcon Grid.Row="0"
                                  Command="{Binding RideNewCommand}"
-                                 TextContent="Jízdy, které řídím"
+                                 TextContent="Přidat jízdu"
                                  IconSource="/Resources/Images/Add.png"
                                  HorizontalAlignment="Center"/>
         <ListBox x:Name="CarsListBox" Grid.Row="1" ItemsSource="{Binding DriverRides}">

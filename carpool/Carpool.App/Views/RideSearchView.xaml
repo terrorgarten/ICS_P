@@ -18,11 +18,11 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TextBox Background="White" Text="{Binding StartCity, Mode=TwoWay}" Margin="76,80,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="239"/>
-        <TextBox Background="White" Text="{Binding EndCity, Mode=TwoWay}" Margin="76,129,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="239"/>
-        <TextBox Background="White" Text="{Binding StartFrom, Mode=TwoWay}" Margin="76,183,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="239"/>
-        <TextBox Background="White" Text="{Binding StartTo, Mode=TwoWay}" Margin="76,237,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="239"/>
-        <ListBox Background="White" x:Name="RideSearchBox" Grid.Row="1"  Grid.Column="0"  ItemsSource="{Binding FoundRides}" Margin="430,80,60,72" >
+        <TextBox Background="White" Foreground="Black" Text="{Binding StartCity, Mode=TwoWay}" Margin="76,80,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="239"/>
+        <TextBox Background="White" Foreground="Black" Text="{Binding EndCity, Mode=TwoWay}" Margin="76,129,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="239"/>
+        <TextBox Background="White" Foreground="Black" Text="{Binding StartFrom, Mode=TwoWay}" Margin="76,183,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="239"/>
+        <TextBox Background="White" Foreground="Black" Text="{Binding StartTo, Mode=TwoWay}" Margin="76,237,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="239"/>
+        <ListBox Background="White" Foreground="Black" x:Name="RideSearchBox" Grid.Row="1"  Grid.Column="0"  ItemsSource="{Binding FoundRides}" Margin="430,80,60,72" >
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding RideSelectedCommand}"
@@ -47,7 +47,11 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <Button Background="White" Foreground="Black" x:Name="FindRides" Content="Vyhledat" HorizontalAlignment="Left" Margin="76,325,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="239" Command="{Binding FilterRides}"/>
-        <Button Background="White" Foreground="Black" x:Name="RegisterFroRide" Content="Pridat se do jizdy" HorizontalAlignment="Left" Margin="76,356,0,0" Grid.Row="1" VerticalAlignment="Top" Width="239"  Command="{Binding RegisterForRideCommand}" />
+        <Button Background="White" Foreground="Black" x:Name="RegisterFroRide" Content="Přidat se do jízdy" HorizontalAlignment="Left" Margin="76,356,0,0" Grid.Row="1" VerticalAlignment="Top" Width="239"  Command="{Binding RegisterForRideCommand}" />
+        <TextBlock HorizontalAlignment="Left" Margin="76,61,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="cs-cz" Text="Odkud"/><LineBreak/><Run Language="cs-cz"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="76,113,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="cs-cz" Text="Kam"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="76,167,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="cs-cz" Text="Od"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="76,221,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="cs-cz" Text="Do"/></TextBlock>
 
     </Grid>
 </local:UserControlBase>
