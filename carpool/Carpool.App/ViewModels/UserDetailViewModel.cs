@@ -73,20 +73,6 @@ namespace Carpool.App.ViewModels
 
         public ObservableCollection<RideListModel> PassengerRides { get; set; } = new();
 
-        //public CarWrapper? SelectedCar
-        //{
-        //    get => _selectedCar;
-        //    set
-        //    {
-        //        _selectedCar = value;
-        //        OnPropertyChanged();
-        //        _mediator.Send(new SelectedMessage<CarWrapper>
-        //        {
-        //            TargetId = Model?.Id ?? Guid.Empty,
-        //            Model = _selectedCar
-        //        });
-        //    }
-        //}
         
         
         public UserWrapper? Model

@@ -167,14 +167,7 @@ namespace Carpool.App.ViewModels
         }
 
         private bool CanSave() => Model?.IsValid ?? false;
-        //{
-        //    if (Model == null)
-        //    {
-        //        return false;
-        //    }
-        //    //Ride has already lapsed
-        //    return DateTime.Compare(Model.BeginTime, DateTime.Now) >= 0;
-        //}
+       
 
         
 
