@@ -31,23 +31,24 @@ public class RideListViewModel : ViewModelBase, IRideListViewModel
         mediator.Register<SelectedMessage<UserWrapper>>(OnUserSelected);
     }
 
+
     public ObservableCollection<RideListModel> DriverRides { get; set; } = new();
-    private static Guid? LoggedInUser { get; set; }
+    private static Guid? CurrentUserId { get; set; }
     public ICommand RideSelectedCommand { get; }
     public ICommand RideNewCommand { get; }
 
     public async Task LoadAsync()
     {
         DriverRides.Clear();
-        var rides = await _rideFacade.GetDriverRides(LoggedInUser);
+        var rides = await _rideFacade.GetDriverRides(CurrentUserId);
         DriverRides.AddRange(rides!);
         DriverRides = new ObservableCollection<RideListModel>(DriverRides.Distinct());
     }
 
-    private void OnUserSelected(SelectedMessage<UserWrapper> obj)
+    private async void OnUserSelected(SelectedMessage<UserWrapper> obj)
     {
-        LoggedInUser = obj.Id;
-        _ = LoadAsync();
+        CurrentUserId = obj.Id;
+        await LoadAsync();
     }
 
 

@@ -42,7 +42,9 @@ public class UserDetailViewModel : ViewModelBase, IUserDetailViewModel
         mediator.Register<DeleteMessage<RideWrapper>>(OnRideDeleted);
         mediator.Register<UpdateMessage<RideWrapper>>(OnRideUpdated);
         mediator.Register<UpdatePassengerRidesMessage<RideWrapper>>(OnPassengerRidesUpdated);
+        mediator.Register<SelectedMessage<UserWrapper>>(OnUserSelected);
     }
+
 
     public ICommand DeleteCommand { get; }
 
@@ -57,21 +59,35 @@ public class UserDetailViewModel : ViewModelBase, IUserDetailViewModel
 
     public async Task LoadAsync(Guid id)
     {
-        Model = await _userFacade.GetAsync(id) ?? UserDetailModel.Empty;
         PassengerRides.Clear();
-        var passengerRides = await _rideFacade.GetPassengerRides(Model.Id);
-        PassengerRides.AddRange(passengerRides!);
+        if (id == Guid.Empty)
+            Model = UserDetailModel.Empty;
+        else
+            try
+            {
+                Model = await _userFacade.GetAsync(id) ?? throw new InvalidOperationException();
+                var passengerRides = await _rideFacade.GetPassengerRides(Model.Id);
+                PassengerRides.AddRange(passengerRides!);
+            }
+            catch
+            {
+                var _ = _messageDialogService.Show(
+                    $"Načítání selhalo",
+                    "Zkontrolujte, zda jste přihlášeni",
+                    MessageDialogButtonConfiguration.OK,
+                    MessageDialogResult.OK);
+            }
     }
 
     public async Task DeleteAsync()
     {
-        if (Model is null) throw new InvalidOperationException("Null model cannot be deleted");
+        if (Model is null) throw new InvalidOperationException("Nelze smazat prázdného uživatele");
 
         if (Model.Id != Guid.Empty)
         {
             var delete = _messageDialogService.Show(
-                "Delete",
-                $"Do you want to delete {Model?.Name}?.",
+                "Smazat uživatele",
+                $"Chcete smazat uživatele {Model?.Name}?.",
                 MessageDialogButtonConfiguration.YesNo,
                 MessageDialogResult.No);
 
@@ -84,59 +100,64 @@ public class UserDetailViewModel : ViewModelBase, IUserDetailViewModel
             catch
             {
                 var _ = _messageDialogService.Show(
-                    $"Deleting of {Model?.Name} failed!",
-                    "Deleting failed",
+                    $"Mazání {Model?.Name} selhalo!",
+                    "Zkontrolujte, zda je vybraný validní uživatel",
                     MessageDialogButtonConfiguration.OK,
                     MessageDialogResult.OK);
             }
 
-            _mediator.Send(new DeleteMessage<UserWrapper> { Model = Model! });
+            _mediator.Send(new DeleteMessage<UserWrapper> {Model = Model!});
         }
     }
 
     public async Task SaveAsync()
     {
-        if (Model == null) throw new InvalidOperationException("Null model cannot be saved");
+        if (Model == null) throw new InvalidOperationException("Nelze uložit prázdného uživatele");
 
         Model = await _userFacade.SaveAsync(Model);
-        _mediator.Send(new UpdateMessage<UserWrapper> { Model = Model });
-        _mediator.Send(new SelectedMessage<UserWrapper> { Id = Model?.Id });
+        _mediator.Send(new UpdateMessage<UserWrapper> {Model = Model});
+        _mediator.Send(new SelectedMessage<UserWrapper> {Id = Model?.Id});
     }
 
-    private void OnPassengerRidesUpdated(UpdatePassengerRidesMessage<RideWrapper> obj)
+    private async void OnUserSelected(SelectedMessage<UserWrapper> obj)
     {
-        _ = LoadAsync(Model!.Id);
+        if (obj.Id != null) await LoadAsync(obj.Id.Value);
     }
 
-    private void OnRideUpdated(UpdateMessage<RideWrapper> obj)
+    private async void OnPassengerRidesUpdated(UpdatePassengerRidesMessage<RideWrapper> obj)
     {
-        _ = LoadAsync(Model!.Id);
+        await LoadAsync(Model!.Id);
     }
 
-    private void OnRideDeleted(DeleteMessage<RideWrapper> obj)
+    private async void OnRideUpdated(UpdateMessage<RideWrapper> obj)
     {
-        _ = LoadAsync(Model!.Id);
+        await LoadAsync(Model!.Id);
     }
 
-    private void DeleteCar(DeleteMessage<CarWrapper> message)
+    private async void OnRideDeleted(DeleteMessage<RideWrapper> obj)
     {
-        if (message.TargetId != Model?.Id || message.Model is null) return;
-
-        _ = LoadAsync(Model!.Id);
+        await LoadAsync(Model!.Id);
     }
 
-    private void NewCar(NewMessage<CarWrapper> message)
+    private async void DeleteCar(DeleteMessage<CarWrapper> message)
     {
         if (message.TargetId != Model?.Id || message.Model is null) return;
 
-        _ = LoadAsync(Model!.Id);
+        await LoadAsync(Model!.Id);
     }
 
-    private void UpdateCar(UpdateMessage<CarWrapper> message)
+    private async void NewCar(NewMessage<CarWrapper> message)
+    {
+        if (message.TargetId != Model?.Id || message.Model is null) return;
+
+        await LoadAsync(Model!.Id);
+    }
+
+    private async void UpdateCar(UpdateMessage<CarWrapper> message)
     {
         if (message.TargetId != Model?.Id) return;
 
-        _ = LoadAsync(Model!.Id);
+        await LoadAsync(Model!.Id);
     }
 
     private bool CanSave()

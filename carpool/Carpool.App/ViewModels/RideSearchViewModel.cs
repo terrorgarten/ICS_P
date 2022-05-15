@@ -75,7 +75,7 @@ public class RideSearchViewModel : ViewModelBase, IRideSearchViewModel
     {
         if (StartCity == string.Empty || EndCity == string.Empty || StartCity == null || EndCity == null)
         {
-            var warning = _messageDialogService.Show(
+            var _ = _messageDialogService.Show(
                 "Nevalidny filter",
                 "Pocatecne mesto a konecne mesto su nevyhnutne",
                 MessageDialogButtonConfiguration.OK,
@@ -97,7 +97,7 @@ public class RideSearchViewModel : ViewModelBase, IRideSearchViewModel
     {
         if (CurrentRideId is null)
         {
-            var warning = _messageDialogService.Show(
+            var _ = _messageDialogService.Show(
                 "Upozorneni",
                 "Musi byt vybrana jizda, do ktere se chces prihlasit",
                 MessageDialogButtonConfiguration.OK,
@@ -107,11 +107,20 @@ public class RideSearchViewModel : ViewModelBase, IRideSearchViewModel
         try
         {
             var _ = await _userRideFacade.SaveCheckAsync(CurrentUserId, CurrentRideId);
+            if (CurrentRideId is not null)
+            {
+                var success_join = _messageDialogService.Show(
+                                "Přihlášení na jízdu", 
+                                "Úspěšně jste se přihlásili na jízdu. Šťastnou cestu!",
+                                MessageDialogButtonConfiguration.OK,
+                                MessageDialogResult.OK);
+            }
+            
             _mediator.Send(new UpdatePassengerRidesMessage<RideWrapper>());
         }
         catch (Exception e)
         {
-            var warning = _messageDialogService.Show(
+            var _ = _messageDialogService.Show(
                 "Upozorneni",
                 $"{e.Message}",
                 MessageDialogButtonConfiguration.OK,
@@ -119,9 +128,9 @@ public class RideSearchViewModel : ViewModelBase, IRideSearchViewModel
         }
     }
 
-    private void OnUserSelected(SelectedMessage<UserWrapper> obj)
+    private async void OnUserSelected(SelectedMessage<UserWrapper> obj)
     {
         CurrentUserId = obj.Id;
-        _ = LoadAsync();
+        await LoadAsync();
     }
 }

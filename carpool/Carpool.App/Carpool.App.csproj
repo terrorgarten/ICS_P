@@ -6,7 +6,12 @@
     <Nullable>enable</Nullable>
     <OutputType>WinExe</OutputType>
     <UseWPF>True</UseWPF>
+    <ApplicationIcon>Resources\Images\carpool.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Images\carpool.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="DotNetProjects.Extended.Wpf.Toolkit" Version="5.0.100" />

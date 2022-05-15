@@ -66,7 +66,7 @@ public partial class App : Application
         services.AddSingleton<ICarListViewModel, CarViewModel>();
         services.AddFactory<ICarDetailViewModel, CarDetailViewModel>();
         services.AddSingleton<IUserListViewModel, UserListViewModel>();
-        services.AddFactory<IUserDetailViewModel, UserDetailViewModel>();
+        services.AddSingleton<IUserDetailViewModel, UserDetailViewModel>();
         services.AddSingleton<IRideListViewModel, RideListViewModel>();
         services.AddFactory<IRideDetailViewModel, RideDetailViewModel>();
         services.AddFactory<IRideSearchViewModel, RideSearchViewModel>();

@@ -46,6 +46,8 @@ public class RideDetailViewModel : ViewModelBase, IRideDetailViewModel
         mediator.Register<UpdateComboboxMessage<CarWrapper>>(OnCarUpdated);
     }
 
+ 
+
     private static Guid? CurrentUserId { get; set; }
     public ICommand SaveCommand { get; }
     public ICommand DeleteCommand { get; }
@@ -113,7 +115,7 @@ public class RideDetailViewModel : ViewModelBase, IRideDetailViewModel
 
         try
         {
-            Model = await _rideFacade.SaveAsync(Model.Model);
+            Model = await _rideFacade.SaveAsync(Model);
             _mediator.Send(new UpdateMessage<RideWrapper> { Model = Model });
         }
         catch
@@ -144,25 +146,27 @@ public class RideDetailViewModel : ViewModelBase, IRideDetailViewModel
 
         Model!.CarId = car!.Id;
         Model!.Car = car;
-        _ = SaveAsync();
     }
 
-    private void OnNewRide(NewMessage<RideWrapper> obj)
+    private async void OnNewRide(NewMessage<RideWrapper> obj)
     {
         Model = RideDetailModel.Empty;
         Model.Id = Guid.NewGuid();
         Model.UserId = CurrentUserId;
+        UserCars.Clear();
+        var cars = await _carFacade.GetUserCarsDetails(CurrentUserId);
+        UserCars.AddRange(cars!);
     }
 
-    private void OnCarUpdated(UpdateComboboxMessage<CarWrapper> obj)
+    private async void OnCarUpdated(UpdateComboboxMessage<CarWrapper> obj)
     {
-        _ = LoadAsync((Guid)CurrentUserId!);
+        await LoadAsync((Guid)CurrentUserId!);
     }
 
 
-    private void OnRideSelected(SelectedMessage<RideWrapper> message)
+    private async void OnRideSelected(SelectedMessage<RideWrapper> message)
     {
-        if (message.Id != null) _ = LoadAsync(message.Id.Value);
+        if (message.Id != null) await LoadAsync(message.Id.Value);
     }
 
     private void OnUserSelected(SelectedMessage<UserWrapper> obj)

@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Carpool.App.Commands;
@@ -26,11 +27,29 @@ public class UserListViewModel : ViewModelBase, IUserListViewModel
 
         mediator.Register<UpdateMessage<UserWrapper>>(UserUpdated);
         mediator.Register<DeleteMessage<UserWrapper>>(UserDeleted);
+        mediator.Register<ReloadMessage<UserWrapper>>(OnUpdate);
+        mediator.Register<SelectedMessage<UserWrapper>>(OnGlobalUserSelected);
+    }
+
+    private void OnGlobalUserSelected(SelectedMessage<UserWrapper> obj)
+    {
+        CurrentuserId = obj.Id;
+    }
+
+    private void OnUpdate(ReloadMessage<UserWrapper> _)
+    {
+        if (CurrentuserId != null)
+        {
+            _mediator.Send(new SelectedMessage<UserWrapper> { Id = CurrentuserId });
+        }
+        
     }
 
     public ObservableCollection<UserListModel> Users { get; set; } = new();
 
     public ICommand UserSelectedCommand { get; }
+
+    public Guid? CurrentuserId { get; set; }
     public ICommand UserNewCommand { get; }
 
     public async Task LoadAsync()
@@ -45,9 +64,13 @@ public class UserListViewModel : ViewModelBase, IUserListViewModel
         _mediator.Send(new NewMessage<UserWrapper>());
     }
 
-    //Toto se vola pokud dostanu command
     private void UserSelected(UserListModel? user)
     {
+        if (user != null)
+        {
+            CurrentuserId = user!.Id;
+        }
+        
         _mediator.Send(new SelectedMessage<UserWrapper> { Id = user?.Id });
     }
 
@@ -60,6 +83,7 @@ public class UserListViewModel : ViewModelBase, IUserListViewModel
     {
         await LoadAsync();
     }
+
 
     public override void LoadInDesignMode()
     {

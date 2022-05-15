@@ -41,6 +41,7 @@ public class CarViewModel : ViewModelBase, ICarListViewModel
         mediator.Register<SelectedMessage<UserWrapper>>(UserSelected);
     }
 
+
     private Guid? LoggedInUserId { get; set; }
 
     //CAR DETAIL WORKAROUND
@@ -62,7 +63,7 @@ public class CarViewModel : ViewModelBase, ICarListViewModel
         Cars.AddRange(cars!);
     }
 
-    private void UserSelected(SelectedMessage<UserWrapper> obj)
+    private async void UserSelected(SelectedMessage<UserWrapper> obj)
     {
         if (obj.Id == Guid.Empty)
         {
@@ -72,7 +73,7 @@ public class CarViewModel : ViewModelBase, ICarListViewModel
         }
 
         LoggedInUserId = obj.Id;
-        _ = LoadAsync();
+        await LoadAsync();
     }
 
     private void OnCarSelected(SelectedMessage<CarWrapper> message)

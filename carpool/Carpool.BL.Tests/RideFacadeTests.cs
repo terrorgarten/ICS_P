@@ -126,7 +126,7 @@ public sealed class RideFacadeTests : CRUDFacadeTestsBase
     [Fact]
     public async Task GetFilteredRide()
     {
-        var filtered = await _rideFacadeSUT.GetFilteredListAsync
+        var _ = await _rideFacadeSUT.GetFilteredListAsync
         (
             new DateTime(2019, 6, 4, 8, 0, 0),
             DateTime.Now,

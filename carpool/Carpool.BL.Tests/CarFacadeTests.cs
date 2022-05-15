@@ -123,6 +123,6 @@ public sealed class CarFacadeTests : CRUDFacadeTestsBase
     [Fact]
     public async Task GetCarsOwnedByUser()
     {
-        var filtered = await _carFacadeSUT.GetUserCars(UserSeeds.UserEntity1.Id);
+        var _ = await _carFacadeSUT.GetUserCars(UserSeeds.UserEntity1.Id);
     }
 }
