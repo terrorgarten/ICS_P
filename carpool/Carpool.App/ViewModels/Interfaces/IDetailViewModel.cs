@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Carpool.App.ViewModels
+namespace Carpool.App.ViewModels;
+
+public interface IDetailViewModel<out TDetail> : IViewModel
 {
-    public interface IDetailViewModel<out TDetail> : IViewModel
-    {
-        TDetail? Model { get; }
-        Task LoadAsync(Guid id);
-        Task DeleteAsync();
-        Task SaveAsync();
-    }
+    TDetail? Model { get; }
+    Task LoadAsync(Guid id);
+    Task DeleteAsync();
+    Task SaveAsync();
 }

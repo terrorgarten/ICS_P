@@ -20,8 +20,10 @@
         <controls:ButtonWithIcon Grid.Row="0"
                                  Command="{Binding CarNewCommand}"
                                  TextContent="Moje vozy" HorizontalAlignment="Center"
-                                 IconSource="https://w7.pngwing.com/pngs/535/334/png-transparent-computer-icons-add-button-logo-number-add-button-thumbnail.png" Margin="52,0,52,0"/>
-        <ListBox Background="#5e98f7" x:Name="CarsListBox" Grid.Row="1" ItemsSource="{Binding Cars}" Margin="10,0,-10,61" d:ItemsSource="{d:SampleData ItemCount=5}">
+                                 IconSource="https://w7.pngwing.com/pngs/535/334/png-transparent-computer-icons-add-button-logo-number-add-button-thumbnail.png"
+                                 Margin="52,0,52,0" />
+        <ListBox Background="#5e98f7" x:Name="CarsListBox" Grid.Row="1" ItemsSource="{Binding Cars}"
+                 Margin="10,0,-10,61" d:ItemsSource="{d:SampleData ItemCount=5}">
 
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
@@ -33,11 +35,13 @@
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding Manufacturer}" />
-                        <Label Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding CarType}" />
+                        <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
+                               Content="{Binding Manufacturer}" />
+                        <Label Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"
+                               Content="{Binding CarType}" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -45,15 +49,17 @@
 
         <TabControl x:Name="CarDetail" Background="#5e98f7"
                     ItemsSource="{Binding CarDetailViewModels}"
-                    SelectedItem="{Binding SelectedCarDetailViewModel, Mode=TwoWay}" Margin="450,0,-465,0" Height="300" VerticalAlignment="Top" Grid.Row="1" >
+                    SelectedItem="{Binding SelectedCarDetailViewModel, Mode=TwoWay}" Margin="450,0,-465,0" Height="300"
+                    VerticalAlignment="Top" Grid.Row="1">
             <TabControl.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Foreground="Black" Text="{Binding Model.Manufacturer}" Margin="5"/>
-                        <Button Content="X" Command="{Binding DataContext.CloseCarDetailTabCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}}"
+                        <TextBlock Foreground="Black" Text="{Binding Model.Manufacturer}" Margin="5" />
+                        <Button Content="X"
+                                Command="{Binding DataContext.CloseCarDetailTabCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}}"
                                 CommandParameter="{Binding}"
                                 Width="20" Height="20" FontWeight="Bold" FontSize="12"
-                                Foreground="White" Padding="0"/>
+                                Foreground="White" Padding="0" />
                     </StackPanel>
                 </DataTemplate>
             </TabControl.ItemTemplate>

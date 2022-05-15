@@ -1,17 +1,15 @@
 ﻿using AutoMapper;
 using Carpool.BL.Models;
 using Carpool.DAL.Entities;
-using Carpool.DAL.Seeds;
 using Carpool.DAL.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Carpool.BL.Facades;
 
 public class UserRideFacade : CRUDFacade<UserRideEntity, UserRideDetailModel, UserRideDetailModel>
 {
-    private readonly IUnitOfWorkFactory _uow;
     private readonly IMapper _mapper;
+    private readonly IUnitOfWorkFactory _uow;
 
     public UserRideFacade(IUnitOfWorkFactory unitOfWorkFactory, IMapper mapper) : base(unitOfWorkFactory, mapper)
     {
@@ -22,10 +20,7 @@ public class UserRideFacade : CRUDFacade<UserRideEntity, UserRideDetailModel, Us
 
     public async Task<UserRideDetailModel?> SaveCheckAsync(Guid? newPassengerId, Guid? rideId)
     {
-        if (newPassengerId is null || rideId is null)
-        {
-            return null;
-        }
+        if (newPassengerId is null || rideId is null) return null;
         var uowCreate = _uow.Create();
         var queryRides = uowCreate.GetRepository<RideEntity>().Get();
         var queryUsers = uowCreate.GetRepository<UserEntity>().Get();
@@ -39,35 +34,24 @@ public class UserRideFacade : CRUDFacade<UserRideEntity, UserRideDetailModel, Us
         var user = users.FirstOrDefault();
         var cars = uowCreate.GetRepository<CarEntity>().Get();
 
-        if (ride == null)
-        {
-            return null;
-        }
+        if (ride == null) return null;
 
         var numPassengers = userRides.Count();
         if (ride.Car != null)
         {
             if (numPassengers == ride.Car.SeatCapacity)
-            {
                 throw new Exception("Neuspesne prihlaseni na jizdu, jizda je plna");
-            }
 
             if (ride.Car.OwnerId == newPassengerId)
-            {
                 throw new Exception("Nemuzes se prihlasit na jizdu, na ktere jsi ridic");
-            }
         }
 
         // Check if new Passenger is not already in the ride
         foreach (var userRide in userRides)
-        {
             if (userRide.PassengerId == newPassengerId)
-            {
                 throw new Exception("Nemuzes se na jizdu prihlasit 2x");
-            }
-        }
 
-        UserRideDetailModel? model = new UserRideDetailModel(user.Name, user.Surname)
+        UserRideDetailModel? model = new(user!.Name, user.Surname)
         {
             PassengerId = user.Id,
             RideId = ride.Id,
@@ -75,15 +59,11 @@ public class UserRideFacade : CRUDFacade<UserRideEntity, UserRideDetailModel, Us
         };
 
         return await base.SaveAsync(model);
-
     }
 
     public async Task<IEnumerable<RideListModel>?> GetUserRides(Guid? id)
     {
-        if (id == null)
-        {
-            return new List<RideListModel>();
-        }
+        if (id == null) return new List<RideListModel>();
 
         await using var _uowCreated = _uow.Create();
         var queryUserRides = _uowCreated.GetRepository<UserRideEntity>().Get();
@@ -98,10 +78,7 @@ public class UserRideFacade : CRUDFacade<UserRideEntity, UserRideDetailModel, Us
 
     public async Task<IEnumerable<UserRideDetailModel>?> GetPassengers(Guid? id)
     {
-        if (id == null)
-        {
-            return new List<UserRideDetailModel>();
-        }
+        if (id == null) return new List<UserRideDetailModel>();
 
         await using var _uowCreated = _uow.Create();
         var queryUserRides = _uowCreated.GetRepository<UserRideEntity>().Get();
@@ -111,7 +88,4 @@ public class UserRideFacade : CRUDFacade<UserRideEntity, UserRideDetailModel, Us
 
         return userRideModel;
     }
-
-
 }
-

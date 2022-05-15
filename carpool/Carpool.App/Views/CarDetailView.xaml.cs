@@ -1,10 +1,9 @@
-namespace Carpool.App.Views
+namespace Carpool.App.Views;
+
+public partial class CarDetailView
 {
-    public partial class CarDetailView
+    public CarDetailView()
     {
-        public CarDetailView()
-        {
-           InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

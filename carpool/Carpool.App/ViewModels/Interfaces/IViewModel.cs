@@ -1,7 +1,6 @@
-﻿namespace Carpool.App.ViewModels
+﻿namespace Carpool.App.ViewModels;
+
+public interface IViewModel
 {
-    public interface IViewModel
-    {
-        void LoadInDesignMode();
-    }
+    void LoadInDesignMode();
 }

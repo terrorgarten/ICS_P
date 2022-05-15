@@ -1,28 +1,27 @@
-﻿using Carpool.DAL;
-using Carpool.Common.Tests.Seeds;
+﻿using Carpool.Common.Tests.Seeds;
+using Carpool.DAL;
 using Microsoft.EntityFrameworkCore;
 
-namespace Carpool.Common.Tests
+namespace Carpool.Common.Tests;
+
+public class CarpoolTestingDbContext : CarpoolDbContext
 {
-    public class CarpoolTestingDbContext : CarpoolDbContext
+    private readonly bool _seedTestingData;
+
+    public CarpoolTestingDbContext(DbContextOptions contextOptions, bool seedTestingData = false)
+        : base(contextOptions, false)
     {
-        private readonly bool _seedTestingData;
+        _seedTestingData = seedTestingData;
+    }
 
-        public CarpoolTestingDbContext(DbContextOptions contextOptions, bool seedTestingData = false)
-            : base(contextOptions, seedDemoData:false)
-        {
-            _seedTestingData = seedTestingData;
-        }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-
-            if (!_seedTestingData) return;
-            UserSeeds.Seed(modelBuilder);
-            CarSeeds.Seed(modelBuilder);
-            RideSeeds.Seed(modelBuilder);
-            UserRideSeeds.Seed(modelBuilder);
-        }
+        if (!_seedTestingData) return;
+        UserSeeds.Seed(modelBuilder);
+        CarSeeds.Seed(modelBuilder);
+        RideSeeds.Seed(modelBuilder);
+        UserRideSeeds.Seed(modelBuilder);
     }
 }

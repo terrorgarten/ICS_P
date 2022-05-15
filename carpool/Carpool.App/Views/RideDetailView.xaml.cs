@@ -1,15 +1,15 @@
-﻿namespace Carpool.App.Views
+﻿using System.Windows.Controls;
+
+namespace Carpool.App.Views;
+
+public partial class RideDetailView
 {
-    public partial class RideDetailView
+    public RideDetailView()
     {
-        public RideDetailView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
 
-        private void PassengerListBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-
-        }
+    private void PassengerListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
     }
 }

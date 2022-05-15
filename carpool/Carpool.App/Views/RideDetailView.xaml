@@ -17,8 +17,11 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Button Style="{StaticResource SaveButtonStyle}" Content="{x:Static texts:IngredientDetailResources.Save_Button_Content}" Command="{Binding SaveCommand}" />
-            <Button Content="{x:Static texts:IngredientDetailResources.Delete_Button_Content}" Command="{Binding DeleteCommand}" />
+            <Button Style="{StaticResource SaveButtonStyle}"
+                    Content="{x:Static texts:IngredientDetailResources.Save_Button_Content}"
+                    Command="{Binding SaveCommand}" />
+            <Button Content="{x:Static texts:IngredientDetailResources.Delete_Button_Content}"
+                    Command="{Binding DeleteCommand}" />
         </StackPanel>
         <Grid Grid.Row="1" Margin="0,0,-145,0">
             <Grid.RowDefinitions>
@@ -35,23 +38,30 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" Content="Start" HorizontalAlignment="Center"/>
-            <TextBox Foreground="Black" Background="White" Grid.Row="0" Grid.Column="1" Text="{Binding Model.Start, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Grid.Row="0" Grid.Column="0" Content="Start" HorizontalAlignment="Center" />
+            <TextBox Foreground="Black" Background="White" Grid.Row="0" Grid.Column="1"
+                     Text="{Binding Model.Start, UpdateSourceTrigger=PropertyChanged}" />
 
-            <Label Grid.Row="1" Grid.Column="0" Content="Cíl" HorizontalAlignment="Center"/>
-            <TextBox Foreground="Black" Background="White" Grid.Row="1" Grid.Column="1" Text="{Binding Model.End, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="Cíl" HorizontalAlignment="Center" />
+            <TextBox Foreground="Black" Background="White" Grid.Row="1" Grid.Column="1"
+                     Text="{Binding Model.End, UpdateSourceTrigger=PropertyChanged}" />
 
             <Label Grid.Row="2" Grid.Column="0" Content="Odhadovaná doba " HorizontalAlignment="Center" />
-            <TextBox Foreground="Black" Background="White" Grid.Row="2" Grid.Column="1" Text="{Binding Model.ApproxRideTime, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Foreground="Black" Background="White" Grid.Row="2" Grid.Column="1"
+                     Text="{Binding Model.ApproxRideTime, UpdateSourceTrigger=PropertyChanged}" />
 
             <Label Grid.Row="4" Grid.Column="0" Content="Vozidlo" HorizontalAlignment="Center" />
-            <TextBox Foreground="Black" Background="White" Grid.Row="4" Grid.Column="1" Text="{Binding Model.Car.Manufacturer, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Foreground="Black" Background="White" Grid.Row="4" Grid.Column="1"
+                     Text="{Binding Model.Car.Manufacturer, UpdateSourceTrigger=PropertyChanged}" />
 
             <Label Grid.Row="3" Grid.Column="0" Content="Datum a Čas" HorizontalAlignment="Center" />
-            <TextBox Foreground="Black" Background="White" Grid.Row="3" Grid.Column="1" Text="{Binding Model.BeginTime, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Foreground="Black" Background="White" Grid.Row="3" Grid.Column="1"
+                     Text="{Binding Model.BeginTime, UpdateSourceTrigger=PropertyChanged}" />
 
             <Label Grid.Row="5" Grid.Column="0" Content="Výběr vozidla" HorizontalAlignment="Center" />
-            <ComboBox Background="White" Foreground="Black" x:Name="CarsComboBox" Grid.Row="5" ItemsSource="{Binding UserCars, Mode=OneWay}" VerticalAlignment="Top" Margin="0,2,0,0" Grid.Column="1">
+            <ComboBox Background="White" Foreground="Black" x:Name="CarsComboBox" Grid.Row="5"
+                      ItemsSource="{Binding UserCars, Mode=OneWay}" VerticalAlignment="Top" Margin="0,2,0,0"
+                      Grid.Column="1">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding CarSelectedCommand}"
@@ -63,10 +73,11 @@
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding Manufacturer}"  />
+                            <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
+                                   Content="{Binding Manufacturer}" />
                         </Grid>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
@@ -75,7 +86,9 @@
             <Label Grid.Row="6" Grid.Column="0" Content="Passengers" HorizontalAlignment="Center" />
 
 
-            <ListBox x:Name="PassengerListBox" Background="Transparent" Grid.Row="6" Grid.Column="1"  ItemsSource="{Binding Passengers}" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="PassengerListBox_SelectionChanged">
+            <ListBox x:Name="PassengerListBox" Background="Transparent" Grid.Row="6" Grid.Column="1"
+                     ItemsSource="{Binding Passengers}" d:ItemsSource="{d:SampleData ItemCount=5}"
+                     SelectionChanged="PassengerListBox_SelectionChanged">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding PassengerDeleteCommand}"
@@ -86,14 +99,17 @@
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding Name}"/>
-                            <Label Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{Binding Surname}"/>
-                            <Label Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Content="ODEBRAT" Foreground="#FFFF0606" Grid.ColumnSpan="2" Margin="44,0,0,0"/>
+                            <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
+                                   Content="{Binding Name}" />
+                            <Label Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                   Content="{Binding Surname}" />
+                            <Label Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left"
+                                   Content="ODEBRAT" Foreground="#FFFF0606" Grid.ColumnSpan="2" Margin="44,0,0,0" />
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -103,7 +119,6 @@
             
             <Label Grid.Row="4" Grid.Column="0" Content="Passengers" HorizontalAlignment="Center" />
             <ComboBox Grid.Row="4" Grid.Column="1" Text="{Binding Passengers, UpdateSourceTrigger=PropertyChanged}"/>-->
-
 
 
             <!--<Label Grid.Row="0" Grid.Column="0" Content="Manufacturer" HorizontalAlignment="Center"/>

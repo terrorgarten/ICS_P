@@ -1,9 +1,5 @@
-﻿using System;
+﻿namespace Carpool.App.ViewModels;
 
-namespace Carpool.App.ViewModels
+public interface ICarListViewModel : IListViewModel
 {
-    public interface ICarListViewModel : IListViewModel
-    {
-
-    }
 }

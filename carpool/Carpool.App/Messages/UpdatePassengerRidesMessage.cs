@@ -1,9 +1,8 @@
 ﻿using Carpool.BL.Models;
 
-namespace Carpool.App.Messages
+namespace Carpool.App.Messages;
+
+public record UpdatePassengerRidesMessage<T> : Message<T>
+    where T : IModel
 {
-    public record UpdatePassengerRidesMessage<T> : Message<T>
-        where T : IModel
-    {
-    }
 }

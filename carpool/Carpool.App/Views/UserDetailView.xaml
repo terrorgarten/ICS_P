@@ -6,28 +6,31 @@
                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                        xmlns:viewModels="clr-namespace:Carpool.App.ViewModels"
                        xmlns:texts="clr-namespace:Carpool.App.Resources.Texts"
-                       xmlns:extensions="clr-namespace:Carpool.App.Extensions"
-                       xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-                       xmlns:enums="clr-namespace:Carpool.Common.Enums;assembly=Carpool.Common"
                        mc:Ignorable="d"
                        Background="#8bb6fc"
                        d:DataContext="{d:DesignInstance viewModels:UserDetailViewModel}"
                        d:DesignHeight="300" Width="808">
-    <Grid Visibility="{Binding Model, Converter={StaticResource NullToVisibilityConverter}}" Margin="49,0,0,0" HorizontalAlignment="Left" Width="759">
+    <Grid Visibility="{Binding Model, Converter={StaticResource NullToVisibilityConverter}}" Margin="49,0,0,0"
+          HorizontalAlignment="Left" Width="759">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Button Background="White" Foreground="Green" BorderBrush="Green"   Content="{x:Static texts:RecipeDetailResources.Save_Button_Content}" Command="{Binding SaveCommand}" />
-            <Button Background="White" Foreground="Red" BorderBrush="Red"  Content="{x:Static texts:RecipeDetailResources.Delete_Button_Content}" Command="{Binding DeleteCommand}" />
+            <Button Background="White" Foreground="Green" BorderBrush="Green"
+                    Content="{x:Static texts:RecipeDetailResources.Save_Button_Content}"
+                    Command="{Binding SaveCommand}" />
+            <Button Background="White" Foreground="Red" BorderBrush="Red"
+                    Content="{x:Static texts:RecipeDetailResources.Delete_Button_Content}"
+                    Command="{Binding DeleteCommand}" />
         </StackPanel>
 
-        <Grid Grid.Row="1" Grid.Column="0" Margin="0,0,30,4" HorizontalAlignment="Right" Width="270" Height="242" VerticalAlignment="Bottom">
+        <Grid Grid.Row="1" Grid.Column="0" Margin="0,0,30,4" HorizontalAlignment="Right" Width="270" Height="242"
+              VerticalAlignment="Bottom">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -43,19 +46,25 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label Foreground="Black"  Grid.Row="0" Grid.Column="0" Content="Name" />
-            <TextBox Background="Transparent" BorderBrush="Black"  Grid.Column="1" Text="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged}" Margin="0,4,13,0" VerticalAlignment="Top" Height="18" />
+            <Label Foreground="Black" Grid.Row="0" Grid.Column="0" Content="Name" />
+            <TextBox Background="Transparent" BorderBrush="Black" Grid.Column="1"
+                     Text="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged}" Margin="0,4,13,0"
+                     VerticalAlignment="Top" Height="18" />
 
             <Label Foreground="Black" Grid.Row="1" Grid.Column="0" Content="Surname" />
-            <TextBox Background="Transparent" BorderBrush="Black" Grid.Row="1" Grid.Column="1" Text="{Binding Model.Surname, UpdateSourceTrigger=PropertyChanged}" Margin="0,4,13,0" VerticalAlignment="Top" />
+            <TextBox Background="Transparent" BorderBrush="Black" Grid.Row="1" Grid.Column="1"
+                     Text="{Binding Model.Surname, UpdateSourceTrigger=PropertyChanged}" Margin="0,4,13,0"
+                     VerticalAlignment="Top" />
 
             <Label Foreground="Black" Grid.Row="2" Grid.Column="0" Content="PhotoUrl" />
-            <TextBox Background="Transparent" BorderBrush="Black" Grid.Row="2" Grid.Column="1" Text="{Binding Model.PhotoUrl, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,13,0" Height="18" TextAlignment="Left"/>
+            <TextBox Background="Transparent" BorderBrush="Black" Grid.Row="2" Grid.Column="1"
+                     Text="{Binding Model.PhotoUrl, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,13,0" Height="18"
+                     TextAlignment="Left" />
 
-            <ListView x:Name="CarListBox" 
-                      Grid.Row="6" 
-                      Grid.Column="0" 
-                      Grid.ColumnSpan="2" 
+            <ListView x:Name="CarListBox"
+                      Grid.Row="6"
+                      Grid.Column="0"
+                      Grid.ColumnSpan="2"
                       Focusable="False"
                       SelectionMode="Single"
                       ItemsSource="{Binding Model.OwnedCars}" Margin="0,57,0,10" Grid.RowSpan="2">
@@ -63,7 +72,7 @@
                 <ListView.View>
                     <GridView>
                         <GridView.Columns>
-                            <GridViewColumn Header="Manufacturer" DisplayMemberBinding="{Binding Manufacturer}"   />
+                            <GridViewColumn Header="Manufacturer" DisplayMemberBinding="{Binding Manufacturer}" />
                             <GridViewColumn Header="CarType" DisplayMemberBinding="{Binding CarType}" />
                         </GridView.Columns>
                     </GridView>
@@ -72,12 +81,12 @@
 
 
             <Image
-                   Grid.Column="1"
-                   Source="{Binding Model.PhotoUrl}" Margin="41,3,98,114" Stretch="Fill" Grid.Row="7"/>
+                Grid.Column="1"
+                Source="{Binding Model.PhotoUrl}" Margin="41,3,98,114" Stretch="Fill" Grid.Row="7" />
         </Grid>
 
-        <ListView Grid.Row="1" x:Name="RideList" 
-                   ItemsSource="{Binding Model.DriverRides}" Margin="31,17,-1,170" Grid.Column="1">
+        <ListView Grid.Row="1" x:Name="RideList"
+                  ItemsSource="{Binding Model.DriverRides}" Margin="31,17,-1,170" Grid.Column="1">
 
             <ListView.View>
                 <GridView>
@@ -92,15 +101,15 @@
 
         </ListView>
 
-        <ListView Grid.Row="1" x:Name="PassengerRideList" 
+        <ListView Grid.Row="1" x:Name="PassengerRideList"
                   ItemsSource="{Binding PassengerRides}" Grid.Column="1" Margin="31,153,-1,58">
 
             <ListView.View>
                 <GridView>
                     <GridView.Columns>
-                        <GridViewColumn Header="Start" DisplayMemberBinding="{Binding Start}"/>
-                        <GridViewColumn Header="End" DisplayMemberBinding="{Binding End}"/>
-                        <GridViewColumn Header="Begin Time" DisplayMemberBinding="{Binding BeginTime}"/>
+                        <GridViewColumn Header="Start" DisplayMemberBinding="{Binding Start}" />
+                        <GridViewColumn Header="End" DisplayMemberBinding="{Binding End}" />
+                        <GridViewColumn Header="Begin Time" DisplayMemberBinding="{Binding BeginTime}" />
                     </GridView.Columns>
                 </GridView>
             </ListView.View>

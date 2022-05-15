@@ -13,12 +13,14 @@ public class DbContextLocalDBTestingFactory : IDbContextFactory<CarpoolDbContext
         _databaseName = databaseName;
         _seedTestingData = seedTestingData;
     }
+
     public CarpoolDbContext CreateDbContext()
     {
         DbContextOptionsBuilder<CarpoolDbContext> builder = new();
-        builder.UseSqlServer($"Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog = {_databaseName};MultipleActiveResultSets = True;Integrated Security = True; ");
-        
-        
+        builder.UseSqlServer(
+            $"Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog = {_databaseName};MultipleActiveResultSets = True;Integrated Security = True; ");
+
+
         return new CarpoolTestingDbContext(builder.Options, _seedTestingData);
     }
 }

@@ -4,7 +4,6 @@ using Carpool.BL.Facades;
 using Carpool.DAL;
 using Carpool.DAL.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Carpool.BL;

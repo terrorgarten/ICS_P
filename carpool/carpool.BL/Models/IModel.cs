@@ -1,9 +1,6 @@
-﻿using System;
+﻿namespace Carpool.BL.Models;
 
-namespace Carpool.BL.Models
+public interface IModel
 {
-    public interface IModel
-    {
-        Guid Id { get; }
-    }
+    Guid Id { get; }
 }

@@ -13,11 +13,12 @@ public class DbContextSQLiteTestingFactory : IDbContextFactory<CarpoolDbContext>
         _databaseName = databaseName;
         _seedTestingData = seedTestingData;
     }
+
     public CarpoolDbContext CreateDbContext()
     {
         DbContextOptionsBuilder<CarpoolDbContext> builder = new();
         builder.UseSqlite($"Data Source={_databaseName};Cache=Shared");
-        
+
         return new CarpoolTestingDbContext(builder.Options, _seedTestingData);
     }
 }

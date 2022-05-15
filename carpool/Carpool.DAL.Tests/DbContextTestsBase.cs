@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Carpool.Common.Tests;
 using Carpool.Common.Tests.Factories;
-using Carpool.DAL.Factories;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 using Xunit.Abstractions;
@@ -15,8 +14,8 @@ public class DbContextTestsBase : IAsyncLifetime
     {
         XUnitTestOutputConverter converter = new(output);
         Console.SetOut(converter);
-        
-        DbContextFactory = new DbContextSQLiteTestingFactory(GetType().FullName!, seedTestingData: true);
+
+        DbContextFactory = new DbContextSQLiteTestingFactory(GetType().FullName!, true);
 
         CarpoolDbContextSUT = DbContextFactory.CreateDbContext();
     }

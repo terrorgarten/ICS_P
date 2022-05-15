@@ -1,20 +1,19 @@
-﻿using Carpool.App.Factories;
+﻿using System;
+using Carpool.App.Factories;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
-namespace Carpool.App.Extensions
+namespace Carpool.App.Extensions;
+
+public static class ServiceCollectionExtensions
 {
-    public static class ServiceCollectionExtensions
+    public static void AddFactory<TService, TImplementation>(this IServiceCollection services)
+        where TService : class
+        where TImplementation : class, TService
     {
-        public static void AddFactory<TService, TImplementation>(this IServiceCollection services)
-            where TService : class
-            where TImplementation : class, TService
-        {
-            services.AddTransient<TService, TImplementation>();
+        services.AddTransient<TService, TImplementation>();
 
-            services.AddSingleton<Func<TService>>(x => x.GetRequiredService<TService>);
+        services.AddSingleton<Func<TService>>(x => x.GetRequiredService<TService>);
 
-            services.AddSingleton<IFactory<TService>, Factory<TService>>();
-        }
+        services.AddSingleton<IFactory<TService>, Factory<TService>>();
     }
 }

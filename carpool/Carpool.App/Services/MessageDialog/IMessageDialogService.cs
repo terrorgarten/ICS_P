@@ -1,11 +1,10 @@
-﻿namespace Carpool.App.Services.MessageDialog
+﻿namespace Carpool.App.Services.MessageDialog;
+
+public interface IMessageDialogService
 {
-    public interface IMessageDialogService
-    {
-        MessageDialogResult Show(
-            string title,
-            string caption,
-            MessageDialogButtonConfiguration buttonConfiguration,
-            MessageDialogResult defaultResult);
-    }
+    MessageDialogResult Show(
+        string title,
+        string caption,
+        MessageDialogButtonConfiguration buttonConfiguration,
+        MessageDialogResult defaultResult);
 }

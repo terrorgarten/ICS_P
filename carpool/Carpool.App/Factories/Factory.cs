@@ -1,13 +1,18 @@
 ﻿using System;
 
-namespace Carpool.App.Factories
+namespace Carpool.App.Factories;
+
+public class Factory<T> : IFactory<T>
 {
-    public class Factory<T> : IFactory<T>
+    private readonly Func<T> _initFunc;
+
+    public Factory(Func<T> initFunc)
     {
-        private readonly Func<T> _initFunc;
+        _initFunc = initFunc;
+    }
 
-        public Factory(Func<T> initFunc) => _initFunc = initFunc;
-
-        public T Create() => _initFunc();
+    public T Create()
+    {
+        return _initFunc();
     }
 }

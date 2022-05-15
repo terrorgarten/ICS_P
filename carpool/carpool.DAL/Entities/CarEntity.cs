@@ -1,4 +1,5 @@
 ﻿using Carpool.Common.Enums;
+
 namespace Carpool.DAL.Entities;
 
 public record CarEntity(
@@ -8,12 +9,13 @@ public record CarEntity(
     DateTime RegistrationDate,
     string? PhotoUrl,
     int SeatCapacity,
-    Guid OwnerId ) : IEntity
+    Guid OwnerId) : IEntity
 {
 #nullable disable
-    public CarEntity() : this(default, default, default, default, string.Empty, default, default) { }
+    public CarEntity() : this(default, default, default, default, string.Empty, default, default)
+    {
+    }
 #nullable enable
     public UserEntity? Owner { get; init; }
     public ICollection<RideEntity> Rides { get; init; } = new List<RideEntity>();
-
 }

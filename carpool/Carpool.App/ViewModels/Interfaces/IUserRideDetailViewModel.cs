@@ -1,9 +1,7 @@
-﻿using System;
-using Carpool.App.Wrappers;
+﻿using Carpool.App.Wrappers;
 
-namespace Carpool.App.ViewModels
+namespace Carpool.App.ViewModels;
+
+public interface IUserRideDetailViewModel : IDetailViewModel<UserRideWrapper>
 {
-    public interface IUserRideDetailViewModel : IDetailViewModel<UserRideWrapper>
-    {
-    }
 }

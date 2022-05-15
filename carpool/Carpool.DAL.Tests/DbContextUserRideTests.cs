@@ -1,105 +1,95 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using Carpool.Common.Enums;
-using Carpool.Common.Tests;
 using Carpool.Common.Tests.Seeds;
-using Carpool.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Carpool.DAL.Tests
+namespace Carpool.DAL.Tests;
 
+public class DbContextUserRideTests : DbContextTestsBase
 {
-    public class DbContextUserRideTests : DbContextTestsBase
+    public DbContextUserRideTests(ITestOutputHelper output) : base(output)
     {
-        public DbContextUserRideTests(ITestOutputHelper output) : base(output)
+    }
+
+    [Fact]
+    public async Task Get_UserRide_ForRide1()
+    {
+        //Act
+        var userRides = await CarpoolDbContextSUT.UsersRideEntity
+            .Where(i => i.RideId == RideSeeds.RideEntityForUserRideEntity.Id)
+            .ToArrayAsync();
+
+        Assert.Contains(UserRideSeeds.UserRideEntity1 with
         {
+            Ride = null,
+            Passenger = null
+        }, userRides);
+    }
 
-        }
+    [Fact]
+    public async Task Get_UserRide_ForRide2()
+    {
+        //Act
+        var userRides = await CarpoolDbContextSUT.UsersRideEntity
+            .Where(i => i.RideId == RideSeeds.RideEntityForRideTestsGet.Id)
+            .ToArrayAsync();
 
-        [Fact]
-        public async Task Get_UserRide_ForRide1()
+        Assert.Contains(UserRideSeeds.UserRideEntity2 with
         {
-            //Act
-            var userRides = await CarpoolDbContextSUT.UsersRideEntity
-                .Where(i => i.RideId == RideSeeds.RideEntityForUserRideEntity.Id)
-                .ToArrayAsync();
+            Ride = null,
+            Passenger = null
+        }, userRides);
+    }
 
-            Assert.Contains(UserRideSeeds.UserRideEntity1 with
+
+    [Fact]
+    public async Task Update_PassengerId_Persisted()
+    {
+        //Arrange
+        var baseEntity = UserRideSeeds.UserRideEntityUpdate;
+        var entity =
+            baseEntity with
             {
-                Ride = null,
-                Passenger = null
-            }, userRides);
-            
-        }
+                PassengerId = UserSeeds.UserEntity.Id //?
+            };
 
-        [Fact]
-        public async Task Get_UserRide_ForRide2()
-        {
-            //Act
-            var userRides = await CarpoolDbContextSUT.UsersRideEntity
-                .Where(i => i.RideId == RideSeeds.RideEntityForRideTestsGet.Id)
-                .ToArrayAsync();
+        //Act
+        CarpoolDbContextSUT.UsersRideEntity.Update(entity);
+        await CarpoolDbContextSUT.SaveChangesAsync();
 
-            Assert.Contains(UserRideSeeds.UserRideEntity2 with
-            {
-                Ride = null,
-                Passenger = null
-            }, userRides);
-        }
+        //Assert
+        await using var dbx = await DbContextFactory.CreateDbContextAsync();
+        var actualEntity = await dbx.UsersRideEntity.SingleAsync(i => i.Id == entity.Id);
+        Assert.Equal(entity, actualEntity);
+    }
 
-       
-        [Fact]
-        public async Task Update_PassengerId_Persisted()
-        {
-            //Arrange
-            var baseEntity = UserRideSeeds.UserRideEntityUpdate;
-            var entity =
-                baseEntity with
-                {
-                    PassengerId = UserSeeds.UserEntity.Id //?
-                };
+    [Fact]
+    public async Task Delete_Ride_UREDelete()
+    {
+        //Arrange
+        var entityBase = RideSeeds.RideEntityForRideUserDelete;
 
-            //Act
-            CarpoolDbContextSUT.UsersRideEntity.Update(entity);
-            await CarpoolDbContextSUT.SaveChangesAsync();
+        //Act
+        CarpoolDbContextSUT.Rides.Remove(entityBase);
+        await CarpoolDbContextSUT.SaveChangesAsync();
 
-            //Assert
-            await using var dbx = await DbContextFactory.CreateDbContextAsync();
-            var actualEntity = await dbx.UsersRideEntity.SingleAsync(i => i.Id == entity.Id);
-            Assert.Equal(entity, actualEntity);
-        }
+        //Assert
+        Assert.False(await CarpoolDbContextSUT.Rides.AnyAsync(i => i.Id == entityBase.Id));
+    }
 
-        [Fact]
-        public async Task Delete_Ride_UREDelete()
-        {
-            //Arrange
-            var entityBase = RideSeeds.RideEntityForRideUserDelete;
+    [Fact]
+    public async Task Delete_UserRide_Deleted()
+    {
+        //Arrange
+        var baseEntity = UserRideSeeds.UserRideEntityDelete;
 
-            //Act
-            CarpoolDbContextSUT.Rides.Remove(entityBase);
-            await CarpoolDbContextSUT.SaveChangesAsync();
+        //Act
+        CarpoolDbContextSUT.UsersRideEntity.Remove(baseEntity);
+        await CarpoolDbContextSUT.SaveChangesAsync();
 
-            //Assert
-            Assert.False(await CarpoolDbContextSUT.Rides.AnyAsync(i => i.Id == entityBase.Id));
-        }
-
-        [Fact]
-        public async Task Delete_UserRide_Deleted()
-        {
-            //Arrange
-            var baseEntity = UserRideSeeds.UserRideEntityDelete;
-
-            //Act
-            CarpoolDbContextSUT.UsersRideEntity.Remove(baseEntity);
-            await CarpoolDbContextSUT.SaveChangesAsync();
-
-            //Assert
-            Assert.False(await CarpoolDbContextSUT.UsersRideEntity.AnyAsync(i => i.Id == baseEntity.Id));
-        }
-
+        //Assert
+        Assert.False(await CarpoolDbContextSUT.UsersRideEntity.AnyAsync(i => i.Id == baseEntity.Id));
     }
 }

@@ -1,48 +1,46 @@
-﻿using Carpool.BL.Models;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Carpool.BL.Models;
 
-namespace Carpool.App.Wrappers
+namespace Carpool.App.Wrappers;
+
+public class UserRideWrapper : ModelWrapper<UserRideDetailModel>
 {
-    public class UserRideWrapper : ModelWrapper<UserRideDetailModel>
+    public UserRideWrapper(UserRideDetailModel model)
+        : base(model)
     {
-        public UserRideWrapper(UserRideDetailModel model)
-            : base(model)
-        {
-        }
+    }
 
-        public string? Name
-        {
-            get => GetValue<string>();
-            set => SetValue(value);
-        }
-        public string? Surname
-        {
-            get => GetValue<string>();
-            set => SetValue(value);
-        }
-        
-        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            if (string.IsNullOrWhiteSpace(Name))
-            {
-                yield return new ValidationResult($"{nameof(Name)} is required", new[] {nameof(Name)});
-            }
+    public string? Name
+    {
+        get => GetValue<string>();
+        set => SetValue(value);
+    }
 
-            if (string.IsNullOrWhiteSpace(Surname))
-            {
-                yield return new ValidationResult($"{nameof(Surname)} is required", new[] {nameof(Surname)});
-            }
+    public string? Surname
+    {
+        get => GetValue<string>();
+        set => SetValue(value);
+    }
 
-            //TODO: tu mozno budu podobne tie validace? :hmmmm:
-            
-        }
+    public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+        if (string.IsNullOrWhiteSpace(Name))
+            yield return new ValidationResult($"{nameof(Name)} is required", new[] { nameof(Name) });
 
-        public static implicit operator UserRideWrapper(UserRideDetailModel detailModel)
-            => new(detailModel);
+        if (string.IsNullOrWhiteSpace(Surname))
+            yield return new ValidationResult($"{nameof(Surname)} is required", new[] { nameof(Surname) });
 
-        public static implicit operator UserRideDetailModel(UserRideWrapper wrapper)
-            => wrapper.Model;
+        //TODO: tu mozno budu podobne tie validace? :hmmmm:
+    }
+
+    public static implicit operator UserRideWrapper(UserRideDetailModel detailModel)
+    {
+        return new(detailModel);
+    }
+
+    public static implicit operator UserRideDetailModel(UserRideWrapper wrapper)
+    {
+        return wrapper.Model;
     }
 }

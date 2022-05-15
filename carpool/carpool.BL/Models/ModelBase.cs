@@ -1,9 +1,6 @@
-﻿using System;
+﻿namespace Carpool.BL.Models;
 
-namespace Carpool.BL.Models
+public abstract record ModelBase : IModel
 {
-    public abstract record ModelBase : IModel
-    {
-        public Guid Id { get; set; }
-    }
+    public Guid Id { get; set; }
 }

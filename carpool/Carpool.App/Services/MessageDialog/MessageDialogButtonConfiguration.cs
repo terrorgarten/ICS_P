@@ -1,10 +1,9 @@
-﻿namespace Carpool.App.Services.MessageDialog
+﻿namespace Carpool.App.Services.MessageDialog;
+
+public enum MessageDialogButtonConfiguration
 {
-    public enum MessageDialogButtonConfiguration
-    {
-        OK,
-        OKCancel,
-        YesNoCancel,
-        YesNo,
-    }
+    OK,
+    OKCancel,
+    YesNoCancel,
+    YesNo
 }

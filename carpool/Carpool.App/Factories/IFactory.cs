@@ -1,7 +1,6 @@
-﻿namespace Carpool.App.Factories
+﻿namespace Carpool.App.Factories;
+
+public interface IFactory<out T>
 {
-    public interface IFactory<out T>
-    {
-        T Create();
-    }
+    T Create();
 }

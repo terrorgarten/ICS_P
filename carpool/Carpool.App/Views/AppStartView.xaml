@@ -7,26 +7,26 @@
     xmlns:views="clr-namespace:Carpool.App.Views"
     xmlns:viewModels="clr-namespace:Carpool.App.ViewModels"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-    xmlns:visualBasic="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core"
 
     TextElement.FontWeight="Regular"
-     TextElement.FontSize="15"
-     TextOptions.TextFormattingMode="Ideal"
-     TextOptions.TextRenderingMode="Auto"
-     TextElement.FontFamily="Poppins"
-     
+    TextElement.FontSize="15"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
+    TextElement.FontFamily="Poppins"
+
 
     mc:Ignorable="d"
-        Title="Carpool" Height="505" Width="933"
-        d:DataContext="{d:DesignInstance viewModels:AppStartViewModel}">
+    Title="Carpool" Height="505" Width="933"
+    d:DataContext="{d:DesignInstance viewModels:AppStartViewModel}">
 
 
     <Grid Background="#5e98f7"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" RenderTransformOrigin="0.47,0.483" HorizontalAlignment="Center" Width="933">
+          RenderTransformOrigin="0.47,0.483" HorizontalAlignment="Center" Width="933">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <TabControl Foreground="Black" Grid.Column="0" Background="#5e98f7" SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}" HorizontalAlignment="Left" Width="933" >
+        <TabControl Foreground="Black" Grid.Column="0" Background="#5e98f7"
+                    SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}" HorizontalAlignment="Left" Width="933">
             <!--TabControl Styling-->
             <TabControl.Resources>
                 <Style TargetType="TabItem">
@@ -35,11 +35,10 @@
                             <ControlTemplate TargetType="TabItem">
                                 <Grid Name="Panel">
                                     <ContentPresenter x:Name="ContentSite"
-                                        VerticalAlignment="Center"
-                                        HorizontalAlignment="Center"
-                                        ContentSource="Header"
-                                        Margin="12,2"
-                                        />
+                                                      VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"
+                                                      ContentSource="Header"
+                                                      Margin="12,2" />
                                 </Grid>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsSelected" Value="True">
@@ -56,12 +55,12 @@
             </TabControl.Resources>
 
 
-            <TabItem Foreground="Black"  x:Name="Login" Height="21" VerticalAlignment="Bottom">
+            <TabItem Foreground="Black" x:Name="Login" Height="21" VerticalAlignment="Bottom">
                 <TabItem.Header>
                     <Grid>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="MouseDown">
-                                <i:InvokeCommandAction Command="{Binding Logout}"/>
+                                <i:InvokeCommandAction Command="{Binding Logout}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                         <Label HorizontalAlignment="Left" Margin="-4,-4,0,-3">LOGIN</Label>
@@ -69,15 +68,16 @@
                 </TabItem.Header>
 
                 <views:UserListView x:Name="UserList"
-                                    Grid.Row="0"
                                     DataContext="{Binding UserListViewModel}" Margin="46,0,32,0" Height="316" />
             </TabItem>
 
-            <TabItem  Foreground="Black" x:Name="Dashboard" Header="DASHBOARD">
+            <TabItem Foreground="Black" x:Name="Dashboard" Header="DASHBOARD">
                 <Border BorderBrush="#FF000000" BorderThickness="5" CornerRadius="8">
                     <Grid>
-                        <views:UserDetailView Background="#8bb6fc" Grid.Column="0" HorizontalAlignment="Left" Width="873" Margin="24,76,0,25"
-                                          DataContext="{Binding SelectedUserDetailViewModel}" Loaded="UserDetailView_Loaded"/>
+                        <views:UserDetailView Background="#8bb6fc" Grid.Column="0" HorizontalAlignment="Left"
+                                              Width="873" Margin="24,76,0,25"
+                                              DataContext="{Binding SelectedUserDetailViewModel}"
+                                              Loaded="UserDetailView_Loaded" />
 
                     </Grid>
                 </Border>
@@ -87,34 +87,35 @@
 
             <TabItem x:Name="FindRide" Header="HLEDAT JÍZDU">
                 <views:RideSearchView
-                    DataContext="{Binding RideSearchViewModel}" Margin="7,0,5,0"></views:RideSearchView>
+                    DataContext="{Binding RideSearchViewModel}" Margin="7,0,5,0" />
             </TabItem>
 
-            <TabItem  Foreground="Black" x:Name="Car" Header="AUTO">
-                <views:CarListView  Background="#8bb6fc"
-                    DataContext="{Binding CarListViewModel}" Height="409" Margin="0,0,11,0"></views:CarListView>
+            <TabItem Foreground="Black" x:Name="Car" Header="AUTO">
+                <views:CarListView Background="#8bb6fc"
+                                   DataContext="{Binding CarListViewModel}" Height="409" Margin="0,0,11,0" />
             </TabItem>
 
 
             <TabItem x:Name="ManageRides" Header="SPRAVOVAT JÍZDU">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="102*"/>
-                        <ColumnDefinition Width="700*"/>
-                        <ColumnDefinition Width="125*"/>
+                        <ColumnDefinition Width="102*" />
+                        <ColumnDefinition Width="700*" />
+                        <ColumnDefinition Width="125*" />
                     </Grid.ColumnDefinitions>
-                    <views:RideDetailView 
-                        DataContext="{Binding RideDetailViewModel}" Margin="114,26,63,0" Grid.Column="1" Grid.ColumnSpan="2"/>
-                    <views:RideListView 
+                    <views:RideDetailView
+                        DataContext="{Binding RideDetailViewModel}" Margin="114,26,63,0" Grid.Column="1"
+                        Grid.ColumnSpan="2" />
+                    <views:RideListView
                         Grid.Column="0"
-                        DataContext="{Binding RideListViewModel}" Height="409" Margin="51,25,478,25" Grid.ColumnSpan="2" ></views:RideListView>
+                        DataContext="{Binding RideListViewModel}" Height="409" Margin="51,25,478,25"
+                        Grid.ColumnSpan="2" />
                 </Grid>
             </TabItem>
         </TabControl>
-        <Label VerticalAlignment="Top" Height="29" Content="{Binding SelectedUserDetailViewModel.Model.Name}" ContentStringFormat="Přihlášen: {0}" Width="172" Background="White" FontWeight="Black" Foreground="Black" RenderTransformOrigin="0.712,0.377" HorizontalAlignment="Left" Margin="751,39,0,0"/>
-
-
-
+        <Label VerticalAlignment="Top" Height="29" Content="{Binding SelectedUserDetailViewModel.Model.Name}"
+               ContentStringFormat="Přihlášen: {0}" Width="172" Background="White" FontWeight="Black"
+               Foreground="Black" RenderTransformOrigin="0.712,0.377" HorizontalAlignment="Left" Margin="751,39,0,0" />
 
 
     </Grid>

@@ -5,7 +5,6 @@
                        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
                        xmlns:local="clr-namespace:Carpool.App.Views"
                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                       xmlns:texts="clr-namespace:Carpool.App.Resources.Texts"
                        xmlns:controls="clr-namespace:Carpool.App.Controls"
                        xmlns:viewModels="clr-namespace:Carpool.App.ViewModels"
                        d:DesignHeight="450"
@@ -22,7 +21,7 @@
                                  Command="{Binding RideNewCommand}"
                                  TextContent="Přidat jízdu"
                                  IconSource="/Resources/Images/Add.png"
-                                 HorizontalAlignment="Center"/>
+                                 HorizontalAlignment="Center" />
         <ListBox x:Name="CarsListBox" Grid.Row="1" ItemsSource="{Binding DriverRides}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
@@ -34,13 +33,15 @@
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding Start}" ContentStringFormat="Z: {0}"  />
-                        <Label Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{Binding End}" ContentStringFormat="Do: {0}" />
+                        <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
+                               Content="{Binding Start}" ContentStringFormat="Z: {0}" />
+                        <Label Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+                               Content="{Binding End}" ContentStringFormat="Do: {0}" />
 
                     </Grid>
                 </DataTemplate>

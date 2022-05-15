@@ -1,27 +1,25 @@
-﻿
-using Carpool.DAL;
+﻿using Carpool.DAL;
 using Microsoft.EntityFrameworkCore;
 
-namespace Carpool.Common.Tests.Factories
+namespace Carpool.Common.Tests.Factories;
+
+public class DbContextTestingInMemoryFactory : IDbContextFactory<CarpoolDbContext>
 {
-    public class DbContextTestingInMemoryFactory: IDbContextFactory<CarpoolDbContext>
+    private readonly string _databaseName;
+    private readonly bool _seedTestingData;
+
+    public DbContextTestingInMemoryFactory(string databaseName, bool seedTestingData = false)
     {
-        private readonly string _databaseName;
-        private readonly bool _seedTestingData;
+        _databaseName = databaseName;
+        _seedTestingData = seedTestingData;
+    }
 
-        public DbContextTestingInMemoryFactory(string databaseName, bool seedTestingData = false)
-        {
-            _databaseName = databaseName;
-            _seedTestingData = seedTestingData;
-        }
+    public CarpoolDbContext CreateDbContext()
+    {
+        DbContextOptionsBuilder<CarpoolDbContext> contextOptionsBuilder = new();
+        contextOptionsBuilder.UseInMemoryDatabase(_databaseName);
 
-        public CarpoolDbContext CreateDbContext()
-        {
-            DbContextOptionsBuilder<CarpoolDbContext> contextOptionsBuilder = new();
-            contextOptionsBuilder.UseInMemoryDatabase(_databaseName);
-            
-            
-            return new CarpoolTestingDbContext(contextOptionsBuilder.Options, _seedTestingData);
-        }
+
+        return new CarpoolTestingDbContext(contextOptionsBuilder.Options, _seedTestingData);
     }
 }

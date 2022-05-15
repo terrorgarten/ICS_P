@@ -2,57 +2,60 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Carpool.App.Services.MessageDialog
+namespace Carpool.App.Services.MessageDialog;
+
+public partial class MessageDialog : Window
 {
-    public partial class MessageDialog : Window
+    private MessageDialogResult _result;
+
+    public MessageDialog(string title, string text, MessageDialogResult defaultResult,
+        MessageDialogButtonConfiguration buttonConfiguration)
     {
-        private MessageDialogResult _result;
+        InitializeComponent();
+        Title = title;
+        textBlock.Text = text;
+        _result = defaultResult;
+        InitializeButtons(buttonConfiguration);
+    }
 
-        public MessageDialog(string title, string text, MessageDialogResult defaultResult,
-            MessageDialogButtonConfiguration buttonConfiguration)
+    private void InitializeButtons(MessageDialogButtonConfiguration buttonConfiguration)
+    {
+        var buttons = GetButtonsFromConfiguration(buttonConfiguration);
+
+        foreach (var button in buttons)
         {
-            InitializeComponent();
-            Title = title;
-            textBlock.Text = text;
-            _result = defaultResult;
-            InitializeButtons(buttonConfiguration);
+            var btn = new Button { Content = button, Tag = button };
+            ButtonsPanel.Children.Add(btn);
+            btn.Click += ButtonClick;
         }
+    }
 
-        private void InitializeButtons(MessageDialogButtonConfiguration buttonConfiguration)
+    private static IEnumerable<MessageDialogResult> GetButtonsFromConfiguration(
+        MessageDialogButtonConfiguration buttonConfiguration)
+    {
+        return buttonConfiguration switch
         {
-            var buttons = GetButtonsFromConfiguration(buttonConfiguration);
+            MessageDialogButtonConfiguration.OK => new[] { MessageDialogResult.OK },
+            MessageDialogButtonConfiguration.OKCancel => new[]
+                { MessageDialogResult.OK, MessageDialogResult.Cancel },
+            MessageDialogButtonConfiguration.YesNoCancel => new[]
+                { MessageDialogResult.Yes, MessageDialogResult.No, MessageDialogResult.Cancel },
+            MessageDialogButtonConfiguration.YesNo => new[] { MessageDialogResult.OK, MessageDialogResult.No },
+            _ => new[] { MessageDialogResult.OK }
+        };
+    }
 
-            foreach (var button in buttons)
-            {
-                var btn = new Button {Content = button, Tag = button};
-                ButtonsPanel.Children.Add(btn);
-                btn.Click += ButtonClick;
-            }
-        }
+    private void ButtonClick(object sender, RoutedEventArgs e)
+    {
+        if (!(e.Source is Button button)) return;
 
-        private static IEnumerable<MessageDialogResult> GetButtonsFromConfiguration(
-            MessageDialogButtonConfiguration buttonConfiguration) =>
-            buttonConfiguration switch
-            {
-                MessageDialogButtonConfiguration.OK => new[] {MessageDialogResult.OK},
-                MessageDialogButtonConfiguration.OKCancel => new[] {MessageDialogResult.OK, MessageDialogResult.Cancel},
-                MessageDialogButtonConfiguration.YesNoCancel => new[] { MessageDialogResult.Yes, MessageDialogResult.No, MessageDialogResult.Cancel},
-                MessageDialogButtonConfiguration.YesNo => new[] {MessageDialogResult.OK, MessageDialogResult.No},
-                _ => new[] {MessageDialogResult.OK}
-            };
+        _result = (MessageDialogResult)button.Tag;
+        Close();
+    }
 
-        private void ButtonClick(object sender, RoutedEventArgs e)
-        {
-            if (!(e.Source is Button button)) return;
-
-            _result = (MessageDialogResult) button.Tag;
-            Close();
-        }
-
-        public new MessageDialogResult ShowDialog()
-        {
-            base.ShowDialog();
-            return _result;
-        }
+    public new MessageDialogResult ShowDialog()
+    {
+        base.ShowDialog();
+        return _result;
     }
 }

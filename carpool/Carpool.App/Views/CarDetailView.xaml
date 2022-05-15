@@ -15,8 +15,12 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Button Background="White" Foreground="Green" BorderBrush="Green" Content="{x:Static texts:IngredientDetailResources.Save_Button_Content}" Command="{Binding SaveCommand}" />
-            <Button Background="White" Foreground="Red" BorderBrush="Red" Content="{x:Static texts:IngredientDetailResources.Delete_Button_Content}" Command="{Binding DeleteCommand}" />
+            <Button Background="White" Foreground="Green" BorderBrush="Green"
+                    Content="{x:Static texts:IngredientDetailResources.Save_Button_Content}"
+                    Command="{Binding SaveCommand}" />
+            <Button Background="White" Foreground="Red" BorderBrush="Red"
+                    Content="{x:Static texts:IngredientDetailResources.Delete_Button_Content}"
+                    Command="{Binding DeleteCommand}" />
         </StackPanel>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
@@ -32,23 +36,30 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Label Foreground="Black" Grid.Row="0" Grid.Column="0" Content="Manufacturer" HorizontalAlignment="Center"/>
-            <TextBox Background="White" Foreground="Black" Grid.Row="0" Grid.Column="1" Text="{Binding Model.Manufacturer, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Foreground="Black" Grid.Row="0" Grid.Column="0" Content="Manufacturer" HorizontalAlignment="Center" />
+            <TextBox Background="White" Foreground="Black" Grid.Row="0" Grid.Column="1"
+                     Text="{Binding Model.Manufacturer, UpdateSourceTrigger=PropertyChanged}" />
 
-            <Label Foreground="Black" Grid.Row="1" Grid.Column="0" Content="CarType" HorizontalAlignment="Center"/>
-            <TextBox Background="White" Foreground="Black" Grid.Row="1" Grid.Column="1" Text="{Binding Model.CarType, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Foreground="Black" Grid.Row="1" Grid.Column="0" Content="CarType" HorizontalAlignment="Center" />
+            <TextBox Background="White" Foreground="Black" Grid.Row="1" Grid.Column="1"
+                     Text="{Binding Model.CarType, UpdateSourceTrigger=PropertyChanged}" />
 
             <Label Foreground="Black" Grid.Row="2" Grid.Column="0" Content="SeatCapacity" HorizontalAlignment="Center" />
-            <TextBox Background="White" Foreground="Black" Grid.Row="2" Grid.Column="1" Text="{Binding Model.SeatCapacity, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Background="White" Foreground="Black" Grid.Row="2" Grid.Column="1"
+                     Text="{Binding Model.SeatCapacity, UpdateSourceTrigger=PropertyChanged}" />
 
             <Label Foreground="Black" Grid.Row="3" Grid.Column="0" Content="Reg. Date" HorizontalAlignment="Center" />
-            <TextBox Background="White" Foreground="Black" Grid.Row="3" Grid.Column="1" Text="{Binding Model.RegistrationDate, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Background="White" Foreground="Black" Grid.Row="3" Grid.Column="1"
+                     Text="{Binding Model.RegistrationDate, UpdateSourceTrigger=PropertyChanged}" />
 
-            <Label Foreground="Black" Grid.Row="4" Grid.Column="0" Content="Photo" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Foreground="Black" Grid.Row="4" Grid.Column="0" Content="Photo" HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
 
-            <Label Foreground="Black" Grid.Row="5" Grid.Column="0" Content="PHOTO URL" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBox Background="White" Foreground="Black" Grid.Row="5" Grid.Column="1" Text="{Binding Model.PhotoUrl, UpdateSourceTrigger=PropertyChanged}"/>
-            <Image Grid.Row="4" Grid.Column="1" Source="{Binding Model.PhotoUrl}"/>
+            <Label Foreground="Black" Grid.Row="5" Grid.Column="0" Content="PHOTO URL" HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
+            <TextBox Background="White" Foreground="Black" Grid.Row="5" Grid.Column="1"
+                     Text="{Binding Model.PhotoUrl, UpdateSourceTrigger=PropertyChanged}" />
+            <Image Grid.Row="4" Grid.Column="1" Source="{Binding Model.PhotoUrl}" />
 
         </Grid>
     </Grid>

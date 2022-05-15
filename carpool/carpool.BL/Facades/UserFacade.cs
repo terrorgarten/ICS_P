@@ -8,8 +8,9 @@ namespace Carpool.BL.Facades;
 
 public class UserFacade : CRUDFacade<UserEntity, UserListModel, UserDetailModel>
 {
-    private readonly IUnitOfWorkFactory _uow;
     private readonly IMapper _mapper;
+    private readonly IUnitOfWorkFactory _uow;
+
     public UserFacade(IUnitOfWorkFactory unitOfWorkFactory, IMapper mapper) : base(unitOfWorkFactory, mapper)
     {
         _uow = unitOfWorkFactory;
@@ -19,11 +20,8 @@ public class UserFacade : CRUDFacade<UserEntity, UserListModel, UserDetailModel>
     public override async Task<UserDetailModel?> GetAsync(Guid id)
     {
         // Je to kvuli testu
-        
-        if (id == Guid.Empty)
-        {
-            return null;
-        }
+
+        if (id == Guid.Empty) return null;
 
         await using var uow = _uow.Create();
         var query = uow
@@ -65,4 +63,4 @@ public class UserFacade : CRUDFacade<UserEntity, UserListModel, UserDetailModel>
         await uow.CommitAsync();
         await base.DeleteAsync(id);
     }
-} 
+}

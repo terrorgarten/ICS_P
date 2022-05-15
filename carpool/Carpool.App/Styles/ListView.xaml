@@ -3,18 +3,18 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style TargetType="{x:Type ListView}">
-        <Setter Property="Background" Value="{StaticResource DefaultBackgroundBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource DefaultForegroundBrush}"/>
+        <Setter Property="Background" Value="{StaticResource DefaultBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource DefaultForegroundBrush}" />
     </Style>
     <Style TargetType="{x:Type ListViewItem}">
-        <Setter Property="Background" Value="{StaticResource DefaultBackgroundBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource DefaultForegroundBrush}"/>
+        <Setter Property="Background" Value="{StaticResource DefaultBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource DefaultForegroundBrush}" />
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="{StaticResource ButtonIsPressedBackgroundBrush}"/>
+                <Setter Property="Background" Value="{StaticResource ButtonIsPressedBackgroundBrush}" />
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource ButtonMouseOverBackgroundBrush}"/>
+                <Setter Property="Background" Value="{StaticResource ButtonMouseOverBackgroundBrush}" />
             </Trigger>
         </Style.Triggers>
     </Style>

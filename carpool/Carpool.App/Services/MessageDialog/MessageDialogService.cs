@@ -1,20 +1,19 @@
 ﻿using System.Windows;
 
-namespace Carpool.App.Services.MessageDialog
+namespace Carpool.App.Services.MessageDialog;
+
+public class MessageDialogService : IMessageDialogService
 {
-    public class MessageDialogService : IMessageDialogService
+    public MessageDialogResult Show(
+        string title,
+        string caption,
+        MessageDialogButtonConfiguration buttonConfiguration,
+        MessageDialogResult defaultResult)
     {
-        public MessageDialogResult Show(
-            string title, 
-            string caption, 
-            MessageDialogButtonConfiguration buttonConfiguration, 
-            MessageDialogResult defaultResult)
+        var messageDialog = new MessageDialog(title, caption, defaultResult, buttonConfiguration)
         {
-            var messageDialog = new MessageDialog(title, caption, defaultResult, buttonConfiguration)
-            {
-                Owner = Application.Current.MainWindow
-            };
-            return messageDialog.ShowDialog();
-        }
+            Owner = Application.Current.MainWindow
+        };
+        return messageDialog.ShowDialog();
     }
 }

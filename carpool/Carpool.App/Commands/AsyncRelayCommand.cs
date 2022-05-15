@@ -22,24 +22,33 @@ public class AsyncRelayCommand<T> : IAsyncRelayCommand<T>
         _relayCommand = new Microsoft.Toolkit.Mvvm.Input.AsyncRelayCommand<T>(execute, canExecute);
         _relayCommand.PropertyChanged += (_, args) => PropertyChanged?.Invoke(this, args);
     }
-    
+
     public AsyncRelayCommand(Func<T?, Task> execute)
     {
         _relayCommand = new Microsoft.Toolkit.Mvvm.Input.AsyncRelayCommand<T>(execute);
         _relayCommand.PropertyChanged += (_, args) => PropertyChanged?.Invoke(this, args);
     }
-    
+
     public AsyncRelayCommand(Func<T?, CancellationToken, Task> cancelableExecute)
     {
         _relayCommand = new Microsoft.Toolkit.Mvvm.Input.AsyncRelayCommand<T>(cancelableExecute);
         _relayCommand.PropertyChanged += (_, args) => PropertyChanged?.Invoke(this, args);
     }
 
-    public async Task ExecuteAsync(T? parameter) => await _relayCommand.ExecuteAsync(parameter);
+    public async Task ExecuteAsync(T? parameter)
+    {
+        await _relayCommand.ExecuteAsync(parameter);
+    }
 
-    public bool CanExecute(object? parameter) => _relayCommand.CanExecute(parameter);
+    public bool CanExecute(object? parameter)
+    {
+        return _relayCommand.CanExecute(parameter);
+    }
 
-    public void Execute(object? parameter) => _relayCommand.Execute(parameter);
+    public void Execute(object? parameter)
+    {
+        _relayCommand.Execute(parameter);
+    }
 
     public event EventHandler? CanExecuteChanged
     {
@@ -47,18 +56,37 @@ public class AsyncRelayCommand<T> : IAsyncRelayCommand<T>
         remove => CommandManager.RequerySuggested -= value;
     }
 
-    public void NotifyCanExecuteChanged() => CommandManager.InvalidateRequerySuggested();
+    public void NotifyCanExecuteChanged()
+    {
+        CommandManager.InvalidateRequerySuggested();
+    }
 
     public event PropertyChangedEventHandler? PropertyChanged;
-    public async Task ExecuteAsync(object? parameter) => await _relayCommand.ExecuteAsync(parameter);
-    public void Cancel() => _relayCommand.Cancel();
+
+    public async Task ExecuteAsync(object? parameter)
+    {
+        await _relayCommand.ExecuteAsync(parameter);
+    }
+
+    public void Cancel()
+    {
+        _relayCommand.Cancel();
+    }
+
     public Task? ExecutionTask => _relayCommand.ExecutionTask;
     public bool CanBeCanceled => _relayCommand.CanBeCanceled;
     public bool IsCancellationRequested => _relayCommand.IsCancellationRequested;
     public bool IsRunning => _relayCommand.IsRunning;
-    public bool CanExecute(T? parameter)=> _relayCommand.CanExecute(parameter);
 
-    public void Execute(T? parameter)=> _relayCommand.Execute(parameter);
+    public bool CanExecute(T? parameter)
+    {
+        return _relayCommand.CanExecute(parameter);
+    }
+
+    public void Execute(T? parameter)
+    {
+        _relayCommand.Execute(parameter);
+    }
 }
 
 public class AsyncRelayCommand : IAsyncRelayCommand
@@ -70,7 +98,7 @@ public class AsyncRelayCommand : IAsyncRelayCommand
         _relayCommand = new Microsoft.Toolkit.Mvvm.Input.AsyncRelayCommand(execute);
         _relayCommand.PropertyChanged += (_, args) => PropertyChanged?.Invoke(this, args);
     }
-    
+
     public AsyncRelayCommand(Func<Task> execute, Func<bool> canExecute)
     {
         _relayCommand = new Microsoft.Toolkit.Mvvm.Input.AsyncRelayCommand(execute, canExecute);
@@ -82,17 +110,23 @@ public class AsyncRelayCommand : IAsyncRelayCommand
         _relayCommand = new Microsoft.Toolkit.Mvvm.Input.AsyncRelayCommand(cancelableExecute, canExecute);
         _relayCommand.PropertyChanged += (_, args) => PropertyChanged?.Invoke(this, args);
     }
-    
+
     public AsyncRelayCommand(Func<CancellationToken, Task> cancelableExecute)
     {
         _relayCommand = new Microsoft.Toolkit.Mvvm.Input.AsyncRelayCommand(cancelableExecute);
         _relayCommand.PropertyChanged += (_, args) => PropertyChanged?.Invoke(this, args);
     }
-    
 
-    public bool CanExecute(object? parameter) => _relayCommand.CanExecute(parameter);
 
-    public void Execute(object? parameter) => _relayCommand.Execute(parameter);
+    public bool CanExecute(object? parameter)
+    {
+        return _relayCommand.CanExecute(parameter);
+    }
+
+    public void Execute(object? parameter)
+    {
+        _relayCommand.Execute(parameter);
+    }
 
     public event EventHandler? CanExecuteChanged
     {
@@ -100,12 +134,22 @@ public class AsyncRelayCommand : IAsyncRelayCommand
         remove => CommandManager.RequerySuggested -= value;
     }
 
-    public void NotifyCanExecuteChanged()=> CommandManager.InvalidateRequerySuggested();
+    public void NotifyCanExecuteChanged()
+    {
+        CommandManager.InvalidateRequerySuggested();
+    }
 
     public event PropertyChangedEventHandler? PropertyChanged;
-    public async Task ExecuteAsync(object? parameter) => await _relayCommand.ExecuteAsync(parameter);
 
-    public void Cancel() => _relayCommand.Cancel();
+    public async Task ExecuteAsync(object? parameter)
+    {
+        await _relayCommand.ExecuteAsync(parameter);
+    }
+
+    public void Cancel()
+    {
+        _relayCommand.Cancel();
+    }
 
     public Task? ExecutionTask => _relayCommand.ExecutionTask;
     public bool CanBeCanceled => _relayCommand.CanBeCanceled;

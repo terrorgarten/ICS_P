@@ -1,9 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using AutoMapper.EntityFrameworkCore;
 using Carpool.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -22,7 +17,10 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, I
         _model = dbContext.Model;
     }
 
-    public IQueryable<TEntity> Get() => _dbSet;
+    public IQueryable<TEntity> Get()
+    {
+        return _dbSet;
+    }
 
     public async Task<TEntity> InsertOrUpdateAsync<TModel>(
         TModel model,
@@ -34,5 +32,8 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, I
         return await _dbSet.Persist(mapper).InsertOrUpdateAsync(model, cancellationToken);
     }
 
-    public void Delete(Guid entityId) => _dbSet.Remove(_dbSet.Single(i => i.Id == entityId));
+    public void Delete(Guid entityId)
+    {
+        _dbSet.Remove(_dbSet.Single(i => i.Id == entityId));
+    }
 }

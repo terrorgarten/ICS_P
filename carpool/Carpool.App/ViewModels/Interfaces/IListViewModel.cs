@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
 
-namespace Carpool.App.ViewModels
+namespace Carpool.App.ViewModels;
+
+public interface IListViewModel
 {
-    public interface IListViewModel
-    {
-        Task LoadAsync();
-    }
+    Task LoadAsync();
 }

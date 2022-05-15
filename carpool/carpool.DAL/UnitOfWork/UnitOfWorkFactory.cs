@@ -1,4 +1,3 @@
-using System;
 using Microsoft.EntityFrameworkCore;
 
 namespace Carpool.DAL.UnitOfWork;
@@ -11,5 +10,9 @@ public class UnitOfWorkFactory : IUnitOfWorkFactory
     {
         _dbContextFactory = dbContextFactory;
     }
-    public IUnitOfWork Create() => new UnitOfWork(_dbContextFactory.CreateDbContext());
+
+    public IUnitOfWork Create()
+    {
+        return new UnitOfWork(_dbContextFactory.CreateDbContext());
+    }
 }

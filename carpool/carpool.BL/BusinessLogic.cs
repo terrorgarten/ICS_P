@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.CompilerServices;
 
-[assembly:InternalsVisibleTo("Carpool.BL.Tests")]
+[assembly: InternalsVisibleTo("Carpool.BL.Tests")]
 
-namespace Carpool.BL
+namespace Carpool.BL;
+
+internal class BusinessLogic
 {
-    internal class BusinessLogic
-    {
-    }
 }

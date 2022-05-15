@@ -1,13 +1,12 @@
-﻿namespace Carpool.App.Views
+﻿namespace Carpool.App.Views;
+
+/// <summary>
+///     Interaction logic for RideListView.xaml
+/// </summary>
+public partial class RideSearchView
 {
-    /// <summary>
-    /// Interaction logic for RideListView.xaml
-    /// </summary>
-    public partial class RideSearchView
+    public RideSearchView()
     {
-        public RideSearchView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

@@ -1,6 +1,5 @@
-﻿namespace Carpool.App.Messages
+﻿namespace Carpool.App.Messages;
+
+public interface IMessage
 {
-    public interface IMessage
-    {
-    }
 }
