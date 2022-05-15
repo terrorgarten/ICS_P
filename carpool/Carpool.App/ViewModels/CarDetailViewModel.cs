@@ -97,7 +97,7 @@ namespace Carpool.App.ViewModels
                 _mediator.Send(new DeleteMessage<CarWrapper>
                 {
                     Model = Model,
-                    TargetId = Model.OwnerId
+                    TargetId = Model!.OwnerId
                 });
             }
         }

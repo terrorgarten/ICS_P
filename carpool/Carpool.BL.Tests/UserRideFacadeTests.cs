@@ -24,7 +24,7 @@ namespace Carpool.BL.Tests
         public async Task GetUserRide()
         {
 
-            var filtered = await _userRideFacadeSUT.GetUserRides
+            _ = await _userRideFacadeSUT.GetUserRides
                 (UserSeeds.UserForUserRideEntity.Id);
             
         }
