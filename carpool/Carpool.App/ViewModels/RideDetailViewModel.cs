@@ -106,8 +106,6 @@ namespace Carpool.App.ViewModels
         private async void OnUserSelected(SelectedMessage<UserWrapper> obj)
         {
             CurrentUserId = obj.Id;
-            var passengers = await _userRideFacade.GetPassengers(Model.Id);
-            Passengers.AddRange(passengers!);
             if (CurrentUserId == Guid.Empty)
             {
                 Model = null;
