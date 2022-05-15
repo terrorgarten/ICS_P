@@ -86,8 +86,20 @@ namespace Carpool.App.ViewModels
                     MessageDialogButtonConfiguration.OK,
                     MessageDialogResult.OK);
             }
-            var _ = await _userRideFacade.SaveCheckAsync(CurrentUserId, CurrentRideId);
-            _mediator.Send(new UpdatePassengerRidesMessage<RideWrapper>());
+            try
+            {
+                var _ = await _userRideFacade.SaveCheckAsync(CurrentUserId, CurrentRideId);
+                _mediator.Send(new UpdatePassengerRidesMessage<RideWrapper>());
+
+            }
+            catch (Exception e)
+            {
+                var warning = _messageDialogService.Show(
+                    "Upozorneni",
+                    $"{e.Message}",
+                    MessageDialogButtonConfiguration.OK,
+                    MessageDialogResult.OK);
+            }
         }
 
         public ObservableCollection<RideListModel> FoundRides { get; set; } = new();

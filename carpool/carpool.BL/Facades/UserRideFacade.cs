@@ -18,7 +18,7 @@ public class UserRideFacade : CRUDFacade<UserRideEntity, UserRideDetailModel, Us
         _uow = unitOfWorkFactory;
         _mapper = mapper;
     }
-    
+
 
     public async Task<UserRideDetailModel?> SaveCheckAsync(Guid? newPassengerId, Guid? rideId)
     {
@@ -29,60 +29,58 @@ public class UserRideFacade : CRUDFacade<UserRideEntity, UserRideDetailModel, Us
         var uowCreate = _uow.Create();
         var queryRides = uowCreate.GetRepository<RideEntity>().Get();
         var queryUsers = uowCreate.GetRepository<UserEntity>().Get();
+        var queryUserRide = uowCreate.GetRepository<UserRideEntity>().Get();
 
 
         var rides = queryRides.Include(x => x.Car).Where(x => x.Id == rideId);
         var users = queryUsers.Where(x => x.Id == newPassengerId);
+        var userRides = queryUserRide.Where(x => x.RideId == rideId);
         var ride = rides.FirstOrDefault();
         var user = users.FirstOrDefault();
+        var cars = uowCreate.GetRepository<CarEntity>().Get();
 
         if (ride == null)
         {
-            // The ride for some reason does not exist
-            
             return null;
         }
 
-        var numPassengers = ride.PassengerRides.Count();
+        var numPassengers = userRides.Count();
         if (ride.Car != null)
         {
             if (numPassengers == ride.Car.SeatCapacity)
             {
-                
-                return null;
+                throw new Exception("Neuspesne prihlaseni na jizdu, jizda je plna");
+            }
+
+            if (ride.Car.OwnerId == newPassengerId)
+            {
+                throw new Exception("Nemuzes se prihlasit na jizdu, na ktere jsi ridic");
             }
         }
 
         // Check if new Passenger is not already in the ride
-        foreach (var userRide in ride.PassengerRides)
+        foreach (var userRide in userRides)
         {
-            if (userRide.Id == newPassengerId)
+            if (userRide.PassengerId == newPassengerId)
             {
-               
-                return null;
+                throw new Exception("Nemuzes se na jizdu prihlasit 2x");
             }
         }
-        // Check if new Passenger is not the driver
-        if (ride.Car != null && ride.Car.OwnerId == newPassengerId)
-        {
-            
-            return null;
-        }
-        
-        var model = new UserRideDetailModel(user!.Name, user!.Surname)
+
+        UserRideDetailModel? model = new UserRideDetailModel(user.Name, user.Surname)
         {
             PassengerId = user.Id,
             RideId = ride.Id,
             Id = Guid.NewGuid()
         };
-        
+
         return await base.SaveAsync(model);
 
     }
 
     public async Task<IEnumerable<RideListModel>?> GetUserRides(Guid? id)
     {
-        if(id == null)
+        if (id == null)
         {
             return new List<RideListModel>();
         }
@@ -109,8 +107,8 @@ public class UserRideFacade : CRUDFacade<UserRideEntity, UserRideDetailModel, Us
         var queryUserRides = _uowCreated.GetRepository<UserRideEntity>().Get();
         var userRides = queryUserRides.Where(x => x.RideId == id);
         var userRideModel = await _mapper.ProjectTo<UserRideDetailModel>(userRides).ToListAsync().ConfigureAwait(false);
-        
-            
+
+
         return userRideModel;
     }
 
