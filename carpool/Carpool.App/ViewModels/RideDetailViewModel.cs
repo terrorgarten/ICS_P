@@ -59,8 +59,9 @@ namespace Carpool.App.ViewModels
             Passengers.Clear();
             var passengers = await _userRideFacade.GetPassengers(Model!.Id);
             Passengers.AddRange(passengers!);
+            _mediator.Send(new UpdatePassengerRidesMessage<RideWrapper>());
         }
-            
+
 
         private void OnCarSelected(CarDetailModel? car)
         {
@@ -103,7 +104,7 @@ namespace Carpool.App.ViewModels
             if (message.Id != null) _ = LoadAsync(message.Id.Value);
         }
 
-        private async void OnUserSelected(SelectedMessage<UserWrapper> obj)
+        private void OnUserSelected(SelectedMessage<UserWrapper> obj)
         {
             CurrentUserId = obj.Id;
             if (CurrentUserId == Guid.Empty)
@@ -135,7 +136,7 @@ namespace Carpool.App.ViewModels
             {
                 var delete = _messageDialogService.Show(
                     $"Delete",
-                    $"Do you want to delete ride to {Model?.End} scheduled for ?.",
+                    $"Do you want to delete ride to {Model?.End} scheduled for {Model?.BeginTime}?.",
                     MessageDialogButtonConfiguration.YesNo,
                     MessageDialogResult.No);
 
@@ -145,6 +146,7 @@ namespace Carpool.App.ViewModels
                 {
                     await _rideFacade.DeleteAsync(Model!.Id);
                     Model = null;
+                    _mediator.Send(new DeleteMessage<RideWrapper>());
                 }
                 catch
                 {
@@ -155,8 +157,6 @@ namespace Carpool.App.ViewModels
                         MessageDialogResult.OK);
                 }
 
-                _mediator.Send(new DeleteMessage<RideWrapper>());
-                //TODO - odebrat z rides vsude -> DELETED MESSAGE 
             }
             else
             {
@@ -165,10 +165,7 @@ namespace Carpool.App.ViewModels
         }
 
         private bool CanSave() => Model?.IsValid ?? false;
-       
-
         
-
         //TODO - Kontroly? 
         public async Task SaveAsync()
         {
