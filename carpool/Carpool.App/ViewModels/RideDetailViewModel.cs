@@ -114,8 +114,6 @@ namespace Carpool.App.ViewModels
 
         }
 
-
-
         public async Task LoadAsync(Guid id)
         {
             Model = await _rideFacade.GetAsync(id) ?? RideDetailModel.Empty;

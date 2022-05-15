@@ -44,7 +44,20 @@ namespace Carpool.App.ViewModels
             mediator.Register<UpdateMessage<CarWrapper>>(UpdateCar);
             mediator.Register<DeleteMessage<CarWrapper>>(DeleteCar);
             mediator.Register<DeleteMessage<RideWrapper>>(OnRideDeleted);
+            mediator.Register<UpdateMessage<RideWrapper>>(OnRideUpdated);
+            mediator.Register<UpdatePassengerRidesMessage<RideWrapper>>(OnPassengerRidesUpdated);
 
+
+        }
+
+        private void OnPassengerRidesUpdated(UpdatePassengerRidesMessage<RideWrapper> obj)
+        {
+            _ = LoadAsync(Model!.Id);
+        }
+
+        private void OnRideUpdated(UpdateMessage<RideWrapper> obj)
+        {
+            _ = LoadAsync(Model!.Id);
         }
 
         private void OnRideDeleted(DeleteMessage<RideWrapper> obj)
@@ -60,20 +73,20 @@ namespace Carpool.App.ViewModels
 
         public ObservableCollection<RideListModel> PassengerRides { get; set; } = new();
 
-        public CarWrapper? SelectedCar
-        {
-            get => _selectedCar;
-            set
-            {
-                _selectedCar = value;
-                OnPropertyChanged();
-                _mediator.Send(new SelectedMessage<CarWrapper>
-                {
-                    TargetId = Model?.Id ?? Guid.Empty,
-                    Model = _selectedCar
-                });
-            }
-        }
+        //public CarWrapper? SelectedCar
+        //{
+        //    get => _selectedCar;
+        //    set
+        //    {
+        //        _selectedCar = value;
+        //        OnPropertyChanged();
+        //        _mediator.Send(new SelectedMessage<CarWrapper>
+        //        {
+        //            TargetId = Model?.Id ?? Guid.Empty,
+        //            Model = _selectedCar
+        //        });
+        //    }
+        //}
         
         
         public UserWrapper? Model

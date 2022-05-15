@@ -9,13 +9,13 @@ public static class UserSeeds
         Id: Guid.Parse(input: "E8C82085-4195-4C1E-BFFB-D6A4069BF997"),
         Name: "Jožko",
         Surname: "Mrkvička",
-        PhotoUrl: @"https://png.pngitem.com/pimgs/s/200-2004145_selfie-png-transparent-png.png");
+        PhotoUrl: @"https://images.pexels.com/photos/1933873/pexels-photo-1933873.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260");
 
     public static readonly UserEntity SecondUser = new(
         Id: Guid.Parse(input: "050FBEEB-7DC6-494B-A5AD-485B129CC4E6"),
         Name: "Franta",
         Surname: "Bobek",
-        PhotoUrl: @"https://png.pngitem.com/pimgs/s/346-3468375_spiderman-mcu-ps4-selfie-hd-png-download.png");
+        PhotoUrl: @"https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
 
     static UserSeeds()
     {
