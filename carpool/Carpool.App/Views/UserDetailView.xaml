@@ -13,21 +13,21 @@
                        Background="#8bb6fc"
                        d:DataContext="{d:DesignInstance viewModels:UserDetailViewModel}"
                        d:DesignHeight="300" Width="808">
-    <Grid Visibility="{Binding Model, Converter={StaticResource NullToVisibilityConverter}}" Margin="49,0,394,0">
+    <Grid Visibility="{Binding Model, Converter={StaticResource NullToVisibilityConverter}}" Margin="49,0,0,0" HorizontalAlignment="Left" Width="759">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <Button Background="White" Foreground="Green" BorderBrush="Green"   Content="{x:Static texts:RecipeDetailResources.Save_Button_Content}" Command="{Binding SaveCommand}" />
             <Button Background="White" Foreground="Red" BorderBrush="Red"  Content="{x:Static texts:RecipeDetailResources.Delete_Button_Content}" Command="{Binding DeleteCommand}" />
         </StackPanel>
-    
-        <Grid Grid.Row="1" Grid.Column="0" Margin="0,32,30,4">
+
+        <Grid Grid.Row="1" Grid.Column="0" Margin="0,0,30,4" HorizontalAlignment="Right" Width="270" Height="242" VerticalAlignment="Bottom">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -58,7 +58,7 @@
                       Grid.ColumnSpan="2" 
                       Focusable="False"
                       SelectionMode="Single"
-                      ItemsSource="{Binding Model.OwnedCars}" Margin="0,43,0,87" Grid.RowSpan="2">
+                      ItemsSource="{Binding Model.OwnedCars}" Margin="0,57,0,10" Grid.RowSpan="2">
                 <!--SelectedItem="{Binding SelectedCar}" HorizontalAlignment="Left">-->
                 <ListView.View>
                     <GridView>
@@ -70,14 +70,14 @@
                 </ListView.View>
             </ListView>
 
-           
-            <Image Grid.Row="7"
+
+            <Image
                    Grid.Column="1"
-                   Source="{Binding Model.PhotoUrl}" Margin="90,1,0,0" Stretch="Uniform"/>
+                   Source="{Binding Model.PhotoUrl}" Margin="41,3,98,114" Stretch="Fill" Grid.Row="7"/>
         </Grid>
 
         <ListView Grid.Row="1" x:Name="RideList" 
-                   ItemsSource="{Binding Model.DriverRides}" Grid.Column="1" Margin="90,10,-330,177">
+                   ItemsSource="{Binding Model.DriverRides}" Margin="31,17,-1,170" Grid.Column="1">
 
             <ListView.View>
                 <GridView>
@@ -93,7 +93,7 @@
         </ListView>
 
         <ListView Grid.Row="1" x:Name="PassengerRideList" 
-                  ItemsSource="{Binding PassengerRides}" Grid.Column="1" Margin="90,162,-330,49">
+                  ItemsSource="{Binding PassengerRides}" Grid.Column="1" Margin="31,153,-1,58">
 
             <ListView.View>
                 <GridView>

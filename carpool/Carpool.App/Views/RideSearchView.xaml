@@ -11,18 +11,18 @@
                        d:DesignHeight="450"
                        d:DesignWidth="800"
                        mc:Ignorable="d"
-                       Background="{StaticResource DefaultComponentBackgroundBrush}"
+                       Background="#8bb6fc"
                        d:DataContext="{d:DesignInstance viewModels:RideSearchViewModel}">
     <Grid x:Name="Root">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TextBox Text="{Binding StartCity, Mode=TwoWay}" Margin="215,80,346,0" Grid.Row="1" VerticalAlignment="Top" Height="26"/>
-        <TextBox Text="{Binding EndCity, Mode=TwoWay}" Margin="215,130,346,0" Grid.Row="1" VerticalAlignment="Top" Height="26"/>
-        <TextBox Text="{Binding StartFrom, Mode=TwoWay}" Margin="215,182,346,0" Grid.Row="1" VerticalAlignment="Top" Height="26"/>
-        <TextBox Text="{Binding StartTo, Mode=TwoWay}" Margin="215,237,346,0" Grid.Row="1" VerticalAlignment="Top" Height="26"/>
-        <ListBox x:Name="RideSearchBox" Grid.Row="1"  Grid.Column="0"  ItemsSource="{Binding FoundRides}" Margin="480,80,10,30" >
+        <TextBox Background="White" Text="{Binding StartCity, Mode=TwoWay}" Margin="76,80,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="239"/>
+        <TextBox Background="White" Text="{Binding EndCity, Mode=TwoWay}" Margin="76,129,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="239"/>
+        <TextBox Background="White" Text="{Binding StartFrom, Mode=TwoWay}" Margin="76,183,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="239"/>
+        <TextBox Background="White" Text="{Binding StartTo, Mode=TwoWay}" Margin="76,237,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="239"/>
+        <ListBox Background="White" x:Name="RideSearchBox" Grid.Row="1"  Grid.Column="0"  ItemsSource="{Binding FoundRides}" Margin="430,80,60,72" >
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding RideSelectedCommand}"
@@ -46,8 +46,8 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button x:Name="FindRides" Content="Vyhledat" HorizontalAlignment="Left" Margin="215,298,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="239" Command="{Binding FilterRides}"/>
-        <Button x:Name="RegisterFroRide" Content="Pridat se do jizdy" HorizontalAlignment="Left" Margin="215,356,0,0" Grid.Row="1" VerticalAlignment="Top" Width="239"  Command="{Binding RegisterForRideCommand}" />
+        <Button Background="White" Foreground="Black" x:Name="FindRides" Content="Vyhledat" HorizontalAlignment="Left" Margin="76,325,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="239" Command="{Binding FilterRides}"/>
+        <Button Background="White" Foreground="Black" x:Name="RegisterFroRide" Content="Pridat se do jizdy" HorizontalAlignment="Left" Margin="76,356,0,0" Grid.Row="1" VerticalAlignment="Top" Width="239"  Command="{Binding RegisterForRideCommand}" />
 
     </Grid>
 </local:UserControlBase>
