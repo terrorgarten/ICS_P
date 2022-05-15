@@ -57,7 +57,7 @@ namespace Carpool.App.ViewModels
             
             await _userRideFacade.DeleteAsync(rideDetailModel!.Id);
             Passengers.Clear();
-            var passengers = await _userRideFacade.GetPassengers(Model.Id);
+            var passengers = await _userRideFacade.GetPassengers(Model!.Id);
             Passengers.AddRange(passengers!);
         }
             
@@ -70,7 +70,7 @@ namespace Carpool.App.ViewModels
             }
 
             Model!.CarId = car!.Id;
-            Model.Car = car;
+            Model!.Car = car;
             _ = SaveAsync();
             //_ = LoadAsync(Model.Id);
         }

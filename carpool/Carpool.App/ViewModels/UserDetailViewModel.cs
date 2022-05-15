@@ -113,7 +113,7 @@ namespace Carpool.App.ViewModels
                 return;
             }
 
-            _ = LoadAsync(Model.Id);
+            _ = LoadAsync(Model!.Id);
         }
 
         private void NewCar(NewMessage<CarWrapper> message)
@@ -123,7 +123,7 @@ namespace Carpool.App.ViewModels
                 return;
             }
 
-            _ = LoadAsync(Model.Id);
+            _ = LoadAsync(Model!.Id);
         }
 
         private void UpdateCar(UpdateMessage<CarWrapper> message)
@@ -133,7 +133,7 @@ namespace Carpool.App.ViewModels
                 return;
             }
 
-            _ = LoadAsync(Model.Id);
+            _ = LoadAsync(Model!.Id);
         }
 
         public async Task DeleteAsync()

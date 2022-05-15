@@ -111,16 +111,6 @@ namespace Carpool.App.ViewModels
             SelectedIndex = 0;
         }
 
-        private void OnCarDeleted(DeleteMessage<CarWrapper> message)
-        {
-            var car = CarDetailViewModels.SingleOrDefault(i => i.Model?.Id == message.Id);
-            if (car != null)
-            {
-                CarDetailViewModels.Remove(car);
-            }
-        }
-
-
 
         private void SelectUser(Guid? id)
         {
