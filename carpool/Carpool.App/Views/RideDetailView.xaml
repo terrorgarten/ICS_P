@@ -75,7 +75,7 @@
             <Label Grid.Row="6" Grid.Column="0" Content="Passengers" HorizontalAlignment="Center" />
 
 
-            <ListBox x:Name="PassengerListBox" Background="Transparent" Grid.Row="6" Grid.Column="1"  ItemsSource="{Binding Passengers}" Height="125" VerticalAlignment="Top">
+            <ListBox x:Name="PassengerListBox" Background="Transparent" Grid.Row="6" Grid.Column="1"  ItemsSource="{Binding Passengers}" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="PassengerListBox_SelectionChanged">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding PassengerDeleteCommand}"
@@ -92,7 +92,8 @@
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding Name}"/>
-                            <Label Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Content="{Binding Surname}"/>
+                            <Label Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{Binding Surname}"/>
+                            <Label Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Content="ODEBRAT" Foreground="#FFFF0606" Grid.ColumnSpan="2" Margin="44,0,0,0"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

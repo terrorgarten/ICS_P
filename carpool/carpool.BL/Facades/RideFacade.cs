@@ -55,8 +55,8 @@ public class RideFacade : CRUDFacade<RideEntity, RideListModel, RideDetailModel>
         var idsToFind = userRides.Select(x => x.RideId).ToList();
         var newRideList = queryRides.Where(x => idsToFind.Any(id => id == x.Id));
 
-        var RideList = await _mapper.ProjectTo<RideListModel>(newRideList).ToListAsync().ConfigureAwait(false);
-        return RideList;
+        var rideList = await _mapper.ProjectTo<RideListModel>(newRideList).ToListAsync().ConfigureAwait(false);
+        return rideList;
     }
 
     public async Task<IEnumerable<RideListModel>?> GetDriverRides(Guid? id)
@@ -97,31 +97,5 @@ public class RideFacade : CRUDFacade<RideEntity, RideListModel, RideDetailModel>
         return rideList;
     }
 
-    //public async Task<IEnumerable<UserRideDetailModel>?> GetPassengers(Guid? id)
-    //{
-    //    if (id == null)
-    //    {
-    //        return new List<UserRideDetailModel>();
-    //    }
 
-    //    await using var _uowCreated = _uow.Create();
-    //    var queryUserRides = _uowCreated.GetRepository<UserRideEntity>().Get();
-    //    //foreach (var variable in queryUserRides)
-    //    //{
-    //    //    Console.WriteLine(variable);
-    //    //}
-
-    //    var userRides = queryUserRides.Where(x => x.RideId == id);
-    //    //foreach (var variable in userRides)
-    //    //{
-    //    //    Console.WriteLine("Vyfiltrovana:  ");
-    //    //    Console.WriteLine(variable);
-    //    //}
-    //    var userRideModel = await _mapper.ProjectTo<UserRideDetailModel>(userRides).ToListAsync().ConfigureAwait(false);
-
-
-    //    return userRideModel;
-    //}
-
-  
 }

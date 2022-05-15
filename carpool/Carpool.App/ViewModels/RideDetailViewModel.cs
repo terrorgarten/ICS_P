@@ -57,7 +57,7 @@ namespace Carpool.App.ViewModels
             
             await _userRideFacade.DeleteAsync(rideDetailModel!.Id);
             Passengers.Clear();
-            var passengers = await _userRideFacade.GetPassengers(Model.Id);
+            var passengers = await _userRideFacade.GetPassengers(Model!.Id);
             Passengers.AddRange(passengers!);
         }
             
@@ -70,9 +70,8 @@ namespace Carpool.App.ViewModels
             }
 
             Model!.CarId = car!.Id;
-            Model.Car = car;
+            Model!.Car = car;
             _ = SaveAsync();
-            //_ = LoadAsync(Model.Id);
         }
 
         private void OnNewRide(NewMessage<RideWrapper> obj)
@@ -104,17 +103,17 @@ namespace Carpool.App.ViewModels
             if (message.Id != null) _ = LoadAsync(message.Id.Value);
         }
 
-        private void OnUserSelected(SelectedMessage<UserWrapper> obj)
+        private async void OnUserSelected(SelectedMessage<UserWrapper> obj)
         {
             CurrentUserId = obj.Id;
+            var passengers = await _userRideFacade.GetPassengers(Model.Id);
+            Passengers.AddRange(passengers!);
             if (CurrentUserId == Guid.Empty)
             {
                 Model = null;
             }
 
         }
-
-
 
         public async Task LoadAsync(Guid id)
         {
@@ -168,14 +167,7 @@ namespace Carpool.App.ViewModels
         }
 
         private bool CanSave() => Model?.IsValid ?? false;
-        //{
-        //    if (Model == null)
-        //    {
-        //        return false;
-        //    }
-        //    //Ride has already lapsed
-        //    return DateTime.Compare(Model.BeginTime, DateTime.Now) >= 0;
-        //}
+       
 
         
 

@@ -6,5 +6,10 @@
         {
             InitializeComponent();
         }
+
+        private void PassengerListBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

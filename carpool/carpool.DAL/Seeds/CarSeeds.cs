@@ -12,7 +12,7 @@ public static class CarSeeds
         Manufacturer: Manufacturer.BMW,
         CarType: CarType.Cabriolet,
         RegistrationDate: new DateTime(2015, 10, 1),
-        PhotoUrl: @"https://png.pngitem.com/pimgs/s/9-99883_beige-bmw-sedan-5-2013-car-png-clipart.png",
+        PhotoUrl: @"https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
         SeatCapacity: 2,
         OwnerId: UserSeeds.FirstUser.Id)
     {
@@ -24,7 +24,7 @@ public static class CarSeeds
         Manufacturer: Manufacturer.Fiat,
         CarType: CarType.Universal,
         RegistrationDate: new DateTime(2016, 5, 28),
-        PhotoUrl: @"https://png.pngitem.com/pimgs/s/79-793999_land-vehicle-city-car-red-fiat-500-rim.png",
+        PhotoUrl: @"https://images.pexels.com/photos/7459482/pexels-photo-7459482.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
         SeatCapacity: 4,
         OwnerId: UserSeeds.SecondUser.Id)
     {
@@ -36,7 +36,7 @@ public static class CarSeeds
         Manufacturer: Manufacturer.Audi,
         CarType: CarType.Convertible,
         RegistrationDate: new DateTime(2017, 6, 28),
-        PhotoUrl: @"https://png.pngitem.com/pimgs/s/79-793999_land-vehicle-city-car-red-fiat-500-rim.png",
+        PhotoUrl: @"https://images.pexels.com/photos/1035108/pexels-photo-1035108.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
         SeatCapacity: 4,
         OwnerId: UserSeeds.SecondUser.Id)
     {
