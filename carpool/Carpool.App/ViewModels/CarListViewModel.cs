@@ -51,6 +51,12 @@ namespace Carpool.App.ViewModels
         private Guid? LoggedInUserId { get; set; }
         private void UserSelected(SelectedMessage<UserWrapper> obj)
         {
+            if (obj.Id == Guid.Empty)
+            {
+                CarDetailViewModels.Clear();
+                SelectedCarDetailViewModel = null;
+                return;
+            }
             LoggedInUserId = obj.Id;
             _ = LoadAsync();
         }

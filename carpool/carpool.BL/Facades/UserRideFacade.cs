@@ -63,13 +63,13 @@ public class UserRideFacade : CRUDFacade<UserRideEntity, UserRideDetailModel, Us
             }
         }
         // Check if new Passenger is not the driver
-        if (ride.Car.OwnerId == newPassengerId)
+        if (ride.Car != null && ride.Car.OwnerId == newPassengerId)
         {
             
             return null;
         }
         
-        UserRideDetailModel? model = new UserRideDetailModel(user.Name, user.Surname)
+        var model = new UserRideDetailModel(user!.Name, user!.Surname)
         {
             PassengerId = user.Id,
             RideId = ride.Id,
