@@ -31,25 +31,11 @@ public class UserListViewModel : ViewModelBase, IUserListViewModel
         mediator.Register<SelectedMessage<UserWrapper>>(OnGlobalUserSelected);
     }
 
-    private void OnGlobalUserSelected(SelectedMessage<UserWrapper> obj)
-    {
-        CurrentuserId = obj.Id;
-    }
-
-    private void OnUpdate(ReloadMessage<UserWrapper> _)
-    {
-        if (CurrentuserId != null)
-        {
-            _mediator.Send(new SelectedMessage<UserWrapper> { Id = CurrentuserId });
-        }
-        
-    }
-
     public ObservableCollection<UserListModel> Users { get; set; } = new();
 
     public ICommand UserSelectedCommand { get; }
 
-    public Guid? CurrentuserId { get; set; }
+    private Guid? CurrentuserId { get; set; }
     public ICommand UserNewCommand { get; }
 
     public async Task LoadAsync()
@@ -59,6 +45,16 @@ public class UserListViewModel : ViewModelBase, IUserListViewModel
         Users.AddRange(users);
     }
 
+    private void OnGlobalUserSelected(SelectedMessage<UserWrapper> obj)
+    {
+        CurrentuserId = obj.Id;
+    }
+
+    private void OnUpdate(ReloadMessage<UserWrapper> _)
+    {
+        if (CurrentuserId != null) _mediator.Send(new SelectedMessage<UserWrapper> {Id = CurrentuserId});
+    }
+
     private void UserNew()
     {
         _mediator.Send(new NewMessage<UserWrapper>());
@@ -66,12 +62,9 @@ public class UserListViewModel : ViewModelBase, IUserListViewModel
 
     private void UserSelected(UserListModel? user)
     {
-        if (user != null)
-        {
-            CurrentuserId = user!.Id;
-        }
-        
-        _mediator.Send(new SelectedMessage<UserWrapper> { Id = user?.Id });
+        if (user != null) CurrentuserId = user!.Id;
+
+        _mediator.Send(new SelectedMessage<UserWrapper> {Id = user?.Id});
     }
 
     private async void UserUpdated(UpdateMessage<UserWrapper> _)

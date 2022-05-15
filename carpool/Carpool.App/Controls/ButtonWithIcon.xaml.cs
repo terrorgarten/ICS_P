@@ -21,19 +21,19 @@ public partial class ButtonWithIcon
 
     public string TextContent
     {
-        get => (string)GetValue(TextContentProperty);
+        get => (string) GetValue(TextContentProperty);
         set => SetValue(TextContentProperty, value);
     }
 
     public ICommand Command
     {
-        get => (ICommand)GetValue(CommandProperty);
+        get => (ICommand) GetValue(CommandProperty);
         set => SetValue(CommandProperty, value);
     }
 
     public string IconSource
     {
-        get => (string)GetValue(IconSourceProperty);
+        get => (string) GetValue(IconSourceProperty);
         set => SetValue(IconSourceProperty, value);
     }
 }

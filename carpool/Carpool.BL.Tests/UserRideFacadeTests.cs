@@ -1,10 +1,10 @@
-using System.Linq;
-using System.Threading.Tasks;
 using Carpool.BL.Facades;
 using Carpool.BL.Models;
 using Carpool.Common.Tests;
 using Carpool.Common.Tests.Seeds;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 

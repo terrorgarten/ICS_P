@@ -57,10 +57,9 @@ public class RideListViewModel : ViewModelBase, IRideListViewModel
         _mediator.Send(new NewMessage<RideWrapper>());
     }
 
-    //Toto se vola pokud dostanu command
     private void RideSelected(RideListModel? ride)
     {
-        _mediator.Send(new SelectedMessage<RideWrapper> { Id = ride?.Id });
+        _mediator.Send(new SelectedMessage<RideWrapper> {Id = ride?.Id});
     }
 
     private async void RideUpdated(UpdateMessage<RideWrapper> _)

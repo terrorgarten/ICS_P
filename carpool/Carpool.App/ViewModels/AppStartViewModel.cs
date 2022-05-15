@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows.Input;
 using Carpool.App.Commands;
-using Carpool.App.Factories;
 using Carpool.App.Messages;
 using Carpool.App.Services;
 using Carpool.App.Wrappers;
@@ -22,7 +19,7 @@ public class AppStartViewModel : ViewModelBase
         IRideSearchViewModel rideSearchViewModel,
         IUserDetailViewModel userDetailViewModel,
         IMediator mediator
-        )
+    )
     {
         _mediator = mediator;
         CarListViewModel = carListViewModel;
@@ -41,13 +38,6 @@ public class AppStartViewModel : ViewModelBase
         mediator.Register<SelectedMessage<UserWrapper>>(OnUserSelected);
     }
 
-    private void OnReload()
-    {
-        var save_tab = SelectedIndex;
-        _mediator.Send(new ReloadMessage<UserWrapper> { });
-        SelectedIndex = save_tab;
-    }
-
     public int SelectedIndex { get; set; }
 
     public IRideDetailViewModel? RideDetailViewModel { get; set; }
@@ -60,6 +50,13 @@ public class AppStartViewModel : ViewModelBase
     public ICommand Logout { get; }
 
     public ICommand ReloadCommand { get; }
+
+    private void OnReload()
+    {
+        var save_tab = SelectedIndex;
+        _mediator.Send(new ReloadMessage<UserWrapper>());
+        SelectedIndex = save_tab;
+    }
 
     private void OnLogout()
     {
@@ -83,31 +80,3 @@ public class AppStartViewModel : ViewModelBase
         SelectedIndex = 1;
     }
 }
-
-
-
-
-
-//    private void OnUserDeleted(DeleteMessage<UserWrapper> message)
-//    {
-//        var user = UserDetailViewModels.SingleOrDefault(i => i.Model?.Id == message.Id);
-//        if (user != null) UserDetailViewModels.Remove(user);
-
-//        SelectedIndex = 0;
-//    }
-
-
-//    private void OnCloseUserDetailTabExecute(IUserDetailViewModel? recipeDetailViewModel)
-//    {
-//        if (recipeDetailViewModel is not null)
-//            // TODO: Check if the Detail has changes and ask user to cancel
-//            UserDetailViewModels.Remove(recipeDetailViewModel);
-//    }
-
-//    private void OnCloseCarDetailTabExecute(ICarDetailViewModel? recipeDetailViewModel)
-//    {
-//        if (recipeDetailViewModel is not null)
-//            // TODO: Check if the Detail has changes and ask user to cancel
-//            CarDetailViewModels.Remove(recipeDetailViewModel);
-//    }
-//}

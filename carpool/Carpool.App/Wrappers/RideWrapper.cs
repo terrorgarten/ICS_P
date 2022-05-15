@@ -64,7 +64,7 @@ public class RideWrapper : ModelWrapper<RideDetailModel>
 
     public static implicit operator RideWrapper(RideDetailModel detailModel)
     {
-        return new(detailModel);
+        return new RideWrapper(detailModel);
     }
 
     public static implicit operator RideDetailModel(RideWrapper wrapper)

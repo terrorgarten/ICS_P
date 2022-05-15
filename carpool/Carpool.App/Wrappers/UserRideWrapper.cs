@@ -26,17 +26,17 @@ public class UserRideWrapper : ModelWrapper<UserRideDetailModel>
     public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
         if (string.IsNullOrWhiteSpace(Name))
-            yield return new ValidationResult($"{nameof(Name)} is required", new[] { nameof(Name) });
+            yield return new ValidationResult($"{nameof(Name)} is required", new[] {nameof(Name)});
 
         if (string.IsNullOrWhiteSpace(Surname))
-            yield return new ValidationResult($"{nameof(Surname)} is required", new[] { nameof(Surname) });
+            yield return new ValidationResult($"{nameof(Surname)} is required", new[] {nameof(Surname)});
 
         //TODO: tu mozno budu podobne tie validace? :hmmmm:
     }
 
     public static implicit operator UserRideWrapper(UserRideDetailModel detailModel)
     {
-        return new(detailModel);
+        return new UserRideWrapper(detailModel);
     }
 
     public static implicit operator UserRideDetailModel(UserRideWrapper wrapper)

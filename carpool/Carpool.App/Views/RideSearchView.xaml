@@ -23,8 +23,8 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsSelected" Value="true">
-                                <Setter TargetName="_Border" Property="Background" Value="CornflowerBlue"/>
-                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter TargetName="_Border" Property="Background" Value="CornflowerBlue" />
+                                <Setter Property="Foreground" Value="Black" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -45,7 +45,8 @@
                  Grid.Row="1" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="239" />
         <TextBox Background="White" Foreground="Black" Text="{Binding StartTo, Mode=TwoWay}" Margin="76,237,0,0"
                  Grid.Row="1" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="239" />
-        <ListBox Background="White" Foreground="Black" x:Name="RideSearchBox" Grid.Row="1" Grid.Column="0" ItemContainerStyle="{DynamicResource ListBoxItemStyle}"
+        <ListBox Background="White" Foreground="Black" x:Name="RideSearchBox" Grid.Row="1" Grid.Column="0"
+                 ItemContainerStyle="{DynamicResource ListBoxItemStyle}"
                  ItemsSource="{Binding FoundRides}" Margin="430,80,60,72">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">

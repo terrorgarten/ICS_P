@@ -58,9 +58,9 @@ public static class RideSeeds
     public static void Seed(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<RideEntity>().HasData(
-            Ride1 with { Car = null, PassengerRides = Array.Empty<UserRideEntity>() },
-            Ride2 with { Car = null, PassengerRides = Array.Empty<UserRideEntity>() },
-            Ride3 with { Car = null, PassengerRides = Array.Empty<UserRideEntity>() },
-            Ride4 with { Car = null, PassengerRides = Array.Empty<UserRideEntity>() });
+            Ride1 with {Car = null, PassengerRides = Array.Empty<UserRideEntity>()},
+            Ride2 with {Car = null, PassengerRides = Array.Empty<UserRideEntity>()},
+            Ride3 with {Car = null, PassengerRides = Array.Empty<UserRideEntity>()},
+            Ride4 with {Car = null, PassengerRides = Array.Empty<UserRideEntity>()});
     }
 }

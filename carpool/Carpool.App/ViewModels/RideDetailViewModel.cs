@@ -46,7 +46,6 @@ public class RideDetailViewModel : ViewModelBase, IRideDetailViewModel
         mediator.Register<UpdateComboboxMessage<CarWrapper>>(OnCarUpdated);
     }
 
- 
 
     private static Guid? CurrentUserId { get; set; }
     public ICommand SaveCommand { get; }
@@ -78,8 +77,8 @@ public class RideDetailViewModel : ViewModelBase, IRideDetailViewModel
         if (Model.Id != Guid.Empty)
         {
             var delete = _messageDialogService.Show(
-                "Delete",
-                $"Do you want to delete ride to {Model?.End} scheduled for {Model?.BeginTime}?.",
+                "Smazat jízdu",
+                $"Chcete smazat jízdu do {Model?.End} plánovanou na {Model?.BeginTime}?.",
                 MessageDialogButtonConfiguration.YesNo,
                 MessageDialogResult.No);
 
@@ -94,8 +93,8 @@ public class RideDetailViewModel : ViewModelBase, IRideDetailViewModel
             catch
             {
                 var _ = _messageDialogService.Show(
-                    "Deleting of ride failed!",
-                    "Deleting failed",
+                    "Mazání selhalo",
+                    "Problém s databází. Restartujte aplikaci",
                     MessageDialogButtonConfiguration.OK,
                     MessageDialogResult.OK);
             }
@@ -116,13 +115,13 @@ public class RideDetailViewModel : ViewModelBase, IRideDetailViewModel
         try
         {
             Model = await _rideFacade.SaveAsync(Model);
-            _mediator.Send(new UpdateMessage<RideWrapper> { Model = Model });
+            _mediator.Send(new UpdateMessage<RideWrapper> {Model = Model});
         }
         catch
         {
             var _ = _messageDialogService.Show(
-                "Zkontrolujte, zda jsou všechna pole vyplněna",
                 "Ukládání jízdy selhalo",
+                "Zkontrolujte, zda jsou všechna pole vyplněna",
                 MessageDialogButtonConfiguration.OK,
                 MessageDialogResult.OK);
         }
@@ -160,7 +159,7 @@ public class RideDetailViewModel : ViewModelBase, IRideDetailViewModel
 
     private async void OnCarUpdated(UpdateComboboxMessage<CarWrapper> obj)
     {
-        await LoadAsync((Guid)CurrentUserId!);
+        await LoadAsync((Guid) CurrentUserId!);
     }
 
 

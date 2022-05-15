@@ -57,15 +57,15 @@ public class UserWrapper : ModelWrapper<UserDetailModel>
     public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
         if (string.IsNullOrWhiteSpace(Name))
-            yield return new ValidationResult($"{nameof(Name)} is required", new[] { nameof(Name) });
+            yield return new ValidationResult($"{nameof(Name)} is required", new[] {nameof(Name)});
 
         if (string.IsNullOrWhiteSpace(Surname))
-            yield return new ValidationResult($"{nameof(Surname)} is required", new[] { nameof(Surname) });
+            yield return new ValidationResult($"{nameof(Surname)} is required", new[] {nameof(Surname)});
     }
 
     public static implicit operator UserWrapper(UserDetailModel detailModel)
     {
-        return new(detailModel);
+        return new UserWrapper(detailModel);
     }
 
     public static implicit operator UserDetailModel(UserWrapper wrapper)

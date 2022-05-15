@@ -44,7 +44,6 @@ public class CarViewModel : ViewModelBase, ICarListViewModel
 
     private Guid? LoggedInUserId { get; set; }
 
-    //CAR DETAIL WORKAROUND
     public ICommand CloseCarDetailTabCommand { get; }
     public ICarDetailViewModel? SelectedCarDetailViewModel { get; set; }
     public ICarDetailViewModel CarDetailViewModel { get; }
@@ -114,7 +113,6 @@ public class CarViewModel : ViewModelBase, ICarListViewModel
         SelectCar(Guid.Empty);
     }
 
-    //Toto se vola pokud dostanu command z listu -> nechci a predelat
     private void CarSelected(CarListModel? car)
     {
         SelectCar(car?.Id);

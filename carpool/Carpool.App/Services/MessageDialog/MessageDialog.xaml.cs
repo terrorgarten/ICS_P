@@ -24,7 +24,7 @@ public partial class MessageDialog : Window
 
         foreach (var button in buttons)
         {
-            var btn = new Button { Content = button, Tag = button };
+            var btn = new Button {Content = button, Tag = button};
             ButtonsPanel.Children.Add(btn);
             btn.Click += ButtonClick;
         }
@@ -35,13 +35,13 @@ public partial class MessageDialog : Window
     {
         return buttonConfiguration switch
         {
-            MessageDialogButtonConfiguration.OK => new[] { MessageDialogResult.OK },
+            MessageDialogButtonConfiguration.OK => new[] {MessageDialogResult.OK},
             MessageDialogButtonConfiguration.OKCancel => new[]
-                { MessageDialogResult.OK, MessageDialogResult.Cancel },
+                {MessageDialogResult.OK, MessageDialogResult.Cancel},
             MessageDialogButtonConfiguration.YesNoCancel => new[]
-                { MessageDialogResult.Yes, MessageDialogResult.No, MessageDialogResult.Cancel },
-            MessageDialogButtonConfiguration.YesNo => new[] { MessageDialogResult.OK, MessageDialogResult.No },
-            _ => new[] { MessageDialogResult.OK }
+                {MessageDialogResult.Yes, MessageDialogResult.No, MessageDialogResult.Cancel},
+            MessageDialogButtonConfiguration.YesNo => new[] {MessageDialogResult.OK, MessageDialogResult.No},
+            _ => new[] {MessageDialogResult.OK}
         };
     }
 
@@ -49,7 +49,7 @@ public partial class MessageDialog : Window
     {
         if (!(e.Source is Button button)) return;
 
-        _result = (MessageDialogResult)button.Tag;
+        _result = (MessageDialogResult) button.Tag;
         Close();
     }
 

@@ -48,7 +48,7 @@ public class CarDetailViewModel : ViewModelBase, ICarDetailViewModel
 
         Model.OwnerId = CurrentUserId;
         Model = await _carFacade.SaveAsync(Model.Model);
-        _mediator.Send(new UpdateMessage<CarWrapper> { Model = Model, TargetId = Model.OwnerId });
+        _mediator.Send(new UpdateMessage<CarWrapper> {Model = Model, TargetId = Model.OwnerId});
         _mediator.Send(new UpdateComboboxMessage<CarWrapper>());
     }
 
@@ -59,8 +59,8 @@ public class CarDetailViewModel : ViewModelBase, ICarDetailViewModel
         if (Model.Id != Guid.Empty)
         {
             var delete = _messageDialogService.Show(
-                "Delete",
-                $"Do you want to delete {Model?.Manufacturer}?.",
+                "Smazat",
+                $"Chcete smazat {Model?.Manufacturer}?.",
                 MessageDialogButtonConfiguration.YesNo,
                 MessageDialogResult.No);
 
@@ -74,8 +74,8 @@ public class CarDetailViewModel : ViewModelBase, ICarDetailViewModel
             catch
             {
                 var _ = _messageDialogService.Show(
-                    $"Deleting of {Model?.Manufacturer} failed!",
-                    "Deleting failed",
+                    $"Smazat {Model?.Manufacturer} se nepovedlo!",
+                    "Zkontrolujte, zda jste přihlášen/a a zkuste to znovu.",
                     MessageDialogButtonConfiguration.OK,
                     MessageDialogResult.OK);
             }

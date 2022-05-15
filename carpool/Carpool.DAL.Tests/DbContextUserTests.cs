@@ -106,7 +106,7 @@ public class DbContextUserTests : DbContextTestsBase
             .SingleAsync(i => i.Id == UserSeeds.UserEntity1.Id);
 
         //Assert
-        DeepAssert.Equal(UserSeeds.UserEntity1 with { PassengerRides = Array.Empty<UserRideEntity>() }, entity);
+        DeepAssert.Equal(UserSeeds.UserEntity1 with {PassengerRides = Array.Empty<UserRideEntity>()}, entity);
     }
 
     [Fact]

@@ -76,8 +76,8 @@ public class RideSearchViewModel : ViewModelBase, IRideSearchViewModel
         if (StartCity == string.Empty || EndCity == string.Empty || StartCity == null || EndCity == null)
         {
             var _ = _messageDialogService.Show(
-                "Nevalidny filter",
-                "Pocatecne mesto a konecne mesto su nevyhnutne",
+                "Nevalidní filtr",
+                "Zadejte prosím počáteční a cílové město.",
                 MessageDialogButtonConfiguration.OK,
                 MessageDialogResult.OK);
 
@@ -98,8 +98,8 @@ public class RideSearchViewModel : ViewModelBase, IRideSearchViewModel
         if (CurrentRideId is null)
         {
             var _ = _messageDialogService.Show(
-                "Upozorneni",
-                "Musi byt vybrana jizda, do ktere se chces prihlasit",
+                "Upozornění",
+                "Musíte vybrat jízdu, do které se chcete přihlásit",
                 MessageDialogButtonConfiguration.OK,
                 MessageDialogResult.OK);
         }
@@ -110,12 +110,12 @@ public class RideSearchViewModel : ViewModelBase, IRideSearchViewModel
             if (CurrentRideId is not null)
             {
                 var success_join = _messageDialogService.Show(
-                                "Přihlášení na jízdu", 
-                                "Úspěšně jste se přihlásili na jízdu. Šťastnou cestu!",
-                                MessageDialogButtonConfiguration.OK,
-                                MessageDialogResult.OK);
+                    "Přihlášení na jízdu",
+                    "Úspěšně jste se přihlásili na jízdu. Šťastnou cestu!",
+                    MessageDialogButtonConfiguration.OK,
+                    MessageDialogResult.OK);
             }
-            
+
             _mediator.Send(new UpdatePassengerRidesMessage<RideWrapper>());
         }
         catch (Exception e)

@@ -45,7 +45,7 @@ public abstract class ModelWrapper<T> : ViewModelBase, IModel, IValidatableObjec
     {
         var propertyInfo = Model.GetType().GetProperty(propertyName ?? string.Empty);
         return propertyInfo?.GetValue(Model) is TValue
-            ? (TValue?)propertyInfo.GetValue(Model)
+            ? (TValue?) propertyInfo.GetValue(Model)
             : default;
     }
 

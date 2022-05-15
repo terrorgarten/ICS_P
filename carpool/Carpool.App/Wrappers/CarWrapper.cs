@@ -49,7 +49,7 @@ public class CarWrapper : ModelWrapper<CarDetailModel>
 
     public static implicit operator CarWrapper(CarDetailModel detailModel)
     {
-        return new(detailModel);
+        return new CarWrapper(detailModel);
     }
 
     public static implicit operator CarDetailModel(CarWrapper wrapper)

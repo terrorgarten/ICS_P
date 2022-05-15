@@ -45,8 +45,8 @@ public static class CarSeeds
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<CarEntity>().HasData(
-            SportCar with { Owner = null },
-            PersonalCar with { Owner = null },
-            BatMobile with { Owner = null });
+            SportCar with {Owner = null},
+            PersonalCar with {Owner = null},
+            BatMobile with {Owner = null});
     }
 }

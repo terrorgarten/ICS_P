@@ -72,7 +72,7 @@ public class UserDetailViewModel : ViewModelBase, IUserDetailViewModel
             catch
             {
                 var _ = _messageDialogService.Show(
-                    $"Načítání selhalo",
+                    "Načítání selhalo",
                     "Zkontrolujte, zda jste přihlášeni",
                     MessageDialogButtonConfiguration.OK,
                     MessageDialogResult.OK);

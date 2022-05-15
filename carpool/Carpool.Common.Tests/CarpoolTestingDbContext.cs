@@ -9,7 +9,7 @@ public class CarpoolTestingDbContext : CarpoolDbContext
     private readonly bool _seedTestingData;
 
     public CarpoolTestingDbContext(DbContextOptions contextOptions, bool seedTestingData = false)
-        : base(contextOptions, false)
+        : base(contextOptions)
     {
         _seedTestingData = seedTestingData;
     }

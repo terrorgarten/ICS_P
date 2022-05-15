@@ -65,14 +65,14 @@ public static class CarSeeds
         };
 
     public static readonly CarEntity CarEntityDelete =
-        SportCar with { Id = Guid.Parse("274D0CC9-A948-4818-AADB-A8B4C0506619"), Owner = null };
+        SportCar with {Id = Guid.Parse("274D0CC9-A948-4818-AADB-A8B4C0506619"), Owner = null};
 
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<CarEntity>().HasData(
-            CarEntity1 with { Owner = null },
-            CarEntity2 with { Owner = null },
-            SportCar with { Owner = null },
+            CarEntity1 with {Owner = null},
+            CarEntity2 with {Owner = null},
+            SportCar with {Owner = null},
             CarEntityUpdate,
             CarEntityDelete);
     }

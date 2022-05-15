@@ -27,7 +27,6 @@
         </Grid.ColumnDefinitions>
 
 
-
         <TabControl Foreground="Black" Grid.Column="0" Background="#5e98f7"
                     SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}" HorizontalAlignment="Left" Width="933">
             <!--TabControl Styling-->
@@ -79,7 +78,7 @@
                     <Grid>
                         <views:UserDetailView Background="#8bb6fc" Grid.Column="0" HorizontalAlignment="Left"
                                               Width="873" Margin="24,76,0,25"
-                                              DataContext="{Binding UserDetailViewModel}"/>
+                                              DataContext="{Binding UserDetailViewModel}" />
 
 
                     </Grid>
@@ -120,14 +119,16 @@
                ContentStringFormat="Přihlášen: {0}" Width="172" Background="White" FontWeight="Normal"
                Foreground="Black" RenderTransformOrigin="0.712,0.377" HorizontalAlignment="Left" Margin="751,39,0,0" />
 
-        <Button VerticalAlignment="Top" Height="29"  Content="Obnovit data"  Command="{Binding ReloadCommand}"
-             Width="172" FontWeight="Normal"
-            Foreground="Black" RenderTransformOrigin="0.712,0.377" HorizontalAlignment="Left" Margin="574,39,0,0" Background="White" BorderBrush="White" Cursor="" >
+        <Button VerticalAlignment="Top" Height="29" Content="Obnovit data" Command="{Binding ReloadCommand}"
+                Width="172" FontWeight="Normal"
+                Foreground="Black" RenderTransformOrigin="0.712,0.377" HorizontalAlignment="Left" Margin="574,39,0,0"
+                Background="White" BorderBrush="White" Cursor="">
             <Button.Triggers>
                 <EventTrigger RoutedEvent="MouseEnter">
                     <BeginStoryboard>
                         <Storyboard>
-                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="DodgerBlue"/>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+                                            To="DodgerBlue" />
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>

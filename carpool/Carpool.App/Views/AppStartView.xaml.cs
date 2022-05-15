@@ -1,6 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using Carpool.App.ViewModels;
+﻿using Carpool.App.ViewModels;
 
 namespace Carpool.App.Views;
 

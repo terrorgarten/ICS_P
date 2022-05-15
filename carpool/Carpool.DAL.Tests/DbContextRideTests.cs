@@ -170,7 +170,7 @@ public class DbContextRideTests : DbContextTestsBase
             .SingleAsync(i => i.Id == RideSeeds.RideEntityForRideTestsGet.Id);
         var passengerides = entity.PassengerRides;
         //Assert
-        DeepAssert.Equal(RideSeeds.RideEntityForRideTestsGet with { PassengerRides = passengerides }, entity);
+        DeepAssert.Equal(RideSeeds.RideEntityForRideTestsGet with {PassengerRides = passengerides}, entity);
     }
 
     [Fact]

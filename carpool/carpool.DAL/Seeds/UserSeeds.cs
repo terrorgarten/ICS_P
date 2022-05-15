@@ -29,8 +29,8 @@ public static class UserSeeds
     public static void Seed(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<UserEntity>().HasData(
-            FirstUser with { OwnedCars = Array.Empty<CarEntity>(), PassengerRides = Array.Empty<UserRideEntity>() },
-            SecondUser with { OwnedCars = Array.Empty<CarEntity>(), PassengerRides = Array.Empty<UserRideEntity>() }
+            FirstUser with {OwnedCars = Array.Empty<CarEntity>(), PassengerRides = Array.Empty<UserRideEntity>()},
+            SecondUser with {OwnedCars = Array.Empty<CarEntity>(), PassengerRides = Array.Empty<UserRideEntity>()}
         );
     }
 }
