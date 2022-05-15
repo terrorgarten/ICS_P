@@ -11,6 +11,27 @@
                        mc:Ignorable="d"
                        Background="#8bb6fc"
                        d:DataContext="{d:DesignInstance viewModels:RideSearchViewModel}">
+    <local:UserControlBase.Resources>
+        <Style x:Key="ListBoxItemStyle" TargetType="ListBoxItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border Name="_Border"
+                                Padding="2"
+                                SnapsToDevicePixels="true">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="_Border" Property="Background" Value="CornflowerBlue"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </local:UserControlBase.Resources>
     <Grid x:Name="Root">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -24,7 +45,7 @@
                  Grid.Row="1" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="239" />
         <TextBox Background="White" Foreground="Black" Text="{Binding StartTo, Mode=TwoWay}" Margin="76,237,0,0"
                  Grid.Row="1" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="239" />
-        <ListBox Background="White" Foreground="Black" x:Name="RideSearchBox" Grid.Row="1" Grid.Column="0"
+        <ListBox Background="White" Foreground="Black" x:Name="RideSearchBox" Grid.Row="1" Grid.Column="0" ItemContainerStyle="{DynamicResource ListBoxItemStyle}"
                  ItemsSource="{Binding FoundRides}" Margin="430,80,60,72">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
@@ -36,16 +57,16 @@
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
+                        <Label Grid.Column="0" VerticalAlignment="Center" Foreground="Black" HorizontalAlignment="Left"
                                Content="{Binding Start}" ContentStringFormat="Z: {0}" />
-                        <Label Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
-                               Content="{Binding End}" ContentStringFormat="Do: {0}" />
-                        <Label Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right"
+                        <Label Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"
+                               Content="{Binding End}" Foreground="Black" ContentStringFormat="Do: {0}" />
+                        <Label Grid.Column="2" VerticalAlignment="Center" Foreground="Black" HorizontalAlignment="Left"
                                Content="{Binding BeginTime}" />
 
                     </Grid>
