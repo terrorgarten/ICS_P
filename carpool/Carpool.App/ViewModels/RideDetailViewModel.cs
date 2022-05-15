@@ -72,7 +72,6 @@ namespace Carpool.App.ViewModels
             Model!.CarId = car!.Id;
             Model!.Car = car;
             _ = SaveAsync();
-            //_ = LoadAsync(Model.Id);
         }
 
         private void OnNewRide(NewMessage<RideWrapper> obj)
@@ -104,9 +103,11 @@ namespace Carpool.App.ViewModels
             if (message.Id != null) _ = LoadAsync(message.Id.Value);
         }
 
-        private void OnUserSelected(SelectedMessage<UserWrapper> obj)
+        private async void OnUserSelected(SelectedMessage<UserWrapper> obj)
         {
             CurrentUserId = obj.Id;
+            var passengers = await _userRideFacade.GetPassengers(Model.Id);
+            Passengers.AddRange(passengers!);
             if (CurrentUserId == Guid.Empty)
             {
                 Model = null;
