@@ -115,20 +115,30 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <Label VerticalAlignment="Top" Height="29" Content="{Binding UserDetailViewModel.Model.Name}"
+        <Label HorizontalContentAlignment="Center" VerticalAlignment="Top" Height="29" Content="{Binding UserDetailViewModel.Model.Name}"
                ContentStringFormat="Přihlášen: {0}" Width="172" Background="White" FontWeight="Normal"
                Foreground="Black" RenderTransformOrigin="0.712,0.377" HorizontalAlignment="Left" Margin="751,39,0,0" />
 
         <Button VerticalAlignment="Top" Height="29" Content="Obnovit data" Command="{Binding ReloadCommand}"
                 Width="172" FontWeight="Normal"
-                Foreground="Black" RenderTransformOrigin="0.712,0.377" HorizontalAlignment="Left" Margin="574,39,0,0"
-                Background="White" BorderBrush="White" Cursor="">
+                Foreground="Black" RenderTransformOrigin="0.712,0.377" HorizontalAlignment="Left" Margin="568,39,0,0"
+                Background="#00ff0000" BorderBrush="White" Cursor="">
             <Button.Triggers>
                 <EventTrigger RoutedEvent="MouseEnter">
                     <BeginStoryboard>
                         <Storyboard>
-                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
-                                            To="DodgerBlue" />
+                            <ColorAnimation Storyboard.TargetProperty="Background.Color"
+                                            From="#00ff0000" To="#ffffffff"
+                                            Duration="0:0:0.125"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="Background.Color"
+                                            To="#00ff0000" From="#ffffffff"
+                                            Duration="0:0:0.125"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
