@@ -87,7 +87,7 @@ namespace Carpool.App.ViewModels
                     MessageDialogResult.OK);
             }
             var _ = await _userRideFacade.SaveCheckAsync(CurrentUserId, CurrentRideId);
-
+            _mediator.Send(new UpdatePassengerRidesMessage<RideWrapper>());
         }
 
         public ObservableCollection<RideListModel> FoundRides { get; set; } = new();
