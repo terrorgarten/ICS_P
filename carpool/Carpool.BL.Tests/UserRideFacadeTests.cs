@@ -1,3 +1,4 @@
+using System;
 using Carpool.BL.Facades;
 using Carpool.BL.Models;
 using Carpool.Common.Tests;
@@ -18,21 +19,7 @@ public sealed class UserRideFacadeTests : CRUDFacadeTestsBase
     {
         _userRideFacadeSUT = new UserRideFacade(UnitOfWorkFactory, Mapper);
     }
-
-    [Fact]
-    public async Task GetUserRide()
-    {
-        _ = await _userRideFacadeSUT.GetUserRides
-            (UserSeeds.UserForUserRideEntity.Id);
-    }
-
-    [Fact]
-    public async Task GetRidePassengers()
-    {
-        var _ = await _userRideFacadeSUT.GetPassengers
-            (RideSeeds.RideEntityForUserRideEntity.Id);
-    }
-
+    
     [Fact]
     public async Task Create_WithNonExistingItem_UserRideDetail_DoesNotThrow()
     {
@@ -49,7 +36,6 @@ public sealed class UserRideFacadeTests : CRUDFacadeTestsBase
 
         var _ = await _userRideFacadeSUT.SaveCheckAsync(UserSeeds.UserEntity1.Id, RideSeeds.RideEntity.Id);
     }
-
 
     [Fact]
     public async Task GetAll_Single_SeededUserRide()
@@ -72,9 +58,11 @@ public sealed class UserRideFacadeTests : CRUDFacadeTestsBase
             RideId = RideSeeds.RideEntity.Id,
             PassengerId = UserSeeds.UserEntity1.Id
         };
-        var _ = await _userRideFacadeSUT.SaveAsync(seeded_user);
+        seeded_user = await _userRideFacadeSUT.SaveAsync(seeded_user);
 
-        var __ = await _userRideFacadeSUT.GetAsync(UserRideSeeds.UserRideEntity1.Id);
+        await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+        var userRideFromDb = await dbxAssert.UsersRideEntity.SingleAsync(i => i.Id == seeded_user.Id);
+        DeepAssert.Equal(seeded_user, Mapper.Map<UserRideDetailModel>(userRideFromDb), "Name", "Surname");
     }
 
 

@@ -123,16 +123,6 @@ public sealed class RideFacadeTests : CRUDFacadeTestsBase
         DeepAssert.Equal(ride, Mapper.Map<RideDetailModel>(rideFromDb), "User", "Car");
     }
 
-    [Fact]
-    public async Task GetFilteredRide()
-    {
-        var _ = await _rideFacadeSUT.GetFilteredListAsync
-        (
-            new DateTime(2019, 6, 4, 8, 0, 0),
-            DateTime.Now,
-            "Olomouc",
-            "Ostrava");
-    }
 
     [Fact]
     public async Task NewUserRide()

@@ -119,10 +119,6 @@ public sealed class CarFacadeTests : CRUDFacadeTestsBase
         var carFromDb = await dbxAssert.Cars.SingleAsync(i => i.Id == car.Id);
         DeepAssert.Equal(car, Mapper.Map<CarDetailModel>(carFromDb));
     }
-
-    [Fact]
-    public async Task GetCarsOwnedByUser()
-    {
-        var _ = await _carFacadeSUT.GetUserCars(UserSeeds.UserEntity1.Id);
-    }
 }
+
+    
