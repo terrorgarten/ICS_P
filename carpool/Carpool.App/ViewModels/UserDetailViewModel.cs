@@ -96,6 +96,7 @@ public class UserDetailViewModel : ViewModelBase, IUserDetailViewModel
             try
             {
                 await _userFacade.DeleteAsync(Model!.Id);
+                Model = UserDetailModel.Empty;
             }
             catch
             {
