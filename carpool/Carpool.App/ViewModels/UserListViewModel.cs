@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Carpool.App.Commands;
@@ -43,6 +44,7 @@ public class UserListViewModel : ViewModelBase, IUserListViewModel
         Users.Clear();
         var users = await _userFacade.GetAsync();
         Users.AddRange(users);
+        Users = new ObservableCollection<UserListModel>(Users.Distinct());
     }
 
     private void OnGlobalUserSelected(SelectedMessage<UserWrapper> obj)
