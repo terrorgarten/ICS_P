@@ -23,7 +23,7 @@ public sealed class UserRideFacadeTests : CRUDFacadeTestsBase
     [Fact]
     public async Task Create_WithNonExistingItem_UserRideDetail_DoesNotThrow()
     {
-        var user = new UserRideDetailModel
+        var _ = new UserRideDetailModel
         (
             UserSeeds.UserEntity1.Name,
             UserSeeds.UserEntity1.Surname
@@ -34,7 +34,7 @@ public sealed class UserRideFacadeTests : CRUDFacadeTestsBase
         };
 
 
-        var _ = await _userRideFacadeSUT.SaveCheckAsync(UserSeeds.UserEntity1.Id, RideSeeds.RideEntity.Id);
+        await _userRideFacadeSUT.SaveCheckAsync(UserSeeds.UserEntity1.Id, RideSeeds.RideEntity.Id);
     }
 
     [Fact]
