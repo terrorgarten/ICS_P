@@ -1,8 +1,21 @@
-# ICS projekt 2022
-## Fáze 1
-- Datový návrh -> ICS projekt 2022 - Carpool 
-- Wireframes
-- ER Diagram
+# ICS project 2022
 
-# Assignment
+## Description
+A desktop app for sharing car rides
+
+## Technologies
+### C# .NET Core 
+Automapper, MVVM, WPF..
+
+### Versioning & project management
+Azure Devops - SCRUM
+Git
+
+### DB 
+SQLite
+
+## Assignment
 https://github.com/nesfit/ICS/tree/master/Project
+
+## Rating
+A
