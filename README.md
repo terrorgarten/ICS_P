@@ -9,7 +9,6 @@ Automapper, MVVM, WPF, UnitTest
 
 ### Versioning & project management
 Azure Devops - SCRUM
-Git
 
 ### DB 
 SQLite
