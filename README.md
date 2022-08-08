@@ -5,7 +5,7 @@ A desktop app for sharing car rides
 
 ## Technologies
 ### C# .NET Core 
-Automapper, MVVM, WPF..
+Automapper, MVVM, WPF, UnitTest
 
 ### Versioning & project management
 Azure Devops - SCRUM
