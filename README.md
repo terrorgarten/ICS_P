@@ -1,4 +1,4 @@
-# ICS project 2022
+# ICS project 2022: Carpool
 
 ## Description
 A desktop app for sharing car rides
